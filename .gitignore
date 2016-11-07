@@ -1,0 +1,14 @@
+obj/
+42sh
+.DS_STORE
+a.out
+*.o
+*.a
+*~
+*#
+#*
+*.dSYM
+*.swp
+*.fr.pdf
+.cache_exists
+libft/
