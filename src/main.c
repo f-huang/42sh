@@ -2,9 +2,5 @@
 
 int			main(void)
 {
-	t_shell	sh;
-
-	if (!init_shell(&sh))
-		return (ERROR);
 	return (GOOD);
 }
