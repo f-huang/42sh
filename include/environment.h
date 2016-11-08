@@ -26,5 +26,6 @@ int						create_elem(t_environment **lst_env, char *variable);
 
 char					*sh_getenv(t_environment *lst_env, char *key);
 int						sh_setenv(t_environment **lst_env, char *key, char *value);
+int						sh_unsetenv(t_environment **lst_env, char *key);
 
 #endif
