@@ -63,7 +63,7 @@ OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
 
 all: $(NAME)
 
-$(NAME): env echo read libft $(OBJ)
+$(NAME): libft env echo read $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
@@ -89,15 +89,15 @@ libft:
 	make -C $(LIBDIR)
 
 read: $(OBJREAD)
-	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(INC)
+	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
 echo: $(OBJECHO)
-	$(CC) $(CFLAGS) -o $(BINECHO) $(OBJECHO) $(INC)
+	$(CC) $(CFLAGS) -o $(BINECHO) $(OBJECHO) $(LIBPATH) $(LIB) $(INC)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
 env: $(OBJENV)
-	$(CC) $(CFLAGS) -o $(BINENV) $(OBJENV) $(INC)
+	$(CC) $(CFLAGS) -o $(BINENV) $(OBJENV) $(LIBPATH) $(LIB) $(INC)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
 norme:
