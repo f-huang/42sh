@@ -10,8 +10,9 @@ OBJDIR	:=	obj/
 BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
-SRC		:= $(shell find src -type d \( -path src/env -o -path src/echo -o -path src/read \) -prune -o -type f -exec basename {} '\\' \;)
-OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
+DIRBUILTINS	:= obj/builtins
+SRC		:= $(shell find src -type d \( -path src/builtins/env -o -path src/builtins/echo -o -path src/builtins/read \) -prune -o -type f -print)
+OBJ		:= $(SRC:src/%.c=obj/%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIB		:=	-ltermcap
 LIBPATH	:=	-L./$(LIBDIR) -lft
@@ -34,27 +35,27 @@ WHITE		= "\033[0;37m"
 # ====================
 
 # ===== env =====
-DIRENV	:=	src/env/
-OBJDIRENV	:= obj/env/
+DIRENV	:=	src/builtins/env/
+OBJDIRENV	:= obj/builtins/env/
 BINENV	:= bin/env
-SRCENV	:=	$(shell ls $(DIRENV))
-OBJENV	:=	$(addprefix $(OBJDIRENV), $(SRCENV:.c=.o))
+SRCENV	:= $(shell find src/builtins/env -type f -print)
+OBJENV	:= $(SRCENV:src/builtins/env/%.c=obj/builtins/env/%.o)
 # ===============
 
 # ===== echo =====
-DIRECHO	:=	src/echo/
-OBJDIRECHO	:= obj/echo/
+DIRECHO	:=	src/builtins/echo/
+OBJDIRECHO	:= obj/builtins/echo/
 BINECHO	:=	bin/echo
-SRCECHO	:=	$(shell ls $(DIRECHO))
-OBJECHO	:=	$(addprefix $(OBJDIRECHO), $(SRCECHO:.c=.o))
+SRCECHO	:=	$(shell find src/builtins/echo -type f -print)
+OBJECHO	:=	$(SRCECHO:src/builtins/echo/%.c=obj/builtins/echo/%.o)
 # ================
 
 # ===== read =====
-DIRREAD	:=	src/read/
-OBJDIRREAD	:= obj/read/
+DIRREAD	:=	src/builtins/read/
+OBJDIRREAD	:= obj/builtins/read/
 BINREAD	:=	bin/read
-SRCREAD	:=	$(shell ls $(DIRREAD))
-OBJREAD	:=	$(addprefix $(OBJDIRREAD), $(SRCREAD:.c=.o))
+SRCREAD	:=	$(shell find src/builtins/read -type f -print)
+OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
 # ================
 
 .PHONY: all libft echo env read norme clean fclean re
@@ -72,9 +73,12 @@ $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 
 $(CACHEF):
 	test -d $(OBJDIR) || mkdir $(OBJDIR)
+	test -d $(DIRBUILTINS) || mkdir $(DIRBUILTINS)
 	test -d $(OBJDIRENV) || mkdir $(OBJDIRENV)
 	test -d $(OBJDIRECHO) || mkdir $(OBJDIRECHO)
 	test -d $(OBJDIRREAD) || mkdir $(OBJDIRREAD)
+	test -d $(OBJDIR)environment || mkdir $(OBJDIR)environment
+	test -d $(OBJDIR)tools || mkdir $(OBJDIR)tools
 	test -d $(BINDIR) || mkdir $(BINDIR)
 	test -d $(CACHEF) || touch $(CACHEF)
 
