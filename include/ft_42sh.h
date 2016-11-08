@@ -80,8 +80,13 @@ typedef struct winsize	t_winsize;
 /*
 **	RETURN VALUES
 */
+#ifndef ERROR
 # define ERROR 0
+#endif
+
+#ifndef GOOD
 # define GOOD 1
+#endif
 
 /*
 **	SHELL STRUCTURE AND DEFINES
@@ -90,7 +95,15 @@ typedef struct winsize	t_winsize;
 typedef struct			s_shell
 {
 	int					last_return;
+	t_environment		*lst_env;
 }						t_shell;
+
+
+/*
+**	SHELL BASIC FUNCTIONS
+*/
+
+int						init_shell(t_shell *sh);
 
 
 #endif
