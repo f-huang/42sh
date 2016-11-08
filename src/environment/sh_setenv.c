@@ -15,7 +15,7 @@ static int	switch_value(t_environment **elem, char *key, char *value)
 	if ((len = ft_strlen(key) + ft_strlen(value) + 1 > (*elem)->length))
 	{
 		ft_strdel(&(*elem)->variable);
-		if (!((*elem)->variable = sh_str3join(key, "=", value))) //
+		if (!((*elem)->variable = tl_str3join(key, "=", value))) //
 			return (ERROR);
 		(*elem)->length = len;
 	}
@@ -31,7 +31,7 @@ static int	add_value(t_environment **lst_env, char *key, char *value)
 {
 	char	*variable;
 
-	if (!(variable = sh_str3join(key, "=", value)))
+	if (!(variable = tl_str3join(key, "=", value)))
 		return (ERROR);
 	if (!create_elem(lst_env, variable))
 	{
@@ -51,7 +51,7 @@ int			sh_setenv(t_environment **lst_env, char *key, char *value)
 	elem = *lst_env;
 	while (elem && key)
 	{
-		if ((tmp = ft_strndup(elem->variable,\
+		if ((tmp = tl_strndup(elem->variable,\
 			(size_t)(ft_strchr(elem->variable, '=') - elem->variable))))
 		{
 			if (ft_strequ(key, tmp))

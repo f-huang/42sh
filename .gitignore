@@ -1,3 +1,4 @@
+libft/
 obj/
 42sh
 .DS_STORE
@@ -11,6 +12,5 @@ a.out
 *.swp
 *.fr.pdf
 .cache_exists
-./libft/
 bin/
 include/libft.h

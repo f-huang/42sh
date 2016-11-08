@@ -1,5 +1,6 @@
 #include "environment.h"
 #include "libft.h"
+#include "tools.h"
 
 /*
 **		This function searches the environment list to find the
@@ -19,7 +20,7 @@ char		*sh_getenv(t_environment *lst_env, char *key)
 	while (elem && key)
 	{
 	 	len_key = (size_t)(ft_strchr(elem->variable, '=') - elem->variable);
-		if ((tmp_key = ft_strndup(elem->variable, len_key)))
+		if ((tmp_key = tl_strndup(elem->variable, len_key)))
 		{
 			if (ft_strequ(key, tmp_key))
 			{
