@@ -98,6 +98,12 @@ typedef struct			s_shell
 	t_environment		*lst_env;
 }						t_shell;
 
+/*
+**	MACRO
+*/
+#ifndef PROMPT
+# define PROMPT "$> "
+#endif
 
 /*
 **	SHELL BASIC FUNCTIONS
