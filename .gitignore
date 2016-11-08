@@ -12,3 +12,4 @@ a.out
 *.fr.pdf
 .cache_exists
 libft/
+bin/
