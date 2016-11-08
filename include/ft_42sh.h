@@ -110,6 +110,7 @@ typedef struct			s_shell
 */
 
 int						init_shell(t_shell *sh);
+int						prompt(t_shell *sh);
 
 
 #endif
