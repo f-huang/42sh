@@ -36,7 +36,7 @@ WHITE		= "\033[0;37m"
 # ===== env =====
 DIRENV	:=	src/env/
 SRCENV	:=	$(shell ls $(DIRENV))
-OBJENV	:=	$(addprefix $(OBJDIR), $(SRCENV:.c=.o))
+OBJENV	:=	$(addprefix $(OBJDIR)env/, $(SRCENV:.c=.o))
 # ===============
 
 # ===== echo =====
@@ -66,6 +66,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 
 $(CACHEF):
 	test -d $(OBJDIR) || mkdir $(OBJDIR)
+	test -d $(OBJDIR)env/ || mkdir $(OBJDIR)env/
 	test -d $(BINDIR) || mkdir $(BINDIR)
 	test -d $(CACHEF) || touch $(CACHEF)
 
@@ -77,6 +78,9 @@ libft:
 
 echo: $(SRCECHO)%.c
 	$(CC) $(CFLAGS) -c $< -o $(OBJDIR)%.o $(INC)
+
+env: $(OBJENV)
+	$(CC) $(CFLAGS) -o $(OBJENV) $(INC)
 
 norme:
 	printf $(RED)
