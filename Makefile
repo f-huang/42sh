@@ -4,16 +4,26 @@ NAME	:=	42sh
 
 # ===== Standard =====
 CC		:=	clang
+<<<<<<< HEAD
 CFLAGS	:=	-g3 -Wall -Wextra -Werror
 SRCDIR	:=	src
+=======
+CFLAGS	:=	-Wall -Wextra -Werror -g3
+SRCDIR	:=	src/
+>>>>>>> master
 OBJDIR	:=	obj/
 BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
+<<<<<<< HEAD
 #TOOLSDIR  := tools/
 SUBDIR	:=	$(shell find $(SRCDIR) -type d -not -name $(SRCDIR) -exec basename {} '\' \;)
 SRC		:=	$(shell find $(SRCDIR) -type f)
 OBJ		:=	$(subst $(SRCDIR),$(OBJDIR),$(SRC:.c=.o))
+=======
+SRC		:=	$(shell basename $(find $(SRCDIR) -type f \( -name '*.c' \)))
+OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
+>>>>>>> master
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIB		:=	-ltermcap
 LIBPATH	:=	-L./$(LIBDIR) -lft
@@ -35,24 +45,58 @@ CYAN		= "\033[0;36m"
 WHITE		= "\033[0;37m"
 # ====================
 
+<<<<<<< HEAD
 .PHONY: all libft norme clean fclean re tools debug
+=======
+# ===== env =====
+DIRENV	:=	src/env/
+SRCENV	:=	$(shell ls $(DIRENV))
+OBJENV	:=	$(addprefix $(OBJDIR)env/, $(SRCENV:.c=.o))
+# ===============
+
+# ===== echo =====
+DIRECHO	:=	src/echo/
+SRCECHO	:=	$(shell ls $(DIRECHO))
+OBJECHO	:=	$(addprefix $(OBJDIR), $(SRCECHO:.c=.o))
+# ================
+
+# ===== read =====
+DIRREAD	:=	src/read/
+SRCREAD	:=	$(shell ls $(DIRECHO))
+OBJREAD	:=	$(addprefix $(OBJDIR), $(SRCREAD:.c=.o))
+# ================
+
+.PHONY: all libft echo env read norme clean fclean re
+>>>>>>> master
 .SILENT:
 
 all: $(NAME)
 
 $(NAME): libft $(OBJ)
+<<<<<<< HEAD
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBPATH) $(LIB) $(INC)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 	$(CC) $(FLAG) -c $< -o $@ $(INC)
+=======
+	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
+	printf	$(BLUE)" $@ compiled!\n"$(EOC)
+
+$(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
+	$(CC) $(CFLAG) -c $< -o $@ $(INC)
+>>>>>>> master
 	printf $(BLUE)"|"$(EOC)
 
 $(CACHEF):
 	test -d $(OBJDIR) || mkdir $(OBJDIR)
+<<<<<<< HEAD
 	$(foreach dir,$(SUBDIR),\
 		$(shell mkdir -p $(OBJDIR)$(dir))\
 	)
+=======
+	test -d $(OBJDIR)env/ || mkdir $(OBJDIR)env/
+>>>>>>> master
 	test -d $(BINDIR) || mkdir $(BINDIR)
 	test -d $(CACHEF) || touch $(CACHEF)
 
@@ -62,9 +106,22 @@ $(CACHEF):
 libft:
 	make -C $(LIBDIR)
 
+<<<<<<< HEAD
 norme:
 	printf $(RED)
 	norminette $(SRCDIR) $(INCDIR) | grep -v Norme -B1 || true
+=======
+echo: $(SRCECHO)%.c
+	$(CC) $(CFLAGS) -c $< -o $(OBJDIR)%.o $(INC)
+
+env: $(OBJENV)
+	$(CC) $(CFLAGS) -o $(OBJENV) $(INC)
+
+norme:
+	printf $(RED)
+	norminette $(SRCDIR) $(INCDIR) | grep -v Norme -B1 || true
+	norminette $(LIBFT)src/ $(LIBFT)include/ | grep -v Norme -B1 || true
+>>>>>>> master
 	printf $(EOC)
 
 clean:
