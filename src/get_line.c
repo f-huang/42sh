@@ -1,3 +1,4 @@
+#include <signal.h>
 #include "ft_42sh.h"
 #include "libft.h"
 #include "tools.h"
