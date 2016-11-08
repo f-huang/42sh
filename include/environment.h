@@ -1,6 +1,8 @@
 #ifndef ENVIRONMENT_H
 # define ENVIRONMENT_H
 
+# include <stdlib.h>
+
 #ifndef ERROR
 # define ERROR 0
 #endif
@@ -16,11 +18,11 @@
 typedef struct			s_environment
 {
 	char					*variable;
-	int						length;
+	size_t					length;
 	struct s_environment	*next;
 }						t_environment;
 
-int						create_link(t_environment **lst_env, char *variable);
+int						create_elem(t_environment **lst_env, char *variable);
 
 char					*sh_getenv(t_environment *lst_env, char *key);
 int						sh_setenv(t_environment **lst_env, char *key, char *value);

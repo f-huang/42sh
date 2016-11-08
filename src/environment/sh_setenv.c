@@ -8,21 +8,21 @@
 **		Else key and value are added at the end of the list.
 */
 
-static int	switch_value(t_environment **link, char *key, char *value)
+static int	switch_value(t_environment **elem, char *key, char *value)
 {
 	int		len;
 
-	if ((len = ft_strlen(key) + ft_strlen(value) + 1 > (*link)->length))
+	if ((len = ft_strlen(key) + ft_strlen(value) + 1 > (*elem)->length))
 	{
-		ft_strdel(&(*link)->variable);
-		if (!((*link)->variable = ft_str3join(key, "=", value))) //
+		ft_strdel(&(*elem)->variable);
+		if (!((*elem)->variable = ft_str3join(key, "=", value))) //
 			return (ERROR);
-		(*link)->length = len;
+		(*elem)->length = len;
 	}
 	else
 	{
-		ft_strclr((*link)->variable + ft_strlen(key) + 1);
-		(*link)->variable = ft_strcat((*link)->variable, value);
+		ft_strclr((*elem)->variable + ft_strlen(key) + 1);
+		(*elem)->variable = ft_strcat((*elem)->variable, value);
 	}
 	return (GOOD);
 }
@@ -33,7 +33,7 @@ static int	add_value(t_environment **lst_env, char *key, char *value)
 
 	if (!(variable = ft_str3join(key, "=", value)))
 		return (ERROR);
-	if (!create_link(lst_env, variable))
+	if (!create_elem(lst_env, variable))
 	{
 		ft_strdel(&variable);
 		return (ERROR);
@@ -44,25 +44,25 @@ static int	add_value(t_environment **lst_env, char *key, char *value)
 
 int			sh_setenv(t_environment **lst_env, char *key, char *value)
 {
-	t_environment	*link;
+	t_environment	*elem;
 	char			*tmp;
 	int				ret;
 
-	link = *lst_env;
-	while (link && key)
+	elem = *lst_env;
+	while (elem && key)
 	{
-		if ((tmp = ft_strndup(link->variable,\
-			(size_t)(ft_strchr(link->variable, '=') - link->variable))))
+		if ((tmp = ft_strndup(elem->variable,\
+			(size_t)(ft_strchr(elem->variable, '=') - elem->variable))))
 		{
 			if (ft_strequ(key, tmp))
 			{
-				ret = switch_value(&link, key, value);
+				ret = switch_value(&elem, key, value);
 				ft_strdel(&tmp);
 				return (ret);
 			}
 			ft_strdel(&tmp);
 		}
-		link = link->next;
+		elem = elem->next;
 	}
 	return (add_value(lst_env, key, value));
 }

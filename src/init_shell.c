@@ -13,7 +13,7 @@ static int		copy_environment(t_environment **lst_env)
 	i = 0;
 	while (environ && environ[i])
 	{
-		create_link(lst_env, environ[i]);
+		create_elem(lst_env, environ[i]);
 		++i;
 	}
 	return (GOOD);
@@ -54,11 +54,11 @@ int		init_shell(t_shell *sh)
 	if (!copy_environment(&sh->lst_env))
 		return (ERROR);
 	set_default(&sh->lst_env);
-	// t_environment *link = sh->lst_env;
-	// while (link)
+	// t_environment *elem = sh->lst_env;
+	// while (elem)
 	// {
-	// 	ft_putendl(link->variable);
-	// 	link = link->next;
+	// 	ft_putendl(elem->variable);
+	// 	elem = elem->next;
 	// }
 	return (GOOD);
 }

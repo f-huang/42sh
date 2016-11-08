@@ -9,15 +9,20 @@
 
 static void	push_back(t_environment **lst_env, t_environment *new)
 {
-	t_environment		*link;
+	t_environment		*elem;
 
-	link = *lst_env;
-	while (link->next)
-		link = link->next;
-	link->next = new;
+	if (*lst_env)
+	{
+		elem = *lst_env;
+		while (elem->next)
+			elem = elem->next;
+		elem->next = new;
+	}
+	else
+		*lst_env = new;
 }
 
-int			create_link(t_environment **lst_env, char *variable)
+int			create_elem(t_environment **lst_env, char *variable)
 {
 	t_environment	*new;
 
@@ -28,9 +33,6 @@ int			create_link(t_environment **lst_env, char *variable)
 	if (!(new->variable = ft_strdup(variable)))
 		return (ERROR);
 	new->length = ft_strlen(variable);
-	if (*lst_env)
-		push_back(lst_env, new);
-	else
-		*lst_env = new;
+	push_back(lst_env, new);
 	return (GOOD);
 }

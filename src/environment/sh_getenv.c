@@ -11,25 +11,24 @@
 
 char		*sh_getenv(t_environment *lst_env, char *key)
 {
-	t_environment	*link;
-	size_t			index;
-	char			*tmp;
+	t_environment	*elem;
+	char			*tmp_key;
+	size_t			len_key;
 
-	link = lst_env;
-	while (link && key)
+	elem = lst_env;
+	while (elem && key)
 	{
-		if ((tmp = ft_strndup(link->variable,\
-			(size_t)(ft_strchr(link->variable, '=') - link->variable))))
+	 	len_key = (size_t)(ft_strchr(elem->variable, '=') - elem->variable);
+		if ((tmp_key = ft_strndup(elem->variable, len_key)))
 		{
-			if (ft_strequ(key, tmp))
+			if (ft_strequ(key, tmp_key))
 			{
-				ft_strdel(&tmp);
-				index = 1 + (size_t)(ft_strchr(link->variable, '=') - link->variable);
-				return (link->variable + index);
+				ft_strdel(&tmp_key);
+				return (elem->variable + ++len_key);
 			}
-			ft_strdel(&tmp);
+			ft_strdel(&tmp_key);
 		}
-		link = link->next;
+		elem = elem->next;
 	}
 	return (NULL);
 }
