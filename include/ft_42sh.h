@@ -105,12 +105,17 @@ typedef struct			s_shell
 # define PROMPT "$> "
 #endif
 
+#ifndef BUFF_SIZE
+# define BUFF_SIZE 64
+#endif
+
 /*
 **	SHELL BASIC FUNCTIONS
 */
 
 int						init_shell(t_shell *sh);
 int						prompt(t_shell *sh);
+int						get_line(char **line);
 
 
 #endif

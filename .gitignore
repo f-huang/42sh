@@ -11,5 +11,6 @@ a.out
 *.swp
 *.fr.pdf
 .cache_exists
-libft/
+./libft/
 bin/
+include/libft.h
