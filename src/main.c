@@ -2,11 +2,11 @@
 
 int			main(void)
 {
-	t_shell	sh;
-	if (init_shell(&sh))
-		while (prompt(&sh))
-			;
-	else
+	t_shell		sh;
+
+	if (!init_shell(&sh))
 		return (ERROR);
+	while (prompt(&sh))
+			;
 	return (GOOD);
 }
