@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.h                                       :+:      :+:    :+:   */
+/*   builtin_setenv.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 18:02:35 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/09 18:02:37 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/09 18:07:55 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/09 18:10:35 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_CD_H
-# define BUILTIN_CD_H
+#ifndef BUILTIN_SETENV_H
+# define BUILTIN_SETENV_H
 
-#ifndef OLDPWD
-# define OLDPWD 0
-#endif
-
-#ifndef NEWPWD
-# define NEWPWD 1
-#endif
-
-#ifndef HOME
-# define HOME 2
-#endif
-
-#include <unistd.h>
-#include <limits.h>
-#include "ft_42sh.h"
-#include "builtin_cd.h"
-#include "environment.h"
-#include "libft.h"
-
-int			builtin_cd(t_shell *sh, int ac, char **av);
+int		builtin_setenv(t_shell *sh, int ac, char **av);
 
 #endif
