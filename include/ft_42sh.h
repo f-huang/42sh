@@ -5,8 +5,8 @@
 **	OUR OWN LIBRAIRIES
 */
 
-//# include "libft.h"
-//# include "environment.h"
+# include "libft.h"
+# include "environment.h"
 
 /*
 **	C STANDARD LIBRARIES
