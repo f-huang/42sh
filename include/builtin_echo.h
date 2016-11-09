@@ -8,7 +8,10 @@
 typedef struct		s_escaped_char
 {
 	char		c;
-	char		escaped_char;
+	char		*escaped_char;
 }					t_escaped_char;
 
+
+int					check_for_options(bool option[2], char *str);
+int					echo_strings(bool option[2], char *str);
 #endif

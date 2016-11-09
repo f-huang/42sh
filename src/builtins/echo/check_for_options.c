@@ -4,7 +4,7 @@
 
 static int	is_option(bool option[2], char c)
 {
-	const char	*letters[] = "Een";
+	const char	letters[] = "Een";
 	int			i;
 
 	i = 0;
@@ -22,7 +22,7 @@ static int	is_option(bool option[2], char c)
 		}
 		i++;
 	}
-	ft_bzero(option, sizeof(int) * 2);
+	ft_bzero(option, sizeof(bool) * 2);
 	return (ERROR);
 }
 
@@ -31,9 +31,11 @@ int			check_for_options(bool option[2], char *str)
 	int			i;
 
 	i = 1;
+	if (str[i] == 0)
+		return (ERROR);
 	while (str[i])
 	{
-		if (!is_option(option, str[i]]))
+		if (!is_option(option, str[i]))
 			return (ERROR);
 		i++;
 	}

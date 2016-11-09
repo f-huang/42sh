@@ -1,6 +1,6 @@
-#include <stddbool.h>
-include "ft_42sh.h"
-
+#include <stdbool.h>
+#include "builtin_echo.h"
+#include "ft_42sh.h"
 
 int			main(int ac, char **av)
 {
@@ -10,17 +10,21 @@ int			main(int ac, char **av)
 
 	i = 1;
 	is_option = 1;
-	ft_bzero(option, sizeof(int) * 2);
+	ft_bzero(option, sizeof(bool) * 2);
 	while (av[i])
 	{
-		if (is_option && ((is_option = check_for_options(option, av[i]))))
+		if (is_option && *av[i] == '-' &&\
+			((is_option = check_for_options(option, av[i]))))
 			i++;
 		else
 		{
 			if (!echo_strings(option, av[i]))
-				return (ERROR);
-			i++;
+				return (1);
+			if (av[++i] && write(1, " ", 1) == -1)
+				return (1);
 		}
 	}
-	return (GOOD);
+	if (!option[0] && write(1, "\n", 1) == -1)
+		return (1);
+	return (0);
 }
