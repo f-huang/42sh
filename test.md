@@ -93,3 +93,7 @@ Makefile	auteur		bin		include		libft		obj		src
 $> env -i PATH=caca ls
 env: ls: No such file or directory
 ```
+```shell
+$> env -u MAIL=
+unsetenv env: MAIL=: Invalid argument
+```
