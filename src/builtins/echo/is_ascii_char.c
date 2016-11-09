@@ -6,12 +6,17 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:25 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/09 20:20:25 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/09 20:40:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_42sh.h"
+
+/*
+**	This function prints the escaped characters when ascii octal or/and hexadecimal
+**	codes are in the string.
+*/
 
 int		are_char_digits(char *str)
 {
