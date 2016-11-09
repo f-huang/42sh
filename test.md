@@ -97,3 +97,7 @@ env: ls: No such file or directory
 $> env -u MAIL=
 unsetenv env: MAIL=: Invalid argument
 ```
+```shell
+$> env -u
+env: option requires an argument -- u
+```
