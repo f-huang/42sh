@@ -54,8 +54,8 @@ int			builtin_cd(t_shell *sh, int ac, char **av)
 		go_to(lst_env, HOME);
 	else if (ac == 2)
 	{
-		if (av[1][0] == '/' || ft_strnequ(av[1], "./", 2) ||\
-													ft_strnequ(av[1], "../", 3))
+		if (av[1][0] == '/' || ft_strnequ(av[1], "./", 2)\
+							|| ft_strnequ(av[1], "../", 3))
 			change_directory(av[1]);
 		else if (ft_strequ(av[1], "-"))
 			go_to(lst_env, OLDPWD);
