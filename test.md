@@ -53,6 +53,20 @@ $> env caca popo
 env: caca: No such file or directory
 ```
 ```
-$> env caca popo
-env: caca: No such file or directory
+$> env ls
+Makefile	auteur		bin		include		libft		obj		src
+```
+```
+$> env ls -a
+.		.cache_exists	.gitignore	auteur		include		obj
+..		.git		Makefile	bin		libft		src
+```
+
+```
+$> env -i ls
+Makefile	auteur		bin		include		libft		obj		src
+```
+```
+$> env -i PATH=caca ls
+env: ls: No such file or directory
 ```
