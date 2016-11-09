@@ -10,7 +10,7 @@ OBJDIR	:=	obj/
 BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
-DIRBUILTINS	:= obj/builtins
+DIRBUILTINS	:= obj/builtins/
 SRC		:= $(shell find src -type d \( -path src/builtins/env -o -path src/builtins/echo -o -path src/builtins/read \) -prune -o -type f -print)
 OBJ		:= $(SRC:src/%.c=obj/%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
@@ -63,7 +63,7 @@ OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
 
 all: $(NAME)
 
-$(NAME): env echo read libft $(OBJ)
+$(NAME): libft env echo read $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
@@ -74,6 +74,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 $(CACHEF):
 	test -d $(OBJDIR) || mkdir $(OBJDIR)
 	test -d $(DIRBUILTINS) || mkdir $(DIRBUILTINS)
+	test -d $(DIRBUILTINS)cd || mkdir $(DIRBUILTINS)cd
 	test -d $(OBJDIRENV) || mkdir $(OBJDIRENV)
 	test -d $(OBJDIRECHO) || mkdir $(OBJDIRECHO)
 	test -d $(OBJDIRREAD) || mkdir $(OBJDIRREAD)
@@ -89,15 +90,15 @@ libft:
 	make -C $(LIBDIR)
 
 read: $(OBJREAD)
-	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(INC)
+	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
 echo: $(OBJECHO)
-	$(CC) $(CFLAGS) -o $(BINECHO) $(OBJECHO) $(INC)
+	$(CC) $(CFLAGS) -o $(BINECHO) $(OBJECHO) $(LIBPATH) $(LIB) $(INC)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
 env: $(OBJENV)
-	$(CC) $(CFLAGS) -o $(BINENV) $(OBJENV) $(INC)
+	$(CC) $(CFLAGS) -o $(BINENV) $(OBJENV) $(LIBPATH) $(LIB) $(INC)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
 norme:
