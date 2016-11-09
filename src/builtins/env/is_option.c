@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_error.c                                        :+:      :+:    :+:   */
+/*   is_option.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 15:44:50 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/09 15:44:50 by yfuks            ###   ########.fr       */
+/*   Created: 2016/11/09 15:44:02 by yfuks             #+#    #+#             */
+/*   Updated: 2016/11/09 15:44:03 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_env.h"
 #include "libft.h"
 
-void	env_put_error(char *executable_name, char *error)
+int		env_is_option(char *str)
 {
-	ft_putstr_fd("env: ", 2);
-	ft_putstr_fd(executable_name, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putendl_fd(error, 2);
+	if (env_is_option_i(str) || env_is_option_u(str))
+		return (1);
+	if (str[0] == '-')
+		return (1);
+	return (0);
 }

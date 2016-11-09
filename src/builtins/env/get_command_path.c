@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_command_path.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/09 15:43:32 by yfuks             #+#    #+#             */
+/*   Updated: 2016/11/09 15:43:34 by yfuks            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "builtin_env.h"
 #include "libft.h"
 #include <stdlib.h>
@@ -15,7 +27,7 @@ static	void	free_double_tab(char **tab)
 	free(tab);
 }
 
-static	int	file_exist(char *filepath)
+static	int		file_exist(char *filepath)
 {
 	if (access(filepath, F_OK) != -1)
 		return (1);
@@ -52,7 +64,7 @@ static	char	*check_all_paths(char *command_name, char **all_paths)
 	return (0);
 }
 
-char	*env_get_command_path(char **env, char *command_name)
+char			*env_get_command_path(char **env, char *command_name)
 {
 	char	*executable;
 	char	*env_path;
