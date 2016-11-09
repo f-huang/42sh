@@ -2,6 +2,7 @@
 
 ## table of content
 - [env](#env)
+- [echo](#echo)
 
 
 ### env
@@ -100,4 +101,55 @@ unsetenv env: MAIL=: Invalid argument
 ```shell
 $> env -u
 env: option requires an argument -- u
+```
+
+### echo
+```shell
+$> echo
+
+```
+```shell
+$> echo -n
+```
+```shell
+$> echo -nnnnnn
+```
+```shell
+$> echo -n -n -n -n -n
+```
+```shell
+$> echo -n -n -n -n -n -y -n
+-y -n%
+```
+```shell
+$> echo -n -n -n -n -n -y -n
+-y -n%
+```
+```shell
+$> echo Le petit chat boit son lait
+Le petit chat boit son lait
+```
+```shell
+$> echo Le         petit         chat        boit       son      lait
+Le petit chat boit son lait
+```
+```shell
+$> echo Le petit \t chat boit \\t son lait
+Le petit t chat boit \t son lait
+```
+```shell
+$> echo -E Le petit \t chat boit \\t son lait
+Le petit t chat boit \t son lait
+```
+```shell
+$> echo -e Le petit \t chat boit \\t son lait
+Le petit t chat boit    son lait
+```
+```shell
+$> echo -eE Le petit \t chat boit \\t son lait
+Le petit t chat boit \t son lait
+```
+```shell
+$> echo -eEe Le petit \t chat boit \\t son lait
+Le petit t chat boit    son lait
 ```
