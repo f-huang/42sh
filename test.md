@@ -15,6 +15,13 @@ $> env --ignore-environment
 $> env -
 ```
 ```shell
+$> env -i -
+```
+```shell
+$> env -i - ls
+Makefile	auteur		bin		include		libft		obj		src
+```
+```shell
 $> env "- "
 env: illegal option --
 usage: env [-iv] [-P utilpath] [-S string] [-u name]
