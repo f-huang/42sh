@@ -5,30 +5,30 @@
 **	OUR OWN LIBRAIRIES
 */
 
-# include "libft.h"
-# include "environment.h"
+//# include "libft.h"
+//# include "environment.h"
 
 /*
 **	C STANDARD LIBRARIES
 */
 
-# include <curses.h>
-# include <dirent.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <signal.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/ioctl.h>
-# include <sys/stat.h>
-# include <sys/syslimits.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <sys/wait.h>
-# include <term.h>
-# include <termios.h>
-# include <unistd.h>
+//# include <curses.h>
+//# include <dirent.h>
+//# include <errno.h>
+//# include <fcntl.h>
+//# include <signal.h>
+//# include <stdio.h>
+//# include <stdlib.h>
+//# include <string.h>
+//# include <sys/ioctl.h>
+//# include <sys/stat.h>
+//# include <sys/syslimits.h>
+//# include <sys/types.h>
+//# include <sys/uio.h>
+//# include <sys/wait.h>
+//# include <term.h>
+//# include <termios.h>
+//# include <unistd.h>
 
 /*
 **	STANDARD LIRAIRIES STRUCTURES
@@ -107,6 +107,17 @@ typedef struct			s_shell
 
 #ifndef BUFF_SIZE
 # define BUFF_SIZE 64
+#endif
+
+/*
+**	BUILTIN CODE
+*/
+#ifndef BUILTIN
+# define BUILTIN "cd, exit, unsetenv, setenv"
+#endif
+
+#ifndef NBBUILTIN
+# define NBBUILTIN 4
 #endif
 
 /*
