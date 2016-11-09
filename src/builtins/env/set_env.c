@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_env.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/09 15:45:01 by yfuks             #+#    #+#             */
+/*   Updated: 2016/11/09 15:45:01 by yfuks            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "builtin_env.h"
 #include "libft.h"
 #include <stdlib.h>
@@ -23,11 +35,13 @@ static	void	remove_duplicate_equals(char *str)
 			shift_str(str, i);
 			i--;
 		}
+		else if (str[i] == '=')
+			break ;
 		i++;
 	}
 }
 
-int		env_set_env(char *str, char ***env)
+int				env_set_env(char *str, char ***env)
 {
 	int		i;
 	char	*key;

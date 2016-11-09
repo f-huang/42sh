@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_command.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/09 15:43:18 by yfuks             #+#    #+#             */
+/*   Updated: 2016/11/09 15:54:03 by yfuks            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "builtin_env.h"
 #include <sys/wait.h>
 #include <stdlib.h>
@@ -14,23 +26,25 @@ static	int		get_command_status_code(int status)
 	return (0);
 }
 
-int		env_execute_command(char **env, char **av, int index_of_executable)
+static	int		rp_error(char *name, char *error, int code)
+{
+	env_put_error(name, error);
+	return (code);
+}
+
+int				env_execute_command(char **env, char **av, int index)
 {
 	pid_t	id;
 	int		status;
 	int		tmp;
 	char	*executable;
 
-	if (!(executable = env_get_command_path(env, av[index_of_executable])))
-	{
-		env_put_error(av[index_of_executable], "No such file or directory");
-		return (NOTFOUND);
-	}
+	if (!(executable = env_get_command_path(env, av[index])))
+		return (rp_error(av[index], "No such file or directory", NOTFOUND));
 	if (!env_is_executable(executable))
 	{
-		env_put_error(executable, "Permission denied");		
 		free(executable);
-		return (CANNOTINVOKE);
+		return (rp_error(av[index], "Permission denied", CANNOTINVOKE));
 	}
 	id = fork();
 	if (id > 0)
@@ -41,7 +55,7 @@ int		env_execute_command(char **env, char **av, int index_of_executable)
 	}
 	else if (id == 0)
 	{
-		execve(executable, &av[index_of_executable], env);
+		execve(executable, &av[index], env);
 		exit(NOTFOUND);
 	}
 	return (0);
