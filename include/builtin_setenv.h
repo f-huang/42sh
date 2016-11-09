@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.h                                            :+:      :+:    :+:   */
+/*   builtin_setenv.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/09 18:12:56 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/09 18:07:55 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/09 18:10:35 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLS_H
-# define TOOLS_H
+#ifndef BUILTIN_SETENV_H
+# define BUILTIN_SETENV_H
 
-char		*tl_str3join(char *s1, char *s2, char *s3);
-char		*tl_strndup(const char *s1, size_t n);
-char		*tl_strrealloc(char *s, size_t size);
-int			*tl_strisalnum(char *s);
+int		builtin_setenv(t_shell *sh, int ac, char **av);
 
 #endif

@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   update_key.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 15:44:26 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/09 16:59:15 by yfuks            ###   ########.fr       */
+/*   Created: 2016/11/09 15:45:05 by yfuks             #+#    #+#             */
+/*   Updated: 2016/11/09 15:45:05 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_env.h"
 #include "libft.h"
+#include <stdlib.h>
 
-int			main(int ac, char **av, char **env)
+static	int	found_line_with_key(char *key, char **env)
 {
-	char	**internal_env;
 	int		i;
 
-	if (ac < 2)
-		return (env_print_env(env));
-	internal_env = env_copy_env(env);
-	return (env_parse_argv(i, ac, av, &internal_env));
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(key, env[i], ft_strlen(key)) == 0)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+int			env_update_key(char *key, char *str, char **env)
+{
+	int		line;
+	char	*tmp;
+
+	line = found_line_with_key(key, env);
+	tmp = env[line];
+	env[line] = ft_strdup(str);
+	free(tmp);
+	return (0);
 }

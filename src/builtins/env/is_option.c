@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.h                                            :+:      :+:    :+:   */
+/*   is_option.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/09 18:12:56 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/09 15:44:02 by yfuks             #+#    #+#             */
+/*   Updated: 2016/11/09 15:44:03 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLS_H
-# define TOOLS_H
+#include "builtin_env.h"
+#include "libft.h"
 
-char		*tl_str3join(char *s1, char *s2, char *s3);
-char		*tl_strndup(const char *s1, size_t n);
-char		*tl_strrealloc(char *s, size_t size);
-int			*tl_strisalnum(char *s);
-
-#endif
+int		env_is_option(char *str)
+{
+	if (env_is_option_i(str) || env_is_option_u(str))
+		return (1);
+	if (str[0] == '-')
+		return (1);
+	return (0);
+}

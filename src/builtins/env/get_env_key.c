@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.h                                            :+:      :+:    :+:   */
+/*   get_env_key.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/09 18:12:56 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/09 15:43:40 by yfuks             #+#    #+#             */
+/*   Updated: 2016/11/09 15:43:41 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLS_H
-# define TOOLS_H
+#include "builtin_env.h"
+#include "libft.h"
 
-char		*tl_str3join(char *s1, char *s2, char *s3);
-char		*tl_strndup(const char *s1, size_t n);
-char		*tl_strrealloc(char *s, size_t size);
-int			*tl_strisalnum(char *s);
+char	*env_get_env_key(char *str)
+{
+	char	*key;
+	char	*equalsign;
 
-#endif
+	key = ft_strdup(str);
+	equalsign = ft_strchr(key, '=');
+	equalsign[0] = 0;
+	return (key);
+}

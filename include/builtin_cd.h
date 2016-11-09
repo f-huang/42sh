@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.h                                            :+:      :+:    :+:   */
+/*   builtin_cd.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/09 18:12:56 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/09 18:02:35 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/09 18:02:37 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLS_H
-# define TOOLS_H
+#ifndef BUILTIN_CD_H
+# define BUILTIN_CD_H
 
-char		*tl_str3join(char *s1, char *s2, char *s3);
-char		*tl_strndup(const char *s1, size_t n);
-char		*tl_strrealloc(char *s, size_t size);
-int			*tl_strisalnum(char *s);
+#ifndef OLDPWD
+# define OLDPWD 0
+#endif
+
+#ifndef NEWPWD
+# define NEWPWD 1
+#endif
+
+#ifndef HOME
+# define HOME 2
+#endif
+
+#include <unistd.h>
+#include <limits.h>
+#include "ft_42sh.h"
+#include "builtin_cd.h"
+#include "environment.h"
+#include "libft.h"
+
+int			builtin_cd(t_shell *sh, int ac, char **av);
 
 #endif

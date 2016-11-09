@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.h                                            :+:      :+:    :+:   */
+/*   alloc_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/09 18:12:56 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/09 15:43:05 by yfuks             #+#    #+#             */
+/*   Updated: 2016/11/09 15:43:08 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLS_H
-# define TOOLS_H
+#include "ft_42sh.h"
 
-char		*tl_str3join(char *s1, char *s2, char *s3);
-char		*tl_strndup(const char *s1, size_t n);
-char		*tl_strrealloc(char *s, size_t size);
-int			*tl_strisalnum(char *s);
-
-#endif
+char	**env_alloc_env(size_t len)
+{
+	return ((char **)malloc(sizeof(char *) * len + 1));
+}
