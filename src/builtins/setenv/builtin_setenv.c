@@ -1,14 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_setenv.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/09 17:47:48 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/09 17:47:58 by cjacquem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_42sh.h"
 #include "environment.h"
 #include "libft.h"
+#include "tools.h"
 
 static int	check_validity_av(char *argv)
 {
-	if (!ft_isalpha(*s))
+	if (!ft_isalpha(*argv))
 	{
 		ft_putendl_fd("setenv: Variable name must begin with a letter.", 2);
 		return (ERROR);
 	}
-	else if (!tl_strisalnum(s))
+	else if (!tl_strisalnum(argv))
 	{
 		ft_putstr_fd("setenv: ", 2);
 		ft_putendl_fd("Variable name must contain alphanumeric characters.", 2);
@@ -27,4 +41,3 @@ int			builtin_setenv(t_shell *sh, int ac, char **av)
 		ft_putendl_fd("setenv: Too many arguments.", 2);
 	return (GOOD);
 }
-
