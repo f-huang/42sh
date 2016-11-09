@@ -122,8 +122,8 @@ $> echo -n -n -n -n -n -y -n
 -y -n%
 ```
 ```shell
-$> echo -n -n -n -n -n -y -n
--y -n%
+$> echo -nnyneEu
+-nnyneEu
 ```
 ```shell
 $> echo Le petit chat boit son lait
