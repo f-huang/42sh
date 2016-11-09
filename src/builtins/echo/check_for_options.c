@@ -1,6 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_for_options.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/09 20:20:21 by fhuang            #+#    #+#             */
+/*   Updated: 2016/11/09 20:35:41 by fhuang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdbool.h>
 #include "ft_42sh.h"
 #include "libft.h"
+
+/*
+**		This file looks if the right options are given.
+**		If not it returns ERROR and option array is cleared.
+**		Else the corresponding index of the array is set to 1.
+**		index 0 stands for the newline and index 1 for escaped characters.
+*/
 
 static int	is_option(bool option[2], char c)
 {

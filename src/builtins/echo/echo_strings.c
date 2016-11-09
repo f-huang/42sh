@@ -1,7 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo_strings.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/09 20:20:23 by fhuang            #+#    #+#             */
+/*   Updated: 2016/11/09 20:38:00 by fhuang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdbool.h>
 #include "builtin_echo.h"
 #include "ft_42sh.h"
 #include "libft.h"
+
+/*
+**	This function outputs the given string.
+**	If -e is on, escaped characters are treated.
+*/
 
 static const t_escaped_char	escaped_char[NB_ESC_CHAR] = {
 	{'a', "\a"},
