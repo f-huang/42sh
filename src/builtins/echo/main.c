@@ -21,8 +21,9 @@ int			main(int ac, char **av)
 			if (!echo_strings(option, av[i]))
 				return (1);
 			if (av[++i] && write(1, " ", 1) == -1)
-				return (1);
+					return (1);
 		}
+		// printf("-- %d --\n", option[0]);
 	}
 	if (!option[0] && write(1, "\n", 1) == -1)
 		return (1);

@@ -2,7 +2,7 @@
 # define BUILTIN_ECHO_H
 
 #ifndef NB_ESC_CHAR
-# define NB_ESC_CHAR 9
+# define NB_ESC_CHAR 10
 #endif
 
 typedef struct		s_escaped_char
@@ -14,4 +14,5 @@ typedef struct		s_escaped_char
 
 int					check_for_options(bool option[2], char *str);
 int					echo_strings(bool option[2], char *str);
+int					is_ascii_char(char *str);
 #endif

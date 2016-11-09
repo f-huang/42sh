@@ -22,12 +22,12 @@ static int	is_option(bool option[2], char c)
 		}
 		i++;
 	}
-	ft_bzero(option, sizeof(bool) * 2);
 	return (ERROR);
 }
 
 int			check_for_options(bool option[2], char *str)
 {
+	static int	good = 0;
 	int			i;
 
 	i = 1;
@@ -36,8 +36,13 @@ int			check_for_options(bool option[2], char *str)
 	while (str[i])
 	{
 		if (!is_option(option, str[i]))
+		{
+			if (!good)
+				ft_bzero(option, sizeof(bool) * 2);
 			return (ERROR);
+		}
 		i++;
 	}
+	good = 1;
 	return (GOOD);
 }

@@ -3,7 +3,7 @@
 #include "ft_42sh.h"
 #include "libft.h"
 
-static const t_escaped_char		escaped_char[NB_ESC_CHAR] = {
+static const t_escaped_char	escaped_char[NB_ESC_CHAR] = {
 	{'a', "\a"},
 	{'b', "\b"},
 	{'e', "\e"},
@@ -12,10 +12,11 @@ static const t_escaped_char		escaped_char[NB_ESC_CHAR] = {
 	{'r', "\r"},
 	{'t', "\t"},
 	{'v', "\v"},
-	{'\\', "\\"}
+	{'\\', "\\"},
+	{'0', "\0"}
 };
 
-int		echo_escaped_char(char c)
+static int	echo_escaped_char(char c)
 {
 	int		i;
 
@@ -33,7 +34,7 @@ int		echo_escaped_char(char c)
 	return (ERROR);
 }
 
-int		echo_strings(bool option[2], char *str)
+int			echo_strings(bool option[2], char *str)
 {
 	int		i;
 
@@ -42,12 +43,14 @@ int		echo_strings(bool option[2], char *str)
 	{
 		if (option[1] && str[i] == '\\')
 		{
-			if (echo_escaped_char(str[++i]))
-				i++;
-			else
-				i--;
+			// if (!is_ascii_char(str + ++i))
+				echo_escaped_char(str[++i]) ? 0 : i--;
+			// if (echo_escaped_char(str[++i]))
+			// 	i++;
+			// else
+			// 	i--;
 		}
-		if (write(1, str + i, 1) == -1)
+		else if (str + i && write(1, str + i, 1) == -1)
 			return (ERROR);
 		i++;
 	}
