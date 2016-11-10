@@ -34,6 +34,7 @@ int			create_elem(t_environment **lst_env, char *variable)
 	if (!(new->variable = ft_strdup(variable)))
 		return (ERROR);
 	new->length = ft_strlen(variable);
+	new->next = 0;
 	push_back(lst_env, new);
 	return (GOOD);
 }
