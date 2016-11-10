@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/09 18:02:27 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/10 12:42:31 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtin_cd.h>
+#include <limits.h>
+#include <unistd.h>
+#include "ft_42sh.h"
+#include "environment.h"
+#include "builtins.h"
+#include "libft.h"
 
 /*
 **			This function change the working directory of the current shell
@@ -63,17 +68,16 @@ int			builtin_cd(t_shell *sh, int ac, char **av)
 		go_to(sh->lst_env, HOME);
 	else if (ac == 2)
 	{
-		if (av[1][0] == '/' || ft_strnequ(av[1], "./", 2)\
-							|| ft_strnequ(av[1], "../", 3))
-			change_directory(sh->lst_env, av[1]);
-		else if (ft_strequ(av[1], "-"))
+		if (ft_strequ(av[1], "-"))
 			go_to(sh->lst_env, OLDPWD);
+		else
+			change_directory(sh->lst_env, av[1]);
 	}
 	else if (ac == 3)
 	{
 		// DO OPTIONS
 	}
 	else
-		ft_putstr_fd("cd: Too many arguments", 2);
+		ft_putstr_fd("cd: Too many arguments\n", 2);
 	return (GOOD);
 }

@@ -6,12 +6,13 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 15:43:00 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/09 15:43:01 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/10 15:38:24 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_env.h"
 #include <stdlib.h>
+#include "libft.h"
 
 int		env_add_key(char *str, char ***env)
 {
@@ -27,7 +28,7 @@ int		env_add_key(char *str, char ***env)
 		tmp_env[i] = env[0][i];
 		i++;
 	}
-	tmp_env[env_size] = str;
+	tmp_env[env_size] = ft_strdup(str);
 	tmp_env[env_size + 1] = 0;
 	free(*env);
 	*env = tmp_env;

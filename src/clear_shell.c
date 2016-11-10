@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_unsetenv.c                                 :+:      :+:    :+:   */
+/*   clear_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 17:59:49 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/09 18:01:36 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/10 10:21:06 by fhuang            #+#    #+#             */
+/*   Updated: 2016/11/10 10:26:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_UNSETENV_H
-# define BUILTIN_UNSETENV_H
-
 #include "ft_42sh.h"
+#include "environment.h"
 
-int			builtin_unsetenv(t_shell *sh, int ac, char **av);
+/*
+**	This function free every variable in the shell structure
+**	and set pointers to NULL.
+*/
 
-#endif
+void	clear_shell(t_shell *sh)
+{
+	sh->last_return = 0;
+	clear_env_list(&sh->lst_env);
+}

@@ -3,6 +3,7 @@
 ## table of content
 - [env](#env)
 - [echo](#echo)
+- [exit](#exit)
 
 
 ### env
@@ -152,4 +153,29 @@ Le petit t chat boit \t son lait
 ```shell
 $> echo -eEe Le petit \t chat boit \\t son lait
 Le petit t chat boit    son lait
+```
+
+### exit
+```shell
+$> exit toto titi
+42sh: exit: too many arguments.
+```
+```shell
+$> exit toto
+42sh: exit: toto: Expression syntax.
+```
+```shell
+$> exit
+$> echo $?
+0
+```
+```shell
+$> exit 20
+$> echo $?
+20
+```
+```shell
+$> exit 256
+$> echo $?
+0
 ```
