@@ -6,13 +6,17 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 10:17:42 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 10:23:13 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/10 10:25:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "environment.h"
 #include "libft.h"
+
+/*
+**		This function free the given environment list and set pointers to NULL.
+*/
 
 void	clear_env_list(t_environment **lst_env)
 {

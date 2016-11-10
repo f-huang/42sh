@@ -6,12 +6,16 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 09:54:32 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 10:22:56 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/10 10:27:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_42sh.h"
+
+/*
+**		This function reproduces the behavior of the built-in exit().
+*/
 
 static int	is_str_digit(char *str)
 {
