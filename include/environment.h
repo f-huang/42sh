@@ -23,6 +23,7 @@ typedef struct			s_environment
 }						t_environment;
 
 int						create_elem(t_environment **lst_env, char *variable);
+void					clear_env_list(t_environment **lst_env);
 
 char					*sh_getenv(t_environment *lst_env, char *key);
 int						sh_setenv(t_environment **lst_env, char *key, char *value);
