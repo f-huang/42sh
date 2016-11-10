@@ -77,6 +77,7 @@ $(CACHEF):
 	test -d $(DIRBUILTINS)cd || mkdir $(DIRBUILTINS)cd
 	test -d $(DIRBUILTINS)setenv || mkdir $(DIRBUILTINS)setenv
 	test -d $(DIRBUILTINS)unsetenv || mkdir $(DIRBUILTINS)unsetenv
+	test -d $(DIRBUILTINS)exit || mkdir $(DIRBUILTINS)exit
 	test -d $(OBJDIRENV) || mkdir $(OBJDIRENV)
 	test -d $(OBJDIRECHO) || mkdir $(OBJDIRECHO)
 	test -d $(OBJDIRREAD) || mkdir $(OBJDIRREAD)
