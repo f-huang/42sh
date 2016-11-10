@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:40:17 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/10 17:38:00 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/10 20:02:48 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static	int	is_builtin_notbinary(t_exec *ex, t_shell *sh, char **command)
 		}
 		i++;
 	}
+	tl_freedoubletab(builtins_list);
 	return (0);
 }
 

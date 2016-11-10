@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 17:25:35 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/10 19:11:20 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/10 19:58:56 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "tools.h"
 #include "libft.h"
 
-int		exec_is_standalone(t_exec *ex, t_shell *sh, char **command, char **paths)
+int	exec_is_standalone(t_exec *ex, t_shell *sh, char **command, char **paths)
 {
 	int		i;
 	char	*executable;

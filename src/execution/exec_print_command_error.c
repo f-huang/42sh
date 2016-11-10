@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_is_executable.c                               :+:      :+:    :+:   */
+/*   exec_print_command_error.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 16:07:18 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/10 19:58:29 by yfuks            ###   ########.fr       */
+/*   Created: 2016/11/10 19:36:33 by yfuks             #+#    #+#             */
+/*   Updated: 2016/11/10 19:41:10 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-#include <sys/stat.h>
+#include "libft.h"
 
-int	exec_is_executable(char *filepath)
+static	void	print_error(char *message, char *command_name)
 {
-	struct stat	buff;
+	ft_putstr_fd("42sh: ", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(command_name, 2);
+}
 
-	if (stat(filepath, &buff) == 0 && buff.st_mode & S_IXUSR)
-		return (1);
-	return (0);
+int				exec_print_command_error(int error, char *command_name)
+{
+	if (error == NOTFOUND)
+		print_error("command not found", command_name);
+	else if (error == CANNOTINVOKE)
+		print_error("permission denied", command_name);
+	return (error);
 }

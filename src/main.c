@@ -6,6 +6,8 @@ int			main(void)
 	t_shell		sh;
 	char		*line;
 	char		**commands;
+	int			command_status;
+	char		*trim;
 
 	line = NULL;
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
@@ -16,13 +18,14 @@ int			main(void)
 	{
 		if (get_line(&line) == 1)
 		{
-			ft_strtrim(line);
-			commands = ft_strsplit(line, ' ');
+			trim = ft_strtrim(line);
+			commands = ft_strsplit(trim, ' ');
 			exec_command(&sh, commands);
 			tl_freedoubletab(commands);
 			/* lexer */
 			ft_strclr(line);
 			ft_strdel(&line);
+			ft_strdel(&trim);
 		}
 		else
 		{
