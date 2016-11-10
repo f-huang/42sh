@@ -6,11 +6,16 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/10 12:22:02 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/10 12:42:31 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtin_cd.h>
+#include <limits.h>
+#include <unistd.h>
+#include "ft_42sh.h"
+#include "environment.h"
+#include "builtins.h"
+#include "libft.h"
 
 /*
 **			This function change the working directory of the current shell
