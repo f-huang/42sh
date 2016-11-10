@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 09:54:32 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 10:09:18 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/10 10:22:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int     builtin_exit(t_shell *sh, int ac, char **av)
 		ft_putendl_fd(": Expression syntax.", 2);
 		return (1);
 	}
-	//CLEAR SHELL
+	clear_shell(sh);
 	exit(av[1] ? (char)ft_atoi(av[1]) : EXIT_SUCCESS);
 	return (0);
 }
