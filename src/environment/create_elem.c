@@ -1,5 +1,6 @@
 #include "environment.h"
 #include "libft.h"
+#include <stdlib.h>
 
 /*
 **		This function create a link at the end of the environment list.
@@ -28,7 +29,7 @@ int			create_elem(t_environment **lst_env, char *variable)
 
 	if (!variable)
 		return (ERROR);
-	if (!(new = (t_environment*)ft_memalloc(sizeof(t_environment))))
+	if (!(new = (t_environment*)malloc(sizeof(t_environment))))
 		return (ERROR);
 	if (!(new->variable = ft_strdup(variable)))
 		return (ERROR);
