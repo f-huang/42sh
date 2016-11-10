@@ -6,14 +6,17 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:23 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/09 20:38:00 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/10 16:56:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
 #include "builtin_echo.h"
 #include "ft_42sh.h"
 #include "libft.h"
+
+#ifndef NB_ESC_CHAR
+# define NB_ESC_CHAR 10
+#endif
 
 /*
 **	This function outputs the given string.
@@ -51,7 +54,7 @@ static int	echo_escaped_char(char c)
 	return (ERROR);
 }
 
-int			echo_strings(bool option[2], char *str)
+int			echo_strings(_Bool option[2], char *str)
 {
 	int		i;
 
@@ -60,12 +63,10 @@ int			echo_strings(bool option[2], char *str)
 	{
 		if (option[1] && str[i] == '\\')
 		{
-			// if (!is_ascii_char(str + ++i))
-				echo_escaped_char(str[++i]) ? 0 : i--;
-			// if (echo_escaped_char(str[++i]))
-			// 	i++;
-			// else
-			// 	i--;
+			/*
+			** Check for \xNNN and \nnn
+			*/
+			echo_escaped_char(str[++i]) ? 0 : i--;
 		}
 		else if (str + i && write(1, str + i, 1) == -1)
 			return (ERROR);

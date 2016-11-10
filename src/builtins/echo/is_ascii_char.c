@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:25 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/09 20:40:17 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/10 16:55:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,6 @@ int		are_char_digits(char *str)
 	return (GOOD);
 }
 
-// int		is_hexa_char(char *str)
-// {
-// 	char	*buffer;
-//
-// 	// ft_putendlcol("hexa char", RED);
-// 	if (!(buffer = are_char_digits(str)))
-// 		return (ERROR);
-// 	// ft_putendlcol(buffer, GREEN);
-// 	// ft_atoi(buffer);
-// 	// write(1, ft_atoi(buffer), 1);
-// 	// printf("%x", (unsigned char)(ft_atoi(buffer)));
-// 	return (GOOD);
-// }
-
-
 int		is_ascii_char(char *str)
 {
 	if (*str == 'x')
@@ -55,7 +40,6 @@ int		is_ascii_char(char *str)
 			return (ERROR);
 		if (write(1, str - 1, 1) == -1)
 			return (ERROR);
-		// return (GOOD);
 	}
 	else if (are_char_digits(str))
 	{
@@ -64,8 +48,5 @@ int		is_ascii_char(char *str)
 	}
 	else
 		return (ERROR);
-
-	// else
-		// return (is_octal_char(str));
 	return (GOOD);
 }

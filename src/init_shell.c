@@ -54,11 +54,5 @@ int		init_shell(t_shell *sh)
 	if (!copy_environment(&sh->lst_env))
 		return (ERROR);
 	set_default(&sh->lst_env);
-	// t_environment *elem = sh->lst_env;
-	// while (elem)
-	// {
-	// 	ft_putendl(elem->variable);
-	// 	elem = elem->next;
-	// }
 	return (GOOD);
 }
