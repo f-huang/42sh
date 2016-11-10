@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:23 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 16:56:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/10 18:00:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int			echo_strings(_Bool option[2], char *str)
 			/*
 			** Check for \xNNN and \nnn
 			*/
-			echo_escaped_char(str[++i]) ? 0 : i--;
+			if (!is_ascii_char(str + ++i))
+				echo_escaped_char(str[i]) ? 0 : i--;
 		}
 		else if (str + i && write(1, str + i, 1) == -1)
 			return (ERROR);
