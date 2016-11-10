@@ -6,10 +6,11 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:56:25 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/10 12:43:59 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/10 15:16:41 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_42sh.h"
 #include "libft.h"
 #include "environment.h"
 

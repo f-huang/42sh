@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:47:48 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/10 12:36:04 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/10 15:15:51 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			builtin_setenv(t_shell *sh, int ac, char **av)
 {
 	if (ac == 1)
 		sh_print_env(sh->lst_env);
-	else if ((ac == 2 || ac == 3)
+	else if (ac == 2 || ac == 3)
 	{
 		if (!check_validity_av(av[1]))
 			return (ERROR);

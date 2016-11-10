@@ -2,6 +2,7 @@
 #include "ft_42sh.h"
 #include "libft.h"
 #include "tools.h"
+#include <unistd.h>
 
 /*
 **			This function receive the data wrote in the prompt (line).
