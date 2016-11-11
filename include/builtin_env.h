@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 15:46:12 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/09 16:34:49 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/11 19:10:29 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int		env_is_option_i(char *str);
 int		env_is_option_u(char *str);
 int		env_remove_key(int index, char **av, char ***env);
 void	env_print_usage(void);
+char	*env_get_paths(char **env);
 
 #endif

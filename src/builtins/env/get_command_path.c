@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 15:43:32 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/09 15:43:34 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/11 19:09:55 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char			*env_get_command_path(char **env, char *command_name)
 	char	**all_paths;
 
 	executable = 0;
-	if (!(env_path = env_get_env_value("PATH", env)))
+	if (!(env_path = env_get_paths(env)))
 		return (0);
 	if (!(all_paths = ft_strsplit(env_path, ':')))
 	{
