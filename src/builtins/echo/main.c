@@ -6,12 +6,13 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:27 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 12:41:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 17:53:50 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_echo.h"
 #include "ft_42sh.h"
+#include <unistd.h>
 
 int			main(int ac, char **av)
 {

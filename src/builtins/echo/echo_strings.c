@@ -6,13 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:23 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 12:42:22 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 17:53:31 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_echo.h"
 #include "ft_42sh.h"
 #include "libft.h"
+#include <unistd.h>
 
 #ifndef NB_ESC_CHAR
 # define NB_ESC_CHAR 9
