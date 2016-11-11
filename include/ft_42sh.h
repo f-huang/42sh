@@ -96,6 +96,7 @@ typedef struct			s_shell
 {
 	int					last_return;
 	t_environment		*lst_env;
+	char				*bin_path;
 }						t_shell;
 
 /*
@@ -124,7 +125,7 @@ typedef struct			s_shell
 **	SHELL BASIC FUNCTIONS
 */
 
-int						init_shell(t_shell *sh);
+int						init_shell(t_shell *sh, char *av_0);
 void					clear_shell(t_shell *sh);
 
 int						prompt(t_shell *sh);

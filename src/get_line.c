@@ -37,7 +37,7 @@ static int	push_line(char **tmp, char **line, char *buf, size_t size)
 
 int			get_line(char **line)
 {
-	size_t		ret;
+	int			ret;
 	static char	*tmp;
 	char		*buf;
 

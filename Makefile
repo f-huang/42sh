@@ -68,7 +68,7 @@ $(NAME): libft env echo read $(OBJ)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
-	$(CC) $(CFLAG) -c $< -o $@ $(INC)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 	printf $(BLUE)"|"$(EOC)
 
 $(CACHEF):
