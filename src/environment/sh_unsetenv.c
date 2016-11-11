@@ -12,8 +12,6 @@
 
 static int	delete_elem(t_environment **elem, t_environment **prev)
 {
-	t_environment	*ptr;
-
 	if (*prev)
 		(*prev)->next = (*elem)->next;
 	ft_strdel(&(*elem)->variable);

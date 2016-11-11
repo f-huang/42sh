@@ -1,4 +1,7 @@
+#include <limits.h>
+#include <unistd.h>
 #include "ft_42sh.h"
+#include "tools.h"
 #include "environment.h"
 
 /*
@@ -38,6 +41,20 @@ static int		increment_shlvl(t_environment **lst_env)
 	return (GOOD);
 }
 
+static int		set_bin_path(char **bin_path, char *av_0)
+{
+	char	buffer[_POSIX_PATH_MAX + 1];
+
+	if (!getcwd(buffer, _POSIX_PATH_MAX + 1))
+		return (ERROR);
+	ft_strclr(av_0 + ft_strlen(av_0) - 4);
+	av_0 = ft_strcat(av_0, "bin/");
+	if (!(*bin_path = tl_str3join(buffer,\
+		buffer[ft_strlen(buffer) - 1] == '/' ? "" : "/", av_0)))
+		return (ERROR);
+	return (GOOD);
+}
+
 static int		set_default(t_environment **lst_env)
 {
 	if (!increment_shlvl(lst_env))
@@ -48,17 +65,13 @@ static int		set_default(t_environment **lst_env)
 	return (GOOD);
 }
 
-int		init_shell(t_shell *sh)
+int		init_shell(t_shell *sh, char *av_0)
 {
 	ft_bzero(sh, sizeof(t_shell));
 	if (!copy_environment(&sh->lst_env))
 		return (ERROR);
+	if (!set_bin_path(&sh->bin_path, av_0))
+		return (ERROR);
 	set_default(&sh->lst_env);
-	// t_environment *elem = sh->lst_env;
-	// while (elem)
-	// {
-	// 	ft_putendl(elem->variable);
-	// 	elem = elem->next;
-	// }
 	return (GOOD);
 }
