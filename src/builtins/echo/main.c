@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:27 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 16:54:25 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:16:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			main(int ac, char **av)
 
 	i = 1;
 	is_option = 1;
-	ft_bzero(option, sizeof(bool) * 2);
+	ft_bzero(option, sizeof(_Bool) * 2);
 	while (av[i])
 	{
 		if (is_option && *av[i] == '-' &&\

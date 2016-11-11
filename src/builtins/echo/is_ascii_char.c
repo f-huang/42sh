@@ -6,58 +6,41 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:25 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 18:00:34 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:00:19 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "tools.h"
 #include "ft_42sh.h"
+#include "builtin_echo.h"
 
 /*
 **	This function prints the escaped characters when ascii octal or/and hexadecimal
 **	codes are in the string.
 */
 
-static int		are_char_digits(const char *str)
+static int	is_xdigit(int c)
 {
-	int		i;
-
-	i = 0;
-	while (i < 3)
-	{
-		if (!ft_isdigit(str[i]))
-			return (ERROR);
-		i++;
-	}
-	return (GOOD);
+	return (ft_isdigit(c) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'));
 }
 
-int		hex_character(char *str)
+int		is_ascii_char(char *str, int *i)
 {
-	int	toto;
+	int		ascii;
+	int		base;
 
-	toto = ft_atoi_base(str, 16);
-	ft_putchar(toto);
-	return (GOOD);
-}
-
-int		is_ascii_char(char *str)
-{
-	ft_putendlcol(str, GREEN);
+	ascii = 0;
 	if (*str == 'x')
 	{
-		ft_putendlcol("toto", RED);
-		if (!ft_isdigit(*(str + 1)))
+		if (!ft_isdigit(*(str + 1)) || (*(str + 2) && !is_xdigit(*(str + 2))))
 			return (ERROR);
-		hex_character(str + 1);
+		base = 16;
 	}
-	else if (are_char_digits(str))
-	{
-		if (write(1, str, 3) == -1)
-			return (ERROR);
-	}
+	else if (*str == '0')
+		base = 8;
 	else
 		return (ERROR);
+	*i += echo_atoi_base(str + 1, &ascii, base, base == 16 ? 2 : 3);
+	ft_putchar(ascii);
 	return (GOOD);
 }

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:23 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 18:00:05 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:05:45 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 
 #ifndef NB_ESC_CHAR
-# define NB_ESC_CHAR 10
+# define NB_ESC_CHAR 9
 #endif
 
 /*
@@ -32,8 +32,7 @@ static const t_escaped_char	escaped_char[NB_ESC_CHAR] = {
 	{'r', "\r"},
 	{'t', "\t"},
 	{'v', "\v"},
-	{'\\', "\\"},
-	{'0', "\0"}
+	{'\\', "\\"}
 };
 
 static int	echo_escaped_char(char c)
@@ -63,14 +62,15 @@ int			echo_strings(_Bool option[2], char *str)
 	{
 		if (option[1] && str[i] == '\\')
 		{
-			/*
-			** Check for \xNNN and \nnn
-			*/
-			if (!is_ascii_char(str + ++i))
-				echo_escaped_char(str[i]) ? 0 : i--;
+			if (!echo_escaped_char(str[++i]))
+				if (!is_ascii_char(str + i, &i))
+					ft_putchar(str[--i]);
 		}
-		else if (str + i && write(1, str + i, 1) == -1)
-			return (ERROR);
+		else if (str + i)
+		{
+			if (write(1, str + i, 1) == -1)
+				return (ERROR);
+		}
 		i++;
 	}
 	return (GOOD);
