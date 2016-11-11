@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:25 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 12:33:43 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:42:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 **	ascii octal or/and hexadecimal codes are in the string.
 */
 
-static int	is_xdigit(int c)
+static int	echo_is_xdigit(int c)
 {
 	return (ft_isdigit(c) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'));
 }
 
-int			is_ascii_char(char *str, int *i)
+int			echo_is_ascii_char(char *str, int *i)
 {
 	int		ascii;
 	int		base;
@@ -32,7 +32,8 @@ int			is_ascii_char(char *str, int *i)
 	ascii = 0;
 	if (*str == 'x')
 	{
-		if (!ft_isdigit(*(str + 1)) || (*(str + 2) && !is_xdigit(*(str + 2))))
+		if (!ft_isdigit(*(str + 1)) ||\
+			(*(str + 2) && !echo_is_xdigit(*(str + 2))))
 			return (ERROR);
 		base = 16;
 	}

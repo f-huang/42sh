@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:27 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 12:31:33 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:41:40 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			main(int ac, char **av)
 	while (av[i])
 	{
 		if (is_option && *av[i] == '-' &&\
-			((is_option = check_for_options(option, av[i]))))
+			((is_option = echo_check_for_options(option, av[i]))))
 			i++;
 		else
 		{

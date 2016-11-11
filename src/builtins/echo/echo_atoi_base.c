@@ -6,19 +6,19 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 11:15:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 12:33:55 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:42:39 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_42sh.h"
 #include "libft.h"
 
-static int	is_octal(int c)
+static int	echo_is_octal(int c)
 {
 	return (c >= '0' && c < '8');
 }
 
-static int	get_atoi_addition(int c)
+static int	echo_get_atoi_addition(int c)
 {
 	const char	pattern[] = "0123456789abcdef";
 	int			i;
@@ -48,10 +48,10 @@ int			echo_atoi_base(const char *str, int *ret, int base, int nb_char)
 	}
 	while (tmp > 0 && *ptr)
 	{
-		if (base == 8 && !is_octal(*ptr))
+		if (base == 8 && !echo_is_octal(*ptr))
 			break ;
 		*ret *= base;
-		*ret += get_atoi_addition(*ptr);
+		*ret += echo_get_atoi_addition(*ptr);
 		ptr++;
 		tmp--;
 	}

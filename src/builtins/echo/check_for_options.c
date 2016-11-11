@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:21 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 16:54:53 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:42:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **		index 0 stands for the newline and index 1 for escaped characters.
 */
 
-static int	is_option(_Bool option[2], char c)
+static int	echo_is_option(_Bool option[2], char c)
 {
 	const char	letters[] = "Een";
 	int			i;
@@ -43,7 +43,7 @@ static int	is_option(_Bool option[2], char c)
 	return (ERROR);
 }
 
-int			check_for_options(_Bool option[2], char *str)
+int			echo_check_for_options(_Bool option[2], char *str)
 {
 	static int	good = 0;
 	int			i;
@@ -53,7 +53,7 @@ int			check_for_options(_Bool option[2], char *str)
 		return (ERROR);
 	while (str[i])
 	{
-		if (!is_option(option, str[i]))
+		if (!echo_is_option(option, str[i]))
 		{
 			if (!good)
 				ft_bzero(option, sizeof(_Bool) * 2);

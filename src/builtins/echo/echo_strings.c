@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:23 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 12:34:17 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:42:22 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int			echo_strings(_Bool option[2], char *str)
 		if (option[1] && str[i] == '\\')
 		{
 			if (!echo_escaped_char(str[++i]))
-				if (!is_ascii_char(str + i, &i))
+				if (!echo_is_ascii_char(str + i, &i))
 					ft_putchar(str[--i]);
 		}
 		else if (str + i)

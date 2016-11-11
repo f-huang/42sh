@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:19 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 11:49:11 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:41:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ typedef struct		s_escaped_char
 	char		*escaped_char;
 }					t_escaped_char;
 
-int		echo_atoi_base(const char *str, int *ret, int base, int nb_char);
-
-int					check_for_options(_Bool option[2], char *str);
+int					echo_atoi_base(const char *str, int *ret, int base, int nb_char);
+int					echo_check_for_options(_Bool option[2], char *str);
 int					echo_strings(_Bool option[2], char *str);
-int					is_ascii_char(char *str, int *i);
+int					echo_is_ascii_char(char *str, int *i);
 
 #endif
