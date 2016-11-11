@@ -6,11 +6,10 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 16:53:59 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 17:00:58 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 17:03:25 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "environment.h"
 #include "libft.h"
 
