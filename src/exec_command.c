@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:00:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/11 16:25:46 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/11 17:20:39 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		exec_command(t_shell *sh, char **command)
 		sh->last_return = NOTFOUND;
 		tl_freedoubletab(paths);
 		ft_strdel(&ex.command);
-		return (exec_print_command_error(CANNOTINVOKE, ex.command));
+		return (exec_print_command_error(CANNOTINVOKE, command[0]));
 	}
 	exec_execute_command(&ex, sh, command);
 	exec_print_command_error(sh->last_return, ex.command);
