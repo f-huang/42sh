@@ -1,4 +1,5 @@
 #include <limits.h>
+#include <unistd.h>
 #include "ft_42sh.h"
 #include "tools.h"
 #include "environment.h"
