@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:11:56 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/10 19:06:52 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/11 16:25:00 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_42sh.h"
 #include "libft.h"
 
-char	**exec_get_envpath(t_shell *sh, char **command)
+char	**exec_get_envpath(t_shell *sh)
 {
 	char	*path;
 	char	**split;

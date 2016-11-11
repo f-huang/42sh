@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 17:46:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/10 19:57:31 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/11 16:24:30 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static	int		get_command_status_code(int status)
 int				exec_execute_command(t_exec *ex, t_shell *sh, char **command)
 {
 	pid_t			id;
-	int				status;
 	int				tmp;
 	extern	char	**environ;
 

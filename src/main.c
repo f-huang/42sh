@@ -6,7 +6,6 @@ int			main(int ac, char **av)
 	t_shell		sh;
 	char		*line;
 	char		**commands;
-	int			command_status;
 	char		*trim;
 
 	line = NULL;

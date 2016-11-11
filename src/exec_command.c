@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:00:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/10 20:05:26 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/11 16:25:46 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		exec_command(t_shell *sh, char **command)
 	char	**paths;
 	t_exec	ex;
 
-	if (!(paths = exec_get_envpath(sh, command)))
+	if (!(paths = exec_get_envpath(sh)))
 		return (ERROR);
 	ex.builtin_not_binary = 0;
 	ex.command = 0;
