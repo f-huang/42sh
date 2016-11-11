@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 15:45:01 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/09 15:45:01 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/11 12:38:23 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static	void	remove_duplicate_equals(char *str)
 
 int				env_set_env(char *str, char ***env)
 {
-	int		i;
+/*	int		i;*/
 	char	*key;
 
 	remove_duplicate_equals(str);
