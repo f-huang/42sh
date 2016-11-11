@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:23 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 12:05:45 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:34:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 **	If -e is on, escaped characters are treated.
 */
 
-static const t_escaped_char	escaped_char[NB_ESC_CHAR] = {
+static const t_escaped_char	g_escaped_char[NB_ESC_CHAR] = {
 	{'a', "\a"},
 	{'b', "\b"},
 	{'e', "\e"},
@@ -42,9 +42,9 @@ static int	echo_escaped_char(char c)
 	i = 0;
 	while (i < NB_ESC_CHAR)
 	{
-		if (c == escaped_char[i].c)
+		if (c == g_escaped_char[i].c)
 		{
-			if (write(1, escaped_char[i].escaped_char, 1) == -1)
+			if (write(1, g_escaped_char[i].escaped_char, 1) == -1)
 				return (ERROR);
 			return (GOOD);
 		}

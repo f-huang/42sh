@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:25 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 12:00:19 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:33:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include "builtin_echo.h"
 
 /*
-**	This function prints the escaped characters when ascii octal or/and hexadecimal
-**	codes are in the string.
+**	This function prints the escaped characters when
+**	ascii octal or/and hexadecimal codes are in the string.
 */
 
 static int	is_xdigit(int c)
@@ -24,7 +24,7 @@ static int	is_xdigit(int c)
 	return (ft_isdigit(c) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'));
 }
 
-int		is_ascii_char(char *str, int *i)
+int			is_ascii_char(char *str, int *i)
 {
 	int		ascii;
 	int		base;

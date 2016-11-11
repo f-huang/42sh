@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 11:15:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/11 11:52:01 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/11 12:33:55 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_octal(int c)
 static int	get_atoi_addition(int c)
 {
 	const char	pattern[] = "0123456789abcdef";
-	int		i;
+	int			i;
 
 	i = 0;
 	c = ft_tolower(c);
@@ -34,7 +34,7 @@ static int	get_atoi_addition(int c)
 	return (0);
 }
 
-int		echo_atoi_base(const char *str, int *ret, int base, int nb_char)
+int			echo_atoi_base(const char *str, int *ret, int base, int nb_char)
 {
 	const char	*ptr;
 	int			tmp;
