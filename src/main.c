@@ -17,11 +17,10 @@ int			main(int ac, char **av)
 	{
 		if (get_line(&line) == 1)
 		{
-			if (line[0] == 0)
-				continue ;
 			trim = ft_strtrim(line);
 			commands = ft_strsplit(trim, ' ');
-			exec_command(&sh, commands);
+			if (*trim)
+				exec_command(&sh, commands);
 			tl_freedoubletab(commands);
 			/* lexer */
 			ft_strclr(line);
