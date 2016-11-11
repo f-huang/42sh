@@ -154,6 +154,20 @@ Le petit t chat boit \t son lait
 $> echo -eEe Le petit \t chat boit \\t son lait
 Le petit t chat boit    son lait
 ```
+```shell
+$> echo -e \\x38 petits\\x20chats boivent son lait\\x21
+8 petits chats boivent son lait!
+```
+```shell
+$> echo -e \\063 chats et \\08 chiens boivent son lait\\077
+3 chats et 8 chiens boivent son lait?
+$> echo -e \\063 chats et \\08 chiens boivent son lait\\077 | cat -e
+3 chats et ^@8 chiens boivent son lait?
+```
+```shell
+$> echo -e \\38 petits\\20chats boivent son lait\\21
+\38 petits\20chats boivent son lait\21
+```
 
 ### exit
 ```shell
