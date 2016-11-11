@@ -114,7 +114,7 @@ typedef struct			s_shell
 **	BUILTIN CODE
 */
 #ifndef BUILTIN
-# define BUILTIN "cd, exit, unsetenv, setenv"
+# define BUILTIN "cd exit unsetenv setenv"
 #endif
 
 #ifndef NBBUILTIN
@@ -130,6 +130,7 @@ void					clear_shell(t_shell *sh);
 
 int						prompt(t_shell *sh);
 int						get_line(char **line);
-void						sig_handler(int signo);
+void					sig_handler(int signo);
+int						exec_command(t_shell *sh, char **command);
 
 #endif
