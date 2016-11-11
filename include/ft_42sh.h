@@ -133,4 +133,7 @@ int						get_line(char **line);
 void					sig_handler(int signo);
 int						exec_command(t_shell *sh, char **command);
 
+
+int						pipe_command(void);
+
 #endif
