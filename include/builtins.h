@@ -21,6 +21,7 @@ typedef	struct	s_bnb
 
 int				builtin_cd(t_shell *sh, int ac, char **av);
 int				builtin_setenv(t_shell *sh, int ac, char **av);
+int				builtin_unsetenv(t_shell *sh, int ac, char **av);
 int				builtin_exit(t_shell *sh, int ac, char **av);
 
 #endif
