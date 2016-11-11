@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 17:46:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/11 17:16:27 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/11 18:55:03 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int				exec_execute_command(t_exec *ex, t_shell *sh, char **command)
 
 	if (ex->builtin_not_binary)
 		return (execute_bnb(sh, command));
+	sh_setenv(&sh->lst_env, "_", ex->command);
 	env = lstenv_to_tab(sh->lst_env);
 	id = fork();
 	if (id > 0)
