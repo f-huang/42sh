@@ -43,7 +43,6 @@ static int		increment_shlvl(t_environment **lst_env)
 static int		set_bin_path(char **bin_path, char *av_0)
 {
 	char	buffer[_POSIX_PATH_MAX + 1];
-	char	*tmp;
 
 	if (!getcwd(buffer, _POSIX_PATH_MAX + 1))
 		return (ERROR);

@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 15:44:08 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/09 16:44:50 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/11 12:37:01 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static	const	char	g_options_i[][21] = {
 	{"-"},
 	{"-i"},
 	{"--ignore-environment"},
-	0
+	{0}
 };
 
 int		env_is_option_i(char *str)
