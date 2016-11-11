@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:40:17 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/11 16:26:42 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/11 16:33:04 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@
 
 static int	is_binary_builtin(t_exec *ex, t_shell *sh, char **command)
 {
-	char	testPATH[] = "/Users/yfuks/sh/bin/";
 	char	*executable;
 
-	(void)sh;
-	executable = ft_strjoin(testPATH, command[0]);
+	executable = ft_strjoin(sh->bin_path, command[0]);
 	if (exec_is_file(executable))
 	{
 		ex->command = executable;
