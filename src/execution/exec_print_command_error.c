@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 19:36:33 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/10 19:41:10 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/14 18:20:01 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int				exec_print_command_error(int error, char *command_name)
 		print_error("command not found", command_name);
 	else if (error == CANNOTINVOKE)
 		print_error("permission denied", command_name);
+	else if (error == ISDIRECTORY)
+		print_error(command_name, "is a directory");
 	return (error);
 }

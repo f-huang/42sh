@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:00:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/11 17:59:52 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/14 18:27:02 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 #include "tools.h"
 #include "libft.h"
 
-int		exec_command(t_shell *sh, char **command)
+static	int	print_error(char **paths, int error, char *command)
+{
+	tl_freedoubletab(paths);
+	return (exec_print_command_error(error, command));
+}
+
+int			exec_command(t_shell *sh, char **command)
 {
 	char	**paths;
 	t_exec	ex;
@@ -25,17 +31,17 @@ int		exec_command(t_shell *sh, char **command)
 	ex.builtin_not_binary = 0;
 	ex.command = 0;
 	if (!exec_is_command(&ex, sh, command, paths))
+		return (print_error(paths, NOTFOUND, command[0]));
+	if (exec_is_directory(ex.command))
 	{
-		sh->last_return = NOTFOUND;
-		tl_freedoubletab(paths);
-		return (exec_print_command_error(NOTFOUND, command[0]));
+		ft_strdel(&ex.command);
+		return (print_error(paths, ISDIRECTORY, ex.command));
 	}
 	if (!ex.builtin_not_binary && !exec_is_executable(ex.command))
 	{
-		sh->last_return = NOTFOUND;
-		tl_freedoubletab(paths);
+		sh->last_return = CANNOTINVOKE;
 		ft_strdel(&ex.command);
-		return (exec_print_command_error(CANNOTINVOKE, command[0]));
+		return (print_error(paths, CANNOTINVOKE, command[0]));
 	}
 	exec_execute_command(&ex, sh, command);
 	ft_strdel(&ex.command);
