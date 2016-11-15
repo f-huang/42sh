@@ -1,5 +1,7 @@
 #include "ft_42sh.h"
 #include "tools.h"
+#include "libft.h"
+#include "execution.h"
 
 int			main(int ac, char **av)
 {
@@ -19,7 +21,12 @@ int			main(int ac, char **av)
 		{
 			trim = ft_strtrim(line);
 			commands = ft_strsplit(trim, ' ');
-			if (*trim)
+			if (is_command_redirection(commands))
+			{
+				ft_putendl("is redirection");				
+				exec_redirection(&sh, get_redirection(commands));
+			}
+			else if (*trim)
 				exec_command(&sh, commands);
 			tl_freedoubletab(commands);
 			/* lexer */

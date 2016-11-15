@@ -132,5 +132,5 @@ int						prompt(t_shell *sh);
 int						get_line(char **line);
 void					sig_handler(int signo);
 int						exec_command(t_shell *sh, char **command);
-
+int						is_command_redirection(char **command);
 #endif
