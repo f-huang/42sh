@@ -73,7 +73,7 @@ int		init_shell(t_shell *sh, char *av_0)
 	if (!set_bin_path(&sh->bin_path, av_0))
 		return (ERROR);
 	set_default(&sh->lst_env);
-	if (!(init_termios(sh->t_termios, sh->t_window)))
+	if (!(init_termios(sh->term, sh->window)))
 		return (ERROR);
 	return (GOOD);
 }
