@@ -7,6 +7,7 @@
 
 # include "libft.h"
 # include "environment.h"
+# include "ft_termcaps.h"
 
 /*
 **	C STANDARD LIBRARIES

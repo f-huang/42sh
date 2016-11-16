@@ -6,11 +6,18 @@
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 17:19:39 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/15 17:23:34 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/16 11:45:33 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <termios.h>
+#include <stdlib.h>
+#include <sys/ioctl.h>
+#include <term.h>
+#include <curses.h>
+#include "ft_42sh.h"
 #include "ft_termcaps.h"
+#include "libft.h"
 
 int			init_termios(t_termios *term, t_winsize *window)
 {

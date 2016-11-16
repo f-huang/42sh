@@ -42,7 +42,7 @@ int			main(int ac, char **av)
 				ft_strdel(&line);
 			}
 			ft_putendl("exit");
-			/* clear all */
+			/* clear all*/
 			exit(0);
 		}
 	}
