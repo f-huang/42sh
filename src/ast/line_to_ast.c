@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:11:54 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/16 17:18:27 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/16 17:55:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ static void	debug_print_list(t_ast *lst)
 	elem = lst;
 	while (elem)
 	{
-		ft_putendlcol(elem->str, RED);
+		ft_putstrcol(elem->str, RED);
+		ft_putstr(" --  ");
+		ft_putstr(GREEN);
+		ft_putnbr(elem->operator);
+		ft_putendl(COLOR_RESET);
 		elem = elem->right;
 	}
 }

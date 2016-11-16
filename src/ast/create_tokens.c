@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 16:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/16 17:22:02 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/16 18:04:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	is_operator(t_ast **lst_tokens, char **ptr, char *tmp)
 	int		i;
 
 	i = 0;
-	while (g_operators[i].operator)
+	while ((*ptr == tmp || *(*ptr - 1) != '\\') && g_operators[i].operator)
 	{
 		if (ft_strnequ(g_operators[i].operator, *ptr, g_operators[i].len))
 		{
@@ -69,7 +69,7 @@ static int	is_operator(t_ast **lst_tokens, char **ptr, char *tmp)
 	return (-1);
 }
 
-t_ast	*create_tokens(char *line)
+t_ast		*create_tokens(char *line)
 {
 	t_ast	*lst_tokens;
 	char	*ptr;
@@ -80,7 +80,7 @@ t_ast	*create_tokens(char *line)
 	tmp = ptr;
 	while (*ptr)
 	{
-		if (ptr != line && *ptr - 1 != '\\' && (*ptr == '\'' || *ptr == '\"'))
+		if ((ptr == line || *ptr - 1 != '\\') && (*ptr == '\'' || *ptr == '\"'))
 			ptr += jump_to_other_quote(ptr) + 1;
 		else if (is_operator(&lst_tokens, &ptr, tmp) != -1)
 			tmp = ptr;
