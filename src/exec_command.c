@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:00:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/14 18:27:02 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/16 13:41:24 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			exec_command(t_shell *sh, char **command)
 	if (exec_is_directory(ex.command))
 	{
 		ft_strdel(&ex.command);
-		return (print_error(paths, ISDIRECTORY, ex.command));
+		return (print_error(paths, ISDIRECTORY, command[0]));
 	}
 	if (!ex.builtin_not_binary && !exec_is_executable(ex.command))
 	{
