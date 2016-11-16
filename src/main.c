@@ -21,13 +21,18 @@ int			main(int ac, char **av)
 		{
 			trim = ft_strtrim(line);
 			commands = ft_strsplit(trim, ' ');
-			if (is_command_redirection(commands))
+			if (*trim && is_command_redirection(commands))
 			{
-				ft_putendl("is redirection");				
 				exec_redirection(&sh, get_redirection(commands));
+				ft_putnbr(sh.last_return);
+				ft_putchar('\n');
 			}
 			else if (*trim)
+			{
 				exec_command(&sh, commands);
+				ft_putnbr(sh.last_return);
+				ft_putchar('\n');
+			}
 			tl_freedoubletab(commands);
 			/* lexer */
 			ft_strclr(line);

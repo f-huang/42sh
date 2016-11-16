@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:09:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/15 03:59:11 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/16 13:12:19 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct	s_exec
 
 typedef	struct	s_redirection
 {
-	char		*executable;
 	char		**command;
 	int			from_fd;
 	int			to_fd;
