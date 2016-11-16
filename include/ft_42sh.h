@@ -106,7 +106,7 @@ typedef struct			s_shell
 **	MACRO
 */
 #ifndef PROMPT
-# define PROMPT "$> "
+# define PROMPT "\033[1;32m42sh>\033[1;37m "
 #endif
 
 #ifndef BUFF_SIZE
