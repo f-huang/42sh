@@ -35,7 +35,7 @@ int			main(int ac, char **av)
 				ft_strdel(&line);
 			}
 			ft_putendl("exit");
-			/* clear all */
+			/* cleair all*/
 			exit(0);
 		}
 	}
