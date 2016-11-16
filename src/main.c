@@ -46,23 +46,3 @@ int			main(int ac, char **av)
 	(void)ac;
 	return (GOOD);
 }
-
-// echo -n tata tutu 2>&- "test2" titi &&& cat test2
-
-//1)LINE -> COMMANDS -> ;
-	//	/!\  Careful : () {} [] "" '' , etc.
-
-//2)COMMANDS[i] -> LIST TOKENS
-	// ex : {echo -n tata tutu} {2>& -} {"test 2" titi} {&&} {&} {cat test 2}
-
-//3)CHECK LIST TOKENS VALID
-	//ex: 'parse error near '&&'
-
-//4)LIST TOKENS TO AST
-	// ex:
-	/*							{&&}
-							  /		\
-						 {2>&-}		[cat test 2]
-						/	  \
-	[echo -n tata tutu titi]	"test 2"
-	*/

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:11:54 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/16 17:55:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/16 18:11:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int			line_to_ast(t_shell *sh, char *line)
 */
 	lst_tokens = create_tokens(line);
 	debug_print_list(lst_tokens);
+	// create_syntax_tree(&lst_tokens);
 
 	/* check ? */
 	/* token to ast */

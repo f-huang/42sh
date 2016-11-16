@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 16:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/16 18:04:42 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/16 19:38:30 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,15 @@ static int	is_operator(t_ast **lst_tokens, char **ptr, char *tmp)
 	{
 		if (ft_strnequ(g_operators[i].operator, *ptr, g_operators[i].len))
 		{
-			create_elem(lst_tokens, -1, ft_strndup(tmp, (size_t)(*ptr - tmp)));
-			create_elem(lst_tokens, i, ft_strndup(*ptr, g_operators[i].len));
+			/*Check redirections:
+				before -> ptr--
+				after -> ptr
+			if (operator == 1 || operator == 4 || operator == 5)
+				look_for_fd(ptr, tmp);
+			*/
+			if (*ptr != tmp)
+				create_elem(lst_tokens, -1, tl_strndup(tmp, (size_t)(*ptr - tmp)));
+			create_elem(lst_tokens, i, tl_strndup(*ptr, g_operators[i].len));
 			*ptr += g_operators[i].len;
 			return (i);
 		}
@@ -88,6 +95,6 @@ t_ast		*create_tokens(char *line)
 			ptr++;
 	}
 	if (tmp != ptr)
-		create_elem(&lst_tokens, -1, ft_strndup(tmp, (size_t)(ptr - tmp)));
+		create_elem(&lst_tokens, -1, tl_strndup(tmp, (size_t)(ptr - tmp)));
 	return (lst_tokens);
 }
