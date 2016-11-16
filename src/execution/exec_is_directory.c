@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_is_command.c                                  :+:      :+:    :+:   */
+/*   exec_is_directory.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 16:24:30 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/14 18:10:13 by yfuks            ###   ########.fr       */
+/*   Created: 2016/11/14 18:13:42 by yfuks             #+#    #+#             */
+/*   Updated: 2016/11/14 18:21:58 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+#include <sys/stat.h>
 
-int		exec_is_command(t_exec *ex, t_shell *sh, char **command, char **path)
+int		exec_is_directory(char *filepath)
 {
-	if (exec_is_builtin(ex, sh, command))
-		return (1);
-	if (exec_is_standalone(ex, command, path))
-		return (1);
-	sh->last_return = NOTFOUND;
-	return (0);
+	struct	stat	path_stat;
+
+	stat(filepath, &path_stat);
+	return (!S_ISREG(path_stat.st_mode));
 }

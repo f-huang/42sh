@@ -8,6 +8,7 @@
 # include "libft.h"
 # include "environment.h"
 # include "ast.h"
+# include "ft_termcaps.h"
 
 /*
 **	C STANDARD LIBRARIES
@@ -99,6 +100,8 @@ typedef struct			s_shell
 	t_environment		*lst_env;
 	t_ast				*root;
 	char				*bin_path;
+	t_termios			*term;
+	t_winsize			*window;
 }						t_shell;
 
 /*

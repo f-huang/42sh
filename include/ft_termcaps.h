@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_is_file.c                                     :+:      :+:    :+:   */
+/*   ft_termcaps.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 16:58:46 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/14 18:15:34 by yfuks            ###   ########.fr       */
+/*   Created: 2016/11/15 17:17:00 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/16 11:40:38 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
-#include <unistd.h>
+#ifndef FT_TERMCAPS_H
+# define FT_TERMCAPS_H
 
-int		exec_is_file(char *filepath)
-{
-	if (access(filepath, F_OK) != -1)
-		return (1);
-	return (0);
-}
+typedef struct termios t_termios;
+typedef struct winsize t_winsize;
+
+int			init_termios(t_termios *term, t_winsize *window);
+int			reset_termios(t_termios *term);
+
+#endif

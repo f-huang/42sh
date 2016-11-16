@@ -85,6 +85,7 @@ $(CACHEF):
 	test -d $(OBJDIR)ast || mkdir $(OBJDIR)ast
 	test -d $(OBJDIR)tools || mkdir $(OBJDIR)tools
 	test -d $(OBJDIR)execution || mkdir $(OBJDIR)execution
+	test -d $(OBJDIR)termcaps || mkdir $(OBJDIR)termcaps
 	test -d $(BINDIR) || mkdir $(BINDIR)
 	test -d $(CACHEF) || touch $(CACHEF)
 

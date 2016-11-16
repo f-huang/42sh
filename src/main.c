@@ -1,5 +1,6 @@
 #include "ft_42sh.h"
 #include "tools.h"
+#include "libft.h"
 
 int			main(int ac, char **av)
 {
@@ -38,7 +39,7 @@ int			main(int ac, char **av)
 				ft_strdel(&line);
 			}
 			ft_putendl("exit");
-			/* clear all */
+			/* clear all*/
 			exit(0);
 		}
 	}
