@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 19:36:33 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/14 18:20:01 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/17 17:34:54 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,17 @@ int				exec_print_command_error(int error, char *command_name)
 		print_error("permission denied", command_name);
 	else if (error == ISDIRECTORY)
 		print_error(command_name, "is a directory");
+	else if (error == NOSUCHFILE)
+		print_error("no such file or directory", command_name);
+	else if (error == PERMISSIONDENIED)
+	{
+		print_error("permission denied", command_name);
+		return (1);
+	}
+	else if (error == BADFILEDESCRIPTOR)
+	{
+		print_error(command_name, "bad file descriptor");
+		return (1);
+	}
 	return (error);
 }
