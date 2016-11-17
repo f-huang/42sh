@@ -2,12 +2,13 @@
 #include "tools.h"
 #include "libft.h"
 
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_shell		sh;
 	char		*line;
 	char		**commands;
-	char		*trim;
+//	char		*trim;
+	t_list		*lst;
 
 	line = NULL;
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
@@ -18,18 +19,23 @@ int			main(int ac, char **av)
 	{
 		if (get_line(&line) == 1)
 		{
-			trim = ft_strtrim(line);
-			commands = ft_strsplit(trim, ' ');
-			if (*trim)
+			lst = first_lexer(line);
+			while (lst)
+			{
+				commands = ft_strsplit(lst->content, ' ');
 				exec_command(&sh, commands);
-			tl_freedoubletab(commands);
+//				reset_termios(sh.term);
+				tl_freedoubletab(commands);
+				lst = lst->next;
+			}
 			/* lexer */
 			ft_strclr(line);
 			ft_strdel(&line);
-			ft_strdel(&trim);
+//			ft_strdel(&trim);
 		}
 		else
 		{
+			reset_termios(sh.term);
 			if (line)
 			{
 				ft_strclr(line);

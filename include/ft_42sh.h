@@ -8,6 +8,7 @@
 # include "libft.h"
 # include "environment.h"
 # include "ft_termcaps.h"
+# include <termios.h>
 
 /*
 **	C STANDARD LIBRARIES
@@ -98,9 +99,15 @@ typedef struct			s_shell
 	int					last_return;
 	t_environment		*lst_env;
 	char				*bin_path;
-	t_termios			*term;
+	t_termios			term;
 	t_winsize			*window;
 }						t_shell;
+
+typedef struct			s_bitfield
+{
+	unsigned int		squote : 1;
+	unsigned int		dquote : 1;
+}						t_bitfield;
 
 /*
 **	MACRO
@@ -135,5 +142,6 @@ int						prompt(t_shell *sh);
 int						get_line(char **line);
 void					sig_handler(int signo);
 int						exec_command(t_shell *sh, char **command);
+t_list					*first_lexer(char *command_line);
 
 #endif
