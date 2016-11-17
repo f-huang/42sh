@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:11:54 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/16 18:11:42 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/17 15:58:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,27 @@ static void	debug_print_list(t_ast *lst)
 	}
 }
 
-static void	print_tree(t_ast *root, int color)
+static void	debug_print_tree(t_ast *root, int color)
 {
 	if (!root)
 		return ;
 	ft_putendlcol(root->str, color == 1 ? YELLOW: CYAN);
-	print_tree(root->left, 1);
-	print_tree(root->right, 0);
+	debug_print_tree(root->left, 1);
+	debug_print_tree(root->right, 0);
 }
 
 int			line_to_ast(t_shell *sh, char *line)
 {
 	t_ast	*lst_tokens;
 	/* line -> tab_commands (;) */
-/*
-	2)COMMANDS[i] -> LIST TOKENS
-		ex : {echo -n tata tutu} {2>& -} {"test 2" titi} {&&} {&} {cat test 2}
-*/
 	lst_tokens = create_tokens(line);
 	debug_print_list(lst_tokens);
-	// create_syntax_tree(&lst_tokens);
+	if (lst_tokens->right != NULL)
+		ast_create_syntax_tree(&lst_tokens);
 
 	/* check ? */
 	/* token to ast */
 	/* ast to exec ? */
-	print_tree(sh->root, 1);
+	debug_print_tree(sh->root, 1);
 	return (GOOD);
 }

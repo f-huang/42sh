@@ -6,14 +6,15 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 16:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/16 19:38:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/17 15:14:26 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ast.h"
+#include "tools.h"
 
-static size_t jump_to_other_quote(char *ptr)
+static size_t	jump_to_other_quote(char *ptr)
 {
 	char	c;
 	size_t	i;
@@ -25,53 +26,26 @@ static size_t jump_to_other_quote(char *ptr)
 	return (i);
 }
 
-static int	create_elem(t_ast **lst, int operator, char *str)
+static int	is_operator(t_ast **lst_tokens, char *ptr, size_t *i, char *tmp)
 {
-	t_ast	*new;
-	t_ast	*ptr;
-	char	*tmp;
+	int		j;
+	size_t	len;
 
-	if (!(new = (t_ast*)ft_memalloc(sizeof(t_ast))))
-		return (ERROR);
-	tmp = str;
-	new->str = ft_strtrim(str);
-	ft_strdel(&tmp);
-	new->operator = operator;
-	if (!*lst)
-		*lst = new;
-	else
+	j = 0;
+	len = 0;
+	while ((*i == 0 || ptr[*i - 1] != '\\') && g_operators[j].operator)
 	{
-		ptr = *lst;
-		while (ptr->right)
-			ptr = ptr->right;
-		new->left = ptr;
-		ptr->right = new;
-	}
-	return (GOOD);
-}
-
-static int	is_operator(t_ast **lst_tokens, char **ptr, char *tmp)
-{
-	int		i;
-
-	i = 0;
-	while ((*ptr == tmp || *(*ptr - 1) != '\\') && g_operators[i].operator)
-	{
-		if (ft_strnequ(g_operators[i].operator, *ptr, g_operators[i].len))
+		if (ft_strnequ(g_operators[j].operator, ptr + *i, g_operators[j].len))
 		{
-			/*Check redirections:
-				before -> ptr--
-				after -> ptr
-			if (operator == 1 || operator == 4 || operator == 5)
-				look_for_fd(ptr, tmp);
-			*/
-			if (*ptr != tmp)
-				create_elem(lst_tokens, -1, tl_strndup(tmp, (size_t)(*ptr - tmp)));
-			create_elem(lst_tokens, i, tl_strndup(*ptr, g_operators[i].len));
-			*ptr += g_operators[i].len;
-			return (i);
+			if (j > 2 && j < 6)
+				len = ast_check_redirections(j, ptr, i);
+			if (ptr + *i != tmp)
+				ast_create_elem(lst_tokens, -1, tl_strndup(tmp, (size_t)(ptr + *i - tmp)));
+			ast_create_elem(lst_tokens, j, tl_strndup(ptr + *i, g_operators[j].len + len));
+			*i += g_operators[j].len + len;
+			return (j);
 		}
-		i++;
+		j++;
 	}
 	return (-1);
 }
@@ -79,22 +53,22 @@ static int	is_operator(t_ast **lst_tokens, char **ptr, char *tmp)
 t_ast		*create_tokens(char *line)
 {
 	t_ast	*lst_tokens;
-	char	*ptr;
+	size_t	i;
 	char	*tmp;
 
 	lst_tokens = NULL;
-	ptr = line;
-	tmp = ptr;
-	while (*ptr)
+	i = 0;
+	tmp = line;
+	while (line[i])
 	{
-		if ((ptr == line || *ptr - 1 != '\\') && (*ptr == '\'' || *ptr == '\"'))
-			ptr += jump_to_other_quote(ptr) + 1;
-		else if (is_operator(&lst_tokens, &ptr, tmp) != -1)
-			tmp = ptr;
+		if ((i == 0 || line[i - 1] != '\\') && (line[i] == '\'' || line[i] == '\"'))
+			i += jump_to_other_quote(line + i) + 1;
+		else if (is_operator(&lst_tokens, line, &i, tmp) != -1)
+			tmp = line + i;
 		else
-			ptr++;
+			i++;
 	}
-	if (tmp != ptr)
-		create_elem(&lst_tokens, -1, tl_strndup(tmp, (size_t)(ptr - tmp)));
+	if (tmp != line + i)
+		ast_create_elem(&lst_tokens, -1, tl_strndup(tmp, (size_t)(line + i - tmp)));
 	return (lst_tokens);
 }

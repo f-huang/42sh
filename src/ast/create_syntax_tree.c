@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_node.c                                      :+:      :+:    :+:   */
+/*   create_syntax_tree.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/14 14:55:16 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/14 18:20:29 by fhuang           ###   ########.fr       */
+/*   Created: 2016/11/17 15:43:49 by fhuang            #+#    #+#             */
+/*   Updated: 2016/11/17 15:57:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
-#include "ft_42sh.h"
+#include "libft.h"
 
-t_ast		*create_node(char *str)
+int		ast_create_syntax_tree(t_ast **lst_tokens)
 {
-	t_ast	*new;
-
-	if (!(new = ft_memalloc(sizeof(t_ast))))
-		return (NULL);
-	if (!(new->str = ft_strtrim(str)))
-		return (NULL);
-	return (new);
+	(void)lst_tokens;
+	// fill_redirection_struct(*lst_tokens);
+	return (0);
 }
