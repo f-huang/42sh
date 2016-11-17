@@ -142,6 +142,6 @@ int						prompt(t_shell *sh);
 int						get_line(char **line);
 void					sig_handler(int signo);
 int						exec_command(t_shell *sh, char **command);
-t_list					*first_lexer(char *command_line);
+int						first_lexer(char *command_line, t_list **lst);
 
 #endif

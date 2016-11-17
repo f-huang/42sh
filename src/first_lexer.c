@@ -6,7 +6,7 @@
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/17 17:39:10 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/17 19:39:47 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		add_elem(t_list **lst, char *command, size_t size)
 	if (!(elem = ft_lstnew(tmp_trim, ft_strlen(tmp_trim) + 1)))
 		return (ERROR);
 	ft_strdel(&tmp_trim);
-	ft_lstadd(lst, elem);
+	ft_lstaddend(lst, elem);
 	return (GOOD);
 }
 
@@ -43,12 +43,12 @@ static int		unmatched(t_bitfield *open)
 		ft_putstr_fd("Unmatched ", 2);
 		ft_putchar_fd(open->dquote ? '\"' : '\'', 2);
 		ft_putendl_fd(".", 2);
-		return (ERROR);
+		return (1);
 	}
-	return (GOOD);
+	return (0);
 }
 
-static int		check_char(char c, size_t *i, t_bitfield *open)
+static int		check_inhibitors(char c, size_t *i, t_bitfield *open)
 {
 	if (c == '\\')
 		ft_strchr("abeEfnrtv\\\'\"?", c) ? i += 2 : ++i;
@@ -59,41 +59,40 @@ static int		check_char(char c, size_t *i, t_bitfield *open)
 	return (GOOD);
 }
 
-static int		check_n_save(t_list *lst, char *command, size_t size,\
+static int		check_n_save(t_list **lst, char *command, size_t size,\
 															t_bitfield *open)
 {
-	if (!(unmatched(open)) || !(add_elem(&lst, command, size)))
+	if (unmatched(open) || !(add_elem(lst, command, size)))
 	{
 		if (lst)
-			ft_lstdel(&lst, ft_del);
+			ft_lstdel(lst, ft_del);
 		return (ERROR);
 	}
 	return (GOOD);
 }
 
-t_list			*first_lexer(char *command_line)
+int				first_lexer(char *command_line, t_list **lst)
 {
 	size_t		i;
 	size_t		index;
-	t_list		*lst;
 	t_bitfield	open;
 
 	i = 0;
 	index = 0;
-	lst = NULL;
 	open.squote = 0;
 	open.dquote = 0;
-	while (command_line[i])
+	while (command_line[i] &&check_inhibitors(command_line[i], &i, &open))
 	{
-		check_char(command_line[i], &i, &open);
 		if (command_line[i] == ';' && !open.squote && !open.dquote)
 		{
-			check_n_save(lst, &command_line[index], i - index, &open);
-			index = i + 1;
+			if (check_n_save(lst, &command_line[index], i - index, &open))
+				index = i + 1;
+			else
+				return (ERROR);
 		}
 		++i;
 	}
 	if (i != index)
-		check_n_save(lst, &command_line[index], i - index, &open);
-	return (lst);
+		return (check_n_save(lst, &command_line[index], i - index, &open));
+	return (GOOD);
 }

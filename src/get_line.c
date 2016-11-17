@@ -8,28 +8,28 @@
 **			This function receive the data wrote in the prompt (line).
 */
 
-static int	save_line(char **line, char *buf, size_t size)
+static int	save_line(char **line, char **buf, size_t size)
 {
 	if (*line)
 	{
 		if (!(*line = tl_strrealloc(*line, size)))
 			return (ERROR);
-		ft_strncat(*line, buf, size);
+		ft_strncat(*line, *buf, size);
 	}
-	else if (!(*line = tl_strndup(buf, size)))
+	else if (!(*line = tl_strndup(*buf, size)))
 		return (ERROR);
-	ft_strclr(buf);
-	ft_strdel(&buf);
+	ft_strclr(*buf);
+	ft_strdel(buf);
 	return (GOOD);
 }
 
-static int	push_line(char **tmp, char **line, char *buf, size_t size)
+static int	push_line(char **tmp, char **line, char **buf, size_t size)
 {
-	if (!(*tmp = ft_strchr(buf, '\n')))
+	if (!(*tmp = ft_strchr(*buf, '\n')))
 		return (save_line(line, buf, size) - 1);
 	else
 	{
-		size = (size_t)(*tmp - buf);
+		size = (size_t)(*tmp - *buf);
 		return (save_line(line, buf, size));
 	}
 	return (GOOD);
@@ -47,7 +47,7 @@ int			get_line(char **line)
 	{
 		if (!(buf = ft_strdup(tmp + 1)))
 			return (ERROR);
-		if (push_line(&tmp, line, buf, ft_strlen(buf)))
+		if (push_line(&tmp, line, &buf, ft_strlen(buf)))
 			return (GOOD);
 	}
 	if (!(buf = ft_strnew(BUFF_SIZE)))
@@ -57,7 +57,7 @@ int			get_line(char **line)
 		if (ret == -1)
 			return (ERROR);
 		buf[ret] = '\0';
-		if (push_line(&tmp, line, buf, ret))
+		if (push_line(&tmp, line, &buf, ret))
 			return (GOOD);
 	}
 	return (*line && ft_strlen(*line) > 0 ? GOOD : 0);
