@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 14:27:27 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/17 16:00:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/18 16:26:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ static const t_operator	g_operators[] = {
 
 int				ast_create_elem(t_ast **lst, int operator, char *str);
 size_t			ast_check_redirections(int operator, char *ptr, size_t *i);
-int				ast_create_syntax_tree(t_ast **lst_tokens);
+int				ast_list_to_tree(t_ast **lst_tokens);
+t_ast			*ast_search_for_operator(t_ast *lst_tokens, _Bool prio, _Bool right);
 
 t_ast			*create_node(char *str);
 void			insert_node(t_ast **root, int operator, char *str, int left);

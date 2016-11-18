@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:11:54 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/17 15:58:13 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/18 16:26:26 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ static void	debug_print_list(t_ast *lst)
 	{
 		ft_putstrcol(elem->str, RED);
 		ft_putstr(" --  ");
-		ft_putstr(GREEN);
+		ft_putstr(YELLOW);
 		ft_putnbr(elem->operator);
 		ft_putendl(COLOR_RESET);
 		elem = elem->right;
 	}
-}
 
 static void	debug_print_tree(t_ast *root, int color)
 {
-	if (!root)
+	// if (!root)
 		return ;
 	ft_putendlcol(root->str, color == 1 ? YELLOW: CYAN);
 	debug_print_tree(root->left, 1);
@@ -46,7 +45,7 @@ int			line_to_ast(t_shell *sh, char *line)
 	lst_tokens = create_tokens(line);
 	debug_print_list(lst_tokens);
 	if (lst_tokens->right != NULL)
-		ast_create_syntax_tree(&lst_tokens);
+		ast_list_to_tree(&lst_tokens);
 
 	/* check ? */
 	/* token to ast */
