@@ -6,65 +6,83 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:43:49 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/18 16:25:44 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/22 23:08:16 by FannyHuang       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 #include "libft.h"
 
-static void		get_root(t_ast **lst_tokens)
+static t_ast	*get_root(t_ast *lst_tokens)
 {
 	t_ast	*elem;
+	t_ast	*root;
 	_Bool	found;
 
 	found = false;
-	elem = *lst_tokens;
-	while ((elem = ast_search_for_operator(elem, true, true)))
+	root = NULL;
+	elem = lst_tokens;
+	while ((elem = ast_search_for_operator(elem, AND_OR, true)))
 	{
-		*lst_tokens = elem;
-		elem = elem->right;
+		root = elem;
+		elem = elem->right.tree;
 		found = true;
 	}
 	if (found == false)
 	{
-		elem = *lst_tokens;
-		while ((elem = ast_search_for_operator(elem, false, true)))
+		elem = lst_tokens;
+		while ((elem = ast_search_for_operator(elem, PIPE, true)))
 		{
-			*lst_tokens = elem;
-			elem = elem->right;
+			root = elem;
+			elem = elem->right.tree;
 		}
 	}
+	return (root);
 }
 
-static void		change_link_right(t_ast **root, t_ast *elem)
+static t_ast	*get_leaves(t_ast **root, _Bool right)
 {
-	if (elem)
+	t_ast	*elem;
+	t_ast	*tmp;
+
+	if (*root == NULL)
+		return (NULL);
+	tmp = (*root)->left.tree;
+	if ((elem = ast_search_for_operator((*root)->left.tree, AND_OR, 0)))
 	{
-		if ((*root)->left)
-			(*root)->left->right = elem;
+		if (right == true)
+			return (NULL);
+		(*root)->left.tree = get_leaves(&elem->left.tree, 0);
+		(*root)->right.tree = get_leaves(&elem->right.tree, 1);
+		return (elem);
+	}
+	if ((elem = ast_search_for_operator((*root)->left.tree, PIPE, 0)))
+	{
+		(*root)->left.tree = get_leaves(&elem->left.tree, 0);
+		if ((*root)->left.tree)
+			(*root)->left.tree->right.tree = NULL;
+		return (elem);
+	}
+	else
+	{
+		return (tmp);
 	}
 }
 
-static void		relink_leaves(t_ast **root, _Bool right, void (*f)(t_ast**, t_ast *))
+int		ast_list_to_tree(t_ast **lst_tokens)
 {
-	t_ast	*elem;
+	t_ast	*root;
 
-	if (*root == NULL)
-		return ;
-	elem = *root;
-	if ((elem = ast_search_for_operator(*root, true, right)))
-		relink_leaves(right ? &elem->right : &elem->left, right, f);
-	else if ((elem = ast_search_for_operator(*root, false, right)))
-		relink_leaves(right ? &elem->right : &elem->left, right, f);
-	f(root, elem);
-}
+	root = get_root(*lst_tokens);
 
-int		ast_create_syntax_tree(t_ast **lst_tokens)
-{
-	get_root(lst_tokens);
-
-	relink_leaves(&(*lst_tokens)->right, true, change_link_right);
+	ft_putendlcol(root->str, GREEN);
+	root->left.tree = get_leaves(&root, false);
+	ft_putendlcol(root->left.tree->str, MAGENTA);
+	if (root->left.tree->left.tree)
+		ft_putendlcol(root->left.tree->left.tree->str, GREEN);
+	if (root->left.tree->right.tree)
+		ft_putendlcol(root->left.tree->right.tree->str, GREEN);
+	printf("%p\n", root->left.tree->right.tree->right.tree);
 	// relink_leaves(&(*lst_tokens)->left, false, change_link_left);
 	return (0);
 }

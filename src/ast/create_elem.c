@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 12:23:14 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/18 11:32:15 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/22 21:57:35 by FannyHuang       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int			ast_create_elem(t_ast **lst, int operator, char *str)
 	else
 	{
 		ptr = *lst;
-		while (ptr->right)
-			ptr = ptr->right;
-		new->left = ptr;
-		ptr->right = new;
+		while (ptr->right.tree)
+			ptr = ptr->right.tree;
+		new->left.tree = ptr;
+		ptr->right.tree = new;
 	}
 	return (GOOD);
 }

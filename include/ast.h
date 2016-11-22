@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 14:27:27 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/18 16:26:00 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/22 23:02:59 by FannyHuang       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,64 +23,23 @@
 # define ERROR 0
 #endif
 
-/*
-**	ex:
-**	echo coucou > test
-**	echo coucou 1> test
-**	echo coucou >& 2
-*/
-# define SIMPLE_REDIRECT	(1 << 0)
-
-/*
-**	ex:
-**	echo coucou >&-
-**	echo coucou >& -
-*/
-# define CLOSE_REDIRECT		(1 << 1)
-
-/*
-**	">"
-*/
-# define SIMPLE_RIGHT_REDIRECT	(1 << 2)
-
-/*
-**	"<"
-*/
-# define SIMPLE_LEFT_REDIRECT	(1 << 3)
-
-/*
-**	">>"
-*/
-# define DOUBLE_RIGHT_REDIRECT	(1 << 4)
-
-/*
-**	"<<"
-*/
-# define DOUBLE_LEFT_REDIRECT	(1 << 5)
-
-/*
-**	"< file"
-**	"1<&- file"
-**	"2> file"
-*/
-# define FILE_REDIRECT			(1 << 6)
-
-typedef struct	s_redirections
+enum			e_type
 {
-	int						from_fd;
-	int						to_fd;
-	char					*dest;
-	int						type;
-	struct s_redirections	*next;
-}				t_redirections;
+	COMMAND, AND_OR, REDIRECTION, PIPE, HEREDOC
+};
 
-typedef struct  s_cmdwr
+typedef struct	s_cmdwr
 {
-	char			**command;
-	t_redirections	*redirs;
+	char		*commands;
 }				t_cmdwr;
 
-typedef struct s_operator
+union	u_left_right
+{
+	struct s_ast	*tree;
+	t_cmdwr			*command;
+};
+
+typedef struct	s_operator
 {
 	char		*operator;
 	uint8_t		len;
@@ -90,9 +49,17 @@ typedef struct	s_ast
 {
 	int				operator;
 	char			*str;
-	struct s_ast	*left;
-	struct s_ast	*right;
+	union u_left_right	left;
+	union u_left_right	right;
+	// struct s_ast	*left;
+	// struct s_ast	*right;
 }				t_ast;
+
+// union	u_left_right
+// {
+// 	struct s_ast	*tree;
+// 	t_cmdwr			*command;
+// };
 
 static const t_operator	g_operators[] = {
 	{"||", 2}, //0
@@ -108,7 +75,7 @@ static const t_operator	g_operators[] = {
 int				ast_create_elem(t_ast **lst, int operator, char *str);
 size_t			ast_check_redirections(int operator, char *ptr, size_t *i);
 int				ast_list_to_tree(t_ast **lst_tokens);
-t_ast			*ast_search_for_operator(t_ast *lst_tokens, _Bool prio, _Bool right);
+t_ast			*ast_search_for_operator(t_ast *lst_tokens, int what, _Bool right);
 
 t_ast			*create_node(char *str);
 void			insert_node(t_ast **root, int operator, char *str, int left);
