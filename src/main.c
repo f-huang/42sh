@@ -10,6 +10,7 @@ int				main(int ac, char **av)
 	char		*line;
 	char		**commands;
 	t_list		*lst;
+	t_list		*p;
 
 	line = NULL;
 	lst = NULL;
@@ -22,6 +23,15 @@ int				main(int ac, char **av)
 		if (get_line(&line) == 1)
 		{
 			if (first_lexer(line, &lst))
+			{
+				p = lst;
+//				ft_putlst(lst);//
+				while (p)
+				{
+					substitute(&sh, &(p->content));
+					p = p->next;
+				}
+//				ft_putlst(lst);//
 				while (lst)
 				{
 					if ((commands = ft_strsplit(lst->content, ' ')))
@@ -32,6 +42,7 @@ int				main(int ac, char **av)
 					}
 					lst = lst->next;
 				}
+			}
 			ft_strclr(line);
 			ft_strdel(&line);
 			ft_lstdel(&lst, ft_del);
