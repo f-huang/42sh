@@ -6,17 +6,19 @@
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 17:17:00 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/16 11:40:38 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/16 12:27:50 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_TERMCAPS_H
 # define FT_TERMCAPS_H
 
-typedef struct termios t_termios;
-typedef struct winsize t_winsize;
+#include "ft_42sh.h"
 
-int			init_termios(t_termios *term, t_winsize *window);
-int			reset_termios(t_termios *term);
+typedef struct termios	t_termios;
+typedef struct winsize	t_winsize;
+
+int			init_termios(t_termios term, t_winsize *window);
+int			reset_termios(t_termios term);
 
 #endif
