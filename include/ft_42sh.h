@@ -98,7 +98,6 @@ typedef struct			s_shell
 {
 	int					last_return;
 	t_environment		*lst_env;
-	t_ast				*root;
 	char				*bin_path;
 	t_termios			*term;
 	t_winsize			*window;

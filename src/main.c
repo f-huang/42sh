@@ -23,7 +23,7 @@ int			main(int ac, char **av)
 			commands = ft_strsplit(trim, ' ');
 			if (*trim)
 			{
-				line_to_ast(&sh, line);
+				line_to_ast(&sh, line); //!\ Change Makefile	
 				// exec_command(&sh, commands);
 			}
 			tl_freedoubletab(commands);
