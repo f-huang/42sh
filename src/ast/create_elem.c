@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 12:23:14 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/22 21:57:35 by FannyHuang       ###   ########.fr       */
+/*   Updated: 2016/11/23 14:55:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ static int	isstrempty(char *str)
 	return (1);
 }
 
+static int	get_operator(int operator)
+{
+	if (operator == 0 | operator == 1)
+		return (AND_OR);
+	else if (operator == 2)
+		return (HEREDOC);
+	else if (operator > 2 && operator < 6)
+		return (REDIRECTION);
+	else if (operator == 6)
+		return (PIPE);
+	return (COMMAND);
+}
+
 int			ast_create_elem(t_ast **lst, int operator, char *str)
 {
 	t_ast	*new;
@@ -41,16 +54,16 @@ int			ast_create_elem(t_ast **lst, int operator, char *str)
 	tmp = str;
 	new->str = ft_strtrim(str);
 	ft_strdel(&tmp);
-	new->operator = operator;
+	new->operator = get_operator(operator);
 	if (!*lst)
 		*lst = new;
 	else
 	{
 		ptr = *lst;
-		while (ptr->right.tree)
-			ptr = ptr->right.tree;
-		new->left.tree = ptr;
-		ptr->right.tree = new;
+		while (ptr->right)
+			ptr = ptr->right;
+		new->left = ptr;
+		ptr->right = new;
 	}
 	return (GOOD);
 }

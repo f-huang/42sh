@@ -1,6 +1,7 @@
 #include "ft_42sh.h"
 #include "tools.h"
 #include "libft.h"
+t_ast	*exemple(void);
 
 int			main(int ac, char **av)
 {
@@ -23,7 +24,7 @@ int			main(int ac, char **av)
 			if (*trim)
 			{
 				line_to_ast(&sh, line);
-				exec_command(&sh, commands);
+				// exec_command(&sh, commands);
 			}
 			tl_freedoubletab(commands);
 			/* lexer */
