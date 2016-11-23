@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:09:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/17 18:22:37 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/23 15:09:45 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +97,7 @@ int				exec_print_command_error(int error, char *command_name);
 int				get_command_status_code(int status);
 
 int				exec_redirection(t_shell *sh, t_cmdwr *r);
+int				exec_pipes(t_shell *sh);
 void			close_and_redirects(t_redirections **cursor);
 t_cmdwr			*get_redirection(char **command);
 #endif

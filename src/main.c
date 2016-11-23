@@ -29,7 +29,8 @@ int			main(int ac, char **av)
 			}
 			else if (*trim)
 			{
-				exec_command(&sh, commands);
+//				exec_command(&sh, commands);
+				exec_pipes(&sh);
 				ft_putnbr(sh.last_return);
 				ft_putchar('\n');
 			}
