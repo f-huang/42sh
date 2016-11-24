@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:00:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/17 19:23:13 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/24 14:06:05 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			exec_command(t_shell *sh, char **command)
 	ex.command = 0;
 	if (!exec_is_command(&ex, sh, command, paths))
 		return (print_error(paths, NOTFOUND, command[0]));
-	if (exec_is_directory(ex.command))
+	if (exec_is_directory(ex.command) && !ex.builtin_not_binary)
 	{
 		sh->last_return = CANNOTINVOKE;
 		ft_strdel(&ex.command);
