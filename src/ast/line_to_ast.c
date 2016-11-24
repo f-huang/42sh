@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:11:54 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/23 18:31:35 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/24 13:04:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	debug_print_tree(t_ast *root, int color)
 int			line_to_ast(t_shell *sh, char *line)
 {
 	t_ast	*lst_tokens;
-	t_ast	*tree;
 
 	(void)sh;
 	lst_tokens = create_tokens(line);
@@ -55,9 +54,12 @@ int			line_to_ast(t_shell *sh, char *line)
 		Only t_command | t_command && t_command
 	*/
 	debug_print_list(lst_tokens);
-	tree = ast_create_tree_with_cmdwr(lst_tokens);
-	// if (lst_tokens->right != NULL)
-		// lst_tokens = ast_list_to_tree(&lst_tokens);
+	if (!ast_create_tree_with_cmdwr(&lst_tokens))
+		return (ERROR);
+	if (lst_tokens->right != NULL)
+	{
+		ast_link_leaves(&lst_tokens);
+	}
 	/* ast to exec ? */
 	if (0)
 	debug_print_tree(lst_tokens, 1);

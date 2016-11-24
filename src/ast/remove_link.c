@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_for_operator.c                              :+:      :+:    :+:   */
+/*   remove_link.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/18 12:00:26 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/24 13:14:22 by fhuang           ###   ########.fr       */
+/*   Created: 2016/11/24 07:08:36 by fhuang            #+#    #+#             */
+/*   Updated: 2016/11/24 11:10:26 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
+#include "libft.h"
 
-t_ast	*ast_search_for_operator(t_ast *list, int what, _Bool right)
+void		ast_remove_link(t_ast **lst, t_ast *link)
 {
-	t_ast	*elem;
+	t_ast		*ptr;
+	t_ast		*prev;
 
-	elem = list;
-	while (elem)
+	ptr = *lst;
+	prev = NULL;
+	while (ptr)
 	{
-		if (elem->operator == what)
-			return (elem);
-		elem = (right ? elem->right : elem->left);
+		if (ptr == link)
+		{
+			if (prev)
+				prev->right = link->right;
+			else
+				*lst = link->right;
+			if (link->right)
+				link->right->left = prev;
+			ft_strdel(&link->str);
+			ft_memdel((void*)&link);
+			return ;
+		}
+		prev = ptr;
+		ptr = ptr->right;
 	}
-	return (NULL);
 }

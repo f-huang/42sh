@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 14:27:27 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/23 18:45:48 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/24 17:43:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@
 # define ERROR 0
 #endif
 
+#ifndef IS_REDIRECTION
+# define IS_REDIRECTION(x) (x >= 3 && x <= 5)
+#endif
+
 enum			e_type
 {
-	COMMAND, AND, OR, PIPE, REDIRECTION, HEREDOC
+	COMMAND = -1, AND, OR, PIPE, HEREDOC
 };
 /******************************************/
 typedef	struct	s_redirections
@@ -75,11 +79,14 @@ int				ast_create_elem(t_ast **lst, int operator, char *str);
 size_t			ast_check_redirections(int operator, char *ptr, size_t *i);
 t_ast			*ast_list_to_tree(t_ast **lst_tokens);
 t_ast			*ast_search_for_operator(t_ast *lst_tokens, int what, _Bool right);
-t_ast			*ast_create_tree_with_cmdwr(t_ast *lst_tokens);
+int				ast_create_tree_with_cmdwr(t_ast **list);
 
-t_ast			*create_node(char *str);
-void			insert_node(t_ast **root, int operator, char *str, int left);
+t_redirections	*fill_redirection_struct(t_ast **list, t_ast *ptr, _Bool *file_redirect);
 
 t_ast			*create_tokens(char *line);
+void			ast_remove_link(t_ast **lst, t_ast *link);
+t_ast			*ast_link_leaves(t_ast **list);
+static t_ast	*right_branch(t_ast **list, int *i);
+static t_ast	*left_branch(t_ast **list, int *i);
 
 #endif

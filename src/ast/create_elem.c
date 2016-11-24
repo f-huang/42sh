@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 12:23:14 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/23 14:55:43 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/24 13:10:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ static int	isstrempty(char *str)
 
 static int	get_operator(int operator)
 {
-	if (operator == 0 | operator == 1)
-		return (AND_OR);
+	if (operator == 0)
+		return (OR);
+	else if (operator == 1)
+		return (AND);
 	else if (operator == 2)
 		return (HEREDOC);
-	else if (operator > 2 && operator < 6)
-		return (REDIRECTION);
+	else if (IS_REDIRECTION(operator))
+		return (operator);
 	else if (operator == 6)
 		return (PIPE);
 	return (COMMAND);

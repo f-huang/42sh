@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 16:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/17 15:14:26 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/24 07:35:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	is_operator(t_ast **lst_tokens, char *ptr, size_t *i, char *tmp)
 	{
 		if (ft_strnequ(g_operators[j].operator, ptr + *i, g_operators[j].len))
 		{
-			if (j > 2 && j < 6)
+			if (IS_REDIRECTION(j))
 				len = ast_check_redirections(j, ptr, i);
 			if (ptr + *i != tmp)
 				ast_create_elem(lst_tokens, -1, tl_strndup(tmp, (size_t)(ptr + *i - tmp)));
