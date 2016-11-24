@@ -2,6 +2,7 @@
 #include "tools.h"
 #include "libft.h"
 #include "execution.h"
+#include "ast.h"
 
 int			main(int ac, char **av)
 {
@@ -21,18 +22,11 @@ int			main(int ac, char **av)
 		{
 			trim = ft_strtrim(line);
 			commands = ft_strsplit(trim, ' ');
-			if (*trim && is_command_redirection(commands))
+			if (*trim)
 			{
-				exec_redirection(&sh, get_redirection(commands));
-				ft_putnbr(sh.last_return);
-				ft_putchar('\n');
-			}
-			else if (*trim)
-			{
-//				exec_command(&sh, commands);
-				exec_pipes(&sh);
-				ft_putnbr(sh.last_return);
-				ft_putchar('\n');
+				exec_command(&sh, commands);
+				// will be replaced with :
+				//exec_ast(&sh, exemple());
 			}
 			tl_freedoubletab(commands);
 			/* lexer */

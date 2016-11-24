@@ -106,7 +106,7 @@ typedef struct			s_shell
 **	MACRO
 */
 #ifndef PROMPT
-# define PROMPT "\033[1;32m42sh>\033[1;37m "
+# define PROMPT "\033[1;32m42sh>\x1b[0m "
 #endif
 
 #ifndef BUFF_SIZE
@@ -135,5 +135,4 @@ int						prompt(t_shell *sh);
 int						get_line(char **line);
 void					sig_handler(int signo);
 int						exec_command(t_shell *sh, char **command);
-int						is_command_redirection(char **command);
 #endif

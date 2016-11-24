@@ -6,19 +6,23 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:14:15 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/23 18:27:37 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/24 11:18:11 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_H
 # define AST_H
 
-#include "execution.h"
-#include "ft_42sh.h"
+# include "execution.h"
+# include "ft_42sh.h"
+
+#ifndef IS_REDIRECTION
+# define IS_REDIRECTION(x) (x >= 3 && x <= 5)
+#endif
 
 enum			e_type
 {
-	COMMAND, AND, OR, REDIRECTION, PIPE, HEREDOC
+	COMMAND = -1, AND, OR, PIPE, HEREDOC
 };
 
 typedef struct	s_ast
@@ -31,7 +35,6 @@ typedef struct	s_ast
     t_cmdwr			*cmd2;
 }				t_ast;
 
-t_ast			*exemple(void);
 int				exec_ast(t_shell *sh, t_ast *ast);
 
 #endif

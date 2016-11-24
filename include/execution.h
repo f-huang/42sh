@@ -7,7 +7,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:09:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/23 15:09:45 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/24 11:15:37 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef	struct	s_cmdwr
 
 int				exec_is_executable(char *filepath);
 char			**exec_get_envpath(t_shell *sh);
-
 int				exec_is_command(t_exec *ex, t_shell *sh, char **command, char **path);
 int				exec_is_builtin(t_exec *ex, t_shell *sh, char **command);
 int				exec_is_standalone(t_exec *ex, char **command, char **paths);
@@ -91,13 +90,8 @@ int				exec_is_directory(char *filepath);
 int				exec_is_readable(char *filepath);
 int				exec_is_writable(char *filepath);
 int				exec_execute_command(t_exec *ex, t_shell *sh, char **command);
-
 int				exec_print_command_error(int error, char *command_name);
-
 int				get_command_status_code(int status);
-
 int				exec_redirection(t_shell *sh, t_cmdwr *r);
-int				exec_pipes(t_shell *sh);
 void			close_and_redirects(t_redirections **cursor);
-t_cmdwr			*get_redirection(char **command);
 #endif
