@@ -6,7 +6,7 @@
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/17 19:39:47 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/24 10:26:34 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 */
 
 #include "ft_42sh.h"
+#include "tools.h"
 #include "libft.h"
 
 static int		add_elem(t_list **lst, char *command, size_t size)
@@ -24,7 +25,7 @@ static int		add_elem(t_list **lst, char *command, size_t size)
 	char		*tmp_trim;
 	t_list		*elem;
 
-	if (!(tmp = ft_strndup(command, size)))
+	if (!(tmp = tl_strndup(command, size)))
 		return (ERROR);
 	if (!(tmp_trim = ft_strtrim(tmp)))
 		return (ERROR);
@@ -32,7 +33,7 @@ static int		add_elem(t_list **lst, char *command, size_t size)
 	if (!(elem = ft_lstnew(tmp_trim, ft_strlen(tmp_trim) + 1)))
 		return (ERROR);
 	ft_strdel(&tmp_trim);
-	ft_lstaddend(lst, elem);
+	tl_lstaddend(lst, elem);
 	return (GOOD);
 }
 
@@ -65,7 +66,7 @@ static int		check_n_save(t_list **lst, char *command, size_t size,\
 	if (unmatched(open) || !(add_elem(lst, command, size)))
 	{
 		if (lst)
-			ft_lstdel(lst, ft_del);
+			ft_lstdel(lst, tl_del);
 		return (ERROR);
 	}
 	return (GOOD);
