@@ -1,7 +1,8 @@
 #include "ft_42sh.h"
 #include "tools.h"
 #include "libft.h"
-t_ast	*exemple(void);
+#include "execution.h"
+#include "ast.h"
 
 int			main(int ac, char **av)
 {
@@ -23,8 +24,10 @@ int			main(int ac, char **av)
 			commands = ft_strsplit(trim, ' ');
 			if (*trim)
 			{
-				line_to_ast(&sh, line); //!\ Change Makefile	
-				// exec_command(&sh, commands);
+				line_to_ast(&sh, line);
+				exec_command(&sh, commands);
+				// will be replaced with :
+				// exec_ast(&sh, exemple());
 			}
 			tl_freedoubletab(commands);
 			/* lexer */

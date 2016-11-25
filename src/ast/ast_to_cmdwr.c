@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/25 20:03:34 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/25 21:03:11 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int				ast_to_cmdwr(t_ast **root)
 			return (ERROR);
 		if (!cmdwr_fill_struct(&cmd, (ptr)->str))
 			return (ERROR);
-		if (cmd->redir != NULL)
+		if (cmd->redirs != NULL)
 			(ptr)->operator = REDIRECTION;
 		link_cmdwr(root, &cmd);
 		if ((ptr)->right)

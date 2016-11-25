@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:27:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/25 20:14:57 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/25 21:03:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int
 				if (str + *i != tmp)
 					*tab = tl_strndup(tmp, (size_t)(str + *i - tmp));
 				redirection_create_elem\
-				(&(*cmd)->redir, tl_strndup(str + *i, ft_strlen(redir[j]) + len));
+				(&(*cmd)->redirs, tl_strndup(str + *i, ft_strlen(redir[j]) + len));
 			}
 			*i += len + 1;
 			return (str + *i == tmp ? 2 : 1);

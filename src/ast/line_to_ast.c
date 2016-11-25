@@ -6,12 +6,12 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:11:54 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/25 20:09:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/25 21:05:26 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_42sh.h"
+#include "libft.h"
 #include "ast.h"
 
 static void	debug_print_tree(t_ast *root, int color)
@@ -45,7 +45,7 @@ static void	debug_print_cmd(t_cmdwr *cmd)
 		return ;
 	debug_print_tab(cmd->command);
 	t_redirections	*ptr;
-	ptr = cmd->redir;
+	ptr = cmd->redirs;
 	while (ptr)
 	{
 		ft_putendl("~~~~~~~~~~~~~~~~~~~~~~");
