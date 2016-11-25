@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 14:27:27 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/24 17:43:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/25 19:36:21 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,16 @@
 # define IS_REDIRECTION(x) (x >= 3 && x <= 5)
 #endif
 
+# define CLOSE_REDIRECT			(1 << 0)
+# define SIMPLE_RIGHT_REDIRECT	(1 << 1)
+# define SIMPLE_LEFT_REDIRECT	(1 << 2)
+# define DOUBLE_RIGHT_REDIRECT	(1 << 3)
+# define DOUBLE_LEFT_REDIRECT	(1 << 4)
+# define FILE_REDIRECT			(1 << 5)
+
 enum			e_type
 {
-	COMMAND = -1, AND, OR, PIPE, HEREDOC
+	COMMAND = -1, AND, OR, PIPE, REDIRECTION, HEREDOC
 };
 /******************************************/
 typedef	struct	s_redirections
@@ -48,11 +55,6 @@ typedef struct	s_cmdwr
 }				t_cmdwr;
 
 /******************************************/
-typedef struct	s_operator
-{
-	char		*operator;
-	uint8_t		len;
-}				t_operator;
 
 typedef struct	s_ast
 {
@@ -64,29 +66,19 @@ typedef struct	s_ast
 	t_cmdwr			*cmd2;
 }				t_ast;
 
-static const t_operator	g_operators[] = {
-	{"||", 2}, //0
-	{"&&", 2},//1
-	{"<<", 2}, //2
-	{">>", 2},//3
-	{">", 1},//4
-	{"<", 1},//5
-	{"|", 1},//6
-	{NULL, 0},
-};
 
+t_ast			*ast_create_tree(char *line);
 int				ast_create_elem(t_ast **lst, int operator, char *str);
-size_t			ast_check_redirections(int operator, char *ptr, size_t *i);
-t_ast			*ast_list_to_tree(t_ast **lst_tokens);
-t_ast			*ast_search_for_operator(t_ast *lst_tokens, int what, _Bool right);
-int				ast_create_tree_with_cmdwr(t_ast **list);
-
-t_redirections	*fill_redirection_struct(t_ast **list, t_ast *ptr, _Bool *file_redirect);
-
-t_ast			*create_tokens(char *line);
+void			ast_insert_elem_in_tree(t_ast **root, t_ast *new);
+int				ast_parse_tree(t_ast *tree);
 void			ast_remove_link(t_ast **lst, t_ast *link);
-t_ast			*ast_link_leaves(t_ast **list);
-static t_ast	*right_branch(t_ast **list, int *i);
-static t_ast	*left_branch(t_ast **list, int *i);
+void			ast_destroy_tree(t_ast *tree);
+
+// t_ast		*ast_to_cmdwr(t_ast *list);
+int				ast_to_cmdwr(t_ast **list);
+
+int				cmdwr_fill_struct(t_cmdwr **cmd, char *str);
+size_t			cmdwr_check_redirections(char *str, int *i, int redirection);
+int				redirection_create_elem(t_redirections **redir, char *str);
 
 #endif

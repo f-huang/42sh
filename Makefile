@@ -63,7 +63,7 @@ OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
 
 all: $(NAME)
 
-$(NAME): libft env echo read $(OBJ)
+$(NAME): libft $(OBJ) env echo read
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
 	printf	$(BLUE)" $@ compiled!\n"$(EOC)
 
