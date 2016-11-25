@@ -6,85 +6,73 @@
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 10:39:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/23 12:51:43 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/25 18:49:58 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
  **			The substitute function change $key by the value in environment and\
  **			the tilde ~ by the path of home.
+ **			Be careful with the simple quotes.
  */
 
 #include "ft_42sh.h"
 #include "tools.h"
 #include "libft.h"
+#include "ast.h"
 
-static int		dollar(t_shell *sh, char **key)
+static size_t		jump_to_end_of_quote(char *cmd, char c)
 {
-	char	*p;
-	char	**split_dollar;
-	int		i;
+	size_t	i;
+
+	i = 1;
+	while (cmd[i] && cmd[i] != c && cmd[i - 1] != '\\')
+		++i;
+	return (i);
+}
+
+static int		core(t_shell *sh, char **acmd)
+{
+	size_t		i;
+	char		*p;
+	size_t		len;
 
 	i = 0;
-	if (!(split_dollar = ft_strsplit(*key, '$')))
-		return (ERROR);
-	while (split_dollar[i])
+	p = *acmd;
+	len = ft_strlen(*acmd);
+	while (i < len)
 	{
-		if ((p = sh_getenv(sh->lst_env, split_dollar[i])))
+		if (p[i] == '\"')
 		{
-			ft_strdel(split_dollar[i]);
-			if (!(split_dollar[i] = ft_strdup(p)))
-				return (ERROR);
+			dollar(sh, acmd);
+			i += jump_to_end_of_quote(&p[i], '\"');
+		}
+		else if (p[i] == '\'')
+			i += jump_to_end_of_quote(&p[i], '\'');
+		else
+		{
+			dollar(sh, acmd);
+			tilde(sh, acmd);
 		}
 		++i;
 	}
 	return (GOOD);
 }
 
-static int		tilde(t_shell *sh, char **key)
+int				substitute(t_shell *sh, t_cmdwr *cmd)
 {
-	char	*p;
+	size_t		i;
+	size_t		ac;
 
-	if ((p = sh_getenv(sh->lst_env, "HOME")))
+	ac = tl_arrlen(cmd->command);
+	if (ac >= 2)
 	{
-		ft_strdel(key);
-		if (!(*key = ft_strdup(p)))
-			return (ERROR);
+		i = 1;
+		while (i < ac)
+		{
+			core(sh, &cmd->command[i]);
+			++i;
+		}
 	}
-	return (GOOD);
-}
-
-int				substitute(t_shell *sh, void **command)
-{
-	int		i;
-	int		modif;
-	char	**split_command;
-
-	i = 0;
-	modif = 0;
-	if (!(split_command = ft_strsplit(*command, ' ')))
-		return (ERROR);
-	while (split_command[i])
-	{
-		if (split_command[i][0] == '$' && ++modif)
-			dollar(sh, &split_command[i]);
-		else if (split_command[i][0] == '~' && ++modif)
-			tilde(sh, &split_command[i]);
-		++i;
-	}
-	//	i = 0;//
-	//	while (split_command[i])//
-	//	{//
-	//		ft_putendl(split_command[i]);//
-	//		++i;//
-	//	}//
-	//	ft_putendl_color(*command, RED);//
-	if (modif)
-	{
-		ft_memdel(command);
-		if (!(*command = ft_arrtostr(split_command, " ")))
-			return (ERROR);
-	}
-	tl_freedoubletab(split_command);
 	return (GOOD);
 }

@@ -6,7 +6,7 @@
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:34:49 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/25 17:58:02 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/25 18:49:53 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,20 @@ static char	*save_remain(char *s, char *rest)
 int			dollar(t_shell *sh, char **acmd)
 {
 	char	*p;
+	char	*key;
 	char	*value;
 	char	*save;
-	char	*key;
-	int		ret;
 
-	ret = 0;
-	save = NULL;
 	if ((p = ft_strchr(*acmd, '$')))
 	{
 		key = build_key(p);
-		if ((value = sh_getenv(sh->lst_env, key)))
-		{
-			save = save_before(*acmd, p);
-			save = tl_strmerge(save, value);
-			save = save_remain(save, p + (ft_strlen(key) + 1));
-			ft_strdel(acmd);
-			*acmd = save;
-			ret = 1;
-		}
+		value = sh_getenv(sh->lst_env, key);
+		save = save_before(*acmd, p);
+		save = tl_strmerge(save, value);
+		save = save_remain(save, p + (ft_strlen(key) + 1));
+		ft_strdel(acmd);
+		*acmd = save;
 		ft_strdel(&key);
 	}
-	return (ret);
+	return (GOOD);
 }
