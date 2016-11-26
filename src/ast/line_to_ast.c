@@ -6,11 +6,10 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:11:54 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/26 10:39:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/26 12:21:06 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
 #include "libft.h"
 #include "ast.h"
 
@@ -86,22 +85,21 @@ static void	debug_print_cmdwr(t_ast *root)
 	debug_print_cmdwr(root->right);
 }
 
-int			line_to_ast(t_shell *sh, char *line)
+t_ast		*line_to_ast(char *line)
 {
 	t_ast	*tree;
 
 	tree = NULL;
 	if (!(tree = ast_create_tree(line)))
-		return (ERROR);
+		return (NULL);
 	debug_print_tree(tree, 1);
 	if (!ast_parse_tree(tree))
 	{
 		ast_destroy_tree(tree);
-		return (ERROR);
+		return (NULL);
 	}
 	if (!ast_to_cmdwr(&tree))
-		return (ERROR);
+		return (NULL);
 	debug_print_cmdwr(tree);
-	(void)sh;
-	return (GOOD);
+	return (tree);
 }
