@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:11:54 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/26 12:21:06 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/26 12:29:22 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static void	debug_print_tree(t_ast *root, int color)
 	t_ast	*ptr = root;
 	if (!ptr)
 		return ;
-	ft_putendlcol(ptr->str, color == 1 ? YELLOW: CYAN);
+	ft_putstr(color == 1 ? YELLOW : CYAN);
+	ft_putstr(ptr->str);
+	ft_putendl(COLOR_RESET);
 	debug_print_tree(ptr->left, 1);
 	debug_print_tree(ptr->right, 0);
 }
@@ -27,7 +29,7 @@ static void		debug_print_tab(char **tab)
 {
 	if (!tab)
 	{
-		ft_putendlcol("NULL", RED);
+		ft_putendl("NULL");
 		return;
 	}
 	int	j = 0;
@@ -49,21 +51,21 @@ static void	debug_print_cmd(t_cmdwr *cmd)
 	{
 		ft_putendl("~~~~~~~~~~~~~~~~~~~~~~");
 		if (ptr->type & SIMPLE_LEFT_REDIRECT)
-			ft_putendlcol("<", MAGENTA);
+			ft_putendl("<");
 		else if (ptr->type & SIMPLE_RIGHT_REDIRECT)
-			ft_putendlcol(">", MAGENTA);
+			ft_putendl(">");
 		else if (ptr->type & DOUBLE_RIGHT_REDIRECT)
-			ft_putendlcol(">>", MAGENTA);
+			ft_putendl(">>");
 		ft_putstr("From fd : ");
 		ft_putnbrendl(ptr->from_fd);
 		ft_putstr("To fd : ");
 		ft_putnbrendl(ptr->to_fd);
 		if (ptr->type & CLOSE_REDIRECT)
-			ft_putendlcol("Close -", YELLOW);
+			ft_putendl("Close -");
 		else if (ptr->type & FILE_REDIRECT)
 			ft_putstr("Dest File : ");
 		if (ptr->dest)
-			ft_putendlcol(ptr->dest, YELLOW);
+			ft_putendl(ptr->dest);
 		ft_putendl("~~~~~~~~~~~~~~~~~~~~~~");
 		ptr = ptr->next;
 	}
@@ -73,8 +75,6 @@ static void	debug_print_cmdwr(t_ast *root)
 {
 	if (root == NULL)
 		return ;
-	if (root->operator != COMMAND && root->operator != REDIRECTION)
-		ft_putendlcol(root->str, GREEN);
 	if (root->cmd1)
 	ft_putendl("_____CMD1_____");
 	debug_print_cmd(root->cmd1);

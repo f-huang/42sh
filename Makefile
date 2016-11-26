@@ -15,7 +15,7 @@ SRC		:= $(shell find src -type d \( -path src/builtins/env -o -path src/builtins
 OBJ		:= $(SRC:src/%.c=obj/%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIB		:=	-ltermcap
-LIBPATH	:=	-L./$(LIBDIR) -lft -L./$(LIBDIR)lib -lftprintf
+LIBPATH	:=	-L./$(LIBDIR) -lft
 CACHEF	:=	.cache_exists
 HISTORY	:=	.42sh_history
 # ====================
