@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 17:58:09 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/25 20:55:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/26 11:47:40 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,46 @@
 #include "tools.h"
 #include "ft_42sh.h"
 
-static int	parse_error(const char *str)
+static int	parse_error(const char *str, char c)
 {
 	ft_putstr_fd("42sh: parse error near `", 2);
-	ft_putstr_fd(str, 2);
+	if (str)
+		ft_putstr_fd(str, 2);
+	else
+		ft_putchar_fd(c, 2);
 	ft_putstr_fd("'\n", 2);
-	return (-1);
+	return (ERROR);
 }
-/*
-static int	is_operator(char *str, int i, _Bool check, _Bool *word)
-{
-	static const char	*redir[] = {"<<", ">>", ">", "<", NULL};
-	int					j;
+static int	parse_str(char *str);
 
-	j = -1;
-	ft_printf("^RED^%i^EOC^ -- %i -> |%s|\n", *word, check, str + i);
-	while (redir[++j])
+static int	is_operator(char *str, int i, _Bool word)
+{
+	static const char	*redir[] = {">>", "<<", ">", "<", NULL};
+	int		j;
+
+	j = 0;
+	while ((i == 0 || str[i - 1] != '\\') && redir[++j])
 		if (ft_strnequ(redir[j], str + i, ft_strlen(redir[j])))
 		{
-			if (check && *word == false)
-			{
-				ft_putendlcol(str + i, GREEN);
-				return (parse_error(redir[j]));
-			}
-			if (check)
-				cmdwr_check_redirections(str, &i, j);
-			return (1);
+			i += ft_strlen(redir[j]);
+			if (word == false || tl_isstrempty(str + i) ||\
+				(str[i] == '&' && !str[i + 1]))
+					return (parse_error(redir[j], 0));
+			else
+				return (parse_str(str + i + 1));
 		}
-	if (check)
-		*word = false;
-	return (0);
+	return (GOOD);
 }
 
 static int	parse_str(char *str)
 {
 	int					i;
+	int					ret;
 	_Bool				word;
 
 	i = 0;
+	while (str[i] && tl_iswhitespace(str[i]))
+		i++;
 	word = false;
 	while (str[i])
 	{
@@ -61,39 +63,38 @@ static int	parse_str(char *str)
 			i += tl_jump_to_other_quote(str + i);
 			word = true;
 		}
-		if (is_operator(str, i, true, &word) == -1)
-			return (-1);
+		else if (!(ret = is_operator(str, i, word)))
+			return (ERROR);
 		if (!tl_iswhitespace(str[i]))
 		{
-			ft_putnbrendl(!ft_isdigit(str[i]) || (ft_isdigit(str[i]) && !is_operator(str, i + 1, false, &word)));
-			if (!ft_isdigit(str[i]) || (ft_isdigit(str[i]) && !is_operator(str, i + 1, false, &word)))
-				word = true;
+			word = true;
+			i++;
 		}
-		i++;
+		else
+			i++;
 	}
-	return (word ? GOOD : -1);
+	return (GOOD);
 }
-*/
+
 int		ast_parse_tree(t_ast *root)
 {
-	int					n_link;
-
 	if (!root)
 		return (GOOD);
-	n_link = 0;
-	if (root->operator == COMMAND)
+	if (root->operator == COMMAND &&\
+		(ft_strchr(root->str, '>') || ft_strchr(root->str, '<')))
 	{
-		// if (parse_str(root->str) == -1)
-			// return (ERROR);
+		if (!parse_str(root->str))
+			return (ERROR);
 		return (GOOD);
 	}
 	else
 	{
-		if (root->left)
-			n_link++;
-		if (root->right)
-			n_link++;
-		return (n_link != 2 && parse_error(root->str) == -1 ? ERROR : GOOD);
+		if (!ast_parse_tree(root->left))
+			return (ERROR);
+		if (!ast_parse_tree(root->right))
+			return (ERROR);
+		else if (!root->left || !root->right)
+			return (parse_error(root->str, 0));
 	}
 	return (GOOD);
 }

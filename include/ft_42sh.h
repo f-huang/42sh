@@ -7,7 +7,6 @@
 
 # include "libft.h"
 # include "environment.h"
-# include "ast.h"
 # include "ft_termcaps.h"
 
 /*

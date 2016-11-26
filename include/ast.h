@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:14:15 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/25 21:09:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/26 10:42:58 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define ERROR 0
 #endif
 
-# include "execution.h"
 # include "ft_42sh.h"
+# include "execution.h"
 
 enum			e_type
 {
@@ -41,6 +41,8 @@ typedef struct	s_ast
 	t_cmdwr			*cmd2;
 }				t_ast;
 
+int				exec_ast(t_shell *sh, t_ast *ast);
+
 t_ast			*ast_create_tree(char *line);
 int				ast_create_elem(t_ast **lst, int operator, char *str);
 void			ast_insert_elem_in_tree(t_ast **root, t_ast *new);
@@ -53,7 +55,5 @@ int				ast_to_cmdwr(t_ast **list);
 int				cmdwr_fill_struct(t_cmdwr **cmd, char *str);
 size_t			cmdwr_check_redirections(char *str, int *i, int redirection);
 int				redirection_create_elem(t_redirections **redir, char *str);
-
-int				exec_ast(t_shell *sh, t_ast *ast);
 
 #endif

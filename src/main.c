@@ -25,7 +25,7 @@ int			main(int ac, char **av)
 			if (*trim)
 			{
 				line_to_ast(&sh, line);
-				exec_command(&sh, commands);
+		//		exec_command(&sh, commands);
 				// will be replaced with :
 				// exec_ast(&sh, exemple());
 			}
