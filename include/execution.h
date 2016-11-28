@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,9 +6,10 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:09:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/24 11:15:37 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/26 10:37:50 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
@@ -21,8 +21,8 @@
 # define CANNOTINVOKE		126
 # define NOTFOUND			127
 
-# include "environment.h"
 # include "ft_42sh.h"
+# include "environment.h"
 
 /*
 **	ex:
