@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/28 19:13:27 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 19:44:10 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int			exec_ast(t_shell *sh, t_ast *ast)
 		return (exec_and(sh, ast));
 	if (ast->operator == OR)
 		return (exec_or(sh, ast));
-	if (ast->operator == COMMAND)
+	if (ast->operator == COMMAND || ast->operator == REDIRECTION)
 		return (exec_redirection(sh, ast->cmd1));
 	if (ast->operator == PIPE)
 		return (exec_pipes(sh ,ast));
