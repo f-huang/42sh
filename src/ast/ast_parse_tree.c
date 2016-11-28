@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 17:58:09 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/28 17:33:59 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 18:34:50 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	is_operator(char *str, int i, _Bool word)
 		if (ft_strnequ(redir[j], str + i, ft_strlen(redir[j])))
 		{
 			i += ft_strlen(redir[j]);
-			if (word == false || tl_isstrempty(str + i) ||\
+			if (word == 0 || tl_isstrempty(str + i) ||\
 				(str[i] == '&' && !str[i + 1]))
 					return (parse_error(redir[j], 0));
 			else
@@ -61,19 +61,19 @@ static int	parse_str(char *str)
 	i = 0;
 	while (str[i] && tl_iswhitespace(str[i]))
 		i++;
-	word = false;
+	word = 0;
 	while (str[i])
 	{
 		if ((i == 0 || str[i - 1] != '\\') && (str[i] == '\'' || str[i] == '\"'))
 		{
 			i += tl_jump_to_other_quote(str + i);
-			word = true;
+			word = 1;
 		}
 		else if (!(ret = is_operator(str, i, word)))
 			return (ERROR);
 		if (!tl_iswhitespace(str[i]))
 		{
-			word = true;
+			word = 1;
 			i++;
 		}
 		else
