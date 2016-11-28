@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 17:58:09 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/26 11:47:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 11:51:48 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		ast_parse_tree(t_ast *root)
 			return (ERROR);
 		return (GOOD);
 	}
-	else
+	else if (root->operator != COMMAND)
 	{
 		if (!ast_parse_tree(root->left))
 			return (ERROR);

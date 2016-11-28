@@ -136,6 +136,7 @@ int						get_line(char **line);
 void					sig_handler(int signo);
 int						exec_command(t_shell *sh, char **command);
 
+//t_ast					*line_to_ast(char *line);
 
 int						pipe_command(void);
 
