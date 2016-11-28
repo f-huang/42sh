@@ -40,8 +40,6 @@ int				main(int ac, char **av)
 					{
 						exec_command(&sh, commands);
 						tl_freedoubletab(commands);
-						exec_command(&sh, cmd->command);
-						tl_freedoubletab(cmd->command);
 					}
 					lst = lst->next;
 				}
