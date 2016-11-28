@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/23 18:50:52 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/28 19:13:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include "libft.h"
+#include "substitution.h"
 
 static	int	exec_and(t_shell *sh, t_ast *ast)
 {
@@ -109,6 +110,10 @@ int			exec_pipes(t_shell *sh, t_ast *ast)
 
 int			exec_ast(t_shell *sh, t_ast *ast)
 {
+	if (ast->cmd1)
+		substitute(sh, ast->cmd1);
+	if (ast->cmd2)
+		substitute(sh, ast->cmd2);
 	if (ast->operator == AND)
 		return (exec_and(sh, ast));
 	if (ast->operator == OR)

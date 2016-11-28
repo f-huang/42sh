@@ -10,10 +10,10 @@ int				main(int ac, char **av)
 {
 	t_shell		sh;
 	char		*line;
-	char		**commands;
+	// char		**commands;
 	t_list		*lst;
-	t_list		*p;
-	t_cmdwr		*cmd = (t_cmdwr*)ft_memalloc(sizeof(t_cmdwr));
+	// t_list		*p;
+	// t_cmdwr		*cmd = (t_cmdwr*)ft_memalloc(sizeof(t_cmdwr));
 
 	line = NULL;
 	lst = NULL;
@@ -27,20 +27,9 @@ int				main(int ac, char **av)
 		{
 			if (first_lexer(line, &lst))
 			{
-				p = lst;
-				while (p)
-				{
-					cmd->command = ft_strsplit(p->content, ' ');//
-					substitute(&sh, cmd);
-					p = p->next;
-				}
 				while (lst)
 				{
-					if ((commands = ft_strsplit(lst->content, ' ')))
-					{
-						exec_command(&sh, commands);
-						tl_freedoubletab(commands);
-					}
+					exec_ast(&sh, lst->content);
 					lst = lst->next;
 				}
 			}

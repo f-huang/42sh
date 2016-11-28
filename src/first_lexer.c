@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first-lexer.c                                      :+:      :+:    :+:   */
+/*   first_lexer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/24 10:26:34 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/28 19:06:31 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,27 @@
 #include "ft_42sh.h"
 #include "tools.h"
 #include "libft.h"
+#include "ast.h"
 
 static int		add_elem(t_list **lst, char *command, size_t size)
 {
 	char		*tmp;
 	char		*tmp_trim;
 	t_list		*elem;
+	t_ast		*ast;
 
 	if (!(tmp = tl_strndup(command, size)))
 		return (ERROR);
 	if (!(tmp_trim = ft_strtrim(tmp)))
 		return (ERROR);
 	ft_strdel(&tmp);
-	if (!(elem = ft_lstnew(tmp_trim, ft_strlen(tmp_trim) + 1)))
-		return (ERROR);
+	if ((ast = line_to_ast(tmp_trim)))
+	{
+		if (!(elem = ft_lstnew(ast, sizeof(t_ast))))
+			return (ERROR);
+		tl_lstaddend(lst, elem);
+	}
 	ft_strdel(&tmp_trim);
-	tl_lstaddend(lst, elem);
 	return (GOOD);
 }
 
@@ -82,7 +87,7 @@ int				first_lexer(char *command_line, t_list **lst)
 	index = 0;
 	open.squote = 0;
 	open.dquote = 0;
-	while (command_line[i] &&check_inhibitors(command_line[i], &i, &open))
+	while (command_line[i] && check_inhibitors(command_line[i], &i, &open))
 	{
 		if (command_line[i] == ';' && !open.squote && !open.dquote)
 		{

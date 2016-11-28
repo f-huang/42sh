@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:14:15 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/28 11:54:41 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 18:59:51 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct	s_ast
 	t_cmdwr			*cmd1;
 	t_cmdwr			*cmd2;
 }				t_ast;
+
+t_ast			*line_to_ast(char *line);
 
 int				exec_ast(t_shell *sh, t_ast *ast);
 
