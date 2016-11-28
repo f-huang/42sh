@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 17:46:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/11 18:55:03 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/16 15:47:21 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,6 @@ static	const	t_bnb	g_bnb[] = {
 	{"setenv", builtin_setenv},
 	{0, 0}
 };
-
-static	int		get_command_status_code(int status)
-{
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
-		return (WTERMSIG(status));
-	else if (WIFSTOPPED(status))
-		return (WSTOPSIG(status));
-	return (0);
-}
 
 static	int		get_ac(char **command)
 {
