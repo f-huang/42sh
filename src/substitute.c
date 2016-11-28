@@ -6,7 +6,7 @@
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 10:39:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/25 18:49:58 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/28 16:37:34 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static int		core(t_shell *sh, char **acmd)
 			i += jump_to_end_of_quote(&p[i], '\'');
 		else
 		{
-			dollar(sh, acmd);
 			tilde(sh, acmd);
+			dollar(sh, acmd);
 		}
 		++i;
 	}

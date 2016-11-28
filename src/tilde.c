@@ -6,7 +6,7 @@
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 18:17:47 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/25 18:49:52 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/28 16:38:58 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,6 @@ static char		*save_home(char *s)
 	return (save);
 }
 
-static char		*save_remain(char *s, char *p)
-{
-	char		*save;
-
-	if (!(save = ft_strjoin(s, p)))
-		return (NULL);
-	return (save);
-}
-
 static char		*save_user(char *s, char *p)
 {
 	char		*last;
@@ -43,22 +34,36 @@ static char		*save_user(char *s, char *p)
 
 	save = NULL;
 	last = ft_strrchr(s, '/');
-	if (!(path = ft_strndup(s, (last - s) + 1)))
+	if (!(path = ft_strndup(s, (last - s))))
 		return (NULL);
 	dir = open_dir(path);
 	while ((ent = readdir(dir)))
 	{
 		if (ft_strequ(p, ent->d_name))
 		{
-			save = save_remain(path, p);
+			if (!(save = tl_str3join(path, "/", p)))
+				return (NULL);
 			break ;
 		}
 	}
 	close_dir(dir);
 	ft_strclr(path);
 	ft_strdel(&path);
-//	if (!save)
-//		unknown(p);
+	return (!save ? ft_strjoin("~", p) : save);
+}
+
+static char		*save_remain(char *s, char *p)
+{
+	char		*save;
+
+	save = NULL;
+	if (ft_isalpha(p[1]))
+		save = save_user(s, p + 1);
+	else
+	{
+		if (!(save = ft_strjoin(s, p + 1)))
+			return (NULL);
+	}
 	return (save);
 }
 
@@ -67,16 +72,15 @@ int				tilde(t_shell *sh, char **acmd)
 	char		*save;
 	int			ret;
 
-	ft_putendl_color(*acmd, RED);
 	ret = 0;
-	if ((save = sh_getenv(sh->lst_env, "HOME")))
+	if (*acmd[0] == '~' && (save = sh_getenv(sh->lst_env, "HOME")))
 	{
-		if (!(*acmd[1]))
+		if (ft_strlen(*acmd) == 1)
 			save = save_home(save);
-		else if (*acmd[1] == '/')
-			save = save_remain(save, acmd[1]);
 		else
-			save = save_user(save, acmd[1]);
+			save = save_remain(save, *acmd);
+		ft_strdel(acmd);
+		*acmd = save;
 	}
 	return (GOOD);
 }
