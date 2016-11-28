@@ -113,7 +113,7 @@ typedef struct			s_bitfield
 **	MACRO
 */
 #ifndef PROMPT
-# define PROMPT "$> "
+# define PROMPT "\033[1;32m42sh>\x1b[0m "
 #endif
 
 #ifndef BUFF_SIZE

@@ -1,6 +1,8 @@
 #include "ft_42sh.h"
 #include "tools.h"
 #include "libft.h"
+#include "execution.h"
+#include "ast.h"
 
 #include <stdio.h>//
 
@@ -25,19 +27,16 @@ int				main(int ac, char **av)
 			if (first_lexer(line, &lst))
 			{
 				p = lst;
-//				ft_putlst(lst);//
 				while (p)
 				{
 					substitute(&sh, &(p->content));
 					p = p->next;
 				}
-//				ft_putlst(lst);//
 				while (lst)
 				{
 					if ((commands = ft_strsplit(lst->content, ' ')))
 					{
 						exec_command(&sh, commands);
-						//				reset_termios(sh.term);
 						tl_freedoubletab(commands);
 					}
 					lst = lst->next;

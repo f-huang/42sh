@@ -19,9 +19,14 @@ typedef	struct	s_bnb
 	int			(*function)(t_shell *, int, char **);
 }				t_bnb;
 
-int				builtin_cd(t_shell *sh, int ac, char **av);
 int				builtin_setenv(t_shell *sh, int ac, char **av);
 int				builtin_unsetenv(t_shell *sh, int ac, char **av);
 int				builtin_exit(t_shell *sh, int ac, char **av);
+
+/*
+**	CD
+*/
+int				builtin_cd(t_shell *sh, int ac, char **av);
+_Bool			get_options(char **av, int *i);
 
 #endif

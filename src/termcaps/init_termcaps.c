@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_termcaps.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 17:19:39 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/16 12:28:56 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/28 18:16:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <termios.h>
 #include <stdlib.h>
 #include <sys/ioctl.h>
@@ -17,7 +18,6 @@
 #include <curses.h>
 #include "ft_42sh.h"
 #include "ft_termcaps.h"
-#include "libft.h"
 
 int			init_termios(t_termios term, t_winsize *window)
 {
