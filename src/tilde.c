@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 18:17:47 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/28 18:26:53 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 18:37:53 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char		*save_user(char *s, char *p)
 
 	save = NULL;
 	last = ft_strrchr(s, '/');
-	if (!(path = ft_strndup(s, (last - s))))
+	if (!(path = tl_strndup(s, (last - s))))
 		return (NULL);
 	dir = open_dir(path);
 	while ((ent = readdir(dir)))
