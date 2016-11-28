@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_env.c                                        :+:      :+:    :+:   */
+/*   tl_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 15:43:05 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/28 18:20:00 by fhuang           ###   ########.fr       */
+/*   Created: 2016/11/24 10:36:57 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/24 10:37:21 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "libft.h"
+#include "tools.h"
 
-char	**env_alloc_env(size_t len)
+t_list		*tl_lstlast(t_list *lst)
 {
-	return ((char **)malloc(sizeof(char *) * (len + 1)));
+	if (!lst)
+		return (NULL);
+	return (!lst->next ? lst : tl_lstlast(lst->next));
 }
