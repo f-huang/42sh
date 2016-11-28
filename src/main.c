@@ -1,7 +1,6 @@
 #include "ft_42sh.h"
 #include "tools.h"
 #include "libft.h"
-#include "execution.h"
 #include "ast.h"
 
 #include <stdio.h>//
@@ -13,6 +12,7 @@ int				main(int ac, char **av)
 	char		**commands;
 	t_list		*lst;
 	t_list		*p;
+	t_cmdwr		*cmd = (t_cmdwr*)ft_memalloc(sizeof(t_cmdwr));
 
 	line = NULL;
 	lst = NULL;
@@ -29,7 +29,8 @@ int				main(int ac, char **av)
 				p = lst;
 				while (p)
 				{
-					substitute(&sh, &(p->content));
+					cmd->command = ft_strsplit(p->content, ' ');//
+					substitute(&sh, cmd);
 					p = p->next;
 				}
 				while (lst)
@@ -38,6 +39,8 @@ int				main(int ac, char **av)
 					{
 						exec_command(&sh, commands);
 						tl_freedoubletab(commands);
+						exec_command(&sh, cmd->command);
+						tl_freedoubletab(cmd->command);
 					}
 					lst = lst->next;
 				}
@@ -48,12 +51,11 @@ int				main(int ac, char **av)
 		}
 		else
 		{
-			//			reset_termios(sh.term);
 			if (line)
 			{
 				ft_strclr(line);
 				ft_strdel(&line);
-				ft_lstdel(&lst, ft_del);
+				ft_lstdel(&lst, tl_del);
 			}
 			ft_putendl("exit");
 			/* clear all*/
