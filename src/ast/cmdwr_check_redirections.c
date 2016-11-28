@@ -6,24 +6,12 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:09:44 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/25 21:02:58 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 17:34:22 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "tools.h"
-
-static size_t	jump_to_other_quote(char *ptr)
-{
-	char	c;
-	size_t	i;
-
-	i = 0;
-	c = ptr[i++];
-	while (ptr[i] && ptr[i] != c && ptr[i - 1] != '\\')
-		i++;
-	return (i);
-}
 
 static	int		get_word(char *str)
 {
@@ -33,7 +21,7 @@ static	int		get_word(char *str)
 	while (str[i] && !tl_iswhitespace(str[i]))
 	{
 		if ((i == 0 || str[i - 1] != '\\') && (str[i] == '\'' || str[i] == '\"'))
-			i+= jump_to_other_quote(str + i);
+			i+= tl_jump_to_other_quote(str + i);
 		i++;
 	}
 	return (i);

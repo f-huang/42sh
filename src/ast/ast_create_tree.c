@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_tokens.c                                    :+:      :+:    :+:   */
+/*   ast_create_tree.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 16:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/25 17:40:05 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 17:32:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,13 @@
 #include "ast.h"
 #include "tools.h"
 
-static size_t	jump_to_other_quote(char *ptr)
-{
-	char	c;
-	size_t	i;
-
-	i = 0;
-	c = ptr[i++];
-	while (ptr[i] && ptr[i] != c && ptr[i - 1] != '\\')
-		i++;
-	return (i);
-}
+/*
+**	This function parse the given string to create the tree.
+**	Each node are delimited by shell operators.
+**	Delimiters are "&&", "||", and "|".
+**
+**	The tree is returned.
+*/
 
 static int	is_operator(t_ast **lst_tokens, char *ptr, size_t *i, char *tmp)
 {
@@ -61,7 +57,7 @@ t_ast		*ast_create_tree(char *line)
 	while (line[i])
 	{
 		if ((i == 0 || line[i - 1] != '\\') && (line[i] == '\'' || line[i] == '\"'))
-			i += jump_to_other_quote(line + i) + 1;
+			i += tl_jump_to_other_quote(line + i) + 1;
 		else if (is_operator(&lst_tokens, line, &i, tmp) != -1)
 			tmp = line + i;
 		else

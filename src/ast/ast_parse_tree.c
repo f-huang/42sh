@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 17:58:09 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/28 11:51:48 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 17:33:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include "libft.h"
 #include "tools.h"
 #include "ft_42sh.h"
+
+/*
+**	This funciton check parse the tree and check
+**	if operator node have a left and a right.
+**	If not, a syntax error is occured.
+*/
 
 static int	parse_error(const char *str, char c)
 {
