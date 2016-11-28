@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_env.c                                        :+:      :+:    :+:   */
+/*   tl_del.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 15:43:05 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/28 18:20:00 by fhuang           ###   ########.fr       */
+/*   Created: 2016/11/24 10:31:37 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/24 10:31:42 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "libft.h"
 
-char	**env_alloc_env(size_t len)
+void		tl_del(void *data, size_t len)
 {
-	return ((char **)malloc(sizeof(char *) * (len + 1)));
+	ft_memdel(&data);
+	len = 0;
 }

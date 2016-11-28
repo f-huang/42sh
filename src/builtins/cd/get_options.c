@@ -6,12 +6,18 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:40:08 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/28 16:44:13 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 17:28:35 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_42sh.h"
 #include "libft.h"
+
+/*
+**	This functions retrieves the options given to the cd built-in.
+**	Synospsis :
+**		cd [-L | -P] [directory]
+*/
 
 static int	is_option(char *str, _Bool *follow_sl)
 {

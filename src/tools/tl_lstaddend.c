@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reset_termcaps.c                                   :+:      :+:    :+:   */
+/*   tl_lstaddend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 17:16:08 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/28 18:31:30 by fhuang           ###   ########.fr       */
+/*   Created: 2016/11/24 10:31:53 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/28 18:27:50 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <termios.h>
-#include <stdlib.h>
-#include <sys/ioctl.h>
-#include <term.h>
-#include <curses.h>
-#include "ft_42sh.h"
-#include "ft_termcaps.h"
+#include "tools.h"
 
-int			reset_termios(t_termios term)
+void		tl_lstaddend(t_list **alst, t_list *new_elem)
 {
-	if (tcgetattr(0, &term) == -1)
-		return (ERROR);
-	term.c_lflag = (ICANON | ECHO);
-	if (tcsetattr(0, TCSANOW, &term) == -1)
-		return (ERROR);
-	return (GOOD);
+	t_list	*p;
+
+	if (!new_elem)
+		return ;
+	if (!(*alst))
+		*alst = new_elem;
+	else
+	{
+		p = tl_lstlast(*alst);
+		p->next = new_elem;
+	}
 }

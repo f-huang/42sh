@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_env.c                                        :+:      :+:    :+:   */
+/*   dir.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 15:43:05 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/28 18:20:00 by fhuang           ###   ########.fr       */
+/*   Created: 2016/09/28 14:33:16 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/25 18:49:55 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <dirent.h>
 #include "ft_42sh.h"
 
-char	**env_alloc_env(size_t len)
+DIR			*open_dir(char *path)
 {
-	return ((char **)malloc(sizeof(char *) * (len + 1)));
+	DIR		*dir;
+
+	dir = NULL;
+	if (!(dir = opendir(path)))
+		return (NULL);
+	return (dir);
+}
+
+int			close_dir(DIR *dir)
+{
+	if (closedir(dir))
+		return (ERROR);
+	return (GOOD);
 }

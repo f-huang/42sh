@@ -1,17 +1,22 @@
 #include "ft_42sh.h"
 #include "tools.h"
 #include "libft.h"
-#include "execution.h"
 #include "ast.h"
+#include "substitution.h"
 
-int			main(int ac, char **av)
+#include <stdio.h>//
+
+int				main(int ac, char **av)
 {
 	t_shell		sh;
 	char		*line;
 	char		**commands;
-	char		*trim;
+	t_list		*lst;
+	t_list		*p;
+	t_cmdwr		*cmd = (t_cmdwr*)ft_memalloc(sizeof(t_cmdwr));
 
 	line = NULL;
+	lst = NULL;
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		;
 	if (!init_shell(&sh, av[0]))
@@ -20,20 +25,30 @@ int			main(int ac, char **av)
 	{
 		if (get_line(&line) == 1)
 		{
-			trim = ft_strtrim(line);
-			commands = ft_strsplit(trim, ' ');
-			if (*trim)
+			if (first_lexer(line, &lst))
 			{
-				// line_to_ast(line);
-		//		exec_command(&sh, commands);
-				// will be replaced with :
-				// exec_ast(&sh, exemple());
+				p = lst;
+				while (p)
+				{
+					cmd->command = ft_strsplit(p->content, ' ');//
+					substitute(&sh, cmd);
+					p = p->next;
+				}
+				while (lst)
+				{
+					if ((commands = ft_strsplit(lst->content, ' ')))
+					{
+						exec_command(&sh, commands);
+						tl_freedoubletab(commands);
+						exec_command(&sh, cmd->command);
+						tl_freedoubletab(cmd->command);
+					}
+					lst = lst->next;
+				}
 			}
-			tl_freedoubletab(commands);
-			/* lexer */
 			ft_strclr(line);
 			ft_strdel(&line);
-			ft_strdel(&trim);
+			ft_lstdel(&lst, tl_del);
 		}
 		else
 		{
@@ -41,6 +56,7 @@ int			main(int ac, char **av)
 			{
 				ft_strclr(line);
 				ft_strdel(&line);
+				ft_lstdel(&lst, tl_del);
 			}
 			ft_putendl("exit");
 			/* clear all*/

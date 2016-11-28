@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/25 20:22:26 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 18:31:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "libft.h"
 
 int			tl_isspace(int c);
 int			tl_iswhitespace(int c);
@@ -26,5 +27,10 @@ char		*tl_strndup(const char *s1, size_t n);
 char		*tl_strrealloc(char *s, size_t size);
 int			*tl_strisalnum(char *s);
 void		tl_freedoubletab(char **tab);
+void		tl_del(void *data, size_t len);
+void		tl_lstaddend(t_list **alst, t_list *new_elem);
+size_t		tl_arrlen(char **arr);
+t_list		*tl_lstlast(t_list *lst);
+char		*tl_strmerge(char *origin, char *adding);
 
 #endif
