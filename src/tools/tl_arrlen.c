@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_termcaps.h                                      :+:      :+:    :+:   */
+/*   tl_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 17:17:00 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/16 12:27:50 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/24 10:31:13 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/24 10:36:17 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TERMCAPS_H
-# define FT_TERMCAPS_H
+#include "tools.h"
 
-#include "ft_42sh.h"
+size_t		tl_arrlen(char **arr)
+{
+	size_t i;
 
-typedef struct termios	t_termios;
-typedef struct winsize	t_winsize;
-
-int			init_termios(t_termios term, t_winsize *window);
-int			reset_termios(t_termios term);
-
-#endif
+	i = 0;
+	while (arr[i])
+		++i;
+	return (i);
+}

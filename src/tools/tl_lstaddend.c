@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_termcaps.h                                      :+:      :+:    :+:   */
+/*   tl_lstaddend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 17:17:00 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/16 12:27:50 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/24 10:31:53 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/24 10:35:02 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TERMCAPS_H
-# define FT_TERMCAPS_H
+#include "libft.h"
+#include "tools.h"
 
-#include "ft_42sh.h"
+void		tl_lstaddend(t_list **alst, t_list *new_elem)
+{
+	t_list	*p;
 
-typedef struct termios	t_termios;
-typedef struct winsize	t_winsize;
-
-int			init_termios(t_termios term, t_winsize *window);
-int			reset_termios(t_termios term);
-
-#endif
+	if (!new_elem)
+		return ;
+	if (!(*alst))
+		*alst = new_elem;
+	else
+	{
+		p = tl_lstlast(*alst);
+		p->next = new_elem;
+		new_elem->prev = p;
+	}
+}

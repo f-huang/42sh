@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_termcaps.h                                      :+:      :+:    :+:   */
+/*   dir.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 17:17:00 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/16 12:27:50 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/09/28 14:33:16 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/25 18:49:55 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TERMCAPS_H
-# define FT_TERMCAPS_H
-
+#include <dirent.h>
 #include "ft_42sh.h"
 
-typedef struct termios	t_termios;
-typedef struct winsize	t_winsize;
+DIR			*open_dir(char *path)
+{
+	DIR		*dir;
 
-int			init_termios(t_termios term, t_winsize *window);
-int			reset_termios(t_termios term);
+	dir = NULL;
+	if (!(dir = opendir(path)))
+		return (NULL);
+	return (dir);
+}
 
-#endif
+int			close_dir(DIR *dir)
+{
+	if (closedir(dir))
+		return (ERROR);
+	return (GOOD);
+}

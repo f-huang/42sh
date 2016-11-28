@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_termcaps.h                                      :+:      :+:    :+:   */
+/*   tl_del.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 17:17:00 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/16 12:27:50 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/24 10:31:37 by cjacquem          #+#    #+#             */
+/*   Updated: 2016/11/24 10:31:42 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TERMCAPS_H
-# define FT_TERMCAPS_H
+#include "libft.h"
 
-#include "ft_42sh.h"
-
-typedef struct termios	t_termios;
-typedef struct winsize	t_winsize;
-
-int			init_termios(t_termios term, t_winsize *window);
-int			reset_termios(t_termios term);
-
-#endif
+void		tl_del(void *data, size_t len)
+{
+	ft_memdel(&data);
+	len = 0;
+}

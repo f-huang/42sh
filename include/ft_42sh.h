@@ -8,6 +8,9 @@
 # include "libft.h"
 # include "environment.h"
 # include "ft_termcaps.h"
+# include <termios.h>
+# include <dirent.h>
+# include "ast.h"
 
 /*
 **	C STANDARD LIBRARIES
@@ -98,15 +101,21 @@ typedef struct			s_shell
 	int					last_return;
 	t_environment		*lst_env;
 	char				*bin_path;
-	t_termios			*term;
+	t_termios			term;
 	t_winsize			*window;
 }						t_shell;
+
+typedef struct			s_bitfield
+{
+	unsigned int		squote : 1;
+	unsigned int		dquote : 1;
+}						t_bitfield;
 
 /*
 **	MACRO
 */
 #ifndef PROMPT
-# define PROMPT "\033[1;32m42sh>\x1b[0m "
+# define PROMPT "$> "
 #endif
 
 #ifndef BUFF_SIZE
@@ -135,4 +144,12 @@ int						prompt(t_shell *sh);
 int						get_line(char **line);
 void					sig_handler(int signo);
 int						exec_command(t_shell *sh, char **command);
+int						first_lexer(char *command_line, t_list **lst);
+int						substitute(t_shell *sh, t_cmdwr *cmd);
+int						dollar(t_shell *sh, char **acmd);
+int						tilde(t_shell *sh, char **acmd);
+DIR						*open_dir(char *path);
+int						close_dir(DIR *dir);
+
+
 #endif
