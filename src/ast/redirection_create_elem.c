@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/25 20:01:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/29 13:34:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static void		get_redir_type(t_redirections **new, char *str)
 					(*new)->type |= SIMPLE_LEFT_REDIRECT;
 				else if (j == 2)
 					(*new)->type |= SIMPLE_RIGHT_REDIRECT;
+				else if (j == 1)
+					(*new)->type |= DOUBLE_LEFT_REDIRECT;
 				else if (j == 0)
 					(*new)->type |= DOUBLE_RIGHT_REDIRECT;
 			}
@@ -78,6 +80,8 @@ static int
 	i = 0;
 	if (ft_isdigit(str[i]))
 		(*new)->from_fd = ft_atoi(str + i++);
+	if ((*new)->type & DOUBLE_LEFT_REDIRECT)
+		return (GOOD); // DOUBLE_LEFT_REDIRECT FUNCITON
 	if ((*new)->type & DOUBLE_RIGHT_REDIRECT)
 		i++;
 	if (str[++i] == '&')
@@ -104,6 +108,8 @@ int		redirection_create_elem(t_redirections **redir, char *str)
 		return (ERROR);
 	new->from_fd = -1;
 	new->to_fd = -1;
+	new->next = NULL;
+	new->dest = NULL;
 	get_redir_type(&new, str);
 	if (!parse_redir_str(redir, &new, str))
 		return (ERROR);

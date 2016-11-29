@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:09:44 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/28 17:34:22 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/29 13:29:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ size_t			cmdwr_check_redirections(char *str, int *i, int redirection)
 	size_t	tmp;
 
 	len = 0;
-	tmp = *i + (redirection == 0 || redirection == 0 ? 2 : 1);
+	tmp = *i + (redirection == 0 || redirection == 1 ? 2 : 1);
 	if (redirection == 0 || redirection == 1)
 		len++;
 	if ((*i == 1 || (*i > 1 && tl_iswhitespace(str[*i - 2]))) && ft_isdigit(str[*i - 1]))
