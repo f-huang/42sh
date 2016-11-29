@@ -10,14 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "ft_42sh.h"
+#include "libft.h"
+#include "history.h"
 
 /*
-**		This function reproduces the behavior of the built-in exit().
-*/
+ **		This function reproduces the behavior of the built-in exit().
+ */
 
-static int	is_str_digit(char *str)
+static int		is_str_digit(char *str)
 {
 	int		i;
 
@@ -31,7 +35,7 @@ static int	is_str_digit(char *str)
 	return (GOOD);
 }
 
-int     builtin_exit(t_shell *sh, int ac, char **av)
+int				builtin_exit(t_shell *sh, int ac, char **av)
 {
 	if (ac > 2)
 	{
@@ -45,6 +49,7 @@ int     builtin_exit(t_shell *sh, int ac, char **av)
 		ft_putendl_fd(": Expression syntax.", 2);
 		return (1);
 	}
+	save_history(sh->all_history);
 	clear_shell(sh);
 	exit(av[1] ? (char)ft_atoi(av[1]) : EXIT_SUCCESS);
 	return (0);

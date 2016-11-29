@@ -5,6 +5,7 @@
 #include "substitution.h"
 #include <signal.h>
 #include <stdio.h>//
+#include "history.h"
 
 int				main(int ac, char **av)
 {
@@ -23,10 +24,11 @@ int				main(int ac, char **av)
 		return (ERROR);
 	while (prompt(&sh))
 	{
-		if (get_line(&line) == 1)
+		if (get_line(0, &line) == 1)
 		{
 			if (first_lexer(line, &lst))
 			{
+				ft_lstadd(&sh.all_history, ft_lstnew(line, ft_strlen(line) + 1));
 				while (lst)
 				{
 					exec_ast(&sh, lst->content);
@@ -46,6 +48,7 @@ int				main(int ac, char **av)
 				ft_lstdel(&lst, tl_del);
 			}
 			ft_putendl("exit");
+			save_history(sh.all_history);
 			/* clear all*/
 			exit(0);
 		}

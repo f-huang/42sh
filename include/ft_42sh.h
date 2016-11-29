@@ -1,4 +1,4 @@
-#ifndef FT_42SH_H
+ #ifndef FT_42SH_H
 # define FT_42SH_H
 
 /*
@@ -100,6 +100,7 @@ typedef struct			s_shell
 	char				*bin_path;
 	t_termios			term;
 	t_winsize			*window;
+	t_list				*all_history;
 }						t_shell;
 
 typedef struct			s_bitfield
@@ -138,11 +139,12 @@ int						init_shell(t_shell *sh, char *av_0);
 void					clear_shell(t_shell *sh);
 
 int						prompt(t_shell *sh);
-int						get_line(char **line);
+int						get_line(int fd, char **line);
 void					sig_handler(int signo);
 int						exec_command(t_shell *sh, char **command);
 
 int						pipe_command(void);
 int						first_lexer(char *command_line, t_list **lst);
+
 
 #endif
