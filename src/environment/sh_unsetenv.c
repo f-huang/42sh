@@ -10,7 +10,7 @@
 **		Return GOOD on success, and ERROR if the key was not found.
 */
 
-static int	delete_elem(t_environment **elem, t_environment **prev)
+static int	delete_elem(t_variable **elem, t_variable **prev)
 {
 	if (*prev)
 		(*prev)->next = (*elem)->next;
@@ -19,10 +19,10 @@ static int	delete_elem(t_environment **elem, t_environment **prev)
 	return (GOOD);
 }
 
-int			sh_unsetenv(t_environment **lst_env, char *key)
+int			sh_unsetenv(t_variable **lst_env, char *key)
 {
-	t_environment	*elem;
-	t_environment	*prev;
+	t_variable	*elem;
+	t_variable	*prev;
 	char			*tmp_key;
 	size_t			len_key;
 

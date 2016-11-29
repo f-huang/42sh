@@ -13,7 +13,7 @@
 #include "environment.h"
 #include "libft.h"
 
-void		sh_print_env(t_environment *lst_env)
+void		sh_print_env(t_variable *lst_env)
 {
 	while (lst_env)
 	{

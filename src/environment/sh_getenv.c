@@ -10,9 +10,9 @@
 **		You shall not free the returned string.
 */
 
-char		*sh_getenv(t_environment *lst_env, char *key)
+char		*sh_getenv(t_variable *lst_env, char *key)
 {
-	t_environment	*elem;
+	t_variable	*elem;
 	char			*tmp_key;
 	size_t			len_key;
 

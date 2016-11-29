@@ -18,10 +18,10 @@
 **		This function free the given environment list and set pointers to NULL.
 */
 
-void	clear_env_list(t_environment **lst_env)
+void	clear_env_list(t_variable **lst_env)
 {
-	t_environment	*elem;
-	t_environment	*ptr;
+	t_variable	*elem;
+	t_variable	*ptr;
 
 	elem = *lst_env;
 	while (elem)

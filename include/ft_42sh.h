@@ -2,34 +2,12 @@
 # define FT_42SH_H
 
 /*
-**	OUR OWN LIBRAIRIES
+**	LIBRAIRIES
 */
 
 # include "libft.h"
 # include "environment.h"
 # include <termios.h>
-
-/*
-**	C STANDARD LIBRARIES
-*/
-
-//# include <curses.h>
-//# include <dirent.h>
-//# include <errno.h>
-//# include <fcntl.h>
-//# include <signal.h>
-//# include <stdio.h>
-//# include <stdlib.h>
-//# include <string.h>
-//# include <sys/ioctl.h>
-//# include <sys/stat.h>
-//# include <sys/syslimits.h>
-//# include <sys/types.h>
-//# include <sys/uio.h>
-//# include <sys/wait.h>
-//# include <term.h>
-//# include <termios.h>
-//# include <unistd.h>
 
 /*
 **	STANDARD LIRAIRIES STRUCTURES
@@ -96,7 +74,8 @@ typedef struct winsize	t_winsize;
 typedef struct			s_shell
 {
 	int					last_return;
-	t_environment		*lst_env;
+	t_variable			*lst_env;
+	t_variable			*lst_localvar;
 	char				*bin_path;
 	t_termios			term;
 	t_winsize			*window;
@@ -123,7 +102,7 @@ typedef struct			s_bitfield
 **	BUILTIN CODE
 */
 #ifndef BUILTIN
-# define BUILTIN "cd exit unsetenv setenv"
+# define BUILTIN "cd exit unsetenv setenv export"
 #endif
 
 #ifndef NBBUILTIN
