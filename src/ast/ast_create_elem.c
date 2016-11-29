@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 12:23:14 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/25 19:51:38 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/28 19:52:14 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int			ast_create_elem(t_ast **lst, int operator, char *str)
 	new->operator = get_operator(operator);
 	new->cmd1 = NULL;
 	new->cmd2 = NULL;
+	new->left = NULL;
+	new->right = NULL;
 	ast_insert_elem_in_tree(lst, new);
 	return (GOOD);
 }

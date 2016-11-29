@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 02:07:16 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/17 17:45:54 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/28 23:17:25 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "libft.h"
 
 int		exec_redirection(t_shell *sh, t_cmdwr *r)
 {
