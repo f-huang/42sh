@@ -3,7 +3,7 @@
 #include "libft.h"
 #include "ast.h"
 #include "substitution.h"
-
+#include <signal.h>
 #include <stdio.h>//
 
 int				main(int ac, char **av)

@@ -1,4 +1,5 @@
 #include "ft_42sh.h"
+#include <signal.h>
 
 void		sig_handler(int signo)
 {

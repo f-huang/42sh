@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "libft.h"
+#include <sys/wait.h>
 
 int		exec_redirection(t_shell *sh, t_cmdwr *r)
 {

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:27:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/29 13:55:39 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/30 12:11:57 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #include "libft.h"
 #include "tools.h"
 
-static int
-	is_operator(t_cmdwr **cmd, char *str, int *i, char *tmp, char **tab)
+static int		is_operator(t_cmdwr **cmd, char *str, char *tmp, t_index *index)
 {
 	static const char	*redir[] = {">>", "<<", ">", "<", NULL};
 	int					j;
@@ -24,53 +23,55 @@ static int
 
 	j = -1;
 	len = 0;
-	while ((*i == 0 || str[*i - 1] != '\\') && redir[++j])
-		if (ft_strnequ(redir[j], str + *i, ft_strlen(redir[j])))
+	while ((index->i == 0 || str[index->i - 1] != '\\') && redir[++j])
+		if (ft_strnequ(redir[j], str + index->i, ft_strlen(redir[j])))
 		{
-			len = cmdwr_check_redirections(str, i, j);
+			len = cmdwr_check_redirections(str, &index->i, j);
 			if (tmp != NULL)
 			{
 				while (tl_iswhitespace(*tmp))
 					tmp++;
-				if (str + *i != tmp)
-					*tab = tl_strndup(tmp, (size_t)(str + *i - tmp));
+				if (str + index->i != tmp)
+					(*cmd)->command[index->j] =\
+						tl_strndup(tmp, (size_t)(str + index->i - tmp));
 				redirection_create_elem(&(*cmd)->redirs,\
-					tl_strndup(str + *i, ft_strlen(redir[j]) + len));
+					tl_strndup(str + index->i, ft_strlen(redir[j]) + len));
 			}
-			*i += len + 1;
-			return (str + *i == tmp ? 2 : 1);
+			index->i += len + 1;
+			return (str + index->i == tmp ? 2 : 1);
 		}
 	return (0);
 }
 
 static size_t	get_tablen(char *str)
 {
-	size_t	len;
-	int		i;
+	size_t				len;
+	t_index				index;
 
-	i = 0;
-	len = str[i] ? 1 : 0;
-	while (str[i] != 0)
+	index.i = 0;
+	len = str[index.i] ? 1 : 0;
+	while (str[index.i] != 0)
 	{
-		if ((i == 0 || str[i - 1] != '\\') && (str[i] == '\'' || str[i] == '\"'))
-			i += tl_jump_to_other_quote(str + i) + 1;
-		else if (is_operator(NULL, str, &i, NULL, NULL))
+		if ((index.i == 0 || str[index.i - 1] != '\\') &&\
+			(str[index.i] == '\'' || str[index.i] == '\"'))
+			index.i += tl_jump_to_other_quote(str + index.i) + 1;
+		else if (is_operator(NULL, str, NULL, &index))
 			len--;
-		else if (tl_iswhitespace(str[i]))
+		else if (tl_iswhitespace(str[index.i]))
 		{
 			len++;
-			while (tl_iswhitespace(str[i]))
-				i++;
+			while (tl_iswhitespace(str[index.i]))
+				index.i++;
 		}
 		else
-			i++;
+			index.i++;
 	}
 	return (len);
 }
 
-static int	is_word(char *str, int *i, char **tmp, char **tab)
+static int		is_word(char *str, int *i, char **tmp, char **tab)
 {
-	char	*ptr;
+	char				*ptr;
 
 	if (!tl_iswhitespace(str[*i]))
 		return (0);
@@ -88,36 +89,36 @@ static int	is_word(char *str, int *i, char **tmp, char **tab)
 	return (1);
 }
 
-int		cmdwr_fill_struct(t_cmdwr **cmd, char *str)
+int				cmdwr_fill_struct(t_cmdwr **cmd, char *str)
 {
-	char	*tmp;
-	int		i;
-	int		j;
-	int		ret;
+	char				*tmp;
+	t_index				index;
+	int					ret;
 
-	if (!((*cmd)->command = (char**)ft_memalloc(sizeof(char*) * (get_tablen(str) + 1))))
+	if (!((*cmd)->command = (char**)\
+		ft_memalloc(sizeof(char*) * (get_tablen(str) + 1))))
 		return (ERROR);
 	tmp = str;
-	j = 0;
-	i = 0;
-	while (str[i])
+	ft_bzero(&index, sizeof(t_index));
+	while (str[index.i])
 	{
-		if ((i == 0 || str[i - 1] != '\\') && (str[i] == '\'' || str[i] == '\"'))
-			i += tl_jump_to_other_quote(str + i) + 1;
-		else if ((ret = is_operator(cmd, str, &i, tmp, &(*((*cmd)->command + j)))))
+		if ((index.i == 0 || str[index.i - 1] != '\\') &&\
+			(str[index.i] == '\'' || str[index.i] == '\"'))
+			index.i += tl_jump_to_other_quote(str + index.i) + 1;
+		else if ((ret = is_operator(cmd, str, tmp, &index)))
 		{
-			j += ret - 1;
-			while (tl_iswhitespace(str[i]))
-				i++;
-			tmp = str + i;
+			index.j += ret - 1;
+			while (tl_iswhitespace(str[index.i]))
+				index.i++;
+			tmp = str + index.i;
 		}
-		else if (is_word(str, &i, &tmp, &*((*cmd)->command + j)))
-			j++;
+		else if (is_word(str, &index.i, &tmp, &*((*cmd)->command + index.j)))
+			index.j++;
 		else
-			i++;
+			index.i++;
 	}
 	if (!tl_isstrempty(tmp))
-		(*cmd)->command[j++] = ft_strtrim(tmp);
-	(*cmd)->command[j] = NULL;
+		(*cmd)->command[index.j++] = ft_strtrim(tmp);
+	(*cmd)->command[index.j] = NULL;
 	return (GOOD);
 }

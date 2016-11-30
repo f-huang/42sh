@@ -3,6 +3,7 @@ NAME	:=	42sh
 # ====================
 
 # ===== Standard =====
+OS		:=	$(shell uname)
 CC		:=	clang
 CFLAGS	:=	-Wall -Wextra -Werror -g3
 SRCDIR	:=	src/
@@ -14,7 +15,11 @@ DIRBUILTINS	:= obj/builtins/
 SRC		:= $(shell find src -type d \( -path src/builtins/env -o -path src/builtins/echo -o -path src/builtins/read \) -prune -o -type f -print)
 OBJ		:= $(SRC:src/%.c=obj/%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
+ifeq ($(OS),Linux)
+LIB		:=	-lncurses
+else
 LIB		:=	-ltermcap
+endif
 LIBPATH	:=	-L./$(LIBDIR) -lft
 CACHEF	:=	.cache_exists
 HISTORY	:=	.42sh_history
