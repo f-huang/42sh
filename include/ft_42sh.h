@@ -144,5 +144,6 @@ int						exec_command(t_shell *sh, char **command);
 
 int						pipe_command(void);
 int						first_lexer(char *command_line, t_list **lst);
+int						get_heredocs(t_shell *sh, t_list **lst);
 
 #endif
