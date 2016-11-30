@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first_lexer.c                                      :+:      :+:    :+:   */
+/*   lexer_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/28 19:06:31 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/30 15:59:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ static int		add_elem(t_list **lst, char *command, size_t size)
 	if (!(tmp_trim = ft_strtrim(tmp)))
 		return (ERROR);
 	ft_strdel(&tmp);
+	ast = NULL;
 	if ((ast = line_to_ast(tmp_trim)))
 	{
+		elem = NULL;
 		if (!(elem = ft_lstnew(ast, sizeof(t_ast))))
 			return (ERROR);
 		tl_lstaddend(lst, elem);
+		ast_destroy_tree(ast);
 	}
 	ft_strdel(&tmp_trim);
 	return (GOOD);
@@ -77,7 +80,7 @@ static int		check_n_save(t_list **lst, char *command, size_t size,\
 	return (GOOD);
 }
 
-int				first_lexer(char *command_line, t_list **lst)
+int				lexer_parser(char *command_line, t_list **lst)
 {
 	size_t		i;
 	size_t		index;

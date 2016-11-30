@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_remove_link.c                                  :+:      :+:    :+:   */
+/*   ast_free_cmdwr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 07:08:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/30 15:35:37 by fhuang           ###   ########.fr       */
+/*   Created: 2016/11/30 15:34:49 by fhuang            #+#    #+#             */
+/*   Updated: 2016/11/30 16:09:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 #include "libft.h"
+#include "tools.h"
 
-void		ast_remove_link(t_ast **lst, t_ast *link)
+void	ast_free_cmdwr(t_cmdwr **cmd)
 {
-	t_ast		*ptr;
-	t_ast		*prev;
+	t_redirections	*ptr;
+	t_redirections	*tmp;
 
-	ptr = *lst;
-	prev = NULL;
-	while (ptr)
+	if (!*cmd)
+		return ;
+	if ((*cmd)->command)
 	{
-		if (ptr == link)
-		{
-			if (prev)
-				prev->right = link->right;
-			else
-				*lst = link->right;
-			if (link->right)
-				link->right->left = prev;
-			ft_strdel(&link->str);
-			ast_free_cmdwr(&link->cmd1);
-			ast_free_cmdwr(&link->cmd2);
-			ft_memdel((void*)&link);
-			return ;
-		}
-		prev = ptr;
-		ptr = ptr->right;
+		tl_freedoubletab((*cmd)->command);
 	}
+	if ((*cmd)->redirs)
+	{
+		ptr = (*cmd)->redirs;
+		tmp = NULL;
+		while (ptr)
+		{
+			tmp = ptr;
+			ptr = ptr->next;
+			if (ptr->dest)
+				ft_strdel(&ptr->dest);
+			ft_memdel((void*)&ptr);
+		}
+	}
+	free(*cmd);
+	*cmd = NULL;
 }

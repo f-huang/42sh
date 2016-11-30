@@ -10,45 +10,41 @@ int				main(int ac, char **av)
 {
 	t_shell		sh;
 	char		*line;
-	// char		**commands;
 	t_list		*lst;
-	// t_list		*p;
-	// t_cmdwr		*cmd = (t_cmdwr*)ft_memalloc(sizeof(t_cmdwr));
 
-	line = NULL;
 	lst = NULL;
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		;
 	if (!init_shell(&sh, av[0]))
 		return (ERROR);
+	line = NULL;
 	while (prompt(&sh))
 	{
 		if (get_line(&line) == 1)
 		{
-			if (first_lexer(line, &lst))
+			lexer_parser(line, &lst);
+			//RECUP `<<`
+			//PUIS EXEC:
+/*			while (lst)
 			{
-				while (lst)
-				{
-					exec_ast(&sh, lst->content);
-					lst = lst->next;
-				}
-			}
-			ft_strclr(line);
-			ft_strdel(&line);
-			ft_lstdel(&lst, tl_del);
+				exec_ast(&sh, lst->content);
+				lst = lst->next;
+			}*/
 		}
-		else
+		else //CTRL D
 		{
 			if (line)
-			{
-				ft_strclr(line);
 				ft_strdel(&line);
+			if (lst)
 				ft_lstdel(&lst, tl_del);
-			}
 			ft_putendl("exit");
-			/* clear all*/
+			clear_shell(&sh);
 			exit(0);
 		}
+		if (line)
+			ft_strdel(&line);
+		if (lst)
+			ft_lstdel(&lst, tl_del);
 	}
 	(void)ac;
 	return (GOOD);

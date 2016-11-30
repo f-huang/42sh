@@ -6,13 +6,14 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/28 18:31:09 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/30 14:30:10 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOOLS_H
 # define TOOLS_H
 
+# include <dirent.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
@@ -32,5 +33,7 @@ void		tl_lstaddend(t_list **alst, t_list *new_elem);
 size_t		tl_arrlen(char **arr);
 t_list		*tl_lstlast(t_list *lst);
 char		*tl_strmerge(char *origin, char *adding);
+DIR			*tl_opendir(char *path);
+int			*tl_closedir(DIR *dir);
 
 #endif

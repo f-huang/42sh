@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:27:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/30 12:11:57 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/30 16:08:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static int		is_word(char *str, int *i, char **tmp, char **tab)
 	while (str[*i] && tl_iswhitespace(str[*i]))
 		(*i)++;
 	*tmp = str + *i;
+	ft_strdel(&ptr);
 	return (1);
 }
 
