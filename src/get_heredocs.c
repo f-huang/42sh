@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 23:35:38 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/30 04:59:34 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/30 05:40:26 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static	t_heredocs	*getnewheredocs(t_list *words)
 	return (doc);
 }
 
+static	int		heredoc_prompt(void)
+{
+	ft_putstr("heredoc de fdp> ");	
+	return (GOOD);
+}
+
 static	void	get_heredoc(t_shell *sh, t_cmdwr *cmd, t_redirections *r)
 {
 	char		*line;
@@ -38,16 +44,8 @@ static	void	get_heredoc(t_shell *sh, t_cmdwr *cmd, t_redirections *r)
 	heredocs_list = cmd->heredocs;
 	heredocs_words = 0;
 	cursor = heredocs_words;
-	while (42)
+	while (heredoc_prompt() && get_line(&line) == 1)
 	{
-		ft_putstr("heredoc de fdp> ");
-		if (get_line(&line) != 1)
-		{
-			ft_strclr(line);
-			ft_strdel(&line);
-			ft_putendl("EOF");
-			break ;
-		}
 		// fill structs
 		if (cursor == 0)
 		{
@@ -62,6 +60,9 @@ static	void	get_heredoc(t_shell *sh, t_cmdwr *cmd, t_redirections *r)
 		ft_strclr(line);
 		ft_strdel(&line);
 	}
+	ft_strclr(line);
+	ft_strdel(&line);
+	ft_putendl("EOF");
 	if (heredocs_words)
 	{
 		while (heredocs_list && heredocs_list->next)

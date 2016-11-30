@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 17:38:44 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/30 04:58:11 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/30 05:23:56 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ static	void	double_right_redirect(t_redirections *cursor)
 static	void	redirect_heredocs(t_heredocs *cursor, t_redirections *redir)
 {
 	t_list		*words;
+	t_list		*tofree;
 	int			fd;
 	int			filed;
 
@@ -101,7 +102,10 @@ static	void	redirect_heredocs(t_heredocs *cursor, t_redirections *redir)
 	while (words)
 	{
 		ft_putendl_fd(words->content, filed);
+		ft_strdel((char **)&words->content);
+		tofree = words;
 		words = words->next;
+		free(tofree);
 	}
 	close(filed);
 	filed = open("/tmp/heredoc42sh", O_RDONLY, S_IRUSR | S_IWUSR);
