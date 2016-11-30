@@ -9,7 +9,7 @@ int			save_history(t_list *all_history)
 {
 	int		fd;
 
-	fd = open(HISTORY, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	fd = open(HISTORY, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRUSR | S_IWUSR);
 	if (fd == -1)
 		return (ERROR);
 	while (all_history)

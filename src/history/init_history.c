@@ -9,7 +9,9 @@ int			init_history(t_list **all_history)
 	int		fd;
 	char	*line;
 
-	fd = open(HISTORY, O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);//cf. openat
+	fd = open(HISTORY, O_RDONLY, S_IRUSR | S_IWUSR);//cf. openat
+	ft_putnbr(fd);//
+	ft_putchar('\n');//
 	if (fd == -1)
 		return (ERROR);
 	line = NULL;
