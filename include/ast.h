@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:14:15 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/28 18:59:51 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/30 12:00:31 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ enum			e_type
 {
 	COMMAND = -1, AND, OR, PIPE, REDIRECTION, HEREDOC
 };
+
+typedef struct	s_index
+{
+	int		i;
+	int		j;
+}				t_index;
 
 typedef struct	s_ast
 {
