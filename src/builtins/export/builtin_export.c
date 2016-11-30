@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:26:25 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/29 20:35:55 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/30 12:47:25 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ static void	set_local_var(t_shell *sh, char *str)
 int			builtin_export(t_shell *sh, int ac, char **av)
 {
 	int		i;
+	_Bool	error;
 
+	error = 0;
 	if (ac == 1)
 		sh_print_env(sh->lst_localvar);
 	else
@@ -70,8 +72,10 @@ int			builtin_export(t_shell *sh, int ac, char **av)
 		{
 			if (is_format_correct(av[i]))
 				set_local_var(sh, av[i]);
+			else
+				error = 1;
 			i++;
 		}
 	}
-	return (0);
+	return (error);
 }
