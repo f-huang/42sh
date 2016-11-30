@@ -23,6 +23,7 @@ int				builtin_setenv(t_shell *sh, int ac, char **av);
 int				builtin_unsetenv(t_shell *sh, int ac, char **av);
 int				builtin_exit(t_shell *sh, int ac, char **av);
 int				builtin_export(t_shell *sh, int ac, char **av);
+int				builtin_unset(t_shell *sh, int ac, char **av);
 
 /*
 **	CD

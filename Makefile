@@ -84,6 +84,7 @@ $(CACHEF):
 	test -d $(DIRBUILTINS)unsetenv || mkdir $(DIRBUILTINS)unsetenv
 	test -d $(DIRBUILTINS)exit || mkdir $(DIRBUILTINS)exit
 	test -d $(DIRBUILTINS)export || mkdir $(DIRBUILTINS)export
+	test -d $(DIRBUILTINS)unset || mkdir $(DIRBUILTINS)unset
 	test -d $(OBJDIRENV) || mkdir $(OBJDIRENV)
 	test -d $(OBJDIRECHO) || mkdir $(OBJDIRECHO)
 	test -d $(OBJDIRREAD) || mkdir $(OBJDIRREAD)
