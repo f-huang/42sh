@@ -46,7 +46,7 @@ static int	cd_error(int index, char *path)
 }
 
 
-static void	set_pwd(t_environment **lst_env, char *path, _Bool follow_sl)
+static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 {
 	struct stat	buf;
 	char		*tmp;
@@ -67,7 +67,7 @@ static void	set_pwd(t_environment **lst_env, char *path, _Bool follow_sl)
 		sh_setenv(lst_env, "PWD", path);
 }
 
-static int	change_directory(t_environment **lst_env, char *path, _Bool follow_sl)
+static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 {
 	struct stat	buf;
 

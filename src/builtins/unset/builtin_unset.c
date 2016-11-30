@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_env_list.c                                   :+:      :+:    :+:   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 10:17:42 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 10:25:46 by fhuang           ###   ########.fr       */
+/*   Created: 2016/11/30 12:16:36 by fhuang            #+#    #+#             */
+/*   Updated: 2016/11/30 12:35:32 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "environment.h"
+#include "ft_42sh.h"
 #include "libft.h"
 
-/*
-**		This function free the given environment list and set pointers to NULL.
-*/
-
-void	clear_env_list(t_variable **lst_env)
+int		builtin_unset(t_shell *sh, int ac, char **av)
 {
-	t_variable	*elem;
-	t_variable	*ptr;
-
-	elem = *lst_env;
-	while (elem)
+	if (ac == 1)
 	{
-		ptr = elem;
-		elem = elem->next;
-		ptr->length = 0;
-		ft_strdel(&ptr->variable);
-		ft_memdel((void*)&ptr);
+		ft_putendl_fd("unset: not enough arguments.", 2);
+		return (1);
 	}
+	while (--ac >= 1)
+		sh_unsetenv(&sh->lst_localvar, av[ac]);
+	return (0);
 }
