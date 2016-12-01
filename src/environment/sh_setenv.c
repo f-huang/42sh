@@ -8,7 +8,7 @@
 **		Else key and value are added at the end of the list.
 */
 
-static int	switch_value(t_environment **elem, char *key, char *value)
+static int	switch_value(t_variable **elem, char *key, char *value)
 {
 	int		len;
 
@@ -27,7 +27,7 @@ static int	switch_value(t_environment **elem, char *key, char *value)
 	return (GOOD);
 }
 
-static int	add_value(t_environment **lst_env, char *key, char *value)
+static int	add_value(t_variable **lst_env, char *key, char *value)
 {
 	char	*variable;
 
@@ -42,9 +42,9 @@ static int	add_value(t_environment **lst_env, char *key, char *value)
 	return (GOOD);
 }
 
-int			sh_setenv(t_environment **lst_env, char *key, char *value)
+int			sh_setenv(t_variable **lst_env, char *key, char *value)
 {
-	t_environment	*elem;
+	t_variable	*elem;
 	char			*tmp;
 	int				ret;
 

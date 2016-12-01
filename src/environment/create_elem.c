@@ -8,9 +8,9 @@
 **		The length is then calculated to prevent useless realloc.
 */
 
-static void	push_back(t_environment **lst_env, t_environment *new)
+static void	push_back(t_variable **lst_env, t_variable *new)
 {
-	t_environment		*elem;
+	t_variable		*elem;
 
 	if (*lst_env)
 	{
@@ -23,13 +23,13 @@ static void	push_back(t_environment **lst_env, t_environment *new)
 		*lst_env = new;
 }
 
-int			create_elem(t_environment **lst_env, char *variable)
+int			create_elem(t_variable **lst_env, char *variable)
 {
-	t_environment	*new;
+	t_variable	*new;
 
 	if (!variable)
 		return (ERROR);
-	if (!(new = (t_environment*)malloc(sizeof(t_environment))))
+	if (!(new = (t_variable*)malloc(sizeof(t_variable))))
 		return (ERROR);
 	if (!(new->variable = ft_strdup(variable)))
 		return (ERROR);

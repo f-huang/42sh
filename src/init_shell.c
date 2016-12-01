@@ -8,7 +8,7 @@
 **		This file is initalizing the shell. (Termios and environment).
 */
 
-static int		copy_environment(t_environment **lst_env)
+static int		copy_environment(t_variable **lst_env)
 {
 	extern char	**environ;
 	int			i;
@@ -22,7 +22,7 @@ static int		copy_environment(t_environment **lst_env)
 	return (GOOD);
 }
 
-static int		increment_shlvl(t_environment **lst_env)
+static int		increment_shlvl(t_variable **lst_env)
 {
 	char	*tmp;
 	int		shlvl;
@@ -55,7 +55,7 @@ static int		set_bin_path(char **bin_path, char *av_0)
 	return (GOOD);
 }
 
-static int		set_default(t_environment **lst_env)
+static int		set_default(t_variable **lst_env)
 {
 	if (!increment_shlvl(lst_env))
 		return (ERROR);

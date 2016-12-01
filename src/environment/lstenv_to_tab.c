@@ -13,7 +13,7 @@
 #include "environment.h"
 #include "libft.h"
 
-static size_t	lstenv_len(t_environment *lst_env)
+static size_t	lstenv_len(t_variable *lst_env)
 {
 	size_t	i;
 
@@ -26,7 +26,7 @@ static size_t	lstenv_len(t_environment *lst_env)
 	return (i);
 }
 
-char			**lstenv_to_tab(t_environment *lst_env)
+char			**lstenv_to_tab(t_variable *lst_env)
 {
 	char	**tab;
 	int		i;
