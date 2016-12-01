@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 09:54:32 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 10:27:43 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/30 14:29:04 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <fcntl.h>
 #include "ft_42sh.h"
 #include "libft.h"
-#include "history.h"
 
 /*
  **		This function reproduces the behavior of the built-in exit().
@@ -49,7 +48,6 @@ int				builtin_exit(t_shell *sh, int ac, char **av)
 		ft_putendl_fd(": Expression syntax.", 2);
 		return (1);
 	}
-	save_history(sh->all_history);
 	clear_shell(sh);
 	exit(av[1] ? (char)ft_atoi(av[1]) : EXIT_SUCCESS);
 	return (0);

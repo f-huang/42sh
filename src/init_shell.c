@@ -3,7 +3,6 @@
 #include "ft_42sh.h"
 #include "tools.h"
 #include "environment.h"
-#include "history.h"
 
 /*
 **		This file is initalizing the shell. (Termios and environment).
@@ -74,8 +73,9 @@ int		init_shell(t_shell *sh, char *av_0)
 	if (!set_bin_path(&sh->bin_path, av_0))
 		return (ERROR);
 	set_default(&sh->lst_env);
-	if (!init_history(&sh->all_history))
-		return (ERROR);
+	init_history(&sh->all_history);
+//	if (!init_history(&sh->all_history))
+//		return (ERROR);
 //	if (!(init_termios(sh->term, sh->window)))
 //		return (ERROR);
 	return (GOOD);

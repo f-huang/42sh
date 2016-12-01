@@ -5,7 +5,6 @@
 #include "substitution.h"
 #include <signal.h>
 #include <stdio.h>//
-#include "history.h"
 
 int				main(int ac, char **av)
 {
@@ -48,8 +47,7 @@ int				main(int ac, char **av)
 				ft_lstdel(&lst, tl_del);
 			}
 			ft_putendl("exit");
-			save_history(sh.all_history);
-			/* clear all*/
+			clear_shell(&sh);
 			exit(0);
 		}
 	}

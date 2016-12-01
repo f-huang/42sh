@@ -50,7 +50,7 @@ int			get_line(int fd, char **line)
 		if (push_line(&tmp, line, &buf, ft_strlen(buf)))
 			return (GOOD);
 	}
-	if (!(buf = ft_strnew(BUFF_SIZE)))
+	if (!(buf = ft_strnew(BUFF_SIZE + 1)))
 		return (ERROR);
 	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
