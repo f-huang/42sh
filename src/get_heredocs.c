@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 23:35:38 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/01 17:15:40 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/01 21:46:59 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static	int		get_heredocs_from_ast(t_ast *ast)
 {
 	if (ast->operator == COMMAND || ast->operator == REDIRECTION)
 		return (retrieve_heredocs(ast->cmd1));
-	if (ast->left)
-		get_heredocs_from_ast(ast->left);
 	if (ast->right)
 		get_heredocs_from_ast(ast->right);
+	if (ast->left)
+		get_heredocs_from_ast(ast->left);
 	return (GOOD);
 }
 

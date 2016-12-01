@@ -37,11 +37,11 @@ int				main(int ac, char **av)
 			lexer_parser(line, &lst);
 			//RECUP `<<`
 			//PUIS EXEC:
-			get_heredocs(&lst);
 			ptr = lst;
+			get_heredocs(&ptr);
 			while (ptr)
 			{
-				exec_ast(&sh, lst->content);
+				exec_ast(&sh, ptr->content);
 				ptr = ptr->next;
 			}
 			clear_main(&line, &lst);

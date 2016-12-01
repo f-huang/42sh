@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 02:07:16 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/30 04:13:57 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/01 21:32:13 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		exec_redirection(t_shell *sh, t_cmdwr *r)
 	{
 		waitpid(0, &tmp, WUNTRACED | WCONTINUED);
 		sh->last_return = get_command_status_code(tmp);
+		free_heredocs(r);
 		return (sh->last_return);
 	}
 	else if (id == 0)

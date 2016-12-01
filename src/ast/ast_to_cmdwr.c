@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/01 12:19:19 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 21:07:49 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int				ast_to_cmdwr(t_ast **root)
 		cmd = NULL;
 		if (!(cmd = (t_cmdwr*)ft_memalloc(sizeof(t_cmdwr))))
 			return (ERROR);
+		cmd->command = NULL;
+		cmd->redirs = NULL;
 		if (!cmdwr_fill_struct(&cmd, (ptr)->str))
 		{
 			ast_free_cmdwr(&cmd);

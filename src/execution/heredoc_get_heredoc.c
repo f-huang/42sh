@@ -6,30 +6,58 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 17:04:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/01 17:18:37 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/01 21:58:22 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "tools.h"
 
-static	t_list	*get_words(char *end)
+static	char	*remove_tabs(char *s)
+{
+	int		i;
+	char	*trim;
+
+	i = 0;
+	while (s[i] && s[i] == '\t')
+		i++;
+	trim = ft_strdup(&s[i]);
+	return (trim);
+}
+
+static	char	*check_line(t_redirections *r, char *line)
+{
+	char	*trim;
+
+	if (r->type & CLOSE_REDIRECT) // <<- Toto
+		trim = remove_tabs(line);
+	else
+		trim = ft_strdup(line);
+	return (trim);
+}
+
+static	t_list	*get_words(t_redirections *r)
 {
 	char		*line;
+	char		*trim;
 	t_list		*words;
 	t_list		*cursor;
 
 	line = 0;
 	cursor = 0;
-	while (heredoc_prompt() && get_line(&line) == 1 && ft_strcmp(line, end))
+	words = 0;
+	while (heredoc_prompt() && get_line(&line) == 1 && ft_strcmp(line, r->dest))
 	{
 		if (cursor == 0)
 		{
-			cursor = ft_lstnew(ft_strdup(line), ft_strlen(line));
+			trim = check_line(r, line);
+			cursor = tl_lstnew(trim, ft_strlen(line));
 			words = cursor;
 		}
 		else
 		{
-			cursor->next = ft_lstnew(ft_strdup(line), ft_strlen(line));
+			trim = check_line(r, line);
+			cursor->next = tl_lstnew(trim, ft_strlen(line));
 			cursor = cursor->next;
 		}
 		ft_strclr(line);
@@ -50,7 +78,7 @@ void		get_heredoc(t_cmdwr *cmd, t_redirections *r)
 	t_heredocs	*heredocs_list;
 
 	heredocs_list = cmd->heredocs;
-	heredocs_words = get_words(r->dest);
+	heredocs_words = get_words(r);
 	if (heredocs_words)
 	{
 		while (heredocs_list && heredocs_list->next)
