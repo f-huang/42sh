@@ -6,48 +6,51 @@
 #include <signal.h>
 #include <stdio.h>//
 
+static void		clear_main(char **line, t_list **lst)
+{
+	if (*line)
+	{
+		ft_strclr(*line);
+		ft_strdel(line);
+	}
+	if (*lst)
+		tl_lstdelast(lst);
+}
+
 int				main(int ac, char **av)
 {
 	t_shell		sh;
 	char		*line;
-	// char		**commands;
 	t_list		*lst;
-	// t_list		*p;
-	// t_cmdwr		*cmd = (t_cmdwr*)ft_memalloc(sizeof(t_cmdwr));
+	t_list		*ptr;
 
-	line = NULL;
 	lst = NULL;
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		;
 	if (!init_shell(&sh, av[0]))
 		return (ERROR);
+	line = NULL;
 	while (prompt(&sh))
 	{
 		if (get_line(&line) == 1)
 		{
-			if (first_lexer(line, &lst))
+			lexer_parser(line, &lst);
+			//RECUP `<<`
+			//PUIS EXEC:
+			get_heredocs(&lst);
+			ptr = lst;
+			while (ptr)
 			{
-				get_heredocs(&lst);
-				while (lst)
-				{
-					exec_ast(&sh, lst->content);
-					lst = lst->next;
-				}
+				exec_ast(&sh, lst->content);
+				ptr = ptr->next;
 			}
-			ft_strclr(line);
-			ft_strdel(&line);
-			ft_lstdel(&lst, tl_del);
+			clear_main(&line, &lst);
 		}
-		else
+		else //CTRL D
 		{
-			if (line)
-			{
-				ft_strclr(line);
-				ft_strdel(&line);
-				ft_lstdel(&lst, tl_del);
-			}
+			clear_main(&line, &lst);
 			ft_putendl("exit");
-			/* clear all*/
+			clear_shell(&sh);
 			exit(0);
 		}
 	}

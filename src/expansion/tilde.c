@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 18:17:47 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/28 18:37:53 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/30 14:09:38 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include "ft_42sh.h"
 #include "tools.h"
-#include "substitution.h"
+#include "expansion.h"
 
 static char		*save_home(char *s)
 {
@@ -37,7 +37,7 @@ static char		*save_user(char *s, char *p)
 	last = ft_strrchr(s, '/');
 	if (!(path = tl_strndup(s, (last - s))))
 		return (NULL);
-	dir = open_dir(path);
+	dir = tl_opendir(path);
 	while ((ent = readdir(dir)))
 	{
 		if (ft_strequ(p, ent->d_name))
@@ -47,7 +47,7 @@ static char		*save_user(char *s, char *p)
 			break ;
 		}
 	}
-	close_dir(dir);
+	tl_closedir(dir);
 	ft_strclr(path);
 	ft_strdel(&path);
 	return (!save ? ft_strjoin("~", p) : save);

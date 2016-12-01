@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_shell.c                                      :+:      :+:    :+:   */
+/*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 10:21:06 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/30 14:39:46 by fhuang           ###   ########.fr       */
+/*   Created: 2016/11/28 18:23:46 by fhuang            #+#    #+#             */
+/*   Updated: 2016/11/30 14:30:14 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
-#include "environment.h"
+#ifndef EXPANSION_H
+# define EXPANSION_H
 
-/*
-**	This function free every variable in the shell structure
-**	and set pointers to NULL.
-*/
+# include <dirent.h>
+# include "ft_42sh.h"
+# include "execution.h"
 
-void	clear_shell(t_shell *sh)
-{
-	sh->last_return = 0;
-	clear_env_list(&sh->lst_env);
-	clear_env_list(&sh->lst_localvar);
-	ft_strdel(&sh->bin_path);
-}
+int						substitute(t_shell *sh, t_cmdwr *cmd);
+int						dollar(t_shell *sh, char **acmd);
+int						tilde(t_shell *sh, char **acmd);
+
+#endif

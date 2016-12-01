@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_shell.c                                      :+:      :+:    :+:   */
+/*   tl_lstdelast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 10:21:06 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/30 14:39:46 by fhuang           ###   ########.fr       */
+/*   Created: 2016/12/01 14:19:10 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/01 14:19:55 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
-#include "environment.h"
+#include "libft.h"
+#include "ast.h"
 
-/*
-**	This function free every variable in the shell structure
-**	and set pointers to NULL.
-*/
-
-void	clear_shell(t_shell *sh)
+void		tl_lstdelast(t_list **lst)
 {
-	sh->last_return = 0;
-	clear_env_list(&sh->lst_env);
-	clear_env_list(&sh->lst_localvar);
-	ft_strdel(&sh->bin_path);
+	t_list	*ptr;
+	t_list	*tmp;
+
+	ptr = *lst;
+	tmp = NULL;
+	while (*lst)
+	{
+		tmp = *lst;
+		*lst = (*lst)->next;
+		ast_destroy_tree(tmp->content);
+		tmp->content_size = 0;
+		free(tmp);
+		tmp = NULL;
+	}
 }

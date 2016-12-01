@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 10:39:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/28 19:13:32 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/30 14:20:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "tools.h"
 #include "libft.h"
 #include "execution.h"
-#include "substitution.h"
+#include "expansion.h"
 
 static size_t		jump_to_end_of_quote(char *cmd, char c)
 {

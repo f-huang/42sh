@@ -89,6 +89,7 @@ $(CACHEF):
 	test -d $(OBJDIRECHO) || mkdir $(OBJDIRECHO)
 	test -d $(OBJDIRREAD) || mkdir $(OBJDIRREAD)
 	test -d $(OBJDIR)environment || mkdir $(OBJDIR)environment
+	test -d $(OBJDIR)expansion || mkdir $(OBJDIR)expansion
 	test -d $(OBJDIR)ast || mkdir $(OBJDIR)ast
 	test -d $(OBJDIR)tools || mkdir $(OBJDIR)tools
 	test -d $(OBJDIR)execution || mkdir $(OBJDIR)execution

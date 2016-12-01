@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:09:44 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/29 13:29:49 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 16:55:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ size_t			cmdwr_check_redirections(char *str, int *i, int redirection)
 		len++;
 		(*i)--;
 	}
-	if ((str[tmp] == '&') || (redirection == 4 && str[tmp] == '|'))
+	if ((str[tmp] == '&') || (redirection == 1 && str[tmp] == '-'))
 	{
 		len++;
 		tmp++;
