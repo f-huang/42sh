@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/01 17:06:32 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 17:07:28 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,20 @@ int		redirection_create_elem(t_redirections **redir, char *str)
 
 	new = NULL;
 	if (!(new = (t_redirections*)ft_memalloc(sizeof(t_redirections))))
+	{
+		ft_strdel(&str);
 		return (ERROR);
+	}
 	new->from_fd = -1;
 	new->to_fd = -1;
 	new->next = NULL;
 	new->dest = NULL;
 	get_redir_type(&new, str);
 	if (!parse_redir_str(redir, &new, str))
+	{
+		ft_strdel(&str);
 		return (ERROR);
+	}
+	ft_strdel(&str);
 	return (GOOD);
 }

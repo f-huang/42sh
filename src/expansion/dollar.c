@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:34:49 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/28 12:58:21 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/11/30 14:29:04 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*save_before(char *s, char	*p)
 	size_t	len;
 
 	len = p - s;
-	if (!(save = len ? tl_strndup(s, len) : ft_strnew(0)))
+	if (!(save = len ? tl_strndup(s, len) : ft_memalloc(1)))
 		return (NULL);
 	return (save);
 }

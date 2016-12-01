@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 12:23:14 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/28 19:52:14 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/11/30 15:14:04 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int	get_operator(int operator)
 int			ast_create_elem(t_ast **lst, int operator, char *str)
 {
 	t_ast	*new;
-	char	*tmp;
 
 	if (tl_isstrempty(str))
 	{
@@ -37,9 +36,9 @@ int			ast_create_elem(t_ast **lst, int operator, char *str)
 	}
 	if (!(new = (t_ast*)ft_memalloc(sizeof(t_ast))))
 		return (ERROR);
-	tmp = str;
-	new->str = ft_strtrim(str);
-	ft_strdel(&tmp);
+	if (!(new->str = ft_strtrim(str)))
+		return (ERROR);
+	ft_strdel(&str);
 	new->operator = get_operator(operator);
 	new->cmd1 = NULL;
 	new->cmd2 = NULL;

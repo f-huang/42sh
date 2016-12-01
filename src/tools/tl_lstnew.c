@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_shell.c                                      :+:      :+:    :+:   */
+/*   tl_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 10:21:06 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/30 14:39:46 by fhuang           ###   ########.fr       */
+/*   Created: 2016/12/01 14:18:30 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/01 14:22:50 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
-#include "environment.h"
+#include "libft.h"
 
-/*
-**	This function free every variable in the shell structure
-**	and set pointers to NULL.
-*/
-
-void	clear_shell(t_shell *sh)
+t_list	*tl_lstnew(void *content, size_t size)
 {
-	sh->last_return = 0;
-	clear_env_list(&sh->lst_env);
-	clear_env_list(&sh->lst_localvar);
-	ft_strdel(&sh->bin_path);
+	t_list		*new;
+
+	new = NULL;
+	if (!(new = (t_list*)ft_memalloc(sizeof(t_list))))
+		return (NULL);
+	new->content_size = size;
+	new->content = content;
+	return (new);
 }
