@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 10:39:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/30 14:20:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 21:48:55 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,32 +32,30 @@ static size_t		jump_to_end_of_quote(char *cmd, char c)
 	return (i);
 }
 
-static int		core(t_shell *sh, char **acmd)
+static char		*core(t_shell *sh, char *cmd)
 {
+	char		*ret = NULL;
 	size_t		i;
-	char		*p;
 	size_t		len;
+	_Bool		single_quote;
+	_Bool		backslash;
 
 	i = 0;
-	p = *acmd;
-	len = ft_strlen(*acmd);
+	len = ft_strlen(cmd);
+	ret = cmd;
 	while (i < len)
 	{
-		if (p[i] == '\"')
-		{
-			dollar(sh, acmd);
-			i += jump_to_end_of_quote(&p[i], '\"');
-		}
-		else if (p[i] == '\'')
-			i += jump_to_end_of_quote(&p[i], '\'');
-		else
-		{
-			tilde(sh, acmd);
-			dollar(sh, acmd);
-		}
-		++i;
+		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
+		single_quote = cmd[i] == '\'' && backslash == 0 ? 1 : 0;
+		if (cmd[i] == '$' && backslash == 0 && single_quote == 0)
+			cmd = dollar(sh, cmd, cmd + i);
+		else if (cmd[i] == '~' && backslash == 0 && single_quote == 0)
+			tilde(sh, &cmd);
+		else if (cmd[i] == '\'')
+			i += jump_to_end_of_quote(cmd + i, cmd[i]);
+		i++;
 	}
-	return (GOOD);
+	return (cmd);
 }
 
 int				substitute(t_shell *sh, t_cmdwr *cmd)
@@ -71,7 +69,7 @@ int				substitute(t_shell *sh, t_cmdwr *cmd)
 		i = 1;
 		while (i < ac)
 		{
-			core(sh, &cmd->command[i]);
+			cmd->command[i] = core(sh, cmd->command[i]);
 			++i;
 		}
 	}
