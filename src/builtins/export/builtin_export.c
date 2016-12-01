@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:26:25 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/30 12:47:25 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 16:36:35 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	set_local_var(t_shell *sh, char *str)
 		sh_setenv(&sh->lst_localvar, str, "");
 	else
 	{
-		if (!(key = ft_strndup(str, (size_t)(value - str))))
+		if (!(key = tl_strndup(str, (size_t)(value - str))))
 			return ;
 		sh_setenv(&sh->lst_localvar, key, value + 1);
 	}
