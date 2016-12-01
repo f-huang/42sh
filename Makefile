@@ -100,7 +100,7 @@ $(CACHEF):
 	printf $(RED)"Missing file : $@\n"$(EOC)
 
 libft:
-	make -C $(LIBDIR)
+	make -C $(LIBDIR) -j
 
 read: $(OBJREAD)
 	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)

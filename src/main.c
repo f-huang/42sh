@@ -27,7 +27,7 @@ int				main(int ac, char **av)
 		{
 			if (first_lexer(line, &lst))
 			{
-				get_heredocs(&sh, &lst);
+				get_heredocs(&lst);
 				while (lst)
 				{
 					exec_ast(&sh, lst->content);
