@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/30 15:59:03 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 14:21:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,9 @@ static int		add_elem(t_list **lst, char *command, size_t size)
 	if ((ast = line_to_ast(tmp_trim)))
 	{
 		elem = NULL;
-		if (!(elem = ft_lstnew(ast, sizeof(t_ast))))
+		if (!(elem = tl_lstnew(ast, sizeof(t_ast))))
 			return (ERROR);
 		tl_lstaddend(lst, elem);
-		ast_destroy_tree(ast);
 	}
 	ft_strdel(&tmp_trim);
 	return (GOOD);

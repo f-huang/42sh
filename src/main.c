@@ -6,11 +6,23 @@
 #include <signal.h>
 #include <stdio.h>//
 
+static void		clear_main(char **line, t_list **lst)
+{
+	if (*line)
+	{
+		ft_strclr(*line);
+		ft_strdel(line);
+	}
+	if (*lst)
+		tl_lstdelast(lst);
+}
+
 int				main(int ac, char **av)
 {
 	t_shell		sh;
 	char		*line;
 	t_list		*lst;
+	t_list		*ptr;
 
 	lst = NULL;
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
@@ -25,26 +37,21 @@ int				main(int ac, char **av)
 			lexer_parser(line, &lst);
 			//RECUP `<<`
 			//PUIS EXEC:
-/*			while (lst)
+			ptr = lst;
+			while (ptr)
 			{
 				exec_ast(&sh, lst->content);
-				lst = lst->next;
-			}*/
+				ptr = ptr->next;
+			}
+			clear_main(&line, &lst);
 		}
 		else //CTRL D
 		{
-			if (line)
-				ft_strdel(&line);
-			if (lst)
-				ft_lstdel(&lst, tl_del);
+			clear_main(&line, &lst);
 			ft_putendl("exit");
 			clear_shell(&sh);
 			exit(0);
 		}
-		if (line)
-			ft_strdel(&line);
-		if (lst)
-			ft_lstdel(&lst, tl_del);
 	}
 	(void)ac;
 	return (GOOD);

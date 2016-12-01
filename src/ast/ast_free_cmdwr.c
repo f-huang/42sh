@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:34:49 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/30 16:09:03 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 12:24:58 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	ast_free_cmdwr(t_cmdwr **cmd)
 	if (!*cmd)
 		return ;
 	if ((*cmd)->command)
-	{
 		tl_freedoubletab((*cmd)->command);
-	}
 	if ((*cmd)->redirs)
 	{
 		ptr = (*cmd)->redirs;
@@ -33,9 +31,9 @@ void	ast_free_cmdwr(t_cmdwr **cmd)
 		{
 			tmp = ptr;
 			ptr = ptr->next;
-			if (ptr->dest)
-				ft_strdel(&ptr->dest);
-			ft_memdel((void*)&ptr);
+			if (tmp->dest)
+				ft_strdel(&tmp->dest);
+			ft_memdel((void*)&tmp);
 		}
 	}
 	free(*cmd);
