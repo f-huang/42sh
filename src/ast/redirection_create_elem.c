@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/01 17:07:28 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 21:03:01 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,13 @@ static int
 		i++;
 	if (str[++i] == '&' || (*new)->type & DOUBLE_LEFT_REDIRECT)
 	{
-		if ((str[i++] == '-') ||\
-			(str[i] == '-' && (tl_iswhitespace(str[i + 1]) || !str[i + 1])))
+		if (((*new)->type & DOUBLE_LEFT_REDIRECT && str[i] == '-') ||\
+			(!((*new)->type & DOUBLE_LEFT_REDIRECT) && \
+			(str[i] == '-' && (tl_iswhitespace(str[i + 1]) || !str[i + 1]))))
+		{
 			(*new)->type |= CLOSE_REDIRECT;
+			++i;
+		}
 		else if (isworddigit(str + i))
 			(*new)->to_fd = ft_atoi(str + i);
 	}
