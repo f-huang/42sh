@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dir.c                                              :+:      :+:    :+:   */
+/*   tl_opendir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/28 14:33:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/25 18:49:55 by cjacquem         ###   ########.fr       */
+/*   Created: 2016/11/30 14:00:16 by fhuang            #+#    #+#             */
+/*   Updated: 2016/11/30 14:07:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
-#include "ft_42sh.h"
 
-DIR			*open_dir(char *path)
+DIR			*tl_opendir(char *path)
 {
 	DIR		*dir;
 
-	dir = NULL;
+	dir = (void*)0;
 	if (!(dir = opendir(path)))
-		return (NULL);
+		return ((void*)0);
 	return (dir);
-}
-
-int			close_dir(DIR *dir)
-{
-	if (closedir(dir))
-		return (ERROR);
-	return (GOOD);
 }

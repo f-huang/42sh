@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_remove_link.c                                  :+:      :+:    :+:   */
+/*   ast_free_cmdwr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 07:08:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/30 15:35:37 by fhuang           ###   ########.fr       */
+/*   Created: 2016/11/30 15:34:49 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/01 12:24:58 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 #include "libft.h"
+#include "tools.h"
 
-void		ast_remove_link(t_ast **lst, t_ast *link)
+void	ast_free_cmdwr(t_cmdwr **cmd)
 {
-	t_ast		*ptr;
-	t_ast		*prev;
+	t_redirections	*ptr;
+	t_redirections	*tmp;
 
-	ptr = *lst;
-	prev = NULL;
-	while (ptr)
+	if (!*cmd)
+		return ;
+	if ((*cmd)->command)
+		tl_freedoubletab((*cmd)->command);
+	if ((*cmd)->redirs)
 	{
-		if (ptr == link)
+		ptr = (*cmd)->redirs;
+		tmp = NULL;
+		while (ptr)
 		{
-			if (prev)
-				prev->right = link->right;
-			else
-				*lst = link->right;
-			if (link->right)
-				link->right->left = prev;
-			ft_strdel(&link->str);
-			ast_free_cmdwr(&link->cmd1);
-			ast_free_cmdwr(&link->cmd2);
-			ft_memdel((void*)&link);
-			return ;
+			tmp = ptr;
+			ptr = ptr->next;
+			if (tmp->dest)
+				ft_strdel(&tmp->dest);
+			ft_memdel((void*)&tmp);
 		}
-		prev = ptr;
-		ptr = ptr->right;
 	}
+	free(*cmd);
+	*cmd = NULL;
 }
