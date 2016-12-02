@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/02 17:11:22 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/02 17:24:06 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static int		isworddigit(char *str)
 	int		i;
 
 	i = 0;
-	ft_putendlcol(str, MAGENTA);
 	while (str[i] && tl_iswhitespace(str[i]))
 		i++;
 	while (str[i] && !tl_iswhitespace(str[i]))
