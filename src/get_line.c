@@ -19,7 +19,6 @@ static int	save_line(char **line, char **buf, size_t size)
 	else if (!(*line = tl_strndup(*buf, size)))
 		return (ERROR);
 	ft_strclr(*buf);
-	ft_strdel(buf);
 	return (GOOD);
 }
 
