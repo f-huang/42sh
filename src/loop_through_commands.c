@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:18:37 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/02 17:10:13 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/02 17:27:52 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void		loop_through_commands(t_shell *sh, t_list *lst_commands)
 	t_list		*ptr;
 
 	ptr = lst_commands;
+	get_heredocs(&ptr);
 	while (ptr)
 	{
 		loop_through_ast(sh, ptr->content);

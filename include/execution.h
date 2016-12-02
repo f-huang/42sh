@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:09:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/26 10:37:50 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 17:32:31 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,17 @@ typedef	struct	s_redirections
 	struct s_redirections	*next;
 }				t_redirections;
 
+typedef struct	s_heredocs
+{
+	t_list					*words;
+	struct s_heredocs		*next;
+}				t_heredocs;
+
 typedef	struct	s_cmdwr
 {
 	char					**command;
 	t_redirections			*redirs;
+	t_heredocs				*heredocs;
 }				t_cmdwr;
 
 int				exec_is_executable(char *filepath);
@@ -93,5 +100,10 @@ int				exec_execute_command(t_exec *ex, t_shell *sh, char **command);
 int				exec_print_command_error(int error, char *command_name);
 int				get_command_status_code(int status);
 int				exec_redirection(t_shell *sh, t_cmdwr *r);
-void			close_and_redirects(t_redirections **cursor);
+void			close_and_redirects(t_cmdwr *cmd, t_redirections **cursor);
+
+t_heredocs		*get_new_heredocs(t_list *words);
+int				heredoc_prompt(void);
+void			get_heredoc(t_cmdwr *cmd, t_redirections *r);
+void			free_heredocs(t_cmdwr *cmd);
 #endif
