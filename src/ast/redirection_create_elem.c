@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/01 22:06:58 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/02 14:43:07 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,10 @@ static int
 		i++;
 	if (str[++i] == '&' || (*new)->type & DOUBLE_LEFT_REDIRECT)
 	{
-		if (((*new)->type & DOUBLE_LEFT_REDIRECT && str[i] == '-') ||\
-			(!((*new)->type & DOUBLE_LEFT_REDIRECT) && \
-			(str[i] == '-' && (tl_iswhitespace(str[i + 1]) || !str[i + 1]))))
+		if ((*new)->type & DOUBLE_LEFT_REDIRECT && str[i] == '-' && (i++))
+			(*new)->type |= CLOSE_REDIRECT;
+		else if (!((*new)->type & DOUBLE_LEFT_REDIRECT) && \
+			(str[++i] == '-' && (tl_iswhitespace(str[i + 1]) || !str[i + 1])))
 		{
 			(*new)->type |= CLOSE_REDIRECT;
 			++i;
