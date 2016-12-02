@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/02 16:02:35 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/02 17:11:22 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ static int
 			(*new)->type |= CLOSE_REDIRECT;
 		else if (!((*new)->type & DOUBLE_LEFT_REDIRECT))
 		{
-			ft_putendlcol(str + i, GREEN);
 			if (str[++i] == '-' && (tl_iswhitespace(str[i + 1]) || !str[i + 1]))
 			{
 				(*new)->type |= CLOSE_REDIRECT;
@@ -107,10 +106,6 @@ static int
 		if (!((*new)->type & DOUBLE_LEFT_REDIRECT))
 			(*new)->type |= FILE_REDIRECT;
 	}
-	if ((*new)->type & CLOSE_REDIRECT)
-		ft_putendlcol("Close", YELLOW);
-	if ((*new)->dest)
-		ft_putendlcol((*new)->dest, RED);
 	return (redirection_push_back(redir, *new));
 }
 
