@@ -21,10 +21,9 @@ int				main(int ac, char **av)
 {
 	t_shell		sh;
 	char		*line;
-	t_list		*lst;
-	t_list		*ptr;
+	t_list		*lst_commands;
 
-	lst = NULL;
+	lst_commands = NULL;
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		;
 	if (!init_shell(&sh, av[0]))
@@ -34,21 +33,13 @@ int				main(int ac, char **av)
 	{
 		if (get_line(&line) == 1)
 		{
-			lexer_parser(line, &lst);
-			//RECUP `<<`
-			//PUIS EXEC:
-			ptr = lst;
-			get_heredocs(&ptr);
-			while (ptr)
-			{
-				exec_ast(&sh, ptr->content);
-				ptr = ptr->next;
-			}
-			clear_main(&line, &lst);
+			lexer_parser(line, &lst_commands);
+			loop_through_commands(&sh, lst_commands);
+			clear_main(&line, &lst_commands);
 		}
 		else //CTRL D
 		{
-			clear_main(&line, &lst);
+			clear_main(&line, &lst_commands);
 			ft_putendl("exit");
 			clear_shell(&sh);
 			exit(0);

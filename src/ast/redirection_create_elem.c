@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/02 14:43:07 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/02 17:28:22 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,21 @@ static int
 	{
 		if ((*new)->type & DOUBLE_LEFT_REDIRECT && str[i] == '-' && (i++))
 			(*new)->type |= CLOSE_REDIRECT;
-		else if (!((*new)->type & DOUBLE_LEFT_REDIRECT) && \
-			(str[++i] == '-' && (tl_iswhitespace(str[i + 1]) || !str[i + 1])))
+		else if (!((*new)->type & DOUBLE_LEFT_REDIRECT))
 		{
-			(*new)->type |= CLOSE_REDIRECT;
-			++i;
+			if (str[++i] == '-' && (tl_iswhitespace(str[i + 1]) || !str[i + 1]))
+			{
+				(*new)->type |= CLOSE_REDIRECT;
+				++i;
+			}
+			else if (isworddigit(str + i))
+				(*new)->to_fd = ft_atoi(str + i);
 		}
-		else if (isworddigit(str + i))
-			(*new)->to_fd = ft_atoi(str + i);
 	}
-	if ((*new)->to_fd == -1 || !((*new)->type & DOUBLE_LEFT_REDIRECT))
+	if ((*new)->to_fd == -1 || ((*new)->type & DOUBLE_LEFT_REDIRECT))
 	{
-		(*new)->dest = ft_strtrim(str + i);
+		if ((*new)->type & DOUBLE_LEFT_REDIRECT || (*new)->to_fd == -1)
+			(*new)->dest = ft_strtrim(str + i);
 		if (!((*new)->type & DOUBLE_LEFT_REDIRECT))
 			(*new)->type |= FILE_REDIRECT;
 	}
