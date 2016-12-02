@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 14:18:30 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/01 14:22:50 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 21:00:52 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ t_list	*tl_lstnew(void *content, size_t size)
 		return (NULL);
 	new->content_size = size;
 	new->content = content;
+	new->next = NULL;
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 17:38:44 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/21 15:37:49 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/01 21:31:31 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,42 @@ static	void	double_right_redirect(t_redirections *cursor)
 	}
 }
 
-void	close_and_redirects(t_redirections **list)
+static	void	redirect_heredocs(t_heredocs *cursor, t_redirections *redir)
+{
+	t_list		*words;
+	int			fd;
+	int			filed;
+
+	fd = (redir->from_fd == -1) ? 0 : redir->from_fd;
+	filed = open("/tmp/heredoc42sh", O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR);
+	words = cursor->words;
+	while (words)
+	{
+		ft_putendl_fd(words->content, filed);
+		words = words->next;
+	}
+	close(filed);
+	filed = open("/tmp/heredoc42sh", O_RDONLY, S_IRUSR | S_IWUSR);
+	dup2(filed, fd);
+	close(filed);
+}
+
+void	close_and_redirects(t_cmdwr *cmd, t_redirections **list)
 {
 	t_redirections	*cursor;
+	t_heredocs		*cursaur;
 
 	cursor = *list;
+	cursaur = cmd->heredocs;
 	while (cursor)
 	{
-		if (cursor->type & SIMPLE_LEFT_REDIRECT)
+		if (cursor->type & DOUBLE_LEFT_REDIRECT)
+		{
+			redirect_heredocs(cursaur, cursor);
+			if (cursaur)
+				cursaur = cursaur->next;
+		}
+		else if (cursor->type & SIMPLE_LEFT_REDIRECT)
 			left_redirect(cursor);
 		else if (cursor->type & SIMPLE_RIGHT_REDIRECT)
 			right_redirect(cursor);

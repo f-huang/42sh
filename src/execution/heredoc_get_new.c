@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tl_strndup.c                                       :+:      :+:    :+:   */
+/*   heredoc_get_new.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 17:48:58 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/01 18:44:30 by yfuks            ###   ########.fr       */
+/*   Created: 2016/12/01 16:59:33 by yfuks             #+#    #+#             */
+/*   Updated: 2016/12/01 17:01:03 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "execution.h"
 
-char	*tl_strndup(const char *s1, size_t n)
+t_heredocs	*get_new_heredocs(t_list *words)
 {
-	char *s2;
+	t_heredocs	*doc;
 
-	if (!(s2 = ft_memalloc(n + 1)))
-		return (NULL);
-	return (ft_strncat(s2, s1, n));
+	if (!(doc = (t_heredocs *)malloc(sizeof(t_heredocs))))
+		return (0);
+	doc->words = words;
+	doc->next = 0;
+	return (doc);
 }
