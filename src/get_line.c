@@ -19,6 +19,7 @@ static int	save_line(char **line, char **buf, size_t size)
 	else if (!(*line = tl_strndup(*buf, size)))
 		return (ERROR);
 	ft_strclr(*buf);
+	ft_strdel(buf);
 	return (GOOD);
 }
 
@@ -58,6 +59,8 @@ int			get_line(char **line)
 		buf[ret] = '\0';
 		if (push_line(&tmp, line, &buf, ret))
 			return (GOOD);
+		else
+			buf = ft_strnew(BUFF_SIZE);
 	}
 	return (*line && ft_strlen(*line) > 0 ? GOOD : 0);
 }
