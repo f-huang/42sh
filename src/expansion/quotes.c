@@ -1,0 +1,74 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quotes.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/02 13:27:22 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/02 15:34:28 by fhuang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static char		*shift_quotes(char *cmd, int *i)
+{
+	int		ret;
+	char	c;
+
+	ret = 0;
+	c = cmd[*i];
+	while (cmd[++(*i)])
+	{
+		if (ret == 0 && cmd[*i] == c)
+			ret = *i -1;
+		cmd[*i - 1] = cmd[*i];
+	}
+	ft_strclr(cmd + *i - 2);
+	*i = ret;
+	return (cmd);
+}
+
+static char		*shift_backslash(char *cmd, int i)
+{
+	while (cmd[++i])
+	{
+		cmd[i - 1] = cmd[i];
+	}
+	ft_strclr(cmd + i - 1);
+	return (cmd);
+}
+
+static char		*remove_backslash(char *cmd)
+{
+	int			i;
+	_Bool		backslash;
+
+	i = 0;
+	while (cmd[i])
+	{
+		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
+		if (cmd[i] == '\\' && backslash == 0)
+			cmd = shift_backslash(cmd, i);
+		i++;
+	}
+	return (cmd);
+}
+
+char			*remove_quotes_and_backslash(char *cmd)
+{
+	int			i;
+	_Bool		backslash;
+
+	i = 0;
+	while (cmd[i])
+	{
+		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
+		if ((cmd[i] == '\"' || cmd[i] == '\'') && backslash == 0)
+			cmd = shift_quotes(cmd, &i);
+		else
+			i++;
+	}
+	return (remove_backslash(cmd));
+}

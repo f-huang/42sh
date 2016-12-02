@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:23:46 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/01 21:30:46 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/02 15:24:37 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include "ft_42sh.h"
 # include "execution.h"
 
-int						substitute(t_shell *sh, t_cmdwr *cmd);
+char					*substitute(t_shell *sh, char *cmd);
 char					*dollar(t_shell *sh, char *acmd, char *ptr);
 int						tilde(t_shell *sh, char **acmd);
+char					*remove_quotes_and_backslash(char *cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:34:49 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/01 21:49:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/02 13:22:10 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char		*dollar(t_shell *sh, char *acmd, char *ptr)
 		p += ft_strlen(key) + 1;
 		save = ft_strcat(save, p);
 		ft_strdel(&key);
-		ft_putendlcol(save, RED);
 	}
+	ft_strdel(&acmd);
 	return (save);
 }
