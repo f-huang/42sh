@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/02 13:03:26 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/02 16:02:35 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static int		isworddigit(char *str)
 	int		i;
 
 	i = 0;
+	ft_putendlcol(str, MAGENTA);
 	while (str[i] && tl_iswhitespace(str[i]))
 		i++;
 	while (str[i] && !tl_iswhitespace(str[i]))
@@ -87,21 +88,29 @@ static int
 	{
 		if ((*new)->type & DOUBLE_LEFT_REDIRECT && str[i] == '-' && (i++))
 			(*new)->type |= CLOSE_REDIRECT;
-		else if (!((*new)->type & DOUBLE_LEFT_REDIRECT) && \
-			(str[++i] == '-' && (tl_iswhitespace(str[i + 1]) || !str[i + 1])))
+		else if (!((*new)->type & DOUBLE_LEFT_REDIRECT))
 		{
-			(*new)->type |= CLOSE_REDIRECT;
-			++i;
+			ft_putendlcol(str + i, GREEN);
+			if (str[++i] == '-' && (tl_iswhitespace(str[i + 1]) || !str[i + 1]))
+			{
+				(*new)->type |= CLOSE_REDIRECT;
+				++i;
+			}
+			else if (isworddigit(str + i))
+				(*new)->to_fd = ft_atoi(str + i);
 		}
-		else if (isworddigit(str + i))
-			(*new)->to_fd = ft_atoi(str + i);
 	}
-	if ((*new)->to_fd == -1 || !((*new)->type & DOUBLE_LEFT_REDIRECT))
+	if ((*new)->to_fd == -1 || ((*new)->type & DOUBLE_LEFT_REDIRECT))
 	{
-		(*new)->dest = ft_strtrim(str + i);
+		if ((*new)->type & DOUBLE_LEFT_REDIRECT || (*new)->to_fd == -1)
+			(*new)->dest = ft_strtrim(str + i);
 		if (!((*new)->type & DOUBLE_LEFT_REDIRECT))
 			(*new)->type |= FILE_REDIRECT;
 	}
+	if ((*new)->type & CLOSE_REDIRECT)
+		ft_putendlcol("Close", YELLOW);
+	if ((*new)->dest)
+		ft_putendlcol((*new)->dest, RED);
 	return (redirection_push_back(redir, *new));
 }
 
