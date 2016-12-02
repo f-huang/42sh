@@ -85,6 +85,7 @@ typedef struct			s_bitfield
 {
 	unsigned int		squote : 1;
 	unsigned int		dquote : 1;
+	unsigned int		bslash : 1;
 }						t_bitfield;
 
 /*
@@ -119,9 +120,11 @@ void					clear_shell(t_shell *sh);
 int						prompt(t_shell *sh);
 int						get_line(char **line);
 void					sig_handler(int signo);
-int						exec_command(t_shell *sh, char **command);
+void					loop_through_commands(t_shell *sh, t_list *lst_commands);
 
 int						pipe_command(void);
+int						exec_command(t_shell *sh, char **command);
+
 int						lexer_parser(char *command_line, t_list **lst);
 
 #endif
