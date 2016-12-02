@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 17:38:44 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/02 18:01:14 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/02 18:03:08 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static	void	right_redirect(t_redirections *cursor)
 	}
 	else // >&2 + 1>&2
 	{
-		ft_putendl("coucou");
 		if (fcntl(cursor->to_fd, F_GETFD) == -1)
 			exit(exec_print_command_error(BADFILEDESCRIPTOR, ft_itoa(cursor->to_fd)));
 		cursor->from_fd = (cursor->from_fd == -1) ? 1 : cursor->from_fd;
