@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/02 15:26:11 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/02 15:45:25 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int		check_n_save(t_list **lst, char *command, size_t size,\
 	if (unmatched(open) || !(add_elem(lst, command, size)))
 	{
 		if (*lst)
-			ft_lstdel(lst, tl_del);
+			tl_lstdelast(lst);
 		return (ERROR);
 	}
 	return (GOOD);
@@ -78,8 +78,8 @@ static int		check_inhibitors(t_list **lst, char *c, size_t *i, t_bitfield *open)
 		if (c[*i + 1] == 0)
 		{
 			open->bslash |= 1;
-			if (lst)
-				ft_lstdel(lst, tl_del);
+			if (*lst)
+				tl_lstdelast(lst);
 			unmatched(open);
 			return (ERROR);
 		}
@@ -92,8 +92,8 @@ static int		check_inhibitors(t_list **lst, char *c, size_t *i, t_bitfield *open)
 		c[*i] == '\'' ? (open->squote ^= 1) : (open->dquote ^= 1);
 		if (c[*i] == 0)
 		{
-			if (lst)
-				ft_lstdel(lst, tl_del);
+			if (*lst)
+				tl_lstdelast(lst);
 			unmatched(open);
 			return (ERROR);
 		}

@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 10:39:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/02 14:48:59 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/02 15:42:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static char		*dollar_and_tilde(t_shell *sh, char *cmd)
 
 char		*substitute(t_shell *sh, char *cmd)
 {
-	cmd = dollar_and_tilde(sh, cmd);
+	if (ft_strchr(cmd, '$') || ft_strchr(cmd, '~'))
+		cmd = dollar_and_tilde(sh, cmd);
 	if (cmd)
 		cmd = remove_quotes_and_backslash(cmd);
 	return (cmd);
