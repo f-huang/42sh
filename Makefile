@@ -4,7 +4,7 @@ NAME	:=	42sh
 
 # ===== Standard =====
 OS		:=	$(shell uname)
-CC		:=	clang
+CC		:=	clang -pipe
 CFLAGS	:=	-Wall -Wextra -Werror -g3
 SRCDIR	:=	src/
 OBJDIR	:=	obj/
@@ -22,7 +22,7 @@ LIB		:=	-ltermcap
 endif
 LIBPATH	:=	-L./$(LIBDIR) -lft
 CACHEF	:=	.cache_exists
-HISTORY	:=	.42sh_history
+HISTORY	:=	42sh_history
 # ====================
 
 # ====== Colors ======
@@ -94,6 +94,7 @@ $(CACHEF):
 	test -d $(OBJDIR)tools || mkdir $(OBJDIR)tools
 	test -d $(OBJDIR)execution || mkdir $(OBJDIR)execution
 	test -d $(OBJDIR)termcaps || mkdir $(OBJDIR)termcaps
+	test -d $(OBJDIR)history || mkdir $(OBJDIR)history
 	test -d $(BINDIR) || mkdir $(BINDIR)
 	test -d $(CACHEF) || touch $(CACHEF)
 
@@ -101,7 +102,7 @@ $(CACHEF):
 	printf $(RED)"Missing file : $@\n"$(EOC)
 
 libft:
-	make -C $(LIBDIR) -j
+	make -C $(LIBDIR) -j$(NUM_PROCESSORS)
 
 read: $(OBJREAD)
 	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)

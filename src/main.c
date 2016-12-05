@@ -5,6 +5,7 @@
 #include "substitution.h"
 #include <signal.h>
 #include <stdio.h>//
+#include "history.h"
 
 static void		clear_main(char **line, t_list **lst)
 {
@@ -33,6 +34,7 @@ int				main(int ac, char **av)
 	{
 		if (get_line(&line) == 1)
 		{
+			save_command_line(&sh.lst_history, line);
 			lexer_parser(line, &lst_commands);
 			loop_through_commands(&sh, lst_commands);
 			clear_main(&line, &lst_commands);

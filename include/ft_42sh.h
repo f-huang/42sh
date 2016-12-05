@@ -5,9 +5,10 @@
 **	LIBRAIRIES
 */
 
+# include <termios.h>
 # include "libft.h"
 # include "environment.h"
-# include <termios.h>
+# include "history.h"
 
 /*
 **	STANDARD LIRAIRIES STRUCTURES
@@ -79,6 +80,7 @@ typedef struct			s_shell
 	char				*bin_path;
 	t_termios			term;
 	t_winsize			*window;
+	t_history			*lst_history;
 }						t_shell;
 
 typedef struct			s_bitfield
