@@ -74,8 +74,13 @@ int		init_shell(t_shell *sh, char *av_0)
 	if (!set_bin_path(&sh->bin_path, av_0))
 		return (ERROR);
 	set_default(&sh->lst_env);
+<<<<<<< HEAD
 	init_history(&sh->lst_history, sh->lst_env);
 //	if (!(init_history(&sh->lst_history)))
+=======
+	init_history(&sh->all_history);
+//	if (!init_history(&sh->all_history))
+>>>>>>> 72c4042b0eecd6045b65c415a4cbc45cafb5c815
 //		return (ERROR);
 //	if (!(init_termios(sh->term, sh->window)))
 //		return (ERROR);

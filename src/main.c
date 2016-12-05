@@ -32,12 +32,27 @@ int				main(int ac, char **av)
 	line = NULL;
 	while (prompt(&sh))
 	{
-		if (get_line(&line) == 1)
+		if (get_line(0, &line) == 1)
 		{
+<<<<<<< HEAD
 			save_command_line(&sh.lst_history, line);
 			lexer_parser(line, &lst_commands);
 			loop_through_commands(&sh, lst_commands);
 			clear_main(&line, &lst_commands);
+=======
+			if (first_lexer(line, &lst))
+			{
+				ft_lstadd(&sh.all_history, ft_lstnew(line, ft_strlen(line) + 1));
+				while (lst)
+				{
+					exec_ast(&sh, lst->content);
+					lst = lst->next;
+				}
+			}
+			ft_strclr(line);
+			ft_strdel(&line);
+			ft_lstdel(&lst, tl_del);
+>>>>>>> 72c4042b0eecd6045b65c415a4cbc45cafb5c815
 		}
 		else //CTRL D
 		{

@@ -35,13 +35,13 @@ static int	push_line(char **tmp, char **line, char **buf, size_t size)
 	return (GOOD);
 }
 
-int			get_line(char **line)
+int			get_line(int fd, char **line)
 {
 	int			ret;
 	static char	*tmp;
 	char		*buf;
 
-	if (BUFF_SIZE <= 0 || !line)
+	if ((fd < 0 && 255 < fd) || BUFF_SIZE <= 0 || !line)
 		return (ERROR);
 	while (tmp)
 	{
@@ -50,9 +50,9 @@ int			get_line(char **line)
 		if (push_line(&tmp, line, &buf, ft_strlen(buf)))
 			return (GOOD);
 	}
-	if (!(buf = ft_strnew(BUFF_SIZE)))
+	if (!(buf = ft_strnew(BUFF_SIZE + 1)))
 		return (ERROR);
-	while ((ret = read(0, buf, BUFF_SIZE)))
+	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
 		if (ret == -1)
 			return (ERROR);
