@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/01 21:52:54 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/05 18:17:11 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,6 @@ int			exec_pipes(t_shell *sh, t_ast *ast)
 
 int			exec_ast(t_shell *sh, t_ast *ast)
 {
-	if (ast->cmd1)
-		substitute(sh, ast->cmd1);
-	if (ast->cmd2)
-		substitute(sh, ast->cmd2);
 	if (ast->operator == AND)
 		return (exec_and(sh, ast));
 	if (ast->operator == OR)

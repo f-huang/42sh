@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 13:27:22 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/02 17:23:05 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/05 18:26:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char		*shift_quotes(char *cmd, int *i)
 			ret = *i -1;
 		cmd[*i - 1] = cmd[*i];
 	}
-	ft_strclr(cmd + *i - 2);
+	ft_strclr(cmd + *i - 1);
 	*i = ret;
 	return (cmd);
 }

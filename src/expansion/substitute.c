@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 10:39:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/02 15:42:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/05 18:31:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char		*dollar_and_tilde(t_shell *sh, char *cmd)
 		}
 		else if (cmd[i] == '~' && backslash == 0 && single_quote == 0)
 			tilde(sh, &cmd);
-		else if (cmd[i] == '\'')
+		else if (single_quote == 1)
 			i += tl_jump_to_other_quote(cmd + i);
 		i++;
 	}
