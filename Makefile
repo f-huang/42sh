@@ -22,7 +22,7 @@ LIB		:=	-ltermcap
 endif
 LIBPATH	:=	-L./$(LIBDIR) -lft
 CACHEF	:=	.cache_exists
-HISTORY	:=	42sh_history
+HISTORY	:=	~/.42sh_history
 # ====================
 
 # ====== Colors ======
