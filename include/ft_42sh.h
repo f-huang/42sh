@@ -80,11 +80,7 @@ typedef struct			s_shell
 	char				*bin_path;
 	t_termios			term;
 	t_winsize			*window;
-<<<<<<< HEAD
 	t_history			*lst_history;
-=======
-	t_list				*all_history;
->>>>>>> 72c4042b0eecd6045b65c415a4cbc45cafb5c815
 }						t_shell;
 
 typedef struct			s_bitfield
@@ -125,7 +121,6 @@ typedef struct			s_bitfield
 */
 
 int						init_shell(t_shell *sh, char *av_0);
-int						init_history(t_list **all_history);
 void					clear_shell(t_shell *sh);
 
 int						prompt(t_shell *sh);

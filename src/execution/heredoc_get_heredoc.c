@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 17:04:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/05 13:34:00 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/05 19:05:47 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static	t_list	*get_words(t_shell *sh, t_redirections *r)
 	line = 0;
 	cursor = 0;
 	words = 0;
-	while (heredoc_prompt() && get_line(&line) == 1 && ft_strcmp(line, r->dest))
+	while (heredoc_prompt() && get_line(0, &line) == 1 && ft_strcmp(line, r->dest))
 	{
 		if (cursor == 0)
 		{
