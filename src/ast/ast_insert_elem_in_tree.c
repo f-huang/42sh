@@ -6,12 +6,15 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 11:27:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/25 17:45:13 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/02 18:18:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 #include "libft.h"
+
+#define IS_AND(x) ((x)->operator == AND)
+#define IS_OR(x) ((x)->operator == OR)
 
 static void	new_is_command(t_ast **root, t_ast *new)
 {
@@ -23,7 +26,8 @@ static void	new_is_command(t_ast **root, t_ast *new)
 
 static void	new_is_operator(t_ast **root, t_ast *new)
 {
-	if ((*root)->operator == COMMAND || new->operator <= (*root)->operator)
+	if ((*root)->operator == COMMAND || new->operator <= (*root)->operator ||\
+		(IS_AND(new) && IS_OR((*root))) || (IS_OR(new) && IS_AND((*root))))
 	{
 		new->left = *root;
 		*root = new;

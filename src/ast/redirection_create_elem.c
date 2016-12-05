@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/02 17:28:22 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/02 18:18:48 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,12 @@ static int
 		if (!((*new)->type & DOUBLE_LEFT_REDIRECT))
 			(*new)->type |= FILE_REDIRECT;
 	}
+/*	ft_putendl("___________________");
+	if ((*new)->dest)
+		printf("dest : %s\n", (*new)->dest);
+	printf("from fd : %i\n", (*new)->from_fd);
+	printf("to fd : %i\n", (*new)->to_fd);
+	ft_putendl("___________________");*/
 	return (redirection_push_back(redir, *new));
 }
 
