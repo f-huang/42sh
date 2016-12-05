@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:09:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/01 17:32:31 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/05 13:29:06 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,6 @@ void			close_and_redirects(t_cmdwr *cmd, t_redirections **cursor);
 
 t_heredocs		*get_new_heredocs(t_list *words);
 int				heredoc_prompt(void);
-void			get_heredoc(t_cmdwr *cmd, t_redirections *r);
+void			get_heredoc(t_shell *sh, t_cmdwr *cmd, t_redirections *r);
 void			free_heredocs(t_cmdwr *cmd);
 #endif

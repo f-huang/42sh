@@ -6,12 +6,13 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 17:04:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/01 21:58:22 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/05 13:34:00 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "tools.h"
+#include "expansion.h"
 
 static	char	*remove_tabs(char *s)
 {
@@ -25,7 +26,7 @@ static	char	*remove_tabs(char *s)
 	return (trim);
 }
 
-static	char	*check_line(t_redirections *r, char *line)
+static	char	*check_line(t_shell *sh, t_redirections *r, char *line)
 {
 	char	*trim;
 
@@ -33,10 +34,11 @@ static	char	*check_line(t_redirections *r, char *line)
 		trim = remove_tabs(line);
 	else
 		trim = ft_strdup(line);
+	trim = substitute(sh, trim);
 	return (trim);
 }
 
-static	t_list	*get_words(t_redirections *r)
+static	t_list	*get_words(t_shell *sh, t_redirections *r)
 {
 	char		*line;
 	char		*trim;
@@ -50,13 +52,13 @@ static	t_list	*get_words(t_redirections *r)
 	{
 		if (cursor == 0)
 		{
-			trim = check_line(r, line);
+			trim = check_line(sh, r, line);
 			cursor = tl_lstnew(trim, ft_strlen(line));
 			words = cursor;
 		}
 		else
 		{
-			trim = check_line(r, line);
+			trim = check_line(sh, r, line);
 			cursor->next = tl_lstnew(trim, ft_strlen(line));
 			cursor = cursor->next;
 		}
@@ -72,13 +74,13 @@ static	t_list	*get_words(t_redirections *r)
 **	into the cmd->heredocs
 */
 
-void		get_heredoc(t_cmdwr *cmd, t_redirections *r)
+void		get_heredoc(t_shell *sh, t_cmdwr *cmd, t_redirections *r)
 {
 	t_list		*heredocs_words;
 	t_heredocs	*heredocs_list;
 
 	heredocs_list = cmd->heredocs;
-	heredocs_words = get_words(r);
+	heredocs_words = get_words(sh, r);
 	if (heredocs_words)
 	{
 		while (heredocs_list && heredocs_list->next)

@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 23:35:38 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/01 22:12:57 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/05 13:30:37 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "execution.h"
 #include "ast.h"
 
-static	int		retrieve_heredocs(t_cmdwr *cmd)
+static	int		retrieve_heredocs(t_shell *sh, t_cmdwr *cmd)
 {
 	t_redirections		*cursor;
 
@@ -22,31 +22,31 @@ static	int		retrieve_heredocs(t_cmdwr *cmd)
 	while (cursor)
 	{
 		if (cursor->type & DOUBLE_LEFT_REDIRECT)
-			get_heredoc(cmd, cursor);
+			get_heredoc(sh, cmd, cursor);
 		cursor = cursor->next;
 	}
 	return (GOOD);
 }
 
-static	int		get_heredocs_from_ast(t_ast *ast)
+static	int		get_heredocs_from_ast(t_shell *sh, t_ast *ast)
 {
 	if (ast->operator == COMMAND || ast->operator == REDIRECTION)
-		return (retrieve_heredocs(ast->cmd1));
+		return (retrieve_heredocs(sh, ast->cmd1));
 	if (ast->left)
-		get_heredocs_from_ast(ast->left);
+		get_heredocs_from_ast(sh, ast->left);
 	if (ast->right)
-		get_heredocs_from_ast(ast->right);
+		get_heredocs_from_ast(sh, ast->right);
 	return (GOOD);
 }
 
-int		get_heredocs(t_list **list)
+int		get_heredocs(t_shell *sh, t_list **list)
 {
 	t_list	*cursor;
 
 	cursor = *list;
 	while (cursor)
 	{
-		get_heredocs_from_ast(cursor->content);
+		get_heredocs_from_ast(sh, cursor->content);
 		cursor = cursor->next;
 	}
 	return (GOOD);
