@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/06 16:34:26 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/06 17:13:37 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,17 +94,17 @@ int			exec_pipes(t_shell *sh, t_ast *ast)
 			close(pipefd[1]);
 			if (ast->cmd2)
 				exit(exec_redirection(sh, ast->cmd2));
-			else
-				exit(exec_ast(sh, ast->left));
+			else if (ast->cmd1)
+				exit(exec_redirection(sh, ast->cmd1));
 		}
 		else if (child == 0)
 		{
 			dup2(pipefd[1], 1);
 			close(pipefd[0]);
-			if (ast->cmd1)
+			if (ast->left)
+				exit(exec_ast(sh, ast->left));
+			else if (ast->cmd1)
 				exit(exec_redirection(sh, ast->cmd1));
-			else
-				exit(exec_ast(sh, ast->right));
 		}
 	}
 	return (0);
