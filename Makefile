@@ -70,7 +70,7 @@ all: $(NAME)
 
 $(NAME): libft env echo read $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
-	print $(BLUE)" $@ compiled!\n"$(EOC)
+	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
