@@ -4,7 +4,7 @@ NAME	:=	42sh
 
 # ===== Standard =====
 OS		:=	$(shell uname)
-CC		:=	clang
+CC		:=	clang -pipe
 CFLAGS	:=	-Wall -Wextra -Werror -g3
 SRCDIR	:=	src/
 OBJDIR	:=	obj/
@@ -22,7 +22,7 @@ LIB		:=	-ltermcap
 endif
 LIBPATH	:=	-L./$(LIBDIR) -lft
 CACHEF	:=	.cache_exists
-HISTORY	:=	.42sh_history
+HISTORY	:=	~/.42sh_history
 # ====================
 
 # ====== Colors ======
@@ -70,7 +70,7 @@ all: $(NAME)
 
 $(NAME): libft env echo read $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
-	printf	$(BLUE)" $@ compiled!\n"$(EOC)
+	print $(BLUE)" $@ compiled!\n"$(EOC)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
@@ -94,6 +94,7 @@ $(CACHEF):
 	test -d $(OBJDIR)tools || mkdir $(OBJDIR)tools
 	test -d $(OBJDIR)execution || mkdir $(OBJDIR)execution
 	test -d $(OBJDIR)termcaps || mkdir $(OBJDIR)termcaps
+	test -d $(OBJDIR)history || mkdir $(OBJDIR)history
 	test -d $(BINDIR) || mkdir $(BINDIR)
 	test -d $(CACHEF) || touch $(CACHEF)
 
@@ -101,19 +102,19 @@ $(CACHEF):
 	printf $(RED)"Missing file : $@\n"$(EOC)
 
 libft:
-	make -C $(LIBDIR) -j
+	make -C $(LIBDIR)
 
 read: $(OBJREAD)
 	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)
-	printf	$(BLUE)" $@ compiled!\n"$(EOC)
+	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 echo: $(OBJECHO)
 	$(CC) $(CFLAGS) -o $(BINECHO) $(OBJECHO) $(LIBPATH) $(LIB) $(INC)
-	printf	$(BLUE)" $@ compiled!\n"$(EOC)
+	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 env: $(OBJENV)
 	$(CC) $(CFLAGS) -o $(BINENV) $(OBJENV) $(LIBPATH) $(LIB) $(INC)
-	printf	$(BLUE)" $@ compiled!\n"$(EOC)
+	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 norme:
 	printf $(RED)
