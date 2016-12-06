@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/05 18:17:11 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/06 15:36:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,16 @@ int			exec_pipes(t_shell *sh, t_ast *ast)
 			waitpid(0, &tmp, WUNTRACED | WCONTINUED);
 			dup2(pipefd[0], 0);
 			close(pipefd[1]);
-			if (ast->right)
-				exit(exec_ast(sh, ast->right));
-			else if (ast->cmd2)
+			if (ast->cmd2)
 				exit(exec_redirection(sh, ast->cmd2));
+			else
+				exit(exec_pipes(sh, ast->left));
 		}
 		else if (child == 0)
 		{
 			dup2(pipefd[1], 1);
 			close(pipefd[0]);
-			if (ast->left)
-				exit(exec_ast(sh, ast->left));
-			else if (ast->cmd1)
+			if (ast->cmd1)
 				exit(exec_redirection(sh, ast->cmd1));
 		}
 	}
@@ -119,6 +117,6 @@ int			exec_ast(t_shell *sh, t_ast *ast)
 	if (ast->operator == COMMAND || ast->operator == REDIRECTION)
 		return (exec_redirection(sh, ast->cmd1));
 	if (ast->operator == PIPE)
-		return (exec_pipes(sh ,ast));
+		return (exec_pipes(sh, ast));
 	return (0);
 }
