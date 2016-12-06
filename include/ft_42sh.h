@@ -1,13 +1,14 @@
-#ifndef FT_42SH_H
+ #ifndef FT_42SH_H
 # define FT_42SH_H
 
 /*
 **	LIBRAIRIES
 */
 
+# include <termios.h>
 # include "libft.h"
 # include "environment.h"
-# include <termios.h>
+# include "history.h"
 
 /*
 **	STANDARD LIRAIRIES STRUCTURES
@@ -79,6 +80,7 @@ typedef struct			s_shell
 	char				*bin_path;
 	t_termios			term;
 	t_winsize			*window;
+	t_history			*lst_history;
 }						t_shell;
 
 typedef struct			s_bitfield
@@ -110,6 +112,10 @@ typedef struct			s_bitfield
 # define NBBUILTIN 4
 #endif
 
+#ifndef HISTORY
+# define HISTORY ".42sh_history" //need all path "~/.42sh_history"
+#endif
+
 /*
 **	SHELL BASIC FUNCTIONS
 */
@@ -118,7 +124,7 @@ int						init_shell(t_shell *sh, char *av_0);
 void					clear_shell(t_shell *sh);
 
 int						prompt(t_shell *sh);
-int						get_line(char **line);
+int						get_line(int fd, char **line);
 void					sig_handler(int signo);
 void					loop_through_commands(t_shell *sh, t_list *lst_commands);
 
@@ -126,5 +132,6 @@ int						pipe_command(void);
 int						get_heredocs(t_shell *sh, t_list **lst);
 int						exec_command(t_shell *sh, char **command);
 int						lexer_parser(char *command_line, t_list **lst);
+
 
 #endif

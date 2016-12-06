@@ -6,18 +6,18 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 09:54:32 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 10:27:43 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/11/30 14:29:04 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_42sh.h"
+#include "libft.h"
 
 /*
-**		This function reproduces the behavior of the built-in exit().
-*/
+ **		This function reproduces the behavior of the built-in exit().
+ */
 
-static int	is_str_digit(char *str)
+static int		is_str_digit(char *str)
 {
 	int		i;
 
@@ -31,7 +31,7 @@ static int	is_str_digit(char *str)
 	return (GOOD);
 }
 
-int     builtin_exit(t_shell *sh, int ac, char **av)
+int				builtin_exit(t_shell *sh, int ac, char **av)
 {
 	if (ac > 2)
 	{
