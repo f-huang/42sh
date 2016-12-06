@@ -33,7 +33,8 @@ static int		save_history(t_history *lst_history, t_variable *lst_env)
 		ft_putendl_fd(lst_history->command_line, fd);
 		lst_history = lst_history->next;
 	}
-	close(fd);
+	if (close(fd) == -1)
+		return (ERROR);
 	return (GOOD);
 }
 
