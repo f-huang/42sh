@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 17:58:09 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/28 18:34:50 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/06 14:20:18 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static int	is_operator(char *str, int i, _Bool word)
 		{
 			i += ft_strlen(redir[j]);
 			if (word == 0 || tl_isstrempty(str + i) ||\
-				(str[i] == '&' && !str[i + 1]))
+				(str[i] == '&' && !str[i + 1]) ||\
+				(j == 1 && str[i] == '-' && !str[i + 1]))
 					return (parse_error(redir[j], 0));
 			else
 				return (parse_str(str + i + 1));

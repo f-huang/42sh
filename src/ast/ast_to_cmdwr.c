@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:32:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/01 21:07:49 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/06 13:01:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,74 @@
 #include "libft.h"
 #include "ft_42sh.h"
 
-static void		link_cmdwr(t_ast **ptr, t_cmdwr **cmd)
+#define IS_CMD(x) ((x) && ((x)->operator) == COMMAND)
+
+static void		ast_remove_link(t_ast **root, t_ast **link)
 {
-	if ((*ptr)->cmd1 == NULL)
-		(*ptr)->cmd1 = *cmd;
+	if (!*root)
+		return ;
+	ast_remove_link(&(*root)->left, link);
+	ast_remove_link(&(*root)->right, link);
+	if (*root == *link)
+	{
+		(*link)->operator = 0;
+		ft_strdel(&(*link)->str);
+		if ((*link)->cmd1)
+			ast_free_cmdwr(&(*link)->cmd1);
+		if ((*link)->cmd2)
+			ast_free_cmdwr(&(*link)->cmd2);
+		free(*link);
+		*link = NULL;
+		*root = NULL;
+	}
+}
+
+static t_cmdwr	*create_cmdwr(t_ast *ptr)
+{
+	t_cmdwr	*cmd;
+
+	if (!(cmd = (t_cmdwr*)ft_memalloc(sizeof(t_cmdwr))))
+		return (ERROR);
+	cmd->command = NULL;
+	cmd->redirs = NULL;
+	if (!cmdwr_fill_struct(&cmd, ptr->str))
+	{
+		ast_free_cmdwr(&cmd);
+		return (NULL);
+	}
+	return (cmd);
+}
+
+static void		get_cmdwr(t_ast **root, t_ast *ptr)
+{
+	t_cmdwr	*cmd;
+
+	if (!(cmd = create_cmdwr(ptr)))
+		return ;
+	if ((*root)->cmd1 == NULL)
+		(*root)->cmd1 = cmd;
 	else
-		(*ptr)->cmd2 = *cmd;
+		(*root)->cmd2 = cmd;
 }
 
 int				ast_to_cmdwr(t_ast **root)
 {
-	t_cmdwr	*cmd;
 	t_ast	*ptr;
 
-	ptr = *root;
-	if (!ptr)
+	if (!*root)
 		return (GOOD);
-	if ((ptr)->operator == COMMAND)
+	ptr = NULL;
+	if (IS_CMD(*root))
+		ptr = *root;
+	while (ptr != NULL || (IS_CMD((*root)->left) && (ptr = (*root)->left))\
+		|| (IS_CMD((*root)->right) && (ptr = (*root)->right)))
 	{
-		cmd = NULL;
-		if (!(cmd = (t_cmdwr*)ft_memalloc(sizeof(t_cmdwr))))
-			return (ERROR);
-		cmd->command = NULL;
-		cmd->redirs = NULL;
-		if (!cmdwr_fill_struct(&cmd, (ptr)->str))
-		{
-			ast_free_cmdwr(&cmd);
-			return (ERROR);
-		}
-		if (cmd->redirs != NULL)
-			(ptr)->operator = REDIRECTION;
-		link_cmdwr(root, &cmd);
-		if (ptr->right || ptr->left)
-			ast_remove_link(root, (ptr));
+		get_cmdwr(root, ptr);
+		if (!IS_CMD(*root))
+			ast_remove_link(root, &ptr);
+		ptr = NULL;
 	}
-	ast_to_cmdwr(&(ptr)->left);
-	ast_to_cmdwr(&(ptr)->right);
+	ast_to_cmdwr(&(*root)->left);
+	ast_to_cmdwr(&(*root)->right);
 	return (GOOD);
 }

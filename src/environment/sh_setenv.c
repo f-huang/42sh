@@ -44,7 +44,7 @@ static int	add_value(t_variable **lst_env, char *key, char *value)
 
 int			sh_setenv(t_variable **lst_env, char *key, char *value)
 {
-	t_variable	*elem;
+	t_variable		*elem;
 	char			*tmp;
 	int				ret;
 

@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:56:25 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/10 15:16:41 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/06 16:37:45 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int			builtin_unsetenv(t_shell *sh, int ac, char **av)
 	if (ac == 1)
 	{
 		ft_putendl_fd("unsetenv: Too few arguments.", 2);
-		return (ERROR);
+		return (1);
 	}
 	while (ac-- >= 1)
 		sh_unsetenv(&sh->lst_env, av[ac]);
-	return (GOOD);
+	return (0);
 }
