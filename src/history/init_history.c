@@ -33,6 +33,7 @@ int				init_history(t_history **lst_history, t_variable *lst_env)
 	line = NULL;
 	while (get_next_line(fd, &line))
 		save_command_line(lst_history, line);
-	close(fd);
+	if (close(fd) == -1)
+		return (ERROR);
 	return (GOOD);
 }
