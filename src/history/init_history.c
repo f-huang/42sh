@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 17:02:09 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/05 18:48:47 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/12/06 18:17:22 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int				init_history(t_history **lst_history, t_variable *lst_env)
 	if (fd == -1)
 		return (GOOD);
 	line = NULL;
-	while (get_next_line(fd, &line))
+	while (tl_get_next_line(fd, &line))
 		save_command_line(lst_history, line);
 	if (close(fd) == -1)
 		return (ERROR);
