@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/28 18:35:07 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/06 16:36:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	cd_error(int index, char *path)
 	if (index > 2 && index < 6 && path)
 		ft_putstr_fd(path, 2);
 	ft_putstr_fd(error_msg[index], 2);
-	return (ERROR);
+	return (1);
 }
 
 
@@ -72,7 +72,7 @@ static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 	struct stat	buf;
 
 	if (!path)
-		return (ERROR);
+		return (1);
 	if (access(path, F_OK) == -1)
 		return (cd_error(3, path));
 	stat(path, &buf);
@@ -81,9 +81,9 @@ static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 	if (access(path, X_OK) == -1)
 		return (cd_error(5, path));
 	if (chdir(path) == -1)
-		return (ERROR);
+		return (1);
 	set_pwd(lst_env, path, follow_sl);
-	return (GOOD);
+	return (0);
 }
 
 int			builtin_cd(t_shell *sh, int ac, char **av)

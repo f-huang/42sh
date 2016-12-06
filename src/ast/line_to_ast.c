@@ -6,13 +6,12 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 17:11:54 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/06 15:37:04 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/06 16:35:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ast.h"
-#include "execution.h"
 
 t_ast		*line_to_ast(char *line)
 {
