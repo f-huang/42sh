@@ -23,18 +23,20 @@ static int		save_history(t_history *lst_history, t_variable *lst_env)
 	char		*path;
 
 	if ((path = sh_getenv(lst_env, "HOME")))
-		path = tl_str3join(path, "/", HISTORY);
-	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRUSR | S_IWUSR);
-	ft_strdel(&path);
-	if (fd == -1)
-		return (GOOD);
-	while (lst_history)
 	{
-		ft_putendl_fd(lst_history->command_line, fd);
-		lst_history = lst_history->next;
+		path = tl_str3join(path, "/", HISTORY);
+		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRUSR | S_IWUSR);
+		ft_strdel(&path);
+		if (fd == -1)
+			return (GOOD);
+		while (lst_history)
+		{
+			ft_putendl_fd(lst_history->command_line, fd);
+			lst_history = lst_history->next;
+		}
+		if (close(fd) == -1)
+			return (ERROR);
 	}
-	if (close(fd) == -1)
-		return (ERROR);
 	return (GOOD);
 }
 
