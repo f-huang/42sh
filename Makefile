@@ -70,7 +70,7 @@ all: $(NAME)
 
 $(NAME): libft env echo read $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
-	printf	$(BLUE)" $@ compiled!\n"$(EOC)
+	print $(BLUE)" $@ compiled!\n"$(EOC)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
@@ -102,19 +102,19 @@ $(CACHEF):
 	printf $(RED)"Missing file : $@\n"$(EOC)
 
 libft:
-	make -C $(LIBDIR) -j$(NUM_PROCESSORS)
+	make -C $(LIBDIR)
 
 read: $(OBJREAD)
 	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)
-	printf	$(BLUE)" $@ compiled!\n"$(EOC)
+	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 echo: $(OBJECHO)
 	$(CC) $(CFLAGS) -o $(BINECHO) $(OBJECHO) $(LIBPATH) $(LIB) $(INC)
-	printf	$(BLUE)" $@ compiled!\n"$(EOC)
+	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 env: $(OBJENV)
 	$(CC) $(CFLAGS) -o $(BINENV) $(OBJENV) $(LIBPATH) $(LIB) $(INC)
-	printf	$(BLUE)" $@ compiled!\n"$(EOC)
+	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 norme:
 	printf $(RED)
