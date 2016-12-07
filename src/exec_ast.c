@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/07 15:42:03 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/07 17:44:47 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ static	int	exec_or(t_shell *sh, t_ast *ast)
 int			exec_pipes(t_shell *sh, t_ast *ast)
 {
 	pid_t	id;
-	pid_t	child;
-	int		pipefd[2];
 	int		tmp;
 
 	id = fork();
@@ -88,28 +86,7 @@ int			exec_pipes(t_shell *sh, t_ast *ast)
 		return (sh->last_return);
 	}
 	else if (id == 0)
-	{
-		pipe(pipefd);
-		child = fork();
-		if (child > 0)
-		{
-			dup2(pipefd[0], 0);
-			close(pipefd[1]);
-			if (ast->cmd2)
-				exit(exec_redirection(sh, ast->cmd2));
-			else if (ast->cmd1)
-				exit(exec_redirection(sh, ast->cmd1));
-		}
-		else if (child == 0)
-		{
-			dup2(pipefd[1], 1);
-			close(pipefd[0]);
-			if (ast->left)
-				exit(exec_ast(sh, ast->left));
-			else if (ast->cmd1)
-				exit(exec_redirection(sh, ast->cmd1));
-		}
-	}
+		exec_pipe(sh, ast);
 	return (0);
 }
 
