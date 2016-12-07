@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/02 15:45:25 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/07 18:29:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static int		check_n_save(t_list **lst, char *command, size_t size,\
 	return (GOOD);
 }
 
-static int		check_inhibitors(t_list **lst, char *c, size_t *i, t_bitfield *open)
+static int		check_inhibitors(t_list **lst, char *c, size_t *i,\
+															t_bitfield *open)
 {
 	if (c[*i] == '\\')
 	{
@@ -108,14 +109,17 @@ int				lexer_parser(char *command_line, t_list **lst)
 	size_t		index;
 	t_bitfield	open;
 
-	i = 0;
+	i = -1;
 	index = 0;
-	open.squote = 0;
-	open.dquote = 0;
-	while (command_line[i])
+	ft_bzero(&open, sizeof(t_bitfield));
+	while (command_line[++i])
 	{
 		if (!check_inhibitors(lst, command_line, &i, &open))
 			return (ERROR);
+		if (command_line[i] == '#' && (i == 0 || (i > 0 && command_line[i - 1] != '\\')) &&\
+			(i == 0 || i == 1 || (i > 1 && command_line[i - 2] != '\\')) &&\
+			(i == 0 || (i > 0 && tl_iswhitespace(command_line[i - 1]))))
+			ft_strclr(command_line + i);
 		if (command_line[i] == ';' && !open.squote && !open.dquote)
 		{
 			if (check_n_save(lst, &command_line[index], i - index, &open))
@@ -123,7 +127,6 @@ int				lexer_parser(char *command_line, t_list **lst)
 			else
 				return (ERROR);
 		}
-		++i;
 	}
 	if (i != index)
 		return (check_n_save(lst, &command_line[index], i - index, &open));

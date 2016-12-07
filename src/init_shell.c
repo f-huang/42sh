@@ -63,6 +63,7 @@ static int		set_default(t_variable **lst_env)
 	if (!sh_getenv(*lst_env, "PATH"))
 		if (!sh_setenv(lst_env, "PATH", DEFAULT_PATH))
 			return (ERROR);
+	sh_setenv(lst_env, "SHELL", "./42sh");
 	return (GOOD);
 }
 
@@ -75,6 +76,7 @@ int		init_shell(t_shell *sh, char *av_0)
 		return (ERROR);
 	set_default(&sh->lst_env);
 	init_history(&sh->lst_history, sh->lst_env);
+	import_shrc(sh);
 //	if (!(init_termios(sh->term, sh->window)))
 //		return (ERROR);
 	return (GOOD);

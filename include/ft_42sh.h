@@ -120,6 +120,7 @@ typedef struct			s_bitfield
 **	SHELL BASIC FUNCTIONS
 */
 
+int						import_shrc(t_shell *sh);
 int						init_shell(t_shell *sh, char *av_0);
 void					clear_shell(t_shell *sh);
 
