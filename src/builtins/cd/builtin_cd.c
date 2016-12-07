@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/06 16:36:17 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/07 15:14:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 		sh_setenv(lst_env, "OLDPWD", tmp);
 	tmp = NULL;
 	lstat(path, &buf);
-	if (follow_sl == 1 || S_ISLNK(buf.st_mode) != 1)
+	if (follow_sl == 0 || S_ISLNK(buf.st_mode) != 1)
 	{
 		if ((tmp = getcwd(tmp, _POSIX_PATH_MAX)))
 		{
