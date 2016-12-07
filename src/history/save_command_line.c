@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   save_command_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 17:43:41 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/05 17:58:13 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/12/07 15:08:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_42sh.h"
 #include "libft.h"
 #include "history.h"
+#include "tools.h"
 
 static void		push_back(t_history **lst_history, t_history *new_elem)
 {
@@ -33,8 +34,8 @@ int			save_command_line(t_history **lst_history, char *command_line)
 {
 	t_history	*new_elem;
 
-	if (!command_line)
-		return (ERROR);
+	if (!command_line || tl_isstrempty(command_line))
+		return (GOOD);
 	if (!(new_elem = (t_history*)ft_memalloc(sizeof(t_history))))
 		return (ERROR);
 	if (!(new_elem->command_line = ft_strdup(command_line)))

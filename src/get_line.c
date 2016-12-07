@@ -7,6 +7,13 @@
 /*
 **			This function receive the data wrote in the prompt (line).
 */
+static void	clear_buf(char **buf)
+{
+	if (!*buf)
+		return ;
+	ft_strclr(*buf);
+	ft_strdel(buf);
+}
 
 static int	save_line(char **line, char **buf, size_t size)
 {
@@ -18,8 +25,7 @@ static int	save_line(char **line, char **buf, size_t size)
 	}
 	else if (!(*line = tl_strndup(*buf, size)))
 		return (ERROR);
-	ft_strclr(*buf);
-	ft_strdel(buf);
+	clear_buf(buf);
 	return (GOOD);
 }
 
@@ -38,7 +44,7 @@ static int	push_line(char **tmp, char **line, char **buf, size_t size)
 int			get_line(int fd, char **line)
 {
 	int			ret;
-	static char	*tmp;
+	static char	*tmp = NULL;
 	char		*buf;
 
 	if ((fd < 0 && 255 < fd) || BUFF_SIZE <= 0 || !line)
@@ -62,5 +68,6 @@ int			get_line(int fd, char **line)
 		else
 			buf = ft_strnew(BUFF_SIZE);
 	}
+	clear_buf(&buf);
 	return (*line && ft_strlen(*line) > 0 ? GOOD : 0);
 }

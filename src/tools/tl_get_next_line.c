@@ -6,121 +6,63 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 16:15:35 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/06 18:15:48 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/07 15:00:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "tools.h"
 
-static t_list	*get_fd(t_list **lst, int const fd)
+static char	*gnl_strjoin_free(char *s1, char const *s2)
 {
-	t_list		*ptr;
-	t_gnl		gnl;
-
-	while (1)
-	{
-		if (*lst)
-		{
-			ptr = *lst;
-			while (ptr)
-			{
-				if (fd == (((t_gnl*)(ptr->content))->fd))
-					return (ptr);
-				ptr = ptr->next;
-			}
-		}
-		gnl.fd = (int)fd;
-		if ((gnl.lfo = ft_strnew(BUFF_SIZE + 1)))
-		{
-			ft_lstadd(lst, ft_lstnew(&gnl, sizeof(gnl)));
-			return (*lst);
-		}
-		else
-			return (0);
-	}
-}
-
-static int		read_fd(t_list *lst, int const fd)
-{
-	int		ret;
-	int		save;
-	char	buf[BUFF_SIZE + 1];
 	char	*tmp;
 
-	ret = 1;
-	save = 0;
-	while ((ft_strchr(((t_gnl*)(lst->content))->lfo, '\n') == 0)
-			&& (ret = read(fd, buf, BUFF_SIZE)))
-	{
-		if (ret == -1)
-			return (-1);
-		if (ft_strchr(((t_gnl*)(lst->content))->lfo, '\n') == 0)
-			save = ret;
-		buf[ret] = '\0';
-		tmp = ((t_gnl*)(lst->content))->lfo;
-		if (!(((t_gnl*)(lst->content))->lfo =
-					ft_strjoin(((t_gnl*)(lst->content))->lfo, buf)))
-			return (-1);
-		free(tmp);
-	}
-	return (save ? save : ret);
+	tmp = s1;
+	s1 = ft_strjoin(s1, s2);
+	free(tmp);
+	tmp = NULL;
+	return ((char*)s1);
 }
 
-static int		free_list(t_list **lst, t_list *tmp)
+static int	update_line_lfo(char **line, char **lfo)
 {
-	t_list	*lst_next;
-	t_list	*ptr;
-
-	ptr = *lst;
-	if (tmp && *lst)
-		while (ptr)
-		{
-			lst_next = ptr->next;
-			if (((t_gnl*)(ptr->content))->fd == ((t_gnl*)(tmp->content))->fd)
-			{
-				ptr = lst_next;
-				free(((t_gnl*)(tmp->content))->lfo);
-				free(tmp);
-			}
-			ptr = lst_next;
-		}
+	if (*lfo)
+	{
+		*line = ft_strdup(*lfo);
+		free(*lfo);
+		*lfo = NULL;
+	}
+	else
+		*line = (char*)ft_strnew(1);
+	if (*line == NULL)
+		return (-1);
 	return (0);
 }
 
-static int		update_lfo(t_list **lst, char **line, t_list *tmp, int ret)
-{
-	int		len;
-	char	*lfo;
-
-	lfo = (((t_gnl*)(tmp->content))->lfo);
-	if (ft_strchr(lfo, '\n') == 0)
-	{
-		if ((*line = ft_strdup(lfo)) == 0)
-			return (-1);
-		if ((!ret && !ft_strlen(lfo)))
-			return (free_list(lst, tmp));
-		ft_strclr((((t_gnl*)(tmp->content))->lfo));
-		return (1);
-	}
-	len = ft_strlen(lfo) - ft_strlen(ft_strstr(lfo, "\n"));
-	if ((*line = tl_strndup(lfo, len)))
-		if ((((t_gnl*)(tmp->content))->lfo =
-					ft_strdup(ft_strchr(lfo, '\n') + 1)))
-			return (!ret ? free_list(lst, tmp) : 1);
-	return (-1);
-}
-
-int		tl_get_next_line(int const fd, char **line)
+int			tl_get_next_line(int fd, char **line)
 {
 	int				ret;
-	static t_list	*lst = NULL;
-	t_list			*tmp;
+	static char		*lfo = NULL;
+	char			*tmp;
+	char			buf[BUFF_SIZE + 1];
 
-	if (fd < 0 || BUFF_SIZE <= 0 || line == NULL)
+	if (fd < 0 || BUFF_SIZE <= 0 || update_line_lfo(line, &lfo) == -1)
 		return (-1);
-	tmp = get_fd(&lst, fd);
-	if ((ret = read_fd(tmp, fd)) == -1)
-		return (-1);
-	return (update_lfo(&lst, line, tmp, ret));
+	ft_bzero(buf, BUFF_SIZE + 1);
+	while ((ft_strchr(*line, '\n') == 0) && (ret = read(fd, buf, BUFF_SIZE)))
+	{
+		if (ret == -1)
+			return (-1);
+		if (!(*line = gnl_strjoin_free(*line, buf)))
+			return (-1);
+	}
+	tmp = ft_strstr(*line, "\n");
+	if (tmp)
+	{
+		lfo = ft_strdup(tmp + 1);
+		ft_bzero(tmp, ft_strlen(tmp));
+	}
+	if (*line && !**line)
+		ft_strdel(&(*line));
+	return (*line && ft_strlen(*line) ? 1 : 0);
 }
