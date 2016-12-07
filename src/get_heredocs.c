@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 23:35:38 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/05 13:30:37 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/07 15:59:57 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ static	int		retrieve_heredocs(t_shell *sh, t_cmdwr *cmd)
 
 static	int		get_heredocs_from_ast(t_shell *sh, t_ast *ast)
 {
-	if (ast->operator == COMMAND || ast->operator == REDIRECTION)
-		return (retrieve_heredocs(sh, ast->cmd1));
+	// if (ast->operator == COMMAND || ast->operator == REDIRECTION)
+		// return (retrieve_heredocs(sh, ast->cmd1));
+	if (ast->cmd1)
+		retrieve_heredocs(sh, ast->cmd1);
+	if (ast->cmd2)
+		retrieve_heredocs(sh, ast->cmd2);
 	if (ast->left)
 		get_heredocs_from_ast(sh, ast->left);
 	if (ast->right)
