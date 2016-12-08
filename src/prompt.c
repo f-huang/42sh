@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 14:08:58 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/29 12:59:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 14:50:15 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ int				prompt(t_shell *sh)
 	int		length;
 
 	length = 0;
-	pwd = get_path_from_pwd(sh);
-	user = get_name(sh);
-	if (user)
+	if ((user = get_name(sh)))
 	{
 		ft_putstr("\033[1;32m");
 		ft_putstr(user);
@@ -68,7 +66,7 @@ int				prompt(t_shell *sh)
 	}
 	else
 		ft_putstr("$");
-	if (pwd)
+	if ((pwd = get_path_from_pwd(sh)))
 	{
 		ft_putstr(pwd);
 		length += ft_strlen(pwd);

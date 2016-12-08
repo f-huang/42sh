@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 23:35:38 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/07 15:59:57 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 14:45:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "execution.h"
 #include "ast.h"
 
-static	int		retrieve_heredocs(t_shell *sh, t_cmdwr *cmd)
+static int	retrieve_heredocs(t_shell *sh, t_cmdwr *cmd)
 {
 	t_redirections		*cursor;
 
@@ -28,10 +28,8 @@ static	int		retrieve_heredocs(t_shell *sh, t_cmdwr *cmd)
 	return (GOOD);
 }
 
-static	int		get_heredocs_from_ast(t_shell *sh, t_ast *ast)
+static int	get_heredocs_from_ast(t_shell *sh, t_ast *ast)
 {
-	// if (ast->operator == COMMAND || ast->operator == REDIRECTION)
-		// return (retrieve_heredocs(sh, ast->cmd1));
 	if (ast->cmd1)
 		retrieve_heredocs(sh, ast->cmd1);
 	if (ast->cmd2)
@@ -43,7 +41,7 @@ static	int		get_heredocs_from_ast(t_shell *sh, t_ast *ast)
 	return (GOOD);
 }
 
-int		get_heredocs(t_shell *sh, t_list **list)
+int			get_heredocs(t_shell *sh, t_list **list)
 {
 	t_list	*cursor;
 

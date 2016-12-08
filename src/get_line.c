@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_line.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/08 14:48:17 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/08 14:55:07 by fhuang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <signal.h>
 #include "ft_42sh.h"
 #include "libft.h"
@@ -7,6 +19,7 @@
 /*
 **			This function receive the data wrote in the prompt (line).
 */
+
 static void	clear_buf(char **buf)
 {
 	if (!*buf)
@@ -43,9 +56,9 @@ static int	push_line(char **tmp, char **line, char **buf, size_t size)
 
 int			get_line(int fd, char **line)
 {
-	int			ret;
 	static char	*tmp = NULL;
 	char		*buf;
+	int			ret;
 
 	if ((fd < 0 && 255 < fd) || BUFF_SIZE <= 0 || !line)
 		return (ERROR);
@@ -58,16 +71,13 @@ int			get_line(int fd, char **line)
 	}
 	if (!(buf = ft_strnew(BUFF_SIZE + 1)))
 		return (ERROR);
-	while ((ret = read(fd, buf, BUFF_SIZE)))
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		if (ret == -1)
-			return (ERROR);
-		buf[ret] = '\0';
 		if (push_line(&tmp, line, &buf, ret))
 			return (GOOD);
 		else
-			buf = ft_strnew(BUFF_SIZE);
+			buf = ft_strnew(BUFF_SIZE + 1);
 	}
 	clear_buf(&buf);
-	return (*line && ft_strlen(*line) > 0 ? GOOD : 0);
+	return (*line && ft_strlen(*line) > 0 && ret != -1 ? GOOD : 0);
 }

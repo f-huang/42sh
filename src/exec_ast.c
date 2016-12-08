@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/07 17:44:47 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/08 14:47:26 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	int	exec_and(t_shell *sh, t_ast *ast)
 	int		tmp;
 
 	id = fork();
-	if (id > 0) // father
+	if (id > 0)
 	{
 		waitpid(0, &tmp, WUNTRACED | WCONTINUED);
 		sh->last_return = get_command_status_code(tmp);
@@ -35,7 +35,7 @@ static	int	exec_and(t_shell *sh, t_ast *ast)
 			exec_redirection(sh, ast->cmd1);
 		return (sh->last_return);
 	}
-	else if (id == 0) // son
+	else if (id == 0)
 	{
 		if (ast->left)
 			exit(exec_ast(sh, ast->left));
@@ -51,7 +51,7 @@ static	int	exec_or(t_shell *sh, t_ast *ast)
 	int		tmp;
 
 	id = fork();
-	if (id > 0) // father
+	if (id > 0)
 	{
 		waitpid(0, &tmp, WUNTRACED | WCONTINUED);
 		sh->last_return = get_command_status_code(tmp);
@@ -63,7 +63,7 @@ static	int	exec_or(t_shell *sh, t_ast *ast)
 			exec_redirection(sh, ast->cmd1);
 		return (sh->last_return);
 	}
-	else if (id == 0) // son
+	else if (id == 0)
 	{
 		if (ast->left)
 			exit(exec_ast(sh, ast->left));

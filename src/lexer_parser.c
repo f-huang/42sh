@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/07 18:30:46 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 14:58:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ static int		add_elem(t_list **lst, char *command, size_t size)
 	return (GOOD);
 }
 
-static int		unmatched(t_bitfield *open)
+static int		unmatched(t_bitfield *open, t_list **lst)
 {
 	if (open->dquote || open->squote || open->bslash)
 	{
+		if (*lst)
+			tl_lstdelast(lst);
 		ft_putstr_fd("Unmatched ", 2);
 		if (!open->bslash)
 			ft_putchar_fd(open->dquote ? '\"' : '\'', 2);
@@ -62,12 +64,8 @@ static int		unmatched(t_bitfield *open)
 static int		check_n_save(t_list **lst, char *command, size_t size,\
 															t_bitfield *open)
 {
-	if (unmatched(open) || !(add_elem(lst, command, size)))
-	{
-		if (*lst)
-			tl_lstdelast(lst);
+	if (unmatched(open, lst) || !(add_elem(lst, command, size)))
 		return (ERROR);
-	}
 	return (GOOD);
 }
 
@@ -79,9 +77,7 @@ static int		check_inhibitors(t_list **lst, char *c, size_t *i,\
 		if (c[*i + 1] == 0)
 		{
 			open->bslash |= 1;
-			if (*lst)
-				tl_lstdelast(lst);
-			unmatched(open);
+			unmatched(open, lst);
 			return (ERROR);
 		}
 		(*i)++;
@@ -93,9 +89,7 @@ static int		check_inhibitors(t_list **lst, char *c, size_t *i,\
 		c[*i] == '\'' ? (open->squote ^= 1) : (open->dquote ^= 1);
 		if (c[*i] == 0)
 		{
-			if (*lst)
-				tl_lstdelast(lst);
-			unmatched(open);
+			unmatched(open, lst);
 			return (ERROR);
 		}
 		c[*i] == '\'' ? (open->squote ^= 1) : (open->dquote ^= 1);

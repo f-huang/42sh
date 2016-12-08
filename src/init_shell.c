@@ -9,7 +9,7 @@
 **		This file is initalizing the shell. (Termios and environment).
 */
 
-static int		copy_environment(t_variable **lst_env)
+static int	copy_environment(t_variable **lst_env)
 {
 	extern char	**environ;
 	int			i;
@@ -23,7 +23,7 @@ static int		copy_environment(t_variable **lst_env)
 	return (GOOD);
 }
 
-static int		increment_shlvl(t_variable **lst_env)
+static int	increment_shlvl(t_variable **lst_env)
 {
 	char	*tmp;
 	int		shlvl;
@@ -45,7 +45,7 @@ static int		increment_shlvl(t_variable **lst_env)
 	return (GOOD);
 }
 
-static int		set_bin_path(char **bin_path, char *av_0)
+static int	set_bin_path(char **bin_path, char *av_0)
 {
 	char	buffer[_POSIX_PATH_MAX + 1];
 
@@ -59,7 +59,7 @@ static int		set_bin_path(char **bin_path, char *av_0)
 	return (GOOD);
 }
 
-static int		set_default(t_variable **lst_env)
+static int	set_default(t_variable **lst_env)
 {
 	if (!increment_shlvl(lst_env))
 		return (ERROR);
@@ -70,7 +70,7 @@ static int		set_default(t_variable **lst_env)
 	return (GOOD);
 }
 
-int		init_shell(t_shell *sh, char *av_0)
+int			init_shell(t_shell *sh, char *av_0)
 {
 	ft_bzero(sh, sizeof(t_shell));
 	if (!copy_environment(&sh->lst_env))
@@ -80,7 +80,7 @@ int		init_shell(t_shell *sh, char *av_0)
 	set_default(&sh->lst_env);
 	init_history(&sh->lst_history, sh->lst_env);
 	import_shrc(sh);
-//	if (!(init_termios(sh->term, sh->window)))
-//		return (ERROR);
-	return (GOOD);
+/*	if (!(init_termios(sh->term, sh->window)))
+		return (ERROR);
+*/	return (GOOD);
 }
