@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:09:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/08 14:38:13 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 17:36:34 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define ISDIRECTORY		125
 # define CANNOTINVOKE		126
 # define NOTFOUND			127
+# define TOOLONG			128
 
 # include "ft_42sh.h"
 # include "environment.h"
