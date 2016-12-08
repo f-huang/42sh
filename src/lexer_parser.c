@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/08 14:58:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 15:11:53 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,11 @@ int				lexer_parser(char *command_line, t_list **lst)
 			ft_strclr(command_line + i);
 		if (command_line[i] == ';' && !open.squote && !open.dquote)
 		{
-			if (check_n_save(lst, &command_line[index], i - index, &open))
-				index = i + 1;
-			else
+			if (!check_n_save(lst, &command_line[index], i - index, &open))
 				return (ERROR);
+			index = i + 1;
 		}
 	}
-	if (i != index)
-		return (check_n_save(lst, &command_line[index], i - index, &open));
-	return (GOOD);
+	return (i != index ? check_n_save(lst,\
+		&command_line[index], i - index, &open) : GOOD);
 }
