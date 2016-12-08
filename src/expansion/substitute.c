@@ -6,12 +6,12 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 10:39:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/05 18:31:09 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 14:27:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-**			The substitute function change $key by the value in environment and\
+**			The substitute function change $key by the value in environment and
 **			the tilde ~ by the path of home.
 **			Be careful with the simple quotes.
 */

@@ -37,7 +37,10 @@ static int		increment_shlvl(t_variable **lst_env)
 	else if (!(tmp = ft_strdup("1")))
 		return (ERROR);
 	if (!sh_setenv(lst_env, "SHLVL", tmp))
+	{
+		ft_strdel(&tmp);
 		return (ERROR);
+	}
 	ft_strdel(&tmp);
 	return (GOOD);
 }
