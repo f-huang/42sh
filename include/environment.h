@@ -1,25 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   environment.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/08 14:37:26 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/08 14:37:27 by fhuang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENVIRONMENT_H
 # define ENVIRONMENT_H
 
 # include <stdlib.h>
 
-#ifndef ERROR
-# define ERROR 0
-#endif
-
-#ifndef GOOD
-# define GOOD 1
-#endif
-
-#ifndef DEFAULT_PATH
-# define DEFAULT_PATH "/bin:/usr/bin"
-#endif
+# ifndef DEFAULT_PATH
+#  define DEFAULT_PATH "/bin:/usr/bin"
+# endif
 
 typedef struct			s_variable
 {
-	char					*variable;
-	size_t					length;
-	struct s_variable		*next;
+	char				*variable;
+	size_t				length;
+	struct s_variable	*next;
 }						t_variable;
 
 int						create_elem(t_variable **lst_env, char *variable);

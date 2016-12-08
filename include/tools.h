@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/06 18:20:14 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 14:39:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdlib.h>
 # include "libft.h"
 
-#ifndef GNL_STRUCT
-# define GNL_STRUCT
+# ifndef GNL_STRUCT
+#  define GNL_STRUCT
 
 typedef struct	s_gnl
 {
@@ -27,11 +27,11 @@ typedef struct	s_gnl
 	char			*lfo;
 }				t_gnl;
 
-#endif
+# endif
 
-#ifndef BUFF_SIZE
-#define BUFF_SIZE 1096
-#endif
+# ifndef BUFF_SIZE
+#  define BUFF_SIZE 1096
+# endif
 
 int				tl_isspace(int c);
 int				tl_iswhitespace(int c);

@@ -6,10 +6,9 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:09:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/07 16:04:00 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/08 14:38:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
@@ -30,7 +29,7 @@
 **	echo coucou >& -
 **	cat 1<&-
 */
-# define CLOSE_REDIRECT		(1 << 0)
+# define CLOSE_REDIRECT			(1 << 0)
 
 /*
 **	">"
@@ -89,7 +88,8 @@ typedef	struct	s_cmdwr
 
 int				exec_is_executable(char *filepath);
 char			**exec_get_envpath(t_shell *sh);
-int				exec_is_command(t_exec *ex, t_shell *sh, char **command, char **path);
+int				exec_is_command(t_exec *ex, t_shell *sh, char **command,\
+					char **path);
 int				exec_is_builtin(t_exec *ex, t_shell *sh, char **command);
 int				exec_is_standalone(t_exec *ex, char **command, char **paths);
 int				exec_is_file(char *filepath);
@@ -106,4 +106,5 @@ t_heredocs		*get_new_heredocs(t_list *words);
 int				heredoc_prompt(void);
 void			get_heredoc(t_shell *sh, t_cmdwr *cmd, t_redirections *r);
 void			free_heredocs(t_cmdwr *cmd);
+
 #endif

@@ -1,4 +1,4 @@
- #ifndef FT_42SH_H
+#ifndef FT_42SH_H
 # define FT_42SH_H
 
 /*
@@ -60,13 +60,13 @@ typedef struct winsize	t_winsize;
 /*
 **	RETURN VALUES
 */
-#ifndef ERROR
-# define ERROR 0
-#endif
+# ifndef ERROR
+#  define ERROR 0
+# endif
 
-#ifndef GOOD
-# define GOOD 1
-#endif
+# ifndef GOOD
+#  define GOOD 1
+# endif
 
 /*
 **	SHELL STRUCTURE AND DEFINES
@@ -90,31 +90,20 @@ typedef struct			s_bitfield
 	unsigned int		bslash : 1;
 }						t_bitfield;
 
-/*
-**	MACRO
-*/
-#ifndef PROMPT
-# define PROMPT "$> "
-#endif
-
-#ifndef BUFF_SIZE
-# define BUFF_SIZE 64
-#endif
+# ifndef BUFF_SIZE
+#  define BUFF_SIZE 256
+# endif
 
 /*
 **	BUILTIN CODE
 */
-#ifndef BUILTIN
-# define BUILTIN "cd exit unsetenv setenv export unset"
-#endif
+# ifndef BUILTIN
+#  define BUILTIN "cd exit unsetenv setenv export unset"
+# endif
 
-#ifndef NBBUILTIN
-# define NBBUILTIN 4
-#endif
-
-#ifndef HISTORY
-# define HISTORY ".42sh_history" //need all path "~/.42sh_history"
-#endif
+# ifndef NBBUILTIN
+#  define NBBUILTIN 6
+# endif
 
 /*
 **	SHELL BASIC FUNCTIONS
@@ -127,12 +116,12 @@ void					clear_shell(t_shell *sh);
 int						prompt(t_shell *sh);
 int						get_line(int fd, char **line);
 void					sig_handler(int signo);
-void					loop_through_commands(t_shell *sh, t_list *lst_commands);
+void					loop_through_commands(t_shell *sh,\
+							t_list *lst_commands);
 
 int						pipe_command(void);
 int						get_heredocs(t_shell *sh, t_list **lst);
 int						exec_command(t_shell *sh, char **command);
 int						lexer_parser(char *command_line, t_list **lst);
-
 
 #endif

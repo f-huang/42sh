@@ -1,6 +1,7 @@
 #include "ft_42sh.h"
 #include <signal.h>
 
+#define PROMPT "$> "
 void		sig_handler(int signo)
 {
 	if (signo == SIGINT)

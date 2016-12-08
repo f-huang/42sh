@@ -6,22 +6,14 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:14:15 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/07 16:08:37 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/08 14:33:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_H
 # define AST_H
 
-#include <stdlib.h>
-
-#ifndef GOOD
-# define GOOD 1
-#endif
-
-#ifndef ERROR
-# define ERROR 0
-#endif
+# include <stdlib.h>
 
 # include "ft_42sh.h"
 # include "execution.h"
@@ -33,8 +25,8 @@ enum			e_type
 
 typedef struct	s_index
 {
-	int		i;
-	int		j;
+	int				i;
+	int				j;
 }				t_index;
 
 typedef struct	s_ast
