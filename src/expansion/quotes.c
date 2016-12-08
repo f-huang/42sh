@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 13:27:22 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 15:26:17 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 16:47:10 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char		*shift_quotes(char *cmd, int *i)
 	while (cmd[++(*i)])
 	{
 		if (save == 0 && cmd[*i] == c)
-			save = *i -1;
+			save = *i - 1;
 		cmd[*i - 1] = cmd[*i];
 	}
 	ft_strclr(cmd + *i - 1);
@@ -39,21 +39,6 @@ static char		*shift_backslash(char *cmd, int i)
 	ft_strclr(cmd + i - 1);
 	return (cmd);
 }
-
-// static	int		is_escaped_char(int c)
-// {
-// 	static const char	escape_char[] = "abefnrtv\\";
-// 	int					i;
-//
-// 	i = 0;
-// 	while (escape_char[i])
-// 	{
-// 		if (escape_char[i] == c)
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
 
 static char		*remove_backslash(char *cmd)
 {

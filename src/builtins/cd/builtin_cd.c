@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/07 15:14:13 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 15:54:45 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static int	cd_error(int index, char *path)
 		": Permission denied.\n",
 		NULL
 	};
+
 	ft_putstr_fd("cd : ", 2);
 	if (index > 2 && index < 6 && path)
 		ft_putstr_fd(path, 2);
 	ft_putstr_fd(error_msg[index], 2);
 	return (1);
 }
-
 
 static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 {

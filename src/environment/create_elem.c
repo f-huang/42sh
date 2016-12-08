@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_elem.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/08 15:58:25 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/08 15:58:26 by fhuang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "environment.h"
 #include "libft.h"
 #include "ft_42sh.h"
@@ -11,7 +23,7 @@
 
 static void	push_back(t_variable **lst_env, t_variable *new)
 {
-	t_variable		*elem;
+	t_variable	*elem;
 
 	if (*lst_env)
 	{

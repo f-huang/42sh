@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 17:43:41 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/07 15:08:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 16:47:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "history.h"
 #include "tools.h"
 
-static void		push_back(t_history **lst_history, t_history *new_elem)
+static void	push_back(t_history **lst_history, t_history *new_elem)
 {
 	t_history	*p;
 

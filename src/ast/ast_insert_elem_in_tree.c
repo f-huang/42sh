@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 11:27:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/02 18:18:05 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 15:29:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	new_is_operator(t_ast **root, t_ast *new)
 	}
 }
 
-void	ast_insert_elem_in_tree(t_ast **root, t_ast *new)
+void		ast_insert_elem_in_tree(t_ast **root, t_ast *new)
 {
 	if (*root == NULL)
 		*root = new;

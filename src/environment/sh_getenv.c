@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sh_getenv.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/08 15:57:40 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/08 15:57:59 by fhuang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "environment.h"
 #include "libft.h"
 #include "tools.h"
@@ -12,14 +24,14 @@
 
 char		*sh_getenv(t_variable *lst_env, char *key)
 {
-	t_variable	*elem;
+	t_variable		*elem;
 	char			*tmp_key;
 	size_t			len_key;
 
 	elem = lst_env;
 	while (elem && key)
 	{
-	 	len_key = (size_t)(ft_strchr(elem->variable, '=') - elem->variable);
+		len_key = (size_t)(ft_strchr(elem->variable, '=') - elem->variable);
 		if ((tmp_key = tl_strndup(elem->variable, len_key)))
 		{
 			if (ft_strequ(key, tmp_key))

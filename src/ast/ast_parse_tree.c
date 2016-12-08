@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 17:58:09 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/06 14:20:18 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 15:44:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ static int	parse_error(const char *str, char c)
 	ft_putstr_fd("'\n", 2);
 	return (ERROR);
 }
-static int	parse_str(char *str);
 
 static int	is_operator(char *str, int i, _Bool word)
 {
 	static const char	*redir[] = {">>", "<<", ">", "<", NULL};
-	int		j;
+	int					j;
 
 	j = 0;
 	while ((i == 0 || str[i - 1] != '\\') && redir[++j])
@@ -46,14 +45,14 @@ static int	is_operator(char *str, int i, _Bool word)
 			if (word == 0 || tl_isstrempty(str + i) ||\
 				(str[i] == '&' && !str[i + 1]) ||\
 				(j == 1 && str[i] == '-' && !str[i + 1]))
-					return (parse_error(redir[j], 0));
+				return (parse_error(redir[j], 0));
 			else
 				return (parse_str(str + i + 1));
 		}
 	return (GOOD);
 }
 
-static int	parse_str(char *str)
+int			parse_str(char *str)
 {
 	int					i;
 	int					ret;
@@ -65,11 +64,9 @@ static int	parse_str(char *str)
 	word = 0;
 	while (str[i])
 	{
-		if ((i == 0 || str[i - 1] != '\\') && (str[i] == '\'' || str[i] == '\"'))
-		{
+		if ((i == 0 || str[i - 1] != '\\') &&\
+			(str[i] == '\'' || str[i] == '\"') && (word = 1))
 			i += tl_jump_to_other_quote(str + i);
-			word = 1;
-		}
 		else if (!(ret = is_operator(str, i, word)))
 			return (ERROR);
 		if (!tl_iswhitespace(str[i]))
@@ -83,7 +80,7 @@ static int	parse_str(char *str)
 	return (GOOD);
 }
 
-int		ast_parse_tree(t_ast *root)
+int			ast_parse_tree(t_ast *root)
 {
 	if (!root)
 		return (GOOD);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sh_unsetenv.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/08 15:58:36 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/08 15:59:44 by fhuang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "environment.h"
 #include "libft.h"
 #include "ft_42sh.h"
@@ -33,7 +45,7 @@ int			sh_unsetenv(t_variable **lst_env, char *key)
 	prev = NULL;
 	while (elem && key)
 	{
-	 	len_key = (size_t)(ft_strchr(elem->variable, '=') - elem->variable);
+		len_key = (size_t)(ft_strchr(elem->variable, '=') - elem->variable);
 		if ((tmp_key = tl_strndup(elem->variable, len_key)))
 		{
 			if (ft_strequ(key, tmp_key))

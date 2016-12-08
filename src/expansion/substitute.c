@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 10:39:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/08 14:27:56 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 16:46:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 #include "execution.h"
 #include "expansion.h"
 
-static char		*dollar_and_tilde(t_shell *sh, char *cmd)
+static char	*dollar_and_tilde(t_shell *sh, char *cmd)
 {
-	size_t		i;
-	_Bool		single_quote;
-	_Bool		backslash;
+	size_t	i;
+	_Bool	single_quote;
+	_Bool	backslash;
 
 	i = 0;
 	while (cmd[i])
@@ -49,9 +49,10 @@ static char		*dollar_and_tilde(t_shell *sh, char *cmd)
 
 char		*substitute(t_shell *sh, char *cmd)
 {
-	if (ft_strchr(cmd, '$') || ft_strchr(cmd, '~'))
+	if (cmd && (ft_strchr(cmd, '$') || ft_strchr(cmd, '~')))
 		cmd = dollar_and_tilde(sh, cmd);
-	if (cmd)
+	if (cmd && (ft_strchr(cmd, '\\') || ft_strchr(cmd, '\'') ||\
+		ft_strchr(cmd, '\"')))
 		cmd = remove_quotes_and_backslash(cmd);
 	return (cmd);
 }

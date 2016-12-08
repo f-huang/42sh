@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_history_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 17:48:57 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/05 18:41:21 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:47:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int		save_history(t_history *lst_history, t_variable *lst_env)
 	if ((path = sh_getenv(lst_env, "HOME")))
 	{
 		path = tl_str3join(path, "/", HISTORY);
-		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRUSR | S_IWUSR);
+		fd = open(path,\
+			O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRUSR | S_IWUSR);
 		ft_strdel(&path);
 		if (fd == -1)
 			return (GOOD);

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:27:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/01 17:21:27 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/08 16:39:40 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ static size_t	get_tablen(char *str)
 	len = str[index.i] ? 1 : 0;
 	while (str[index.i] != 0)
 	{
+		index.j = index.i;
 		if ((index.i == 0 || str[index.i - 1] != '\\') &&\
 			(str[index.i] == '\'' || str[index.i] == '\"'))
 			index.i += tl_jump_to_other_quote(str + index.i) + 1;
-		else if (is_operator(NULL, str, NULL, &index))
+		else if (is_operator(NULL, str, NULL, &index) &&\
+			index.j > 0 && tl_iswhitespace(str[index.j - 1]))
 			len--;
 		else if (tl_iswhitespace(str[index.i]))
 		{
@@ -89,36 +91,44 @@ static int		is_word(char *str, int *i, char **tmp, char **tab)
 	return (1);
 }
 
+static char		*cmdwr_fill_command_tab(t_cmdwr **cmd, t_index *index,\
+					char *str)
+{
+	char				*tmp;
+	int					ret;
+
+	tmp = str;
+	while (str[index->i])
+	{
+		if ((index->i == 0 || str[index->i - 1] != '\\') &&\
+			(str[index->i] == '\'' || str[index->i] == '\"'))
+			index->i += tl_jump_to_other_quote(str + index->i) + 1;
+		else if ((ret = is_operator(cmd, str, tmp, index)))
+		{
+			index->j += ret - 1;
+			while (tl_iswhitespace(str[index->i]))
+				index->i++;
+			tmp = str + index->i;
+		}
+		else if (is_word(str, &index->i, &tmp, &*((*cmd)->command + index->j)))
+			index->j++;
+		else
+			index->i++;
+	}
+	return (tmp);
+}
+
 int				cmdwr_fill_struct(t_cmdwr **cmd, char *str)
 {
 	char				*tmp;
 	t_index				index;
-	int					ret;
 
+	ft_bzero(&index, sizeof(t_index));
 	if (!((*cmd)->command = (char**)\
 		ft_memalloc(sizeof(char*) * (get_tablen(str) + 1))))
 		return (ERROR);
-	tmp = str;
-	ft_bzero(&index, sizeof(t_index));
-	while (str[index.i])
-	{
-		if ((index.i == 0 || str[index.i - 1] != '\\') &&\
-			(str[index.i] == '\'' || str[index.i] == '\"'))
-			index.i += tl_jump_to_other_quote(str + index.i) + 1;
-		else if ((ret = is_operator(cmd, str, tmp, &index)))
-		{
-			index.j += ret - 1;
-			while (tl_iswhitespace(str[index.i]))
-				index.i++;
-			tmp = str + index.i;
-		}
-		else if (is_word(str, &index.i, &tmp, &*((*cmd)->command + index.j)))
-			index.j++;
-		else
-			index.i++;
-	}
+	tmp = cmdwr_fill_command_tab(cmd, &index, str);
 	if (!tl_isstrempty(tmp))
 		(*cmd)->command[index.j++] = ft_strtrim(tmp);
-	(*cmd)->command[index.j] = NULL;
 	return (GOOD);
 }

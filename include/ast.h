@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:14:15 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/08 14:33:52 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 15:44:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_ast			*ast_create_tree(char *line);
 int				ast_create_elem(t_ast **lst, int operator, char *str);
 void			ast_insert_elem_in_tree(t_ast **root, t_ast *new);
 int				ast_parse_tree(t_ast *tree);
+int				parse_str(char *str);
 void			ast_free_cmdwr(t_cmdwr **cmd);
 void			ast_destroy_tree(t_ast *tree);
 

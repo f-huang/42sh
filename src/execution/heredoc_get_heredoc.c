@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 17:04:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/05 19:05:47 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:43:28 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "tools.h"
 #include "expansion.h"
 
-static	char	*remove_tabs(char *s)
+static char		*remove_tabs(char *s)
 {
-	int		i;
-	char	*trim;
+	int				i;
+	char			*trim;
 
 	i = 0;
 	while (s[i] && s[i] == '\t')
@@ -26,11 +26,11 @@ static	char	*remove_tabs(char *s)
 	return (trim);
 }
 
-static	char	*check_line(t_shell *sh, t_redirections *r, char *line)
+static char		*check_line(t_shell *sh, t_redirections *r, char *line)
 {
-	char	*trim;
+	char			*trim;
 
-	if (r->type & CLOSE_REDIRECT) // <<- Toto
+	if (r->type & CLOSE_REDIRECT)
 		trim = remove_tabs(line);
 	else
 		trim = ft_strdup(line);
@@ -38,31 +38,29 @@ static	char	*check_line(t_shell *sh, t_redirections *r, char *line)
 	return (trim);
 }
 
-static	t_list	*get_words(t_shell *sh, t_redirections *r)
+static t_list	*get_words(t_shell *sh, t_redirections *r)
 {
-	char		*line;
-	char		*trim;
-	t_list		*words;
-	t_list		*cursor;
+	char			*line;
+	char			*trim;
+	t_list			*words;
+	t_list			*cursor;
 
 	line = 0;
 	cursor = 0;
 	words = 0;
-	while (heredoc_prompt() && get_line(0, &line) == 1 && ft_strcmp(line, r->dest))
+	while (heredoc_prompt() && get_line(0, &line) == 1 &&
+		ft_strcmp(line, r->dest) && (trim = check_line(sh, r, line)))
 	{
 		if (cursor == 0)
 		{
-			trim = check_line(sh, r, line);
 			cursor = tl_lstnew(trim, ft_strlen(line));
 			words = cursor;
 		}
 		else
 		{
-			trim = check_line(sh, r, line);
 			cursor->next = tl_lstnew(trim, ft_strlen(line));
 			cursor = cursor->next;
 		}
-		ft_strclr(line);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
@@ -74,7 +72,7 @@ static	t_list	*get_words(t_shell *sh, t_redirections *r)
 **	into the cmd->heredocs
 */
 
-void		get_heredoc(t_shell *sh, t_cmdwr *cmd, t_redirections *r)
+void			get_heredoc(t_shell *sh, t_cmdwr *cmd, t_redirections *r)
 {
 	t_list		*heredocs_words;
 	t_heredocs	*heredocs_list;

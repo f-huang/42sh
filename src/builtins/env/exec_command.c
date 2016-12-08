@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 15:43:18 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/11 12:36:51 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/08 15:55:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static	int		rp_error(char *name, char *error, int code)
 int				env_execute_command(char **env, char **av, int index)
 {
 	pid_t	id;
-/*	int		status; */
 	int		tmp;
 	char	*executable;
 
