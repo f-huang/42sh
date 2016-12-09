@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:01:19 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/09 17:05:25 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/09 17:42:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 **		-u : read from given fd
 */
 
-int				get_options(char **av, int *option);
+int		get_options(char **av, int *option);
+int		read_input(char **av, int option);
 
 #endif

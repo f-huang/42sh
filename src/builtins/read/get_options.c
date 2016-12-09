@@ -6,11 +6,13 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:05:40 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/09 17:20:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/09 17:36:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_read.h"
+#include "libft.h"
+#include "ft_42sh.h"
 
 static void		acquaint_option(int *option, char c)
 {
@@ -32,44 +34,44 @@ static void		acquaint_option(int *option, char c)
 		*option |= OPTION_U;
 }
 
-static int		is_option(char *av, int *option)
+static int		is_option(char c, int *option)
 {
 	const char	options[] = "denprstu";
 	int			i;
-	int			j;
 
-	i = 1;
-	while (av[i])
+	i = 0;
+	while (options[i])
 	{
-		j = 0;
-		while (options[j])
+		if (options[i] == c)
 		{
-			if (av[i] != option[j])
-			{
-				ft_putstr_fd("42sh: bad option: -", 2)
-				ft_putchar_fd(av[i], 2);
-				ft_putchar_fd('\n', 2);
-				return (0);
-			}
-			acquaint_option(option, option[j]);
-			j++;
+			acquaint_option(option, c);
+			return (GOOD);
 		}
 		i++;
 	}
-	return (1);
+	ft_putstr_fd("42sh: bad option: -", 2);
+	ft_putchar_fd(c, 2);
+	ft_putchar_fd('\n', 2);
+	return (ERROR);
 }
 
 int				get_options(char **av, int *option)
 {
 	int			i;
+	int			j;
 
 	i = 1;
 	if (ft_strequ(av[i], "--"))
 		return (++i);
 	while (av[i] && *(av[i]) == '-')
 	{
-		if (!is_option(av[i]))
-			return (-1);
+		j = 1;
+		while (av[i][j])
+		{
+			if (!is_option(av[i][j], option))
+				return (-1);
+			j++;
+		}
 		i++;
 	}
 	return (i);
