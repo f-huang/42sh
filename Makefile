@@ -56,11 +56,11 @@ OBJECHO	:=	$(SRCECHO:src/builtins/echo/%.c=obj/builtins/echo/%.o)
 # ================
 
 # ===== read =====
-DIRREAD	:=	src/builtins/read/
-OBJDIRREAD	:= obj/builtins/read/
-BINREAD	:=	bin/read
-SRCREAD	:=	$(shell find src/builtins/read -type f -print)
-OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
+#DIRREAD	:=	src/builtins/read/
+#OBJDIRREAD	:= obj/builtins/read/
+#BINREAD	:=	bin/read
+#SRCREAD	:=	$(shell find src/builtins/read -type f -print)
+#OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
 # ================
 
 .PHONY: all libft echo env read norme clean fclean re
@@ -80,6 +80,7 @@ $(CACHEF):
 	test -d $(OBJDIR) || mkdir $(OBJDIR)
 	test -d $(DIRBUILTINS) || mkdir $(DIRBUILTINS)
 	test -d $(DIRBUILTINS)cd || mkdir $(DIRBUILTINS)cd
+	test -d $(DIRBUILTINS)read || mkdir $(DIRBUILTINS)read
 	test -d $(DIRBUILTINS)setenv || mkdir $(DIRBUILTINS)setenv
 	test -d $(DIRBUILTINS)unsetenv || mkdir $(DIRBUILTINS)unsetenv
 	test -d $(DIRBUILTINS)exit || mkdir $(DIRBUILTINS)exit
@@ -104,9 +105,9 @@ $(CACHEF):
 libft:
 	make -C $(LIBDIR)
 
-read: $(OBJREAD)
-	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)
-	printf $(BLUE)" $@ compiled!\n"$(EOC)
+#read: $(OBJREAD)
+#	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)
+#	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 echo: $(OBJECHO)
 	$(CC) $(CFLAGS) -o $(BINECHO) $(OBJECHO) $(LIBPATH) $(LIB) $(INC)
