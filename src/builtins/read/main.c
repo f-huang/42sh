@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 11:51:06 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/12 14:51:33 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/13 18:05:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include <curses.h>
 #include <term.h>
 #include <sys/ioctl.h>
+union
+{
+	int		dest;
+	char	*prompt;
+}u_dest;
 
 void	debug_options(int option)
 {

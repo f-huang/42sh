@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:14:15 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/08 15:44:56 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/13 16:45:34 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct	s_ast
 t_ast			*line_to_ast(char *line);
 
 int				exec_ast(t_shell *sh, t_ast *ast);
-void			exec_pipe(t_shell *sh, t_ast *ast);
+void			exec_pipe(t_shell *sh, t_ast **ast);
 
 t_ast			*ast_create_tree(char *line);
 int				ast_create_elem(t_ast **lst, int operator, char *str);

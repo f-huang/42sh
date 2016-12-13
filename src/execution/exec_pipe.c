@@ -6,43 +6,77 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:01:52 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/12 19:15:07 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/13 18:22:36 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "execution.h"
 #include "ast.h"
+#include "libft.h"
+#include "tools.h"
 
-void		exec_pipe(t_shell *sh, t_ast *ast)
+static	t_list		*ast_to_list(t_ast **ast)
+{
+	t_ast	*cursor;
+	t_list	*begin;
+
+	cursor = *ast;
+	begin = 0;
+	while (cursor)
+	{
+		if (cursor->cmd2)
+		{
+			if (!begin)
+				begin = tl_lstnew(cursor->cmd2, sizeof(cursor->cmd2));
+			else
+				ft_lstadd(&begin, tl_lstnew(cursor->cmd2, sizeof(cursor->cmd2)));
+		}
+		if (!begin)
+			begin = tl_lstnew(cursor->cmd1, sizeof(cursor->cmd1));
+		else
+			ft_lstadd(&begin, tl_lstnew(cursor->cmd1, sizeof(cursor->cmd1)));
+		cursor = cursor->left;
+	}
+	return (begin);
+}
+
+void			exec_pipe(t_shell *sh, t_ast **ast)
 {
 	pid_t	id;
 	int		pipefd[2];
+	int		fd_in;
+	t_list	*cursor;
+	t_list	*begin;
 	int		tmp;
-	int		first;
 
-	first = sh->first_pipe;
-	if (sh->first_pipe)
-		sh->first_pipe = 0;
-	pipe(pipefd);
-	if ((id = fork()) > 0)
+	begin = ast_to_list(ast);
+	cursor = begin;
+	fd_in = 0;
+	while (cursor)
 	{
-		dup2(pipefd[0], 0);
-		close(pipefd[1]);
-		if (first)
-			waitpid(0, &tmp, WUNTRACED | WCONTINUED);
-		if (ast->cmd2)
-			exit(exec_redirection(sh, ast->cmd2));
-		else if (ast->cmd1)
-			exit(exec_redirection(sh, ast->cmd1));
-	}
-	else if (id == 0)
-	{
-		dup2(pipefd[1], 1);
-		close(pipefd[0]);
-		if (ast->left)
-			exit(exec_ast(sh, ast->left));
-		else if (ast->cmd1)
-			exit(exec_redirection(sh, ast->cmd1));
+		pipe(pipefd);
+		id = fork();
+		if (id > 0)
+		{
+			close(pipefd[1]);
+			fd_in = pipefd[0];
+			if (!cursor->next)
+			{
+				waitpid(id, &tmp, WUNTRACED | WCONTINUED);
+				sh->last_return = get_command_status_code(tmp);
+				exit(sh->last_return);
+			} else {
+				cursor = cursor->next;
+			}
+		}
+		else if (id == 0)
+		{
+			dup2(fd_in, 0);
+			if (cursor->next)
+				dup2(pipefd[1], 1);
+			close(pipefd[0]);
+			exit(exec_redirection(sh, (t_cmdwr *)cursor->content));
+		}
 	}
 }

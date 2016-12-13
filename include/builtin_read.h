@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:01:19 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/13 17:31:06 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/13 18:03:30 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@
 # define OPTION_U		(1 << 7)
 
 /*
-**		-d : Delim = 1 char
 **		-e : Write output in the terminal (Readline() ?)
-**		-n : ?
-**		-p : ?
 **		-r : backslash(\) do not escape characters
 **		-s : Dont echo input on terminal
+**
+**		-d : Delim = 1 char
+**		-n : nchars -> 0 = infinite
+**		-p : prompt
 **		-t : timeout
 **		-u : read from given fd
 */
