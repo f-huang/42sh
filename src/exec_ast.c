@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/13 16:26:48 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/13 16:47:58 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ int			exec_pipes(t_shell *sh, t_ast *ast)
 	id = fork();
 	if (id > 0)
 	{
-		waitpid(0, &tmp, WUNTRACED | WCONTINUED);
+		waitpid(-1, &tmp, WUNTRACED | WCONTINUED);
 		sh->last_return = get_command_status_code(tmp);
 		return (sh->last_return);
 	}
 	else if (id == 0)
-		exit(exec_pipe(sh, &ast));
+		exec_pipe(sh, &ast);
 	return (0);
 }
 

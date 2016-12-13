@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:01:52 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/13 16:19:52 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/13 16:47:42 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static	t_list		*ast_to_list(t_ast **ast)
 	return (begin);
 }
 
-int			exec_pipe(t_shell *sh, t_ast **ast)
+void			exec_pipe(t_shell *sh, t_ast **ast)
 {
 	pid_t	id;
 	int		pipefd[2];
@@ -65,9 +65,11 @@ int			exec_pipe(t_shell *sh, t_ast **ast)
 //			if (first)
 //			{
 //				first = 0;
-				waitpid(0, NULL, WUNTRACED | WCONTINUED);
+				waitpid(-1, NULL, WUNTRACED | WCONTINUED);
 //			}
 			cursor = cursor->next;
+			if (!cursor)
+				exit(0);
 		}
 		else if (id == 0)
 		{
@@ -78,5 +80,4 @@ int			exec_pipe(t_shell *sh, t_ast **ast)
 			exit(exec_redirection(sh, (t_cmdwr *)cursor->content));
 		}
 	}
-	return (ERROR);
 }
