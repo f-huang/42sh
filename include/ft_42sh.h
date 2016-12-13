@@ -81,7 +81,6 @@ typedef struct			s_shell
 	t_termios			term;
 	t_winsize			*window;
 	t_history			*lst_history;
-	char				first_pipe;
 }						t_shell;
 
 typedef struct			s_bitfield
