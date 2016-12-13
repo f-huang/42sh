@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 17:46:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/13 18:20:46 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/13 18:51:02 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <unistd.h>
 #include "builtins.h"
 #include "environment.h"
-#include <sys/select.h>
 
 static	const	t_bnb	g_bnb[] = {
 	{"cd", builtin_cd},
@@ -68,7 +67,6 @@ int				exec_execute_command(t_exec *ex, t_shell *sh, char **command)
 	id = fork();
 	if (id > 0)
 	{
-		tmp = 0;
 		waitpid(0, &tmp, WUNTRACED | WCONTINUED);
 		sh->last_return = get_command_status_code(tmp);
 		free(env);
