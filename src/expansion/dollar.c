@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:34:49 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/05 18:53:35 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/13 15:09:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ static char	*get_value(t_shell *sh, char *key, int variable_number)
 
 	value = NULL;
 	if (variable_number == -1)
-		value = ft_strdup(sh_getenv(sh->lst_env, key));
+	{
+		if (!(value = sh_getenv(sh->lst_localvar, key)))
+			value = sh_getenv(sh->lst_env, key);
+		value = ft_strdup(value);
+	}
 	else if (variable_number == 0)
 		value = ft_itoa(sh->last_return);
 	else if (variable_number == 1)

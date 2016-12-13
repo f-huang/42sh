@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:35:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/12 19:13:21 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/13 15:03:14 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ _Bool			get_options(char **av, int *i);
 **	EXPORT
 */
 
-void			print_export(t_shell *sh);
+int				print_export(t_variable *lst_env, t_variable *lst_localvar);
 
 #endif

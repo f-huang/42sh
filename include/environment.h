@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:37:26 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 14:37:27 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/13 14:57:40 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int						create_elem(t_variable **lst_env, char *variable);
 void					clear_env_list(t_variable **lst_env);
 
 char					**lstenv_to_tab(t_variable *lst_env);
+char					*var_getkey(char *variable);
+char					**create_variables_tab(t_variable *lst_env, t_variable *lst_localvar);
 
 char					*sh_getenv(t_variable *lst_env, char *key);
 int						sh_setenv(t_variable **lst_env, char *key, char *value);

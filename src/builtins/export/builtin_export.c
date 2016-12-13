@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:26:25 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/12 19:13:08 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/13 15:04:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ int			builtin_export(t_shell *sh, int ac, char **av)
 
 	error = 0;
 	if (ac == 1)
-		print_export(sh);
-		// sh_print_env(sh->lst_localvar);
+		print_export(sh->lst_env, sh->lst_localvar);
 	else
 	{
 		i = 1;
