@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/13 16:03:14 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/13 16:26:48 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int			exec_pipes(t_shell *sh, t_ast *ast)
 		return (sh->last_return);
 	}
 	else if (id == 0)
-		exec_pipe(sh, &ast);
+		exit(exec_pipe(sh, &ast));
 	return (0);
 }
 

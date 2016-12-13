@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:01:52 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/13 16:02:52 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/13 16:19:52 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ int			exec_pipe(t_shell *sh, t_ast **ast)
 	int		fd_in;
 	t_list	*cursor;
 	t_list	*begin;
+	int		first;
 
 	begin = ast_to_list(ast);
 	cursor = begin;
+	first = 1;
 	fd_in = 0;
 	while (cursor)
 	{
@@ -60,8 +62,11 @@ int			exec_pipe(t_shell *sh, t_ast **ast)
 		{
 			close(pipefd[1]);
 			fd_in = pipefd[0];
-			if (!cursor->next)
+//			if (first)
+//			{
+//				first = 0;
 				waitpid(0, NULL, WUNTRACED | WCONTINUED);
+//			}
 			cursor = cursor->next;
 		}
 		else if (id == 0)
