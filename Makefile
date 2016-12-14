@@ -12,7 +12,7 @@ BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
 DIRBUILTINS	:= obj/builtins/
-SRC		:= $(shell find src -type d \( -path src/builtins/env -o -path src/builtins/echo -o -path src/builtins/read \) -prune -o -type f -print)
+SRC		:= $(shell find src -type d \( -path src/builtins/env -o -path src/builtins/echo \) -prune -o -type f -print)
 OBJ		:= $(SRC:src/%.c=obj/%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 ifeq ($(OS),Linux)
@@ -63,12 +63,12 @@ OBJECHO	:=	$(SRCECHO:src/builtins/echo/%.c=obj/builtins/echo/%.o)
 #OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
 # ================
 
-.PHONY: all libft echo env read norme clean fclean re
+.PHONY: all libft echo env norme clean fclean re
 .SILENT:
 
 all: $(NAME)
 
-$(NAME): libft env echo read $(OBJ)
+$(NAME): libft env echo $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
 	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
@@ -88,7 +88,6 @@ $(CACHEF):
 	test -d $(DIRBUILTINS)unset || mkdir $(DIRBUILTINS)unset
 	test -d $(OBJDIRENV) || mkdir $(OBJDIRENV)
 	test -d $(OBJDIRECHO) || mkdir $(OBJDIRECHO)
-	test -d $(OBJDIRREAD) || mkdir $(OBJDIRREAD)
 	test -d $(OBJDIR)environment || mkdir $(OBJDIR)environment
 	test -d $(OBJDIR)expansion || mkdir $(OBJDIR)expansion
 	test -d $(OBJDIR)ast || mkdir $(OBJDIR)ast

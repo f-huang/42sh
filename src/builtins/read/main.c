@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 11:51:06 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/13 18:05:52 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/14 19:59:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,44 +16,54 @@
 #include <curses.h>
 #include <term.h>
 #include <sys/ioctl.h>
-union
-{
-	int		dest;
-	char	*prompt;
-}u_dest;
 
-void	debug_options(int option)
+void	debug_options(t_read tools)
 {
-	if (option & OPTION_D)
-		ft_putstrcol("d", CYAN);
-	else if (option & OPTION_E)
+	if (tools.option & OPTION_D)
+	{
+		ft_putstrcol("d -> ", CYAN);
+		ft_putendlcol(&tools.delim, YELLOW);
+	}
+	if (tools.option & OPTION_E)
 		ft_putstrcol("e", CYAN);
-	else if (option & OPTION_N)
-		ft_putstrcol("n", CYAN);
-	else if (option & OPTION_P)
-		ft_putstrcol("p", CYAN);
-	else if (option & OPTION_R)
+	if (tools.option & OPTION_N)
+	{
+		ft_putstrcol("n -> ", CYAN);
+		ft_putnbrendl(tools.nchars);
+	}
+	if (tools.option & OPTION_P)
+	{
+		ft_putstrcol("p -> ", CYAN);
+		ft_putendlcol(tools.prompt, YELLOW);
+	}
+	if (tools.option & OPTION_R)
 		ft_putstrcol("r", CYAN);
-	else if (option & OPTION_S)
+	if (tools.option & OPTION_S)
 		ft_putstrcol("s", CYAN);
-	else if (option & OPTION_T)
-		ft_putstrcol("t", CYAN);
-	else if (option & OPTION_U)
-		ft_putstrcol("u", CYAN);
-	ft_putchar('\n');
+	if (tools.option & OPTION_T)
+	{
+		ft_putstrcol("t -> ", CYAN);
+		ft_putnbrendl(tools.timeout);
+	}
+	if (tools.option & OPTION_U)
+	{
+		ft_putstrcol("u -> ", CYAN);
+		ft_putnbrendl(tools.fd);
+	}
 }
 
 int		builtin_read(t_shell *sh, int ac, char **av)
 {
 	int			i;
-	int			option;
+	t_read		tools;
+	// int			option;
 
-	option = 0;
-	if ((i = get_options(av, &option)) == -1)
+	ft_bzero(&tools, sizeof(t_read));
+	if ((i = read_get_options(av, &tools)) == -1)
 		return (1);
 	// if (!(option & OPTION_S))
 		// reset_termios(&term);
-	debug_options(option);
+	debug_options(tools);
 	// if (!(option & OPTION_S))
 		// init_termcaps(&term, &window);
 	(void)sh;

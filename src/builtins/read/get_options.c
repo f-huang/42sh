@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:05:40 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/09 17:36:07 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/14 20:06:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,65 +14,83 @@
 #include "libft.h"
 #include "ft_42sh.h"
 
-static void		acquaint_option(int *option, char c)
+static int		acquaint_option(t_read *tools, char **av, int *i, int *j)
 {
-	if (c == 'd')
-		*option |= OPTION_D;
-	else if (c == 'e')
-		*option |= OPTION_E;
-	else if (c == 'n')
-		*option |= OPTION_N;
-	else if (c == 'p')
-		*option |= OPTION_P;
-	else if (c == 'r')
-		*option |= OPTION_R;
-	else if (c == 's')
-		*option |= OPTION_S;
-	else if (c == 't')
-		*option |= OPTION_T;
-	else if (c == 'u')
-		*option |= OPTION_U;
-}
+	static int	(*p[5])(t_read *, char **, int *, int *);
 
-static int		is_option(char c, int *option)
-{
-	const char	options[] = "denprstu";
-	int			i;
+	p[0] = read_option_d;
+	p[1] = read_option_n;
+	p[2] = read_option_p;
+	p[3] = read_option_t;
+	p[4] = read_option_u;
+	const char	options[] = "dnptu";
+	int			x;
 
-	i = 0;
-	while (options[i])
-	{
-		if (options[i] == c)
+	x = -1;
+	while (options[++x])
+		if (options[x] == av[*i][*j])
 		{
-			acquaint_option(option, c);
-			return (GOOD);
+			(*j)++;
+			return ((p[x])(tools, av, i, j) ? 1 : -1);
 		}
-		i++;
-	}
-	ft_putstr_fd("42sh: bad option: -", 2);
-	ft_putchar_fd(c, 2);
-	ft_putchar_fd('\n', 2);
-	return (ERROR);
+	return (0);
 }
 
-int				get_options(char **av, int *option)
+static int		is_option(t_read *tools, char **av, int *i, int *j)
+{
+	const char	options[] = "dnptu";
+	int			x;
+
+	x = 0;
+	while (options[x])
+	{
+		if (options[x] == av[*i][*j])
+		{
+			if (acquaint_option(tools, av, i, j) == -1)
+				return (-1);
+			return (x);
+		}
+		x++;
+	}
+	if (av[*i][*j] == 'e')
+		tools->option |= OPTION_E;
+	else if (av[*i][*j] == 'r')
+		tools->option |= OPTION_R;
+	else if (av[*i][*j] == 's')
+		tools->option |= OPTION_S;
+	else
+	{
+		ft_putstr_fd("42sh: bad option: -", 2);
+		ft_putchar_fd(av[*i][*j], 2);
+		ft_putchar_fd('\n', 2);
+		return (-1);
+	}
+	return (5);
+}
+
+int				read_get_options(char **av, t_read *tools)
 {
 	int			i;
 	int			j;
+	int			ret;
 
 	i = 1;
-	if (ft_strequ(av[i], "--"))
-		return (++i);
 	while (av[i] && *(av[i]) == '-')
 	{
+		if (ft_strequ(av[i], "--"))
+			return (++i);
 		j = 1;
-		while (av[i][j])
+		while (av[i] && av[i][j])
 		{
-			if (!is_option(av[i][j], option))
+			if ((ret = is_option(tools, av, &i, &j) == -1))
 				return (-1);
-			j++;
+			if (ret < 5)
+				break ;
+			if (av[i] && av[i][j])
+				j++;
 		}
-		i++;
+		if (av[i])
+			i++;
 	}
 	return (i);
 }

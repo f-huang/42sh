@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_get_envpath.c                                 :+:      :+:    :+:   */
+/*   tl_isstrdigit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 16:11:56 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/14 13:56:45 by yfuks            ###   ########.fr       */
+/*   Created: 2016/12/14 19:49:14 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/14 19:51:21 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
-#include "ft_42sh.h"
 #include "libft.h"
+#include "ft_42sh.h"
 
-char	**exec_get_envpath(t_shell *sh)
+int	tl_isstrdigit(char *str)
 {
-	char	*path;
-	char	**split;
+	int		i;
 
-	if (!(path = sh_getenv(sh->lst_env, "PATH")))
-		return (ERROR);
-	split = ft_strsplit(path, ':');
-	return (split);
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (ERROR);
+		i++;
+	}
+	return (GOOD);
 }

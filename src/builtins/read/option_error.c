@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_get_envpath.c                                 :+:      :+:    :+:   */
+/*   option_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 16:11:56 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/14 13:56:45 by yfuks            ###   ########.fr       */
+/*   Created: 2016/12/14 19:51:57 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/14 19:55:01 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
-#include "ft_42sh.h"
 #include "libft.h"
+#include "ft_42sh.h"
 
-char	**exec_get_envpath(t_shell *sh)
+int		read_option_error(char *str, char *msg)
 {
-	char	*path;
-	char	**split;
-
-	if (!(path = sh_getenv(sh->lst_env, "PATH")))
-		return (ERROR);
-	split = ft_strsplit(path, ':');
-	return (split);
+	ft_putstr_fd("42sh: read: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(msg, 2);
+	return (ERROR);
 }

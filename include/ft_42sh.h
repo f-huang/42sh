@@ -98,7 +98,7 @@ typedef struct			s_bitfield
 **	BUILTIN CODE
 */
 # ifndef BUILTIN
-#  define BUILTIN "cd exit unsetenv setenv export unset"
+#  define BUILTIN "cd exit read unsetenv setenv export unset"
 # endif
 
 # ifndef NBBUILTIN

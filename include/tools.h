@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/08 14:39:59 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/14 19:49:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_gnl
 int				tl_isspace(int c);
 int				tl_iswhitespace(int c);
 int				tl_isstrempty(char *str);
+int				tl_isstrdigit(char *str);
 
 int				*tl_strisalnum(char *s);
 
