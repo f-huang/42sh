@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 17:25:35 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/11 16:26:59 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/14 14:07:12 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	exec_is_standalone(t_exec *ex, char **command, char **paths)
 		return (1);
 	}
 	i = 0;
-	while (paths[i])
+	while (paths && paths[i])
 	{
 		executable = tl_str3join(paths[i], "/", command[0]);
 		if (exec_is_file(executable))

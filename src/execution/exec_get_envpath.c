@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:11:56 by yfuks             #+#    #+#             */
-/*   Updated: 2016/11/11 16:25:00 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/14 13:56:45 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**exec_get_envpath(t_shell *sh)
 	char	**split;
 
 	if (!(path = sh_getenv(sh->lst_env, "PATH")))
-		return (ft_strsplit(DEFAULT_PATH, ':'));
+		return (ERROR);
 	split = ft_strsplit(path, ':');
 	return (split);
 }

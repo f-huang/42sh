@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:00:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/12 18:38:06 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/14 13:58:14 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int			exec_command(t_shell *sh, char **command)
 	char	**paths;
 	t_exec	ex;
 
-	if (!(paths = exec_get_envpath(sh)))
-		return (ERROR);
+	paths = exec_get_envpath(sh);
 	ft_bzero(&ex, sizeof(ex));
 	if (ft_strlen(command[0]) > ARG_MAX && (sh->last_return = 1))
 		return (print_error(paths, TOOLONG, command[0]));
