@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
+/*   Updated: 2016/12/15 14:20:21 by yfuks            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_42sh.h"
 #include "tools.h"
 #include "libft.h"
 #include "ast.h"
 #include "substitution.h"
 #include <signal.h>
-#include <stdio.h>//
+#include <stdio.h>
 #include "history.h"
 
 static void		clear_main(char **line, t_list **lst)
@@ -39,7 +51,7 @@ int				main(int ac, char **av)
 			loop_through_commands(&sh, lst_commands);
 			clear_main(&line, &lst_commands);
 		}
-		else //CTRL D
+		else
 		{
 			clear_main(&line, &lst_commands);
 			ft_putendl("exit");
