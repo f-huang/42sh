@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:01:19 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/14 19:55:06 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/15 15:45:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUILTIN_READ_H
 
 # include <stddef.h>
+# include <time.h>
+# include "ft_42sh.h"
 
 # define OPTION_D		(1 << 0)
 # define OPTION_E		(1 << 1)
@@ -49,12 +51,16 @@ typedef struct	s_read
 	char	delim;
 	int		nchars;
 	char	*prompt;
-	size_t	timeout;
+	time_t	timeout;
 	int		fd;
 }				t_read;
 
 int				read_get_options(char **av, t_read *tools);
 int				read_option_error(char *str, char *msg);
+
+int				read_input(t_shell *sh, t_read tools, char **line);
+
+int				split_line_into_fields(t_shell *sh, char **av, char *line);
 
 int				read_option_d(t_read *tools, char **av, int *i, int *j);
 int				read_option_n(t_read *tools, char **av, int *i, int *j);

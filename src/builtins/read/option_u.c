@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:48:02 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/14 19:58:06 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/15 15:05:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "ft_42sh.h"
 #include "tools.h"
+#include <fcntl.h>
 
 int			read_option_u(t_read *tools, char **av, int *i, int *j)
 {
@@ -28,8 +29,6 @@ int			read_option_u(t_read *tools, char **av, int *i, int *j)
 		{
 			tools->option |= OPTION_U;
 			tools->fd = ft_atoi(av[*i] + *j);
-			(*i)++;
-			*j = 0;
 			return (GOOD);
 		}
 		else

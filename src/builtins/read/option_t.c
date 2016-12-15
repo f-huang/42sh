@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:37:54 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/14 19:57:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/15 14:37:39 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int			read_option_t(t_read *tools, char **av, int *i, int *j)
 		{
 			tools->option |= OPTION_T;
 			tools->timeout = ft_atoi(av[*i] + *j);
-			(*i)++;
-			*j = 0;
 			return (GOOD);
 		}
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tl_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 10:31:13 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/24 10:36:17 by cjacquem         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:40:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t		tl_arrlen(char **arr)
 	size_t i;
 
 	i = 0;
-	while (arr[i])
+	while (arr && arr[i])
 		++i;
 	return (i);
 }

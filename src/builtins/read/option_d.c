@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 17:50:47 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/14 19:33:10 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/15 14:37:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	read_option_d(t_read *tools, char **av, int *i, int *j)
 		{
 			tools->option |= OPTION_D;
 			tools->delim = av[*i][*j];
-			(*i)++;
-			*j = 0;
 			return (GOOD);
 		}
 		*j = 0;
