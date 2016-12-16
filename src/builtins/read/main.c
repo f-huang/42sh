@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 11:51:06 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/15 17:38:19 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/16 18:36:11 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ static int	launch_read(t_shell *sh, t_read tools, char **av, int i)
 	line = NULL;
 	if (!read_input(sh, tools, &line))
 		return (ERROR);
+	if (!(tools.option & OPTION_R))
+		escape_line(&line);
 	split_line_into_fields(sh, av + i, line);
+	if (tools.option & OPTION_E)
+		ft_putendl(line);
 	ft_strdel(&line);
 	return (GOOD);
 }
@@ -31,22 +35,24 @@ static int	launch_read(t_shell *sh, t_read tools, char **av, int i)
 static int	read_start_timer(t_shell *sh, t_read tools, char **av, int i)
 {
 	struct timeval	tv;
-	fd_set			rfds;
+	fd_set			sock;
 	int				ret;
 
-	FD_ZERO(&rfds);
-	FD_SET(tools.option & OPTION_U ? tools.fd : 0, &rfds);
+	FD_ZERO(&sock);
+	FD_SET(tools.fd, &sock);
 	tv.tv_sec = tools.timeout;
 	tv.tv_usec = 0;
-	if ((ret = select(1, &rfds, NULL,NULL, &tv)) > 0)
+	if ((ret = select(tools.fd + 1, &sock, NULL,NULL, &tv)) > 0)
 	{
 		return (launch_read(sh, tools, av, i));
 	}
-	else
+	else if (ret == 0)
 	{
 		/* handle line display */
 		return (ERROR);
 	}
+	else
+		return (ERROR);
 }
 
 int		builtin_read(t_shell *sh, int ac, char **av)

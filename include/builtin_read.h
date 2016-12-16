@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:01:19 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/15 15:45:42 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/16 18:39:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,13 @@
 **		-u : read from given fd
 */
 
-/*
-**	TODO:
-**		atoi() for size_t
-**		Verif int max and size_t max for nchars and timeout
-*/
-
 typedef struct	s_read
 {
 	int		option;
 	char	delim;
 	int		nchars;
 	char	*prompt;
-	time_t	timeout;
+	size_t	timeout;
 	int		fd;
 }				t_read;
 
@@ -60,6 +54,7 @@ int				read_option_error(char *str, char *msg);
 
 int				read_input(t_shell *sh, t_read tools, char **line);
 
+void 			escape_line(char **line);
 int				split_line_into_fields(t_shell *sh, char **av, char *line);
 
 int				read_option_d(t_read *tools, char **av, int *i, int *j);
