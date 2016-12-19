@@ -6,10 +6,9 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:54:42 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/13 15:00:01 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/19 17:00:29 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libft.h"
 #include "environment.h"
@@ -101,8 +100,8 @@ static void	alpha_sort_tab(char ***tab)
 	i = 0;
 	while ((*tab)[i + 1])
 	{
-		tmp1 = (*tab)[i][0] != '1' ?(*tab)[i] : (*tab)[i] + 1;
-		tmp2 = (*tab)[i + 1][0] != '1' ?(*tab)[i + 1] : (*tab)[i + 1] + 1;
+		tmp1 = (*tab)[i][0] != '1' ? (*tab)[i] : (*tab)[i] + 1;
+		tmp2 = (*tab)[i + 1][0] != '1' ? (*tab)[i + 1] : (*tab)[i + 1] + 1;
 		if (ft_strcmp(tmp1, tmp2) > 0)
 		{
 			swap = (*tab)[i];

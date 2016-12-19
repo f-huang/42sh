@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:26:25 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/13 15:04:05 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/19 17:08:01 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	is_format_correct(char *str)
 	{
 		ft_putstr_fd("42sh: export: `", 2);
 		ft_putstr_fd(str, 2);
-		ft_putstr_fd("': not a valid identifier\n'", 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		return (ERROR);
 	}
 	return (GOOD);

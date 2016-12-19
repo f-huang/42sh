@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstenv_to_tab.c                                    :+:      :+:    :+:   */
+/*   lstvariable_len.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 16:53:59 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 16:56:40 by fhuang           ###   ########.fr       */
+/*   Created: 2016/12/19 16:55:35 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/19 17:06:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
 #include "environment.h"
-#include "libft.h"
 
-char			**lstenv_to_tab(t_variable *lst_env)
+size_t	lstvariable_len(t_variable *lstvariable)
 {
-	char	**tab;
-	int		i;
+	size_t	i;
 
-	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (lstvariable_len(lst_env) + 1))))
-		return (NULL);
 	i = 0;
-	while (lst_env)
+	while (lstvariable)
 	{
-		tab[i++] = lst_env->variable;
-		lst_env = lst_env->next;
+		i++;
+		lstvariable = lstvariable->next;
 	}
-	tab[i] = NULL;
-	return (tab);
+	return (i);
 }

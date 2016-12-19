@@ -77,6 +77,7 @@ typedef struct			s_shell
 	int					last_return;
 	t_variable			*lst_env;
 	t_variable			*lst_localvar;
+	t_variable			*lst_alias;
 	char				*bin_path;
 	t_termios			term;
 	t_winsize			*window;
@@ -98,7 +99,7 @@ typedef struct			s_bitfield
 **	BUILTIN CODE
 */
 # ifndef BUILTIN
-#  define BUILTIN "cd exit read unsetenv setenv export unset"
+#  define BUILTIN "alias unalias cd exit read unsetenv setenv export unset"
 # endif
 
 # ifndef NBBUILTIN

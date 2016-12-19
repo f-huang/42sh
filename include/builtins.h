@@ -6,12 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:35:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/14 18:01:34 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/19 19:09:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
+
+#include "ft_42sh.h"
 
 # ifndef OLDPWD
 #  define OLDPWD 0
@@ -31,6 +33,8 @@ typedef	struct	s_bnb
 	int			(*function)(t_shell *, int, char **);
 }				t_bnb;
 
+int				builtin_alias(t_shell *sh, int ac, char **av);
+int				builtin_unalias(t_shell *sh, int ac, char **av);
 int				builtin_setenv(t_shell *sh, int ac, char **av);
 int				builtin_unsetenv(t_shell *sh, int ac, char **av);
 int				builtin_exit(t_shell *sh, int ac, char **av);
@@ -49,6 +53,14 @@ _Bool			get_options(char **av, int *i);
 **	EXPORT
 */
 
-int				print_export(t_variable *lst_env, t_variable *lst_localvar);
+char			**create_variables_tab(t_variable *lst_env, t_variable *lst_localvar);
+void			print_export(t_variable *lst_env, t_variable *lst_localvar);
+
+
+/*
+**	ALIAS
+*/
+
+void			print_alias(t_variable *lst_alias);
 
 #endif

@@ -6,12 +6,12 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:50:15 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/13 15:05:58 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/19 17:41:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "environment.h"
+#include "builtins.h"
 #include "tools.h"
 
 static void	print_tab(char **tab)
@@ -26,7 +26,7 @@ static void	print_tab(char **tab)
 			ft_putendl(tab[i]);
 		else
 		{
-			j = 1;
+			j = 0;
 			while (tab[i][j] && tab[i][j] != '=')
 				ft_putchar(tab[i][j++]);
 			ft_putstr("='");
