@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:43:43 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/20 17:34:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 17:46:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int			builtin_alias(t_shell *sh, int ac, char **av)
 	char	*value;
 
 	error = 0;
-	if (ac && (i = is_option(av)) == -1)
+	if ((i = is_option(av)) == -1 && ac)
 		return (1);
 	if (!av[i])
 		print_alias(sh->lst_alias);
