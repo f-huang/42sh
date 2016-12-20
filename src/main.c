@@ -2,7 +2,7 @@
 #include "tools.h"
 #include "libft.h"
 #include "ast.h"
-#include "substitution.h"
+#include "expansion.h"
 #include <signal.h>
 #include <stdio.h>//
 #include "history.h"
@@ -35,6 +35,7 @@ int				main(int ac, char **av)
 		if (get_line(0, &line) == 1)
 		{
 			save_command_line(&sh.lst_history, line);
+			alias_substitution(sh.lst_alias, &line);
 			lexer_parser(line, &lst_commands);
 			loop_through_commands(&sh, lst_commands);
 			clear_main(&line, &lst_commands);
