@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 16:06:20 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/16 16:16:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 17:37:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	shift_string(char *str)
 	ft_strclr(str + i);
 }
 
-void 	escape_line(char **line)
+void		escape_line(char **line)
 {
 	int		i;
 

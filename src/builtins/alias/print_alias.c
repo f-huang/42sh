@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 16:49:44 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 17:55:24 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 17:37:33 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include "tools.h"
 #include "libft.h"
 
-static void	sort_alpha_tab(char ***tab)
+static void		sort_alpha_tab(char ***tab)
 {
-	int		i;
-	char	*swap;
+	int			i;
+	char		*swap;
 
 	i = 0;
 	while ((*tab)[i + 1])
@@ -50,14 +50,15 @@ static size_t	biggest_indext(t_variable *lst_alias)
 	return (index_size);
 }
 
-static char	**get_alias_table(t_variable *lst_alias)
+static char		**get_alias_table(t_variable *lst_alias)
 {
 	t_variable	*ptr;
 	size_t		index_size;
 	char		**tab;
 	int			i;
 
-	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (lstvariable_len(lst_alias) + 1))))
+	if (!(tab = (char**)ft_memalloc(sizeof(char*) *\
+		(lstvariable_len(lst_alias) + 1))))
 		return (NULL);
 	ptr = lst_alias;
 	index_size = biggest_indext(lst_alias);
@@ -73,10 +74,10 @@ static char	**get_alias_table(t_variable *lst_alias)
 	return (tab);
 }
 
-static void	print_tab(char **tab)
+static void		print_tab(char **tab)
 {
-	int		i;
-	int		j;
+	int			i;
+	int			j;
 
 	i = 0;
 	while (tab[i])
@@ -92,9 +93,9 @@ static void	print_tab(char **tab)
 	}
 }
 
-void		print_alias(t_variable *lst_alias)
+void			print_alias(t_variable *lst_alias)
 {
-	char	**tab;
+	char		**tab;
 
 	if (!lst_alias)
 		return ;

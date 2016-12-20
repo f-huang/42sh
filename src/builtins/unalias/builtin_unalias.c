@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/19 18:11:48 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 19:21:41 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 17:39:11 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ static int	is_all_option(char **av, int *option)
 	return (i);
 }
 
-
-int		builtin_unalias(t_shell *sh, int ac, char **av)
+int			builtin_unalias(t_shell *sh, int ac, char **av)
 {
 	int		i;
 	int		option;
