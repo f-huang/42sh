@@ -14,7 +14,7 @@
 #include "tools.h"
 #include "libft.h"
 #include "ast.h"
-#include "substitution.h"
+#include "expansion.h"
 #include <signal.h>
 #include <stdio.h>
 #include "history.h"

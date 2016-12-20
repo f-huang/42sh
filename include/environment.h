@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:37:26 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 14:37:27 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/19 16:57:04 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ typedef struct			s_variable
 int						create_elem(t_variable **lst_env, char *variable);
 void					clear_env_list(t_variable **lst_env);
 
+size_t					lstvariable_len(t_variable *lstvariable);
 char					**lstenv_to_tab(t_variable *lst_env);
+char					*var_getkey(char *variable);
 
 char					*sh_getenv(t_variable *lst_env, char *key);
 int						sh_setenv(t_variable **lst_env, char *key, char *value);

@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstenv_to_tab.c                                    :+:      :+:    :+:   */
+/*   tl_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 16:53:59 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 16:56:40 by fhuang           ###   ########.fr       */
+/*   Created: 2016/12/16 18:06:56 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/16 18:18:32 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "environment.h"
 #include "libft.h"
 
-char			**lstenv_to_tab(t_variable *lst_env)
+long long	tl_atoll(const char *str)
 {
-	char	**tab;
-	int		i;
+	long long		res;
+	int				i;
+	int				negatif;
 
-	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (lstvariable_len(lst_env) + 1))))
-		return (NULL);
+	res = 0;
 	i = 0;
-	while (lst_env)
+	while (str[i] && ft_isspace(str[i]))
+		++i;
+	negatif = str[i] == '-' ? -1 : 1;
+	if (str[i] == '-' || str[i] == '+')
+		++i;
+	while (str[i] && ft_isdigit(str[i]))
 	{
-		tab[i++] = lst_env->variable;
-		lst_env = lst_env->next;
+		res *= 10;
+		res += negatif * (str[i] - '0');
+		++i;
 	}
-	tab[i] = NULL;
-	return (tab);
+	return (res);
 }

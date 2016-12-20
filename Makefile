@@ -12,7 +12,7 @@ BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
 DIRBUILTINS	:= obj/builtins/
-SRC		:= $(shell find src -type d \( -path src/builtins/env -o -path src/builtins/echo -o -path src/builtins/read \) -prune -o -type f -print)
+SRC		:= $(shell find src -type d \( -path src/builtins/env -o -path src/builtins/echo \) -prune -o -type f -print)
 OBJ		:= $(SRC:src/%.c=obj/%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 ifeq ($(OS),Linux)
@@ -56,19 +56,19 @@ OBJECHO	:=	$(SRCECHO:src/builtins/echo/%.c=obj/builtins/echo/%.o)
 # ================
 
 # ===== read =====
-DIRREAD	:=	src/builtins/read/
-OBJDIRREAD	:= obj/builtins/read/
-BINREAD	:=	bin/read
-SRCREAD	:=	$(shell find src/builtins/read -type f -print)
-OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
+#DIRREAD	:=	src/builtins/read/
+#OBJDIRREAD	:= obj/builtins/read/
+#BINREAD	:=	bin/read
+#SRCREAD	:=	$(shell find src/builtins/read -type f -print)
+#OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
 # ================
 
-.PHONY: all libft echo env read norme clean fclean re
+.PHONY: all libft echo env norme clean fclean re
 .SILENT:
 
 all: $(NAME)
 
-$(NAME): libft env echo read $(OBJ)
+$(NAME): libft env echo $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
 	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
@@ -80,6 +80,7 @@ $(CACHEF):
 	test -d $(OBJDIR) || mkdir $(OBJDIR)
 	test -d $(DIRBUILTINS) || mkdir $(DIRBUILTINS)
 	test -d $(DIRBUILTINS)cd || mkdir $(DIRBUILTINS)cd
+	test -d $(DIRBUILTINS)read || mkdir $(DIRBUILTINS)read
 	test -d $(DIRBUILTINS)setenv || mkdir $(DIRBUILTINS)setenv
 	test -d $(DIRBUILTINS)unsetenv || mkdir $(DIRBUILTINS)unsetenv
 	test -d $(DIRBUILTINS)exit || mkdir $(DIRBUILTINS)exit
@@ -87,7 +88,6 @@ $(CACHEF):
 	test -d $(DIRBUILTINS)unset || mkdir $(DIRBUILTINS)unset
 	test -d $(OBJDIRENV) || mkdir $(OBJDIRENV)
 	test -d $(OBJDIRECHO) || mkdir $(OBJDIRECHO)
-	test -d $(OBJDIRREAD) || mkdir $(OBJDIRREAD)
 	test -d $(OBJDIR)environment || mkdir $(OBJDIR)environment
 	test -d $(OBJDIR)expansion || mkdir $(OBJDIR)expansion
 	test -d $(OBJDIR)ast || mkdir $(OBJDIR)ast
@@ -104,9 +104,9 @@ $(CACHEF):
 libft:
 	make -C $(LIBDIR)
 
-read: $(OBJREAD)
-	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)
-	printf $(BLUE)" $@ compiled!\n"$(EOC)
+#read: $(OBJREAD)
+#	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)
+#	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 echo: $(OBJECHO)
 	$(CC) $(CFLAGS) -o $(BINECHO) $(OBJECHO) $(LIBPATH) $(LIB) $(INC)

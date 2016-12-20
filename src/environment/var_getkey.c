@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstenv_to_tab.c                                    :+:      :+:    :+:   */
+/*   var_getkey.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 16:53:59 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 16:56:40 by fhuang           ###   ########.fr       */
+/*   Created: 2016/12/13 12:19:57 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/19 17:37:19 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
 #include "libft.h"
+#include "tools.h"
 
-char			**lstenv_to_tab(t_variable *lst_env)
+/*
+**		Get the string before the first equal character found.
+**		The returned string should be freed.
+*/
+
+char		*var_getkey(char *variable)
 {
-	char	**tab;
-	int		i;
+	char	*tmp;
 
-	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (lstvariable_len(lst_env) + 1))))
-		return (NULL);
-	i = 0;
-	while (lst_env)
-	{
-		tab[i++] = lst_env->variable;
-		lst_env = lst_env->next;
-	}
-	tab[i] = NULL;
-	return (tab);
+	if ((tmp = ft_strchr(variable, '=')))
+		return (tl_strndup(variable, (size_t)(tmp - variable)));
+	return (NULL);
 }

@@ -1,31 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstenv_to_tab.c                                    :+:      :+:    :+:   */
+/*   escape_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 16:53:59 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 16:56:40 by fhuang           ###   ########.fr       */
+/*   Created: 2016/12/16 16:06:20 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/16 16:16:20 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "environment.h"
 #include "libft.h"
 
-char			**lstenv_to_tab(t_variable *lst_env)
+static void	shift_string(char *str)
 {
-	char	**tab;
 	int		i;
 
-	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (lstvariable_len(lst_env) + 1))))
-		return (NULL);
 	i = 0;
-	while (lst_env)
+	while (str[i + 1])
 	{
-		tab[i++] = lst_env->variable;
-		lst_env = lst_env->next;
+		str[i] = str[i + 1];
+		i++;
 	}
-	tab[i] = NULL;
-	return (tab);
+	ft_strclr(str + i);
+}
+
+void 	escape_line(char **line)
+{
+	int		i;
+
+	i = 0;
+	while ((*line)[i])
+	{
+		if ((*line)[i] == '\\')
+		{
+			if ((*line)[i + 1] == '\\')
+				shift_string((*line) + i);
+			else
+				i++;
+		}
+		i++;
+	}
 }

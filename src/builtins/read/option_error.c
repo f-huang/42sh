@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstenv_to_tab.c                                    :+:      :+:    :+:   */
+/*   option_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 16:53:59 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 16:56:40 by fhuang           ###   ########.fr       */
+/*   Created: 2016/12/14 19:51:57 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/14 19:55:01 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "environment.h"
 #include "libft.h"
+#include "ft_42sh.h"
 
-char			**lstenv_to_tab(t_variable *lst_env)
+int		read_option_error(char *str, char *msg)
 {
-	char	**tab;
-	int		i;
-
-	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (lstvariable_len(lst_env) + 1))))
-		return (NULL);
-	i = 0;
-	while (lst_env)
-	{
-		tab[i++] = lst_env->variable;
-		lst_env = lst_env->next;
-	}
-	tab[i] = NULL;
-	return (tab);
+	ft_putstr_fd("42sh: read: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(msg, 2);
+	return (ERROR);
 }

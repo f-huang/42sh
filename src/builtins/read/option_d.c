@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstenv_to_tab.c                                    :+:      :+:    :+:   */
+/*   option_d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 16:53:59 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 16:56:40 by fhuang           ###   ########.fr       */
+/*   Created: 2016/12/14 17:50:47 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/15 14:37:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "environment.h"
+#include "builtin_read.h"
 #include "libft.h"
+#include "ft_42sh.h"
 
-char			**lstenv_to_tab(t_variable *lst_env)
+int	read_option_d(t_read *tools, char **av, int *i, int *j)
 {
-	char	**tab;
-	int		i;
-
-	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (lstvariable_len(lst_env) + 1))))
-		return (NULL);
-	i = 0;
-	while (lst_env)
+	while (av[*i])
 	{
-		tab[i++] = lst_env->variable;
-		lst_env = lst_env->next;
+		while (av[*i][*j])
+		{
+			tools->option |= OPTION_D;
+			tools->delim = av[*i][*j];
+			return (GOOD);
+		}
+		*j = 0;
+		(*i)++;
 	}
-	tab[i] = NULL;
-	return (tab);
+	ft_putendl_fd("42sh: read: -d: option requires an argument", 2);
+	return (ERROR);
 }

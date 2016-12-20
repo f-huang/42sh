@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/08 15:11:53 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 15:37:23 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,8 @@ int				lexer_parser(char *command_line, t_list **lst)
 		if (!check_inhibitors(lst, command_line, &i, &open))
 			return (ERROR);
 		if (command_line[i] == '#' &&\
-			(i == 0 || (i > 0 && command_line[i - 1] != '\\')) &&\
-			(i == 0 || i == 1 || (i > 1 && command_line[i - 2] != '\\')) &&\
-			(i == 0 || (i > 0 && tl_iswhitespace(command_line[i - 1]))))
+			(i == 0 || (i > 0 && tl_iswhitespace(command_line[i - 1]))) &&\
+			(i == 0 || i == 1 || (i > 1 && command_line[i - 2] != '\\')))
 			ft_strclr(command_line + i);
 		if (command_line[i] == ';' && !open.squote && !open.dquote)
 		{

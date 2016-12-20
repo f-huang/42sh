@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/13 18:20:55 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/20 16:43:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include "libft.h"
-#include "substitution.h"
+#include "expansion.h"
 
 static	int	exec_and(t_shell *sh, t_ast *ast)
 {

@@ -6,13 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:26:25 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 15:07:29 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/19 17:08:01 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_42sh.h"
 #include "libft.h"
 #include "tools.h"
+#include "builtins.h"
 
 static int	is_format_correct(char *str)
 {
@@ -35,7 +36,7 @@ static int	is_format_correct(char *str)
 	{
 		ft_putstr_fd("42sh: export: `", 2);
 		ft_putstr_fd(str, 2);
-		ft_putstr_fd("': not a valid identifier\n'", 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		return (ERROR);
 	}
 	return (GOOD);
@@ -65,7 +66,7 @@ int			builtin_export(t_shell *sh, int ac, char **av)
 
 	error = 0;
 	if (ac == 1)
-		sh_print_env(sh->lst_localvar);
+		print_export(sh->lst_env, sh->lst_localvar);
 	else
 	{
 		i = 1;

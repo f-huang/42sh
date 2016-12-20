@@ -6,12 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:35:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 14:35:18 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 16:44:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
+
+#include "ft_42sh.h"
 
 # ifndef OLDPWD
 #  define OLDPWD 0
@@ -35,6 +37,7 @@ int				builtin_setenv(t_shell *sh, int ac, char **av);
 int				builtin_unsetenv(t_shell *sh, int ac, char **av);
 int				builtin_exit(t_shell *sh, int ac, char **av);
 int				builtin_export(t_shell *sh, int ac, char **av);
+int				builtin_read(t_shell *sh, int ac, char **av);
 int				builtin_unset(t_shell *sh, int ac, char **av);
 
 /*
@@ -43,5 +46,19 @@ int				builtin_unset(t_shell *sh, int ac, char **av);
 
 int				builtin_cd(t_shell *sh, int ac, char **av);
 _Bool			get_options(char **av, int *i);
+
+/*
+**	EXPORT
+*/
+
+char			**create_variables_tab(t_variable *lst_env, t_variable *lst_localvar);
+void			print_export(t_variable *lst_env, t_variable *lst_localvar);
+
+
+/*
+**	ALIAS
+*/
+
+void			print_alias(t_variable *lst_alias);
 
 #endif

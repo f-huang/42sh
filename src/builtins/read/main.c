@@ -6,21 +6,71 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 11:51:06 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/08 15:56:19 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/16 18:36:11 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-**		Synopsis
-**		read [-ers] [-u <FD>] [-t <TIMEOUT>] [-p <PROMPT>] [-a <ARRAY>]\
-**		[-n <NCHARS>] [-d <DELIM>] [-i <TEXT>] [<NAME...>]
-*/
-
+#include "builtin_read.h"
+#include "libft.h"
 #include "ft_42sh.h"
+#include "tools.h"
+#include <sys/select.h>
 
-int		main(int ac, char **av)
+static int	launch_read(t_shell *sh, t_read tools, char **av, int i)
 {
+	char			*line;
+
+	line = NULL;
+	if (!read_input(sh, tools, &line))
+		return (ERROR);
+	if (!(tools.option & OPTION_R))
+		escape_line(&line);
+	split_line_into_fields(sh, av + i, line);
+	if (tools.option & OPTION_E)
+		ft_putendl(line);
+	ft_strdel(&line);
+	return (GOOD);
+}
+
+static int	read_start_timer(t_shell *sh, t_read tools, char **av, int i)
+{
+	struct timeval	tv;
+	fd_set			sock;
+	int				ret;
+
+	FD_ZERO(&sock);
+	FD_SET(tools.fd, &sock);
+	tv.tv_sec = tools.timeout;
+	tv.tv_usec = 0;
+	if ((ret = select(tools.fd + 1, &sock, NULL,NULL, &tv)) > 0)
+	{
+		return (launch_read(sh, tools, av, i));
+	}
+	else if (ret == 0)
+	{
+		/* handle line display */
+		return (ERROR);
+	}
+	else
+		return (ERROR);
+}
+
+int		builtin_read(t_shell *sh, int ac, char **av)
+{
+	int				i;
+	t_read			tools;
+
+	ft_bzero(&tools, sizeof(t_read));
+	if ((i = read_get_options(av, &tools)) == -1)
+		return (1);
+	if (tools.option & OPTION_T)
+	{
+		if (!read_start_timer(sh, tools, av, i))
+			return (1);
+	}
+	else
+		if (!launch_read(sh, tools, av, i))
+			return (1);
 	(void)ac;
-	(void)av;
 	return (0);
 }

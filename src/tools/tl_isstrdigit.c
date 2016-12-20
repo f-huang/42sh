@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstenv_to_tab.c                                    :+:      :+:    :+:   */
+/*   tl_isstrdigit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 16:53:59 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 16:56:40 by fhuang           ###   ########.fr       */
+/*   Created: 2016/12/14 19:49:14 by fhuang            #+#    #+#             */
+/*   Updated: 2016/12/14 19:51:21 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "environment.h"
 #include "libft.h"
+#include "ft_42sh.h"
 
-char			**lstenv_to_tab(t_variable *lst_env)
+int	tl_isstrdigit(char *str)
 {
-	char	**tab;
 	int		i;
 
-	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (lstvariable_len(lst_env) + 1))))
-		return (NULL);
 	i = 0;
-	while (lst_env)
+	while (str[i])
 	{
-		tab[i++] = lst_env->variable;
-		lst_env = lst_env->next;
+		if (!ft_isdigit(str[i]))
+			return (ERROR);
+		i++;
 	}
-	tab[i] = NULL;
-	return (tab);
+	return (GOOD);
 }
