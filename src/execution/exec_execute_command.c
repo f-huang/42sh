@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 17:46:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/19 19:05:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 16:44:38 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@
 #include "environment.h"
 
 static	const	t_bnb	g_bnb[] = {
-	{"alias", builtin_alias},
 	{"cd", builtin_cd},
 	{"exit", builtin_exit},
 	{"read", builtin_read},
 	{"unsetenv", builtin_unsetenv},
 	{"setenv", builtin_setenv},
 	{"export", builtin_export},
-	{"unalias", builtin_unalias},
 	{"unset", builtin_unset},
 	{0, 0}
 };

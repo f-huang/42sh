@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 10:39:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/08 16:46:49 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/19 15:56:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,23 @@
 static char	*dollar_and_tilde(t_shell *sh, char *cmd)
 {
 	size_t	i;
-	_Bool	single_quote;
-	_Bool	backslash;
+	int		double_quote;
+	int		backslash;
 
 	i = 0;
+	double_quote = -1;
 	while (cmd[i])
 	{
 		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
-		single_quote = cmd[i] == '\'' && backslash == 0 ? 1 : 0;
-		if (cmd[i] == '$' && cmd[i + 1] && backslash == 0 && single_quote == 0)
+		double_quote = cmd[i] == '\"' && !backslash ? -double_quote : double_quote;
+		if (cmd[i] == '$' && cmd[i + 1] && backslash == 0)
 		{
 			cmd = dollar(sh, cmd, cmd + i);
 			i = -1;
 		}
-		else if (cmd[i] == '~' && backslash == 0 && single_quote == 0)
+		else if (cmd[i] == '~' && backslash == 0)
 			tilde(sh, &cmd);
-		else if (single_quote == 1)
+		else if (cmd[i] == '\'' && backslash == 0 && double_quote == -1)
 			i += tl_jump_to_other_quote(cmd + i);
 		i++;
 	}

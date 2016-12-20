@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 13:27:22 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 16:47:10 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/19 16:08:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char		*remove_backslash(char *cmd)
 	{
 		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
 		if (cmd[i] == '\\' && backslash == 0 &&\
-			(cmd[i + 1] == '\'' || cmd[i + 1] == '\"' || cmd[i + 1] != '\\'))
+			(cmd[i + 1] == '\'' || cmd[i + 1] == '\"' || cmd[i + 1] == '\\'))
 			cmd = shift_backslash(cmd, i);
 		i++;
 	}
