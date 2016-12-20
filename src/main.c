@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/15 14:20:21 by yfuks            ###   ########.fr       */
+/*   Updated: 2016/12/20 19:41:50 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <signal.h>
 #include <stdio.h>
 #include "history.h"
+
+t_shell		g_sh;
 
 static void		clear_main(char **line, t_list **lst)
 {
@@ -44,10 +46,11 @@ int				main(int ac, char **av)
 	line = NULL;
 	while (prompt(&sh))
 	{
+		g_sh = sh;
 		if (get_line(0, &line) == 1)
 		{
 			save_command_line(&sh.lst_history, line);
-			lexer_parser(line, &lst_commands);
+			lexer_parser(&line, &lst_commands);
 			loop_through_commands(&sh, lst_commands);
 			clear_main(&line, &lst_commands);
 		}

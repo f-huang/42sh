@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:41:29 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 15:03:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 19:35:47 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	execute_line(t_shell *sh, char **line)
 	lst_commands = NULL;
 	if (!*line)
 		return (ERROR);
-	lexer_parser(*line, &lst_commands);
+	lexer_parser(line, &lst_commands);
 	loop_through_commands(sh, lst_commands);
 	tl_lstdelast(&lst_commands);
 	return (GOOD);

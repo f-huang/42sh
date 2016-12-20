@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 14:55:34 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 19:42:25 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 #define PROMPT "$> "
 
+extern	t_shell	g_sh;
+
 void		sig_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
 		ft_putchar('\n');
-		ft_putstr(PROMPT);
+		prompt(&g_sh);
 	}
 }

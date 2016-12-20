@@ -123,6 +123,6 @@ void					loop_through_commands(t_shell *sh,\
 int						pipe_command(void);
 int						get_heredocs(t_shell *sh, t_list **lst);
 int						exec_command(t_shell *sh, char **command);
-int						lexer_parser(char *command_line, t_list **lst);
+int						lexer_parser(char **command_line, t_list **lst);
 
 #endif
