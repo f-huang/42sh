@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:23:46 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/20 16:43:56 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/21 16:23:08 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ char					*dollar(t_shell *sh, char *acmd, char *ptr);
 int						tilde(t_shell *sh, char **acmd);
 char					*remove_quotes_and_backslash(char *cmd);
 
+int						alias_substitution(t_variable *lst_alias, char **line);
 #endif

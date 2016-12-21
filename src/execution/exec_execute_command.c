@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 17:46:09 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/20 16:44:38 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/21 16:19:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static	const	t_bnb	g_bnb[] = {
 	{"setenv", builtin_setenv},
 	{"export", builtin_export},
 	{"unset", builtin_unset},
+	{"alias", builtin_alias},
+	{"unalias", builtin_unalias},
 	{0, 0}
 };
 

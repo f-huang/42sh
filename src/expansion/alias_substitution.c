@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 15:47:41 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/20 17:31:04 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/21 16:34:33 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static int	search_for_alias(t_variable *lst_alias, char **line,\
 	char	*tmp_key;
 
 	tmp_key = initial_word;
+	ft_putendlcol(initial_word, RED);
 	while ((value = is_alias(lst_alias, tmp_key)))
 	{
 		value += ft_strlen(tmp_key) + 1;
@@ -79,7 +80,8 @@ static int	search_for_alias(t_variable *lst_alias, char **line,\
 	if (!ft_strequ(initial_word, tmp_key))
 	{
 		switch_string(line, *i, tmp_key, initial_word);
-		*i = *i + ft_strlen(tmp_key);
+		ft_putendlcol(*line, GREEN);
+		*i = ft_strlen(tmp_key) - ft_strlen(initial_word);
 		return (GOOD);
 	}
 	return (ERROR);
@@ -98,13 +100,21 @@ static int	find_first_word(t_variable *lst_alias, char **line,\
 		end = *i;
 		while ((*line)[end] && !tl_iswhitespace((*line)[end])\
 			&& (*line)[end] != ';')
+		{
+			if (((*line)[end] == '\"' || (*line)[end] == '\\') &&\
+				(end == 0 || (end > 0 && (*line)[end - 1] != '\\')))
+				end += tl_jump_to_other_quote(*line + end);
 			end++;
+		}
 		if (first_word)
 		{
 			word = tl_strndup(*line + *i, (end - *i));
 			search_for_alias(lst_alias, line, word, i);
 			ft_strdel(&word);
 		}
+		if (((*line)[*i] == '\"' || (*line)[*i] == '\\') &&\
+			(*i == 0 || (*i > 0 && (*line)[*i - 1] != '\\')))
+			*i += tl_jump_to_other_quote(*line + *i);
 		first_word = 0;
 		(*i)++;
 	}
@@ -125,6 +135,7 @@ int			alias_substitution(t_variable *lst_alias, char **line)
 		find_first_word(lst_alias, line, &i, 1);
 		while ((*line)[i] == ';')
 			i++;
+		len = ft_strlen(*line);
 	}
 	return (GOOD);
 }
