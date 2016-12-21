@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/20 19:47:10 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/21 15:56:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,29 @@ static int		quote_prompt(char c)
 	return (GOOD);
 }
 
-static int		is_line_fulfilled(char **command, char *line, size_t *i, char c)
+static int		is_line_fulfilled(char **command, char *line, size_t *i, char *c)
 {
 	int		squote;
 	int		dquote;
 
 	if (!(*command = tl_str3join(*command, line, "\n")))
 		return (ERROR);
-	squote = c == '\'' ? 1 : 0;
-	dquote = c == '\"' ? 1 : 0;
+	squote = *c == '\'' ? 1 : 0;
+	dquote = *c == '\"' ? 1 : 0;
 	while ((*command)[*i])
 	{
-		if ((*command)[*i] == c && *i > 1 && (*command)[*i - 1] != '\\')
+		if ((*command)[*i] == *c && *i > 1 && (*command)[*i - 1] != '\\')
+			*c == '\'' ? squote++ : dquote++;
+		else if (((*command)[*i] == '\"' || (*command)[*i] == '\'') &&\
+			*i > 1 && (*command)[*i - 1] != '\\' && !(squote % 2) && !(dquote % 2))
 		{
+			*c = (*command)[*i];
+			squote = *c == '\'' ? 1 : 0;
+			dquote = *c == '\"' ? 1 : 0;
 		}
 		(*i)++;
 	}
-	return (open % 2 ? ERROR : GOOD);
+	return (squote % 2 || dquote % 2 ? ERROR : GOOD);
 }
 
 static int		wait_for_end_of_quote(char **command, size_t *i, char c)
@@ -80,7 +86,7 @@ static int		wait_for_end_of_quote(char **command, size_t *i, char c)
 	line = NULL;
 	while (quote_prompt(c) && (ret = tl_get_next_line(0, &line)) > 0)
 	{
-		if (is_line_fulfilled(command, line, i, c))
+		if (is_line_fulfilled(command, line, i, &c))
 		{
 			break ;
 		}
