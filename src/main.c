@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include "history.h"
 
+t_shell		g_sh;
+
 static void		clear_main(char **line, t_list **lst)
 {
 	if (*line)
@@ -44,6 +46,7 @@ int				main(int ac, char **av)
 	line = NULL;
 	while (prompt(&sh))
 	{
+		g_sh = sh;
 		if (get_line(0, &line) == 1)
 		{
 			save_command_line(&sh.lst_history, line);
