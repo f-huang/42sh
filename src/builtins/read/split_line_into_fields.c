@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 15:30:02 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/15 19:57:24 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 17:38:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #define DEFAULT_IFS " \t\n\0"
 
-static int		is_ifs_char(char *ifs, char c)
+static int	is_ifs_char(char *ifs, char c)
 {
 	int		j;
 
@@ -31,18 +31,17 @@ static int		is_ifs_char(char *ifs, char c)
 	return (ERROR);
 }
 
-static int		set_read_arguments(t_shell *sh, char **av, char *line, char *ifs)
+static int	set_read_arguments(t_shell *sh, char **av, char *line, char *ifs)
 {
 	char	*value;
 	int		tmp;
 	int		i;
 	int		j;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	tmp = 0;
-	while (line[i] && av[j + 1])
-	{
+	while (line[++i] && av[j + 1])
 		if (is_ifs_char(ifs, line[i]))
 		{
 			if (i != tmp)
@@ -56,8 +55,6 @@ static int		set_read_arguments(t_shell *sh, char **av, char *line, char *ifs)
 				i++;
 			tmp = i;
 		}
-		i++;
-	}
 	if (!(value = ft_strdup(line + tmp)))
 		return (ERROR);
 	sh_setenv(&sh->lst_localvar, av[j++], value);
@@ -99,7 +96,7 @@ static void	epur_tab(char *value, char *ifs)
 	}
 }
 
-void	split_line_into_fields(t_shell *sh, char **av, char *line)
+void		split_line_into_fields(t_shell *sh, char **av, char *line)
 {
 	char	*ifs;
 	int		i;
