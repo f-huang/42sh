@@ -79,6 +79,8 @@ $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 $(CACHEF):
 	test -d $(OBJDIR) || mkdir $(OBJDIR)
 	test -d $(DIRBUILTINS) || mkdir $(DIRBUILTINS)
+	test -d $(DIRBUILTINS)alias || mkdir $(DIRBUILTINS)alias
+	test -d $(DIRBUILTINS)unalias || mkdir $(DIRBUILTINS)unalias
 	test -d $(DIRBUILTINS)cd || mkdir $(DIRBUILTINS)cd
 	test -d $(DIRBUILTINS)read || mkdir $(DIRBUILTINS)read
 	test -d $(DIRBUILTINS)setenv || mkdir $(DIRBUILTINS)setenv

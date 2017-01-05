@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 14:54:42 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 17:00:29 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 17:35:15 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include "tools.h"
 #include "builtins.h"
 
-static size_t	get_tabsize(t_variable *lst_env, t_variable *lst_localvar, size_t *indexsize)
+static size_t	get_tabsize(t_variable *lst_env, t_variable *lst_localvar,\
+															size_t *indexsize)
 {
 	t_variable	*ptr;
 	size_t		nb_index;
@@ -41,7 +42,7 @@ static size_t	get_tabsize(t_variable *lst_env, t_variable *lst_localvar, size_t 
 	return (nb_index);
 }
 
-static int	is_key_duplicate(char ***tab, char *variable)
+static int		is_key_duplicate(char ***tab, char *variable)
 {
 	size_t		len;
 	char		*key;
@@ -66,7 +67,8 @@ static int	is_key_duplicate(char ***tab, char *variable)
 	return (ERROR);
 }
 
-static int	copy_lst_to_tab(t_variable *lst_env, t_variable *lst_localvar, char ***tab, size_t indexsize)
+static int		copy_lst_to_tab(t_variable *lst_env, t_variable *lst_localvar,\
+												char ***tab, size_t indexsize)
 {
 	t_variable	*ptr;
 	int			i;
@@ -90,12 +92,12 @@ static int	copy_lst_to_tab(t_variable *lst_env, t_variable *lst_localvar, char *
 	return (GOOD);
 }
 
-static void	alpha_sort_tab(char ***tab)
+static void		alpha_sort_tab(char ***tab)
 {
-	int		i;
-	char	*swap;
-	char	*tmp1;
-	char	*tmp2;
+	int			i;
+	char		*swap;
+	char		*tmp1;
+	char		*tmp2;
 
 	i = 0;
 	while ((*tab)[i + 1])
@@ -113,11 +115,12 @@ static void	alpha_sort_tab(char ***tab)
 	}
 }
 
-char	**create_variables_tab(t_variable *lst_env, t_variable *lst_localvar)
+char			**create_variables_tab(t_variable *lst_env,\
+													t_variable *lst_localvar)
 {
-	char	**tab;
-	size_t	nb_index;
-	size_t	indexsize;
+	char		**tab;
+	size_t		nb_index;
+	size_t		indexsize;
 
 	tab = NULL;
 	indexsize = 0;

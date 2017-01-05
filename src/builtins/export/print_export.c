@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:50:15 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 17:41:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 17:35:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	print_tab(char **tab)
 	}
 }
 
-void	print_export(t_variable *lst_env, t_variable *lst_localvar)
+void		print_export(t_variable *lst_env, t_variable *lst_localvar)
 {
 	char	**tab;
 

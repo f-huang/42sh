@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/20 19:41:50 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/21 16:22:14 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int				main(int ac, char **av)
 		if (get_line(0, &line) == 1)
 		{
 			save_command_line(&sh.lst_history, line);
-			lexer_parser(&line, &lst_commands);
+			alias_substitution(sh.lst_alias, &line);
+			lexer_parser(line, &lst_commands);
 			loop_through_commands(&sh, lst_commands);
 			clear_main(&line, &lst_commands);
 		}

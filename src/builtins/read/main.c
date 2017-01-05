@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 11:51:06 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/16 18:36:11 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 17:36:23 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	read_start_timer(t_shell *sh, t_read tools, char **av, int i)
 	FD_SET(tools.fd, &sock);
 	tv.tv_sec = tools.timeout;
 	tv.tv_usec = 0;
-	if ((ret = select(tools.fd + 1, &sock, NULL,NULL, &tv)) > 0)
+	if ((ret = select(tools.fd + 1, &sock, NULL, NULL, &tv)) > 0)
 	{
 		return (launch_read(sh, tools, av, i));
 	}
@@ -55,7 +55,7 @@ static int	read_start_timer(t_shell *sh, t_read tools, char **av, int i)
 		return (ERROR);
 }
 
-int		builtin_read(t_shell *sh, int ac, char **av)
+int			builtin_read(t_shell *sh, int ac, char **av)
 {
 	int				i;
 	t_read			tools;
@@ -69,8 +69,10 @@ int		builtin_read(t_shell *sh, int ac, char **av)
 			return (1);
 	}
 	else
+	{
 		if (!launch_read(sh, tools, av, i))
 			return (1);
+	}
 	(void)ac;
 	return (0);
 }
