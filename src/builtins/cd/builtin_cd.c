@@ -67,12 +67,42 @@ static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 		sh_setenv(lst_env, "PWD", path);
 }
 
+static int	substitute_path(t_variable *lst_env, char **path)
+{
+	char	*pwd;
+	char	*p;
+
+	if (!(pwd = sh_getenv(lst_env, "PWD")))
+		return(cd_error(1, NULL));
+	if (ft_strequ(*path, "."))
+	{
+		ft_strdel(path);
+		if (!(*path = ft_strdup(pwd)))
+			return (ERROR);
+	}
+	else
+	{
+		p = ft_strrchr(pwd, '/');
+		if (p - pwd)
+		{
+			if (!(*path = ft_strndup(pwd, p - pwd)))
+				return (ERROR);
+		}
+		else
+			if (!(*path = ft_strdup("/")))
+				return (ERROR);
+	}
+	return (GOOD);
+}
+
 static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 {
 	struct stat	buf;
 
 	if (!path)
 		return (1);
+	if (ft_strequ(path, ".") || ft_strequ(path, ".."))
+		substitute_path(*lst_env, &path);
 	if (access(path, F_OK) == -1)
 		return (cd_error(3, path));
 	stat(path, &buf);
