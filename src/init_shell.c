@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:21 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/15 14:19:23 by yfuks            ###   ########.fr       */
+/*   Updated: 2017/01/06 15:33:46 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	copy_environment(t_variable **lst_env)
 	extern char	**environ;
 	int			i;
 
+	*env() = environ;
+	*get_home() = ft_getenv("HOME");
 	i = 0;
 	while (environ && environ[i])
 	{
