@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 14:08:58 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/06 15:30:08 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/09 19:14:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int				prompt(t_shell *sh)
 	int		length;
 
 	length = 0;
+	if (sh->last_return == 2)
+		return (-1);
 	if ((user = get_name(sh)))
 	{
 		ft_putstr("\033[1;32m");

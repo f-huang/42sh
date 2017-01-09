@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:21 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/06 15:33:46 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/09 18:41:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,16 @@ static int	increment_shlvl(t_variable **lst_env)
 static int	set_bin_path(char **bin_path, char *av_0)
 {
 	char	buffer[_POSIX_PATH_MAX + 1];
+	char	*tmp;
 
 	if (!getcwd(buffer, _POSIX_PATH_MAX + 1))
 		return (ERROR);
-	ft_strclr(av_0 + ft_strlen(av_0) - 4);
-	av_0 = ft_strcat(av_0, "bin/");
+	tmp = ft_strdup(av_0);
+	ft_strclr(tmp + ft_strlen(tmp) - 4);
+	// ft_strclr(av_0 + ft_strlen(av_0) - 4);
+	tmp = ft_strcat(tmp, "bin/");
 	if (!(*bin_path = tl_str3join(buffer,\
-		buffer[ft_strlen(buffer) - 1] == '/' ? "" : "/", av_0)))
+		buffer[ft_strlen(buffer) - 1] == '/' ? "" : "/", tmp)))
 		return (ERROR);
 	return (GOOD);
 }
