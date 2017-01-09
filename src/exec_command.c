@@ -38,7 +38,7 @@ int			exec_command(t_shell *sh, char **command)
 
 	paths = exec_get_envpath(sh);
 	ft_bzero(&ex, sizeof(ex));
-	if (ft_strlen(command[0]) > ARG_MAX && (sh->last_return = 1))
+	if (ft_strlen(command[0]) > _POSIX_ARG_MAX && (sh->last_return = 1))
 		return (print_error(paths, TOOLONG, command[0]));
 	if (!exec_is_command(&ex, sh, command, paths))
 		return (print_error(paths, NOTFOUND, command[0]));

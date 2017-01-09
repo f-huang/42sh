@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <sys/wait.h>
 #include "execution.h"
 #include "ast.h"
 #include "libft.h"
