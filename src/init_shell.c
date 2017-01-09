@@ -27,7 +27,7 @@ static int	copy_environment(t_variable **lst_env)
 	int			i;
 
 	*env() = environ;
-	*get_home() = ft_getenv("HOME");
+	*get_home() = *env() ? ft_getenv("HOME") : NULL;
 	i = 0;
 	while (environ && environ[i])
 	{
@@ -72,7 +72,11 @@ static int	set_bin_path(char **bin_path, char *av_0)
 	tmp = ft_strcat(tmp, "bin/");
 	if (!(*bin_path = tl_str3join(buffer,\
 		buffer[ft_strlen(buffer) - 1] == '/' ? "" : "/", tmp)))
+	{
+		ft_strdel(&tmp);
 		return (ERROR);
+	}
+	ft_strdel(&tmp);
 	return (GOOD);
 }
 

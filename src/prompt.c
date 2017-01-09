@@ -55,7 +55,7 @@ int				prompt(t_shell *sh)
 	int		length;
 
 	length = 0;
-	if (sh->last_return == 2)
+	if (sh->last_return == 2 && !(sh->last_return = 0))
 		return (-1);
 	if ((user = get_name(sh)))
 	{
