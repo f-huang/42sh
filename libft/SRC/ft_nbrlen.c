@@ -15,10 +15,8 @@
 size_t		ft_nbrlen(int n)
 {
 	size_t		size;
-	size_t		neg;
 
 	size = 1;
-	neg = n < 0 ? 1 : 0;
 	ABS(n);
 	while (n / 10)
 	{
