@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 14:08:58 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/08 14:50:15 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/06 15:30:08 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int				prompt(t_shell *sh)
 	}
 	ft_putstr("> ");
 	length += ft_strlen("> ");
+	*prompt_len() = length;
 	return (length);
 }

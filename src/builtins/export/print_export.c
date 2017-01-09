@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:50:15 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/06 15:07:10 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/20 17:35:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	print_tab(char **tab)
 			ft_putendl(tab[i]);
 		else
 		{
-			j = 1;
+			j = 0;
 			while (tab[i][j] && tab[i][j] != '=')
 				ft_putchar(tab[i][j++]);
 			ft_putstr("='");

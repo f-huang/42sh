@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:48:17 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 14:55:07 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/05 15:18:03 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			get_line(int fd, char **line)
 	char		*buf;
 	int			ret;
 
-	if ((fd < 0 && 255 < fd) || BUFF_SIZE <= 0 || !line)
+	if ((fd < 0 || 255 < fd) || BUFF_SIZE <= 0 || !line)
 		return (ERROR);
 	while (tmp)
 	{

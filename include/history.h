@@ -13,6 +13,7 @@
 #ifndef HISTORY_H
 # define HISTORY_H
 
+
 # ifndef HISTORY
 #  define HISTORY ".42sh_history"
 # endif
@@ -27,5 +28,7 @@ int				init_history(t_history **lst_history, t_variable *lst_env);
 int				save_command_line(t_history **lst_history, char *command_line);
 void			clear_history_list(t_history **lst_history,\
 					t_variable *lst_env);
+
+
 
 #endif

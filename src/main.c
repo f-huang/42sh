@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/05 14:59:17 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/09 13:53:03 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,25 @@ int				main(int ac, char **av)
 	if (!init_shell(&sh, av[0]))
 		return (ERROR);
 	line = NULL;
+	ft_init_list();
+	*old_command() = ft_strdup("");
 	while (prompt(&sh))
 	{
 		g_sh = sh;
-		if (get_line(0, &line) == 1)
+		if (ft_input() == 0)
 		{
-			save_command_line(&sh.lst_history, line);
-			alias_substitution(sh.lst_alias, &line);
-			lexer_parser(&line, &lst_commands);
+			ft_strcmp(*command(), *old_command()) ? ft_history(*command()) : 0;
+			ft_strdel(old_command());
+			*old_command() = *command() ? ft_strdup(*command()) : ft_strdup("");
+			save_command_line(&sh.lst_history, *command());
+			alias_substitution(sh.lst_alias, command());
+			lexer_parser(command(), &lst_commands);
 			loop_through_commands(&sh, lst_commands);
-			clear_main(&line, &lst_commands);
+			clear_main(command(), &lst_commands);
 		}
 		else
 		{
-			clear_main(&line, &lst_commands);
+			clear_main(command(), &lst_commands);
 			ft_putendl("exit");
 			clear_shell(&sh);
 			exit(0);

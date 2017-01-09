@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 17:31:44 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/09 14:36:57 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/12/01 21:15:07 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,10 @@ void		free_heredocs(t_cmdwr *cmd)
 			list_tofree = list_cursor;
 			list_cursor = list_cursor->next;
 			free(list_tofree->content);
-			list_tofree->content = NULL;
 			free(list_tofree);
-			list_tofree = NULL;
 		}
 		tofree = cursor;
 		cursor = cursor->next;
 		free(tofree);
-		tofree = NULL;
 	}
-	cmd->heredocs = NULL;
 }
