@@ -50,29 +50,44 @@ static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 
 static int	build_path(t_variable *lst_env, char **path)
 {
+	char	**tmp;
 	char	*pwd;
 	char	*p;
+	char	full_path[PATH_MAX];
+	int		i;
 
+	if (!(tmp = ft_strsplit(*path, '/')))
+		return (ERROR);
+	
 	if (!(pwd = sh_getenv(lst_env, "PWD")))
 		return(cd_error(1, NULL));
-	if (ft_strequ(*path, "."))
+	ft_strcpy(full_path, pwd);
+	i = 0;
+	while (tmp[i])
 	{
-		ft_strdel(path);
-		if (!(*path = ft_strdup(pwd)))
-			return (ERROR);
-	}
-	else
-	{
-		p = ft_strrchr(pwd, '/');
-		if (p - pwd)
+		ft_putendl(tmp[i]);//
+		if (!ft_strequ(tmp[i], "."))
 		{
-			if (!(*path = ft_strndup(pwd, p - pwd)))
-				return (ERROR);
+			if (ft_strequ(tmp[i], ".."))
+			{
+				p = full_path;
+				while (*p)
+					++p;
+				--p;
+				while (*p && *p != '/')
+				{
+					*p = '\0';
+					--p;
+				}
+			}
+			else
+				ft_strcat(full_path, tmp[i]);
 		}
-		else
-			if (!(*path = ft_strdup("/")))
-				return (ERROR);
+		++i;
 	}
+	ft_strdel(path);
+	*path = ft_strdup(full_path);
+	ft_putendl(full_path);//
 	return (GOOD);
 }
 
