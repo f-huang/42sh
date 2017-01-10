@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/09 19:08:27 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/10 15:26:38 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ extern	t_shell	g_sh;
 void	reset_input(void)
 {
 	ft_default_mode();
-	// if (g_sh.last_return != 2)
-	{
-		ft_putchar('\n');
-		prompt(&g_sh);
-	}
+	ft_putchar('\n');
+	prompt(&g_sh);
 	ft_strdel(command());
 	*command() = ft_strdup("");
 	ft_reset_quotes();
