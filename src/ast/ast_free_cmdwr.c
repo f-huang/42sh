@@ -14,6 +14,13 @@
 #include "libft.h"
 #include "tools.h"
 
+void	ast_free_list(void *memo, size_t size)
+{
+	(void)size;
+	free(memo);
+	memo = NULL;
+}
+
 void	ast_free_cmdwr(t_cmdwr **cmd)
 {
 	t_redirections	*ptr;
