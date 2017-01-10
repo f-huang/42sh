@@ -63,7 +63,6 @@ static int	search_for_alias(t_variable *lst_alias, char **line,\
 	char	*tmp_key;
 
 	tmp_key = initial_word;
-	ft_putendlcol(initial_word, RED);
 	while ((value = is_alias(lst_alias, tmp_key)))
 	{
 		value += ft_strlen(tmp_key) + 1;
@@ -80,7 +79,6 @@ static int	search_for_alias(t_variable *lst_alias, char **line,\
 	if (!ft_strequ(initial_word, tmp_key))
 	{
 		switch_string(line, *i, tmp_key, initial_word);
-		ft_putendlcol(*line, GREEN);
 		*i = ft_strlen(tmp_key) - ft_strlen(initial_word);
 		return (GOOD);
 	}

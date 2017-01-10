@@ -26,7 +26,7 @@ static void	print_tab(char **tab)
 			ft_putendl(tab[i]);
 		else
 		{
-			j = 0;
+			j = 1;
 			while (tab[i][j] && tab[i][j] != '=')
 				ft_putchar(tab[i][j++]);
 			ft_putstr("='");

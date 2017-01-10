@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/09 19:18:09 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/10 11:57:08 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int				main(int ac, char **av)
 	if (!init_shell(&sh, av[0]))
 		return (ERROR);
 	line = NULL;
-	ft_init_list();
 	*old_command() = ft_strdup("");
+	ft_init_list();
 	while (prompt(&sh))
 	{
 		g_sh = sh;
