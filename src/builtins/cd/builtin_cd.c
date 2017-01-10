@@ -15,17 +15,18 @@
 #include <sys/stat.h>
 #include "ft_42sh.h"
 #include "environment.h"
+#include "tools.h"
 #include "builtins.h"
 #include "libft.h"
 
 /*
-**			This function change the working directory of the current shell
-**			execution environment.
-**			cd -P -> Do not follow symbolic links
-**				(ex: PWD=/private/tmp)
-**			cd -L -> Follow symbolic links  >>>>> DEFAULT
-**				(ex: PWD=/tmp)
-*/
+ **			This function change the working directory of the current shell
+ **			execution environment.
+ **			cd -P -> Do not follow symbolic links
+ **				(ex: PWD=/private/tmp)
+ **			cd -L -> Follow symbolic links  >>>>> DEFAULT
+ **				(ex: PWD=/tmp)
+ */
 
 static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 {
@@ -48,46 +49,57 @@ static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 		sh_setenv(lst_env, "PWD", path);
 }
 
+static int	gear_tmp(char **path, char *tmp)
+{
+	char	*p;
+
+	if (ft_strequ(tmp, "."))
+		;
+	else if (ft_strequ(tmp, ".."))
+	{
+		p = *path;
+		while (*p)
+			++p;
+		--p;
+		while (*p && *p != '/')
+		{
+			*p = '\0';
+			--p;
+		}
+		if (*p == '/')
+			*p = '\0';
+	}
+	else
+	{
+		*path = tl_strmerge(*path, "/");
+		*path = tl_strmerge(*path, tmp);
+	}
+	return (GOOD);
+}
+
 static int	build_path(t_variable *lst_env, char **path)
 {
 	char	**tmp;
 	char	*pwd;
-	char	*p;
-	char	full_path[PATH_MAX];
 	int		i;
 
-	if (!(tmp = ft_strsplit(*path, '/')))
-		return (ERROR);
-	
-	if (!(pwd = sh_getenv(lst_env, "PWD")))
-		return(cd_error(1, NULL));
-	ft_strcpy(full_path, pwd);
-	i = 0;
-	while (tmp[i])
+	tmp = NULL;
+	if (*path[0] != '/')
 	{
-		ft_putendl(tmp[i]);//
-		if (!ft_strequ(tmp[i], "."))
+		if (!(pwd = sh_getenv(lst_env, "PWD")))
+			return(cd_error(1, NULL));
+		if (!(tmp = ft_strsplit(*path, '/')))
+			return (ERROR);
+		if (!(*path = ft_strdup(pwd)))
+			return (ERROR);
+		i = 0;
+		while (tmp[i])
 		{
-			if (ft_strequ(tmp[i], ".."))
-			{
-				p = full_path;
-				while (*p)
-					++p;
-				--p;
-				while (*p && *p != '/')
-				{
-					*p = '\0';
-					--p;
-				}
-			}
-			else
-				ft_strcat(full_path, tmp[i]);
+			gear_tmp(path, tmp[i]);
+			++i;
 		}
-		++i;
+		tl_freedoubletab(tmp);
 	}
-	ft_strdel(path);
-	*path = ft_strdup(full_path);
-	ft_putendl(full_path);//
 	return (GOOD);
 }
 
@@ -108,6 +120,7 @@ static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 	if (chdir(path) == -1)
 		return (1);
 	set_pwd(lst_env, path, follow_sl);
+	ft_strdel(&path);
 	return (0);
 }
 
