@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:35:41 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 13:09:23 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/10 16:29:59 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ void	ft_commandcase(char *pattern)
 {
 	t_comp	p;
 
-	p.path = ft_getenv("PATH");
-	p.splitted_path = ft_strsplit(p.path, ':');
+	p.path = ft_getenv("PATH") ? ft_getenv("PATH") : NULL;
+	p.splitted_path = p.path ? ft_strsplit(p.path, ':') : NULL;
 	p.t = 0;
-	while (p.splitted_path[p.t])
+	while (p.splitted_path && p.splitted_path[p.t])
 	{
 		if (!(p.dir = opendir(p.splitted_path[p.t])))
 			return ;
