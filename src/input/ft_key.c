@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:44:58 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:45:33 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:04:16 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int		key_get(void)
 
 	ft_raw_mode();
 	read(0, &c, 1);
+	if (!ft_isvalid(c))
+		return (-3);
 	if (c == '\x9' || c == '\x4' || c == '\x18' || c == '\x15' || c == '\x17' ||
 			c == '\x7f' || c == '\xa')
 		return (get_basics(c));

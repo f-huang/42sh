@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:44:25 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:44:40 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:03:24 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		ft_input(void)
 	{
 		cor()->len = *command() ? ft_strlen(*command()) : 0;
 		key = key_get();
+		if (key == -3)
+			continue ;
 		(key != -2) ? key_dump(key) : 0;
 		if (!key)
 		{
