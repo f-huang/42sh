@@ -27,25 +27,6 @@
 **				(ex: PWD=/tmp)
 */
 
-static int	cd_error(int index, char *path)
-{
-	const char	*error_msg[] = {
-		"Too many arguments.\n",
-		"'HOME' variable not set.\n",
-		"'OLDPWD' variable not set.\n",
-		": No such file or directory.\n",
-		": Not a directory.\n",
-		": Permission denied.\n",
-		NULL
-	};
-
-	ft_putstr_fd("cd : ", 2);
-	if (index > 2 && index < 6 && path)
-		ft_putstr_fd(path, 2);
-	ft_putstr_fd(error_msg[index], 2);
-	return (1);
-}
-
 static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 {
 	struct stat	buf;
@@ -67,7 +48,7 @@ static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 		sh_setenv(lst_env, "PWD", path);
 }
 
-static int	substitute_path(t_variable *lst_env, char **path)
+static int	build_path(t_variable *lst_env, char **path)
 {
 	char	*pwd;
 	char	*p;
@@ -101,8 +82,7 @@ static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 
 	if (!path)
 		return (1);
-	if (ft_strequ(path, ".") || ft_strequ(path, ".."))
-		substitute_path(*lst_env, &path);
+	build_path(*lst_env, &path);
 	if (access(path, F_OK) == -1)
 		return (cd_error(3, path));
 	stat(path, &buf);
