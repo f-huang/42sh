@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:21 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/10 11:56:50 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/10 12:53:46 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "tools.h"
 #include "environment.h"
 #include "history.h"
+#include <pwd.h>
 
 /*
 **		This file is initalizing the shell. (Termios and environment).
@@ -26,8 +27,7 @@ static int	copy_environment(t_variable **lst_env)
 	extern char	**environ;
 	int			i;
 
-	*env() = environ;
-	*get_home() = *env() && ft_getenv("HOME") ? ft_getenv("HOME") : ft_strdup("/tmp");
+	*get_home() = ft_strjoin("/Users/", getpwuid(getuid())->pw_name);
 	i = 0;
 	while (environ && environ[i])
 	{
