@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/08 15:54:45 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/11 10:11:25 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 #include "libft.h"
 
 /*
- **			This function change the working directory of the current shell
- **			execution environment.
- **			cd -P -> Do not follow symbolic links
- **				(ex: PWD=/private/tmp)
- **			cd -L -> Follow symbolic links  >>>>> DEFAULT
- **				(ex: PWD=/tmp)
- */
+**			This function change the working directory of the current shell
+**			execution environment.
+**			cd -P -> Do not follow symbolic links
+**				(ex: PWD=/private/tmp)
+**			cd -L -> Follow symbolic links  >>>>> DEFAULT
+**				(ex: PWD=/tmp)
+*/
 
 static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 {
@@ -87,7 +87,7 @@ static int	build_path(t_variable *lst_env, char **path)
 	if (*path[0] != '/')
 	{
 		if (!(pwd = sh_getenv(lst_env, "PWD")))
-			return(cd_error(1, NULL));
+			return (cd_error(1, NULL));
 		if (!(tmp = ft_strsplit(*path, '/')))
 			return (ERROR);
 		if (!(*path = ft_strdup(pwd)))
