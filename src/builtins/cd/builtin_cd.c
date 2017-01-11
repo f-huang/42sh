@@ -70,10 +70,7 @@ static int	gear_tmp(char **path, char *tmp)
 			*p = '\0';
 	}
 	else
-	{
-		*path = tl_strmerge(*path, "/");
 		*path = tl_strmerge(*path, tmp);
-	}
 	return (GOOD);
 }
 
@@ -90,7 +87,7 @@ static int	build_path(t_variable *lst_env, char **path)
 			return (cd_error(1, NULL));
 		if (!(tmp = ft_strsplit(*path, '/')))
 			return (ERROR);
-		if (!(*path = ft_strdup(pwd)))
+		if (!(*path = ft_strjoin(pwd, "/")))
 			return (ERROR);
 		i = 0;
 		while (tmp[i])
