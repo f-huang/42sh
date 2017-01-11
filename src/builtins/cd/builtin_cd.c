@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/11 10:11:25 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/11 10:29:30 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	gear_tmp(char **path, char *tmp)
 			*p = '\0';
 			--p;
 		}
-		if (*p == '/')
+		if (*p == '/' && ft_strlen(*path) > 1)
 			*p = '\0';
 	}
 	else
@@ -120,7 +120,6 @@ static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 	if (chdir(path) == -1)
 		return (1);
 	set_pwd(lst_env, path, follow_sl);
-	ft_strdel(&path);
 	return (0);
 }
 
