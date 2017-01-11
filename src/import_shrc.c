@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:41:29 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/09 18:11:52 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/11 22:33:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	execute_line(t_shell *sh, char **line)
 	lst_commands = NULL;
 	if (!*line)
 		return (ERROR);
-		ft_putendlcol(*line, RED);
 	lexer_parser(line, &lst_commands);
 	loop_through_commands(sh, lst_commands);
 	tl_lstdelast(&lst_commands);
@@ -48,7 +47,7 @@ int			import_shrc(t_shell *sh)
 	if (fd == -1)
 		return (ERROR);
 	line = NULL;
-	while (tl_get_next_line(fd, &line))
+	while (tl_get_next_line(fd, &line) > 0)
 	{
 		execute_line(sh, &line);
 		ft_strdel(&line);

@@ -68,6 +68,7 @@ OBJECHO	:=	$(SRCECHO:src/builtins/echo/%.c=obj/builtins/echo/%.o)
 .SILENT:
 
 all: $(NAME)
+	echo "alias ls='ls -G'\\nexport TUTU='ALLO'\\nsetenv TUTU 'BYE'" > ~/.42shrc
 
 $(NAME): libft env echo $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)

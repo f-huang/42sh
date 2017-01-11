@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 14:08:58 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/10 11:38:16 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/11 22:11:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "environment.h"
 #include "libft.h"
 #include <stdlib.h>
+
 
 static	char	*get_name(t_shell *sh)
 {
@@ -55,8 +56,6 @@ int				prompt(t_shell *sh)
 	int		length;
 
 	length = 0;
-	if (sh->last_return == 2)
-		return (-1);
 	if ((user = get_name(sh)))
 	{
 		ft_putstr("\033[1;32m");

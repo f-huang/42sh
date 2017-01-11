@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/10 11:57:08 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/11 22:11:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include "history.h"
 
 t_shell		g_sh;
-
 static void		clear_main(char **line, t_list **lst)
 {
 	if (*line)
@@ -32,18 +31,21 @@ static void		clear_main(char **line, t_list **lst)
 		tl_lstdelast(lst);
 }
 
+static void		call_signal(void)
+{
+	signal(SIGINT, sig_handler);
+}
+
+
 int				main(int ac, char **av)
 {
 	t_shell		sh;
-	char		*line;
 	t_list		*lst_commands;
 
 	lst_commands = NULL;
-	if (signal(SIGINT, sig_handler) == SIG_ERR)
-		;
-	if (!init_shell(&sh, av[0]))
+	if (ac && !init_shell(&sh, av[0]))
 		return (ERROR);
-	line = NULL;
+	call_signal();
 	*old_command() = ft_strdup("");
 	ft_init_list();
 	while (prompt(&sh))
@@ -65,9 +67,8 @@ int				main(int ac, char **av)
 			clear_main(command(), &lst_commands);
 			ft_putendl("exit");
 			clear_shell(&sh);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 	}
-	(void)ac;
 	return (GOOD);
 }
