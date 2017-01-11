@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/11 13:00:30 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/11 14:35:06 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include "history.h"
+#include "input.h"
 
 t_shell		g_sh;
 

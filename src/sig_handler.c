@@ -6,11 +6,12 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/11 13:00:57 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/11 14:37:25 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_42sh.h"
+#include "input.h"
 #include <signal.h>
 
 #define PROMPT "$> "
