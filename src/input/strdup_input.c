@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
-char	*ft_strdup_input(char *src)
+char	*strdup_input(char *src)
 {
 	int		i;
 	int		j;

@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	code_return(int *key)
 {
-	*ft_pos() = -1000;
+	*pos() = -1000;
 	*key = CODE_END;
-	ft_default_mode();
+	default_mode();
 }

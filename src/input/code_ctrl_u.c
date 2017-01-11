@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	code_ctrl_u(void)
 {
@@ -21,7 +21,7 @@ void	code_ctrl_u(void)
 		return ;
 	while ((*copied())[i])
 	{
-		ft_strinsert_input((*copied())[i]);
+		strinsert_input((*copied())[i]);
 		(cor()->x)++;
 		i++;
 	}

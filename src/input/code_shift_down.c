@@ -10,25 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	code_shift_down(void)
 {
 	size_t	t;
 
-	t = cor()->x + ft_termsize()->col;
+	t = cor()->x + termsize()->col;
 	while (cor()->x <= cor()->len && cor()->x <= t)
 	{
-		if (!((cor()->x + cor()->prompt_len) % ft_termsize()->col))
+		if (!((cor()->x + cor()->prompt_len) % termsize()->col))
 		{
-			ft_move_down(1);
-			ft_move_left(ft_termsize()->col - 1);
-			ft_move_right(1);
+			move_down(1);
+			move_left(termsize()->col - 1);
+			move_right(1);
 		}
 		else
-			ft_move_right(1);
+			move_right(1);
 		(cor()->x)++;
 	}
-	ft_move_left(1);
+	move_left(1);
 	(cor()->x)--;
 }

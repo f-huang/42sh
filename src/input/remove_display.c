@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 12:49:50 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:50:06 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/11 13:01:58 by ataguiro          #+#    #+#             */
+/*   Updated: 2017/01/11 13:02:00 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
-void	ft_remove_display(char *to_add)
+void	remove_display(char *to_add)
 {
 	size_t	diff;
 	size_t	i;
@@ -24,7 +24,7 @@ void	ft_remove_display(char *to_add)
 		ft_putchar(' ');
 		i++;
 	}
-	ft_move_left(diff + 10);
+	move_left(diff + 10);
 	ft_putstr(to_add);
-	ft_move_left(ft_strlen(to_add));
+	move_left(ft_strlen(to_add));
 }

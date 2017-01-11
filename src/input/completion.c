@@ -6,11 +6,11 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:35:30 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/10 16:28:48 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/11 12:47:02 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 int		match(char *s1, char *s2)
 {
@@ -42,14 +42,14 @@ void	completion(void)
 
 	splitted = ft_strsplit_whitespace(*command());
 	i = ft_tablen(splitted);
-	needle = i ? ft_strdup_input(splitted[i - 1]) : ft_strdup_input("");
+	needle = i ? strdup_input(splitted[i - 1]) : strdup_input("");
 	pattern = two_step(needle);
 	if (ft_strchr(needle, '/'))
-		ft_linkcase(pattern, needle);
+		linkcase(pattern, needle);
 	else if (!splitted[1] && ft_getlast(*command()) != ' ')
-		ft_commandcase(pattern);
+		commandcase(pattern);
 	else
-		ft_lastcase(pattern);
+		lastcase(pattern);
 	ft_tabdel(&splitted);
 	ft_strdel(&needle);
 	ft_strdel(&pattern);

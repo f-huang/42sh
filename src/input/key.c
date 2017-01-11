@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	key_dump(int key)
 {
 	(key == CODE_TAB) ? completion() : 0;
 	(key == CODE_UP) ? code_up(key) : 0;
-	(key == CODE_BACK) ? ft_stremove() : 0;
+	(key == CODE_BACK) ? stremove() : 0;
 	(key == CODE_RIGHT) ? code_right() : 0;
 	(key == CODE_LEFT) ? code_left() : 0;
 	(key == CODE_DOWN) ? code_down(key) : 0;
@@ -37,7 +37,7 @@ int		key_get(void)
 {
 	char	c;
 
-	ft_raw_mode();
+	raw_mode();
 	read(0, &c, 1);
 	if (!ft_isvalid(c))
 		return (-3);
@@ -49,6 +49,6 @@ int		key_get(void)
 		read(0, &c, 1);
 		return (get_x1b(c));
 	}
-	ft_manage_command(c);
+	manage_command(c);
 	return (-2);
 }

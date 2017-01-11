@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	code_shift_up(void)
 {
-	if (cor()->x > (ft_termsize())->col)
+	if (cor()->x > (termsize())->col)
 	{
-		ft_move_up(1);
-		cor()->x -= (ft_termsize())->col;
+		move_up(1);
+		cor()->x -= (termsize())->col;
 	}
 }

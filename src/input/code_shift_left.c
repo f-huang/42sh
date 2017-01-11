@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	code_shift_left(void)
 {
 	if (cor()->x > 0)
 	{
 		(cor()->x)--;
-		ft_move_left(1);
+		move_left(1);
 	}
 	while (!(!ft_isspace((*command())[cor()->x - 1]) &&
 				ft_isspace((*command())[cor()->x])) && cor()->x > 0)
 	{
-		ft_move_left(1);
+		move_left(1);
 		(cor()->x)--;
 	}
 }

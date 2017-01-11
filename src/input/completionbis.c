@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 int		applylink(struct dirent *lu, char *pattern)
 {
@@ -21,12 +21,12 @@ int		applylink(struct dirent *lu, char *pattern)
 	if (match(lu->d_name, pattern) && ft_strcmp(lu->d_name, ".") &&
 			ft_strcmp(lu->d_name, ".."))
 	{
-		str = ft_strdup_input(lu->d_name);
+		str = strdup_input(lu->d_name);
 		while (cor()->x > 0 && ft_getlast(*command()) != '/' &&
 				!ft_isspace(ft_getlast(*command())))
-			ft_stremove();
+			stremove();
 		while (str[p])
-			ft_manage_command(str[p++]);
+			manage_command(str[p++]);
 		ft_strdel(&str);
 		return (1);
 	}
@@ -43,18 +43,18 @@ int		applycommand(struct dirent *lu, char *pattern)
 			ft_strcmp(lu->d_name, ".") && ft_strcmp(lu->d_name, "..") &&
 			match(lu->d_name, pattern))
 	{
-		str = ft_strdup_input(lu->d_name);
+		str = strdup_input(lu->d_name);
 		while (cor()->x > 0 && !ft_isspace(ft_getlast(*command())))
-			ft_stremove();
+			stremove();
 		while (str[p])
-			ft_manage_command(str[p++]);
+			manage_command(str[p++]);
 		ft_strdel(&str);
 		return (1);
 	}
 	return (0);
 }
 
-void	ft_linkcase(char *pattern, char *to_open)
+void	linkcase(char *pattern, char *to_open)
 {
 	int				i;
 	DIR				*dir;
@@ -73,7 +73,7 @@ void	ft_linkcase(char *pattern, char *to_open)
 	closedir(dir);
 }
 
-void	ft_commandcase(char *pattern)
+void	commandcase(char *pattern)
 {
 	t_comp	p;
 
@@ -98,7 +98,7 @@ void	ft_commandcase(char *pattern)
 	ft_tabdel(&p.splitted_path);
 }
 
-void	ft_lastcase(char *pattern)
+void	lastcase(char *pattern)
 {
 	DIR				*dir;
 	struct dirent	*lu;
@@ -113,11 +113,11 @@ void	ft_lastcase(char *pattern)
 				ft_strcmp(lu->d_name, ".") && ft_strcmp(lu->d_name, "..") &&
 				match(lu->d_name, pattern))
 		{
-			str = ft_strdup_input(lu->d_name);
+			str = strdup_input(lu->d_name);
 			while (cor()->x > 0 && !ft_isspace(ft_getlast(*command())))
-				ft_stremove();
+				stremove();
 			while (str[p])
-				ft_manage_command(str[p++]);
+				manage_command(str[p++]);
 			ft_strdel(&str);
 			closedir(dir);
 			return ;

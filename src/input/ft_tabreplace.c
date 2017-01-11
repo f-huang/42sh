@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 int		ft_tabreplace(char ***tab, char *str, char *by)
 {
@@ -34,14 +34,14 @@ int		ft_tabreplace(char ***tab, char *str, char *by)
 	ft_strdel(&cleaner_str);
 	if (by)
 		(*tab)[i] ? free((*tab)[i]) : 0;
-	(by) ? (*tab)[i] = ft_strdup_input(by) : 0;
+	(by) ? (*tab)[i] = strdup_input(by) : 0;
 	cleaner = *tab;
 	*tab = ft_tabdup(*tab);
 	ft_tabdel(&cleaner);
 	return (i);
 }
 
-char	*ft_newclean(char *str)
+char	*newclean(char *str)
 {
 	int		i;
 	int		j;

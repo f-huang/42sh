@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 12:44:25 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/10 14:03:24 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/11 13:01:37 by ataguiro          #+#    #+#             */
+/*   Updated: 2017/01/11 13:01:39 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	ft_init_input(void)
 {
@@ -19,10 +19,10 @@ void	ft_init_input(void)
 	cor()->xmax = 0;
 	cor()->ymax = 0;
 	cor()->prompt_len = *prompt_len() + 1;
-	*command() = ft_strdup_input("");
+	*command() = strdup_input("");
 }
 
-int		ft_input(void)
+int		input(void)
 {
 	int	key;
 
@@ -39,7 +39,7 @@ int		ft_input(void)
 		{
 			if (!(*dquote() % 2) && !(*quote() % 2))
 			{
-				ft_reset_quotes();
+				reset_quotes();
 				ft_putchar('\n');
 				return (0);
 			}

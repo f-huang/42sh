@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 static int	count_words2(char *s)
 {
@@ -51,7 +51,7 @@ char		**ft_strsplit_whitespace(char *s)
 
 	if (!s)
 		return ((char **)ft_memalloc(0));
-	ft_replace_with_shit(&s);
+	replace_with_shit(&s);
 	info.words = count_words2(s);
 	info.new = (char **)ft_memalloc(sizeof(char *) * (info.words + 2));
 	info.i = 0;
@@ -70,6 +70,6 @@ char		**ft_strsplit_whitespace(char *s)
 			info.i++;
 	}
 	info.new[info.words] = NULL;
-	ft_remove_shit(&info.new);
+	remove_shit(&info.new);
 	return (info.new);
 }

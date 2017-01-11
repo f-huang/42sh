@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	code_right(void)
 {
@@ -19,11 +19,11 @@ void	code_right(void)
 	check = cor()->x < cor()->len;
 	if (check)
 		(cor()->x)++;
-	if (check && ((cor()->x + cor()->prompt_len) % ft_termsize()->col))
-		ft_move_right(1);
-	else if (check && !((cor()->x + cor()->prompt_len) % ft_termsize()->col))
+	if (check && ((cor()->x + cor()->prompt_len) % termsize()->col))
+		move_right(1);
+	else if (check && !((cor()->x + cor()->prompt_len) % termsize()->col))
 	{
-		ft_move_down(1);
-		ft_move_left(ft_termsize()->col - 1);
+		move_down(1);
+		move_left(termsize()->col - 1);
 	}
 }

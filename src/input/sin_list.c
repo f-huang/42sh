@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
-t_list	**ft_get_list(void)
+t_list	**get_list(void)
 {
 	static t_list	*history = NULL;
 
@@ -21,14 +21,14 @@ t_list	**ft_get_list(void)
 	return (&history);
 }
 
-int		*ft_get_size(void)
+int		*get_size(void)
 {
 	static int	size = 0;
 
 	return (&size);
 }
 
-int		*ft_pos(void)
+int		*pos(void)
 {
 	static int	i = -1000;
 

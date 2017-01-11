@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/10 14:58:51 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/11 13:00:30 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int				main(int ac, char **av)
 		return (ERROR);
 	line = NULL;
 	*old_command() = ft_strdup("");
-	ft_init_list();
+	init_list();
 	while (prompt(&sh))
 	{
 		g_sh = sh;
-		if (ft_input() == 0)
+		if (input() == 0)
 		{
-			ft_strcmp(*command(), *old_command()) ? ft_history(*command()) : 0;
+			ft_strcmp(*command(), *old_command()) ? in_history(*command()) : 0;
 			ft_strdel(old_command());
 			*old_command() = *command() ? ft_strdup(*command()) : ft_strdup("");
 			save_command_line(&sh.lst_history, *command());
