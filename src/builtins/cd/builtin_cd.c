@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/12 16:43:39 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/12 16:51:11 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,13 +158,14 @@ static char		*build_path(char *wanted, char *current_path, t_variable *env)
 	int		i;
 
 	i = 0;
-	if (!ft_strcmp(wanted, "-"))
+	if (wanted && !ft_strcmp(wanted, "-"))
 		return (ft_strdup(sh_getenv(env, "OLDPWD")));
 	if (!wanted || !ft_strcmp(wanted, "~"))
 	{
 		if (!(sh_getenv(env, "HOME")))
 			cd_error(1, "HOME");
-		return (ft_strdup(sh_getenv(env, "HOME")));
+		else
+			return (ft_strdup(sh_getenv(env, "HOME")));
 	}
 	new_split = ft_strsplit(wanted, '/');
 	new_path = ft_strdup(current_path);
