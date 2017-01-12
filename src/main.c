@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/12 14:12:39 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/12 17:36:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ static void		clear_main(char **line, t_list **lst)
 static void		call_signal(void)
 {
 	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, sig_handler);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGCONT, SIG_IGN);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/12 14:15:38 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/12 17:47:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,18 @@
 extern	t_shell	g_sh;
 extern	pid_t	g_id;
 
-void	reset_input(void)
+static void	reset_input(void)
 {
+	int	status;
 	default_mode();
 	ft_putchar('\n');
-	if (g_id == -1)
-		prompt(&g_sh);
-	else
+	if (waitpid(g_id, &status, 0) != -1)
 	{
-		if (kill(g_id, SIGKILL) == -1)
-			prompt(&g_sh);
+		if (g_id != -1)
+			kill(g_id, SIGKILL);
 	}
+	else
+		prompt(&g_sh);
 	ft_strdel(command());
 	*command() = ft_strdup("");
 	reset_quotes();
@@ -37,8 +38,24 @@ void	reset_input(void)
 	cor()->x = 0;
 }
 
+static void	sigquit_handler(void)
+{
+	int	status;
+
+	if (waitpid(g_id, &status, 0) != -1)
+	{
+		if (g_id != -1)
+			kill(g_id, SIGKILL);
+		ft_putchar('\n');
+	}
+}
+
 void		sig_handler(int signo)
 {
 	if (signo == SIGINT)
 		reset_input();
+	else if (signo == SIGQUIT)
+	{
+		sigquit_handler();
+	}
 }
