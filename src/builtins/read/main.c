@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 11:51:06 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/20 17:36:23 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 15:29:40 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	launch_read(t_shell *sh, t_read tools, char **av, int i)
 	char			*line;
 
 	line = NULL;
-	if (!read_input(sh, tools, &line))
+	if (!read_input(tools, &line))
 		return (ERROR);
 	if (!(tools.option & OPTION_R))
 		escape_line(&line);
