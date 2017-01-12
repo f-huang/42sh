@@ -24,6 +24,7 @@ static void	reset_input(void)
 	int	status;
 
 	default_mode();
+	code_end();
 	ft_putchar('\n');
 	if (waitpid(g_id, &status, 0) != -1)
 	{
@@ -31,9 +32,7 @@ static void	reset_input(void)
 			kill(g_id, SIGKILL);
 	}
 	else
-	{
 		prompt(&g_sh);
-	}
 	ft_strdel(command());
 	*command() = ft_strdup("");
 	reset_quotes();

@@ -47,6 +47,7 @@
 # define CODE_CTRL_X 100
 # define CODE_CTRL_U 200
 # define CODE_CTRL_W 300
+# define CODE_CTRL_L 400
 
 typedef	struct	s_infos2
 {
@@ -125,6 +126,7 @@ void			code_shift_left(void);
 void			code_ctrl_x(void);
 void			code_ctrl_u(void);
 void			code_ctrl_w(void);
+void			code_ctrl_l(void);
 
 int				match(char *s1, char *s2);
 void			linkcase(char *pattern, char *to_open);
