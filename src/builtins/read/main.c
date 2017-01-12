@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 11:51:06 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/12 15:29:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 16:28:55 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	read_start_timer(t_shell *sh, t_read tools, char **av, int i)
 	}
 	else if (ret == 0)
 	{
-		/* handle line display */
+		ft_putstr(NONEWLINE);
 		return (ERROR);
 	}
 	else

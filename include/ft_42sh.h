@@ -95,6 +95,10 @@ typedef struct			s_bitfield
 #  define BUFF_SIZE 256
 # endif
 
+# ifndef NONEWLINE
+# define NONEWLINE "\033[7m%\033[m\n"
+#endif
+
 /*
 **	BUILTIN CODE
 */
@@ -105,6 +109,7 @@ typedef struct			s_bitfield
 # ifndef NBBUILTIN
 #  define NBBUILTIN 6
 # endif
+
 
 /*
 **	SHELL BASIC FUNCTIONS
