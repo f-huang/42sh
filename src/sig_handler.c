@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/11 14:37:25 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/12 14:12:04 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,19 @@
 #define PROMPT "$> "
 
 extern	t_shell	g_sh;
+extern	pid_t	g_id;
 
 void	reset_input(void)
 {
-	default_mode();
+	ft_default_mode();
 	ft_putchar('\n');
-	prompt(&g_sh);
+	if (g_id == -1)
+		prompt(&g_sh);
+	else
+	{
+		if (kill(g_id, SIGKILL) == -1)
+			prompt(&g_sh);
+	}
 	ft_strdel(command());
 	*command() = ft_strdup("");
 	reset_quotes();

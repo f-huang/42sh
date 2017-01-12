@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 14:08:58 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/11 14:36:57 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/12 14:13:03 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "libft.h"
 #include "input.h"
 #include <stdlib.h>
+
 
 static	char	*get_name(t_shell *sh)
 {

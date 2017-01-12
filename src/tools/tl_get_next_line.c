@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 16:15:35 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/07 15:00:52 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/11 23:00:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,23 @@ int			tl_get_next_line(int fd, char **line)
 	char			*tmp;
 	char			buf[BUFF_SIZE + 1];
 
-	if (fd < 0 || BUFF_SIZE <= 0 || update_line_lfo(line, &lfo) == -1)
+	if (lfo && !*lfo)
+	{
+		ft_strdel(&lfo);
+		return (0);
+	}
+	if (fd < 0 || BUFF_SIZE <= 0 || (ret = update_line_lfo(line, &lfo)) == -1)
 		return (-1);
 	ft_bzero(buf, BUFF_SIZE + 1);
 	while ((ft_strchr(*line, '\n') == 0) && (ret = read(fd, buf, BUFF_SIZE)))
-	{
-		if (ret == -1)
+		if (ret == -1 || !(*line = gnl_strjoin_free(*line, buf)))
 			return (-1);
-		if (!(*line = gnl_strjoin_free(*line, buf)))
-			return (-1);
-	}
-	tmp = ft_strstr(*line, "\n");
-	if (tmp)
+	if ((tmp = ft_strstr(*line, "\n")))
 	{
 		lfo = ft_strdup(tmp + 1);
 		ft_bzero(tmp, ft_strlen(tmp));
 	}
-	if (*line && !**line)
-		ft_strdel(&(*line));
-	return (*line && ft_strlen(*line) ? 1 : 0);
+	else
+		lfo = ft_strdup(*line);
+	return (1);
 }
