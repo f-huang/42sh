@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/11 11:26:10 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/12 16:43:39 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 **				(ex: PWD=/tmp)
 */
 
+/*
 static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 {
 	struct stat	buf;
@@ -75,8 +76,8 @@ static int	gear_tmp(char **path, char *tmp)
 	}
 	return (GOOD);
 }
-
-static int	build_path(t_variable *lst_env, char **path)
+*/
+/*static int	build_path(t_variable *lst_env, char **path)
 {
 	char	**tmp;
 	char	*pwd;
@@ -100,9 +101,9 @@ static int	build_path(t_variable *lst_env, char **path)
 		tl_freedoubletab(tmp);
 	}
 	return (GOOD);
-}
+}*/
 
-static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
+/*static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 {
 	struct stat	buf;
 
@@ -120,9 +121,91 @@ static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 		return (1);
 	set_pwd(lst_env, path, follow_sl);
 	return (0);
+}*/
+
+static void		remove_one_path(char **path)
+{
+	int		i;
+
+	i = 0;
+	while ((*path)[i])
+		i++;
+	while ((*path)[i] != '/')
+		i--;
+	if (!i)
+		(*path)[i + 1] = 0;
+	else
+		(*path)[i] = 0;
 }
 
-int			builtin_cd(t_shell *sh, int ac, char **av)
+static void		append_one_path(char **path, char *wanted)
+{
+	char	*tmp;
+
+	if ((*path)[1])
+		tmp = ft_strjoin(*path, "/");
+	else
+		tmp = ft_strdup(*path);
+	*path ? free(*path) : 0;
+	*path = ft_strjoin(tmp, wanted);
+	tmp ? free(tmp) : 0;
+}
+
+static char		*build_path(char *wanted, char *current_path, t_variable *env)
+{
+	char	*new_path;
+	char	**new_split;
+	int		i;
+
+	i = 0;
+	if (!ft_strcmp(wanted, "-"))
+		return (ft_strdup(sh_getenv(env, "OLDPWD")));
+	if (!wanted || !ft_strcmp(wanted, "~"))
+	{
+		if (!(sh_getenv(env, "HOME")))
+			cd_error(1, "HOME");
+		return (ft_strdup(sh_getenv(env, "HOME")));
+	}
+	new_split = ft_strsplit(wanted, '/');
+	new_path = ft_strdup(current_path);
+	if (wanted[0] == '/')
+		while (i++ < 20)
+			remove_one_path(&new_path);
+	i = 0;
+	while (new_split[i])
+	{
+		(!ft_strcmp(new_split[i], "..")) ? remove_one_path(&new_path) : 0;
+		(ft_strcmp(new_split[i], ".") && ft_strcmp(new_split[i], "..")) ?
+		append_one_path(&new_path, new_split[i]) : 0;
+		i++;
+	}
+	tl_freedoubletab(new_split);
+	return (new_path);
+}
+
+int				builtin_cd(t_shell *sh, int ac, char **av)
+{
+	char	*final_path;
+	char	*current_path;
+	int		r;
+
+	(void)ac;
+	current_path = sh_getenv(sh->lst_env, "PWD");
+	final_path = (av[1] && !ft_strcmp(av[1], "/")) ? ft_strdup("/") :
+	build_path(av[1], current_path, sh->lst_env);
+	r = chdir(final_path);
+	if (r != -1)
+	{
+		sh_setenv(&sh->lst_env, "OLDPWD", current_path);
+		sh_setenv(&sh->lst_env, "PWD", final_path);
+	}
+	else
+		ft_putendl("Fucking error from cd.");
+	ft_strdel(&final_path);
+	return (1);
+}
+
+/*int			builtin_cd(t_shell *sh, int ac, char **av)
 {
 	char	*path;
 	_Bool	follow_sl;
@@ -149,4 +232,4 @@ int			builtin_cd(t_shell *sh, int ac, char **av)
 	else
 		return (cd_error(0, NULL));
 	return (change_directory(&sh->lst_env, path, follow_sl));
-}
+}*/
