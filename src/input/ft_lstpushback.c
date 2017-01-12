@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	ft_lstpushback(t_list **lst, void const *content, size_t content_size)
 {

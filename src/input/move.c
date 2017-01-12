@@ -1,40 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_quotes.c                                        :+:      :+:    :+:   */
+/*   ft_move.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 12:49:07 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:49:37 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/08 12:48:38 by ataguiro          #+#    #+#             */
+/*   Updated: 2017/01/08 12:48:53 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
-void	ft_manage_quotes(void)
+void	move_left(int x)
 {
-	int		i;
-	int		dq;
-	int		q;
-
-	i = 0;
-	q = 0;
-	dq = 0;
-	while ((*command())[i])
-	{
-		if ((*command())[i] == '"' && !(q % 2))
-			dq++;
-		if ((*command())[i] == '\'' && !(dq % 2))
-			q++;
-		i++;
-	}
-	*(dquote()) = dq;
-	*(quote()) = q;
+	if (!x)
+		return ;
+	ft_putstr("\033[");
+	ft_putnbr(x);
+	ft_putstr("D");
 }
 
-void	ft_reset_quotes(void)
+void	move_right(int x)
 {
-	*dquote() = 0;
-	*quote() = 0;
+	if (!x)
+		return ;
+	ft_putstr("\033[");
+	ft_putnbr(x);
+	ft_putstr("C");
+}
+
+void	move_down(int x)
+{
+	if (!x)
+		return ;
+	ft_putstr("\033[");
+	ft_putnbr(x);
+	ft_putstr("B");
+}
+
+void	move_up(int x)
+{
+	if (!x)
+		return ;
+	ft_putstr("\033[");
+	ft_putnbr(x);
+	ft_putstr("A");
 }

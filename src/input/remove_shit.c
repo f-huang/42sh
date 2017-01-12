@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_remove_shit.c                                   :+:      :+:    :+:   */
+/*   remove_shit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 char	*ft_get_clean(char *s)
 {
@@ -40,7 +40,7 @@ char	*ft_get_clean(char *s)
 	return (t.new);
 }
 
-void	ft_remove_shit(char ***new)
+void	remove_shit(char ***new)
 {
 	int			i;
 	char		*tmp;

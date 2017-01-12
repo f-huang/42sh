@@ -10,33 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	code_down(int key)
 {
 	char	*str;
 
-	str = ft_get_elem(key);
+	str = get_elem(key);
 	if ((*dquote() % 2) || (*quote() % 2))
 		return ;
-	if (*ft_pos() == *ft_get_size())
+	if (*pos() == *get_size())
 	{
-		ft_move_left(cor()->x);
-		ft_fill_space(cor()->len);
+		move_left(cor()->x);
+		fill_space(cor()->len);
 		cor()->x = 0;
 		ft_strdel(command());
-		*command() = ft_strdup_input("");
+		*command() = strdup_input("");
 		return ;
 	}
 	if (!str)
 		return ;
-	ft_move_left(cor()->x);
-	ft_fill_space(cor()->len);
+	move_left(cor()->x);
+	fill_space(cor()->len);
 	cor()->x = 0;
 	ft_putstr(str);
 	cor()->len = ft_strlen(str);
 	cor()->x = cor()->len;
 	ft_strdel(command());
-	*command() = ft_strdup_input(str);
+	*command() = strdup_input(str);
 	ft_strdel(&str);
 }

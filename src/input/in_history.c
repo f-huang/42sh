@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_history.c                                       :+:      :+:    :+:   */
+/*   in_history.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 char	*ft_purify(char *str, int size)
 {
@@ -36,22 +36,22 @@ char	*ft_purify(char *str, int size)
 	return (new);
 }
 
-char	*ft_get_elem(int command)
+char	*get_elem(int command)
 {
 	int				j;
 	t_list			*list;
 
 	j = 0;
-	list = *ft_get_list();
-	*ft_get_size() = ft_lstsize(list);
-	(*ft_pos() == -1000) ? *ft_pos() = *ft_get_size() : 0;
+	list = *get_list();
+	*get_size() = ft_lstsize(list);
+	(*pos() == -1000) ? *pos() = *get_size() : 0;
 	if (command == CODE_UP)
-		*ft_pos() -= *ft_pos() > 1 ? 1 : 0;
+		*pos() -= *pos() > 1 ? 1 : 0;
 	else
-		*ft_pos() += *ft_pos() < *ft_get_size() ? 1 : 0;
-	while (list && *ft_pos() >= 0 && *ft_pos() <= *ft_get_size())
+		*pos() += *pos() < *get_size() ? 1 : 0;
+	while (list && *pos() >= 0 && *pos() <= *get_size())
 	{
-		if (*ft_pos() == j)
+		if (*pos() == j)
 			return (ft_purify((char *)list->content, list->content_size));
 		j++;
 		list = list->next;
@@ -59,7 +59,7 @@ char	*ft_get_elem(int command)
 	return (NULL);
 }
 
-void	ft_init_list(void)
+void	init_list(void)
 {
 	int		fd;
 	char	*line;
@@ -75,13 +75,13 @@ void	ft_init_list(void)
 	ft_strdel(&path);
 	while (get_next_line_stdin(fd, &line) > 0)
 	{
-		ft_lstpushback(ft_get_list(), line, ft_strlen(line) + 20);
+		ft_lstpushback(get_list(), line, ft_strlen(line) + 20);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 }
 
-void	ft_history(char *buffer)
+void	in_history(char *buffer)
 {
 	int		fd;
 	char	*path;
@@ -92,7 +92,7 @@ void	ft_history(char *buffer)
 	ft_strdel(&path);
 	if (buffer && buffer[0])
 	{
-		ft_lstpushback(ft_get_list(), buffer, ft_strlen(buffer) + 20);
+		ft_lstpushback(get_list(), buffer, ft_strlen(buffer) + 20);
 		write(fd, buffer, ft_strlen(buffer));
 		write(fd, "\n", 1);
 	}

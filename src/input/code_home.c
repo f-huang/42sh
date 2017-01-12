@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	code_home(void)
 {
 	if (cor()->x > 0)
 	{
-		ft_move_left(cor()->x);
+		move_left(cor()->x);
 		cor()->x = 0;
 	}
 }

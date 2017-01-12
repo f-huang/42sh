@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 int		get_basics(char c)
 {
@@ -28,9 +28,9 @@ int		get_basics(char c)
 		return (CODE_BACK);
 	if (c == '\xa')
 	{
-		ft_manage_quotes();
+		manage_quotes();
 		(((*dquote() % 2 && *dquote()) || (*quote() % 2 && *quote()))) ?
-			ft_manage_command(c) : 0;
+			manage_command(c) : 0;
 		return (CODE_RETURN);
 	}
 	return (-42);

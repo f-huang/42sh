@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	code_ctrl_d(void)
 {
 	if (!(*command() && (*command())[0]))
 	{
-		ft_default_mode();
+		default_mode();
 		ft_putchar('\n');
 	}
 }

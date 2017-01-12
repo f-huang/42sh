@@ -6,13 +6,14 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 14:08:58 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/11 22:11:05 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 14:13:03 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_42sh.h"
 #include "environment.h"
 #include "libft.h"
+#include "input.h"
 #include <stdlib.h>
 
 

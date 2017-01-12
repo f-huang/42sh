@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/11 22:11:07 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 14:12:39 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include "history.h"
+#include "input.h"
 
 t_shell		g_sh;
 static void		clear_main(char **line, t_list **lst)
@@ -47,13 +48,13 @@ int				main(int ac, char **av)
 		return (ERROR);
 	call_signal();
 	*old_command() = ft_strdup("");
-	ft_init_list();
+	init_list();
 	while (prompt(&sh))
 	{
 		g_sh = sh;
-		if (ft_input() == 0)
+		if (input() == 0)
 		{
-			ft_strcmp(*command(), *old_command()) ? ft_history(*command()) : 0;
+			ft_strcmp(*command(), *old_command()) ? in_history(*command()) : 0;
 			ft_strdel(old_command());
 			*old_command() = *command() ? ft_strdup(*command()) : ft_strdup("");
 			save_command_line(&sh.lst_history, *command());

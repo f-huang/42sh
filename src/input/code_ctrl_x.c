@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 void	code_ctrl_x(void)
 {
 	ft_strdel(copied());
-	*copied() = ft_strdup_input(&(*command())[cor()->x]);
-	ft_fill_space(ft_strlen(*copied()));
+	*copied() = strdup_input(&(*command())[cor()->x]);
+	fill_space(ft_strlen(*copied()));
 	(*command())[cor()->x] = 0;
 }

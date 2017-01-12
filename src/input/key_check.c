@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabdup.c                                        :+:      :+:    :+:   */
+/*   ft_key_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 12:59:01 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:59:11 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/08 12:47:05 by ataguiro          #+#    #+#             */
+/*   Updated: 2017/01/08 12:47:12 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-char	**ft_tabdup(char **tab)
+int	ft_isvalid(char c)
 {
-	char	**dup;
-	size_t	size;
-	size_t	i;
-	size_t	j;
-
-	size = ft_tablen(tab) + 1;
-	i = 0;
-	j = 0;
-	if (!(dup = (char **)ft_memalloc(sizeof(char *) * size * size)))
-		return (NULL);
-	while (tab[i])
-	{
-		if (tab[i][0])
-		{
-			dup[j] = strdup_input(tab[i]);
-			j++;
-		}
-		i++;
-	}
-	return (dup);
+	if (ft_isprint(c) || (c == '\x9') || c == '\x4' || c == '\x7f' || c == '\xa'
+	|| c == '\x1b' || c == '\x5b' || c == '\x41' || c == '\x42' || c == '\x43'
+	|| c == '\x44' || c == '\x48' || c == '\x46' || c == '\x31' || c == '\x32'
+	|| c == '\x3b' || c == '\x42' || c == '\x41' || c == '\x18' || c == '\x15'
+	|| c == '\x17')
+		return (1);
+	return (0);
 }

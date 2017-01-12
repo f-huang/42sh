@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
 char	*ft_getenv(const char *need)
 {
@@ -31,7 +31,7 @@ char	*ft_getenv(const char *need)
 	return (&tmp[ft_strlen(need) + 1] ? &tmp[ft_strlen(need) + 1] : NULL);
 }
 
-void	ft_raw_mode(void)
+void	raw_mode(void)
 {
 	struct termios	tattr;
 
@@ -43,7 +43,7 @@ void	ft_raw_mode(void)
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &tattr);
 }
 
-void	ft_default_mode(void)
+void	default_mode(void)
 {
 	struct termios	tattr;
 

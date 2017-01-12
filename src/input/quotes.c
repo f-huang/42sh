@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_key_check.c                                     :+:      :+:    :+:   */
+/*   ft_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 12:47:05 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:47:12 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/08 12:49:07 by ataguiro          #+#    #+#             */
+/*   Updated: 2017/01/08 12:49:37 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_42sh.h"
+#include "input.h"
 
-int	ft_isvalid(char c)
+void	manage_quotes(void)
 {
-	if (ft_isprint(c) || (c == '\x9') || c == '\x4' || c == '\x7f' || c == '\xa'
-	|| c == '\x1b' || c == '\x5b' || c == '\x41' || c == '\x42' || c == '\x43'
-	|| c == '\x44' || c == '\x48' || c == '\x46' || c == '\x31' || c == '\x32'
-	|| c == '\x3b' || c == '\x42' || c == '\x41' || c == '\x18' || c == '\x15'
-	|| c == '\x17')
-		return (1);
-	return (0);
+	int		i;
+	int		dq;
+	int		q;
+
+	i = 0;
+	q = 0;
+	dq = 0;
+	while ((*command())[i])
+	{
+		if ((*command())[i] == '"' && !(q % 2))
+			dq++;
+		if ((*command())[i] == '\'' && !(dq % 2))
+			q++;
+		i++;
+	}
+	*(dquote()) = dq;
+	*(quote()) = q;
+}
+
+void	reset_quotes(void)
+{
+	*dquote() = 0;
+	*quote() = 0;
 }
