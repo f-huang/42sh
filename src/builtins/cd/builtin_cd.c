@@ -18,6 +18,7 @@
 #include "tools.h"
 #include "builtins.h"
 #include "libft.h"
+#include "input.h"
 
 /*
 **			This function change the working directory of the current shell
@@ -35,15 +36,13 @@ static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 
 	if ((tmp = sh_getenv(*lst_env, "PWD")))
 		sh_setenv(lst_env, "OLDPWD", tmp);
-	tmp = NULL;
 	lstat(path, &buf);
 	if (follow_sl == 0 || S_ISLNK(buf.st_mode) != 1)
 	{
-		if ((tmp = getcwd(tmp, _POSIX_PATH_MAX)))
-		{
-			sh_setenv(lst_env, "PWD", tmp);
-			ft_strdel(&tmp);
-		}
+			if (ft_getlast(tmp) == '/')
+				sh_setenv(lst_env, "PWD", &path[1]);
+			else
+				sh_setenv(lst_env, "PWD", path);
 	}
 	else
 		sh_setenv(lst_env, "PWD", path);
