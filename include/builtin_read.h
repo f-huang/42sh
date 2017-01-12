@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:01:19 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/12 15:29:31 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 17:51:44 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # define OPTION_S		(1 << 5)
 # define OPTION_T		(1 << 6)
 # define OPTION_U		(1 << 7)
-
 
 /*
 **		-e : Write output in the terminal (Readline() ?)	OK
@@ -54,7 +53,7 @@ int				read_option_error(char *str, char *msg);
 
 int				read_input(t_read tools, char **line);
 
-void 			escape_line(char **line);
+void			escape_line(char **line);
 int				split_line_into_fields(t_shell *sh, char **av, char *line);
 
 int				read_option_d(t_read *tools, char **av, int *i, int *j);

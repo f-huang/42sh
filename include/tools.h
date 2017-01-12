@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/12 16:28:47 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 17:53:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,5 @@ void			tl_lstdelast(t_list **lst);
 int				tl_get_next_line(int const fd, char **line);
 DIR				*tl_opendir(char *path);
 int				*tl_closedir(DIR *dir);
-
-
 
 #endif

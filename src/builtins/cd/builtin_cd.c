@@ -6,13 +6,16 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/11 11:26:10 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/12 18:54:30 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <uuid/uuid.h>
 #include "ft_42sh.h"
 #include "environment.h"
 #include "tools.h"
@@ -133,7 +136,7 @@ int			builtin_cd(t_shell *sh, int ac, char **av)
 	path = NULL;
 	if (!av[i])
 	{
-		if (!(path = sh_getenv(sh->lst_env, "HOME")))
+		if (!(path = getpwuid(getuid())->pw_dir))
 			return (cd_error(1, NULL));
 	}
 	else if (ac - i == 1)
