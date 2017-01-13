@@ -14,6 +14,10 @@
 
 int		get_basics(char c)
 {
+	if (c == '\x01')
+		return (CODE_HOME);
+	if (c == '\x05')
+		return (CODE_END);
 	if (c == '\x9')
 		return (CODE_TAB);
 	if (c == '\x4')
@@ -26,6 +30,8 @@ int		get_basics(char c)
 		return (CODE_CTRL_W);
 	if (c == '\x7f')
 		return (CODE_BACK);
+	if (c == '\x0C')
+		return (CODE_CTRL_L);
 	if (c == '\xa')
 	{
 		manage_quotes();
