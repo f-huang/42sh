@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/13 14:44:00 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/13 16:20:19 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ int			builtin_cd(t_shell *sh, int ac, char **av)
 	follow_sl = get_options(av, &i);
 	path = NULL;
 	alloc = 0;
-	ft_putendl(av[i]);//
 	if (!av[i])
 	{
 		if (!(path = sh_getenv(sh->lst_env, "HOME")))
