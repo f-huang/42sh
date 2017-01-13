@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:18:37 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 20:45:11 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/13 17:37:30 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "execution.h"
 #include "tools.h"
 #include "ft_42sh.h"
+
+pid_t	g_heredoc_pid = -1;
 
 static void	handle_expansion(t_shell *sh, t_cmdwr *cmd)
 {
@@ -46,7 +48,8 @@ void		loop_through_commands(t_shell *sh, t_list *lst_commands)
 	t_list		*ptr;
 
 	ptr = lst_commands;
-	get_heredocs(sh, &ptr);
+	if (!get_heredocs(sh, &ptr))
+		return ;
 	while (ptr)
 	{
 		loop_through_ast(sh, ptr->content);

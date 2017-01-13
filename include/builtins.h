@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:35:18 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/13 14:44:34 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/13 17:56:55 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int				builtin_unalias(t_shell *sh, int ac, char **av);
 */
 
 int				builtin_cd(t_shell *sh, int ac, char **av);
+int				change_directory(t_variable **lst_env, char *path, \
+					_Bool follow_sl);
 _Bool			get_options(char **av, int *i);
 int				cd_error(int index, char *path);
 

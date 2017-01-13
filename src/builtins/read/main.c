@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 11:51:06 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/12 16:28:55 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/13 15:33:34 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static int	launch_read(t_shell *sh, t_read tools, char **av, int i)
 
 	line = NULL;
 	if (!read_input(tools, &line))
+	{
+		ft_strdel(&line);
 		return (ERROR);
+	}
 	if (!(tools.option & OPTION_R))
 		escape_line(&line);
 	split_line_into_fields(sh, av + i, line);

@@ -6,13 +6,15 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/13 16:27:19 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/13 17:57:18 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include <unistd.h>
-#include <sys/stat.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <uuid/uuid.h>
 #include "ft_42sh.h"
 #include "environment.h"
 #include "builtins.h"
@@ -27,49 +29,6 @@
 **			cd -L -> Follow symbolic links  >>>>> DEFAULT
 **				(ex: PWD=/tmp)
 */
-
-static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
-{
-	struct stat	buf;
-	char		*tmp;
-
-	if ((tmp = sh_getenv(*lst_env, "PWD")))
-		sh_setenv(lst_env, "OLDPWD", tmp);
-	tmp = NULL;
-	lstat(path, &buf);
-	if (follow_sl == 0 || S_ISLNK(buf.st_mode) != 1)
-	{
-		if ((tmp = getcwd(tmp, _POSIX_PATH_MAX)))
-		{
-			sh_setenv(lst_env, "PWD", tmp);
-			ft_strdel(&tmp);
-		}
-	}
-	else
-		sh_setenv(lst_env, "PWD", path);
-}
-
-static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl, \
-		int alloc)
-{
-	struct stat	buf;
-
-	if (!path)
-		return (1);
-	if (access(path, F_OK) == -1)
-		return (cd_error(3, path));
-	stat(path, &buf);
-	if (S_ISDIR(buf.st_mode) != 1)
-		return (cd_error(4, path));
-	if (access(path, X_OK) == -1)
-		return (cd_error(5, path));
-	if (chdir(path) == -1)
-		return (1);
-	set_pwd(lst_env, path, follow_sl);
-	if (alloc)
-		ft_strdel(&path);
-	return (0);
-}
 
 static void	append_one_dir(char **path, char *wanted)
 {
@@ -139,31 +98,25 @@ int			builtin_cd(t_shell *sh, int ac, char **av)
 	char	*path;
 	_Bool	follow_sl;
 	int		i;
-	int		alloc;
 
 	i = 1;
 	follow_sl = get_options(av, &i);
-	path = NULL;
-	alloc = 0;
 	if (!av[i])
 	{
-		if (!(path = sh_getenv(sh->lst_env, "HOME")))
+		if (!(path = ft_strdup(getpwuid(getuid())->pw_dir)))
 			return (cd_error(1, NULL));
 	}
 	else if (ac - i == 1)
 	{
 		if (ft_strequ(av[i], "-"))
 		{
-			if (!(path = sh_getenv(sh->lst_env, "OLDPWD")))
+			if (!(path = ft_strdup(sh_getenv(sh->lst_env, "OLDPWD"))))
 				return (cd_error(2, NULL));
 		}
 		else
-		{
 			path = build_path(sh->lst_env, av[i]);
-			alloc = 1;
-		}
 	}
 	else
 		return (cd_error(0, NULL));
-	return (change_directory(&sh->lst_env, path, follow_sl, alloc));
+	return (change_directory(&sh->lst_env, path, follow_sl));
 }

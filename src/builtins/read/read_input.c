@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:41:46 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/12 19:12:45 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/13 17:41:58 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@ static int	read_with_termcaps(t_read tools, char **line, int fd)
 	while (1)
 	{
 		ft_bzero(&c, 2);
+		signal(SIGINT, SIG_IGN);
 		if ((ret = read(fd, &c, 1)) == -1)
 			return (read_fd_error(tools.fd));
 		if (c[0] != '\n' && (*line = tl_strmerge(*line, c)))
-		{
 			if (!(tools.option & OPTION_S))
 				ft_putstr(c);
-		}
 		if (tools.option & OPTION_N && ft_strlen(*line) == tools.nchars)
 			return (one_line_down(tools, line, c[0]));
 		else if (tools.option & OPTION_D)
@@ -60,7 +59,7 @@ static int	read_with_termcaps(t_read tools, char **line, int fd)
 				if (c[0] == tools.delim)
 					return (GOOD);
 		}
-		else if (c[0] == '\n')
+		else if (c[0] == '\n' || c[0] == 4)
 			return (GOOD);
 	}
 }

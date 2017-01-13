@@ -68,7 +68,7 @@ OBJECHO	:=	$(SRCECHO:src/builtins/echo/%.c=obj/builtins/echo/%.o)
 .SILENT:
 
 all: $(NAME)
-	echo "alias ls='ls -G'\\nexport TUTU='ALLO'\\nsetenv TUTU 'BYE'" > ~/.42shrc
+	echo "alias l='ls -lG'\\n" > ~/.42shrc
 
 $(NAME): libft env echo $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
@@ -109,10 +109,6 @@ $(CACHEF):
 libft:
 	make -C $(LIBDIR)
 
-#read: $(OBJREAD)
-#	$(CC) $(CFLAGS) -o $(BINREAD) $(OBJREAD) $(LIBPATH) $(LIB) $(INC)
-#	printf $(BLUE)" $@ compiled!\n"$(EOC)
-
 echo: $(OBJECHO)
 	$(CC) $(CFLAGS) -o $(BINECHO) $(OBJECHO) $(LIBPATH) $(LIB) $(INC)
 	printf $(BLUE)" $@ compiled!\n"$(EOC)
@@ -122,10 +118,8 @@ env: $(OBJENV)
 	printf $(BLUE)" $@ compiled!\n"$(EOC)
 
 norme:
-	printf $(RED)
 	norminette $(SRCDIR) $(INCDIR) | grep -v Norme -B1 || true
-	norminette $(LIBFT)src/ $(LIBFT)include/ | grep -v Norme -B1 || true
-	printf $(EOC)
+	norminette $(LIBFT)SRC/ $(LIBFT)include/ | grep -v Norme -B1 || true
 
 clean:
 	make -C $(LIBDIR) clean

@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 23:35:38 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/08 16:30:47 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/13 15:04:32 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int	get_heredocs_from_ast(t_shell *sh, t_ast *ast)
 	if (ast->cmd2)
 		retrieve_heredocs(sh, ast->cmd2);
 	if (ast->left)
-		get_heredocs_from_ast(sh, ast->left);
+		return (get_heredocs_from_ast(sh, ast->left));
 	if (ast->right)
-		get_heredocs_from_ast(sh, ast->right);
+		return (get_heredocs_from_ast(sh, ast->right));
 	return (GOOD);
 }
 
