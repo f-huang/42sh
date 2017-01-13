@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 13:06:57 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 13:07:09 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/13 12:02:09 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 int		get_basics(char c)
 {
-	if (c == '\x01')
-		return (CODE_HOME);
-	if (c == '\x05')
-		return (CODE_END);
 	if (c == '\x9')
 		return (CODE_TAB);
 	if (c == '\x4')
