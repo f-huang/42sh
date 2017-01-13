@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/12 17:56:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/13 12:25:21 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ char			*newclean(char *str);
 char			**command(void);
 int				*dquote(void);
 int				*quote(void);
+int				*bs(void);
 t_termsize		*termsize(void);
 void			remove_display(char *to_add);
 t_list			**get_list(void);

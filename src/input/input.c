@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:01:37 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/13 11:55:11 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/13 12:45:43 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,12 @@ int		input(void)
 				return (0);
 			}
 			else
-				ft_putstr(*dquote() % 2 ? "dquote> " : "quote> ");
+			{
+				if (*dquote() % 2)
+					ft_putstr("dquote> ");
+				else if (*quote() % 2)
+					ft_putstr("quote> ");
+			}
 		}
 		if (key == -1 && !(*command() && (*command())[0]) && !cor()->len)
 			return (1);
