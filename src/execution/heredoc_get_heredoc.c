@@ -6,13 +6,16 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 17:04:11 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/08 16:43:28 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/13 17:50:44 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
 #include "execution.h"
 #include "tools.h"
 #include "expansion.h"
+
+extern pid_t	g_heredoc_pid;
 
 static char		*remove_tabs(char *s)
 {
@@ -45,10 +48,10 @@ static t_list	*get_words(t_shell *sh, t_redirections *r)
 	t_list			*words;
 	t_list			*cursor;
 
-	line = 0;
 	cursor = 0;
 	words = 0;
-	while (heredoc_prompt() && get_line(0, &line) == 1 &&
+	signal(SIGINT, SIG_IGN);
+	while (!(line = 0) && heredoc_prompt() && get_line(0, &line) == 1 &&
 		ft_strcmp(line, r->dest) && (trim = check_line(sh, r, line)))
 	{
 		if (cursor == 0)

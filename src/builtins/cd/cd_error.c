@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_errors.c                                        :+:      :+:    :+:   */
+/*   cd_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/11 10:11:32 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/11 10:11:34 by cjacquem         ###   ########.fr       */
+/*   Created: 2017/01/13 16:18:18 by cjacquem          #+#    #+#             */
+/*   Updated: 2017/01/13 16:28:41 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			cd_error(int index, char *path)
+int		cd_error(int index, char *path)
 {
 	const char	*error_msg[] = {
 		"Too many arguments.\n",
@@ -24,7 +24,7 @@ int			cd_error(int index, char *path)
 		NULL
 	};
 
-	ft_putstr_fd("cd : ", 2);
+	ft_putstr_fd("42sh: cd: ", 2);
 	if (index > 2 && index < 6 && path)
 		ft_putstr_fd(path, 2);
 	ft_putstr_fd(error_msg[index], 2);
