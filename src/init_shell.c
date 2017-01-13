@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:21 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/15 14:19:23 by yfuks            ###   ########.fr       */
+/*   Updated: 2017/01/12 17:56:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "tools.h"
 #include "environment.h"
 #include "history.h"
+#include "input.h"
+#include <pwd.h>
 
 /*
 **		This file is initalizing the shell. (Termios and environment).
@@ -26,6 +28,8 @@ static int	copy_environment(t_variable **lst_env)
 	extern char	**environ;
 	int			i;
 
+	*env() = environ;
+	*get_home() = ft_strjoin("/Users/", getpwuid(getuid())->pw_name);
 	i = 0;
 	while (environ && environ[i])
 	{
@@ -60,14 +64,20 @@ static int	increment_shlvl(t_variable **lst_env)
 static int	set_bin_path(char **bin_path, char *av_0)
 {
 	char	buffer[_POSIX_PATH_MAX + 1];
+	char	*tmp;
 
 	if (!getcwd(buffer, _POSIX_PATH_MAX + 1))
 		return (ERROR);
-	ft_strclr(av_0 + ft_strlen(av_0) - 4);
-	av_0 = ft_strcat(av_0, "bin/");
+	tmp = ft_strdup(av_0);
+	ft_strclr(tmp + ft_strlen(tmp) - 4);
+	tmp = ft_strcat(tmp, "bin/");
 	if (!(*bin_path = tl_str3join(buffer,\
-		buffer[ft_strlen(buffer) - 1] == '/' ? "" : "/", av_0)))
+		buffer[ft_strlen(buffer) - 1] == '/' ? "" : "/", tmp)))
+	{
+		ft_strdel(&tmp);
 		return (ERROR);
+	}
+	ft_strdel(&tmp);
 	return (GOOD);
 }
 
@@ -92,7 +102,5 @@ int			init_shell(t_shell *sh, char *av_0)
 	set_default(&sh->lst_env);
 	init_history(&sh->lst_history, sh->lst_env);
 	import_shrc(sh);
-/*	if (!(init_termios(sh->term, sh->window)))
-		return (ERROR);
-*/	return (GOOD);
+	return (GOOD);
 }

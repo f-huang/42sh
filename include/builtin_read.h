@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:01:19 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/16 18:39:03 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 17:51:44 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,23 @@
 # define OPTION_T		(1 << 6)
 # define OPTION_U		(1 << 7)
 
-
 /*
-**		-e : Write output in the terminal (Readline() ?)
-**		-r : backslash(\) do not escape characters
+**		-e : Write output in the terminal (Readline() ?)	OK
+**		-r : backslash(\) do not escape characters			OK
 **		-s : Dont echo input on terminal
 **
 **		-d : Delim = 1 char
 **		-n : nchars -> 0 = infinite
-**		-p : prompt
-**		-t : timeout
-**		-u : read from given fd
+**		-p : prompt											OK
+**		-t : timeout										OK~
+**		-u : read from given fd								OK
 */
 
 typedef struct	s_read
 {
 	int		option;
 	char	delim;
-	int		nchars;
+	size_t	nchars;
 	char	*prompt;
 	size_t	timeout;
 	int		fd;
@@ -52,9 +51,9 @@ typedef struct	s_read
 int				read_get_options(char **av, t_read *tools);
 int				read_option_error(char *str, char *msg);
 
-int				read_input(t_shell *sh, t_read tools, char **line);
+int				read_input(t_read tools, char **line);
 
-void 			escape_line(char **line);
+void			escape_line(char **line);
 int				split_line_into_fields(t_shell *sh, char **av, char *line);
 
 int				read_option_d(t_read *tools, char **av, int *i, int *j);

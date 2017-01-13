@@ -6,13 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:27 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 14:27:48 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 16:23:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_echo.h"
 #include "ft_42sh.h"
 #include <unistd.h>
+#include "tools.h"
 
 int			main(int ac, char **av)
 {
@@ -36,8 +37,9 @@ int			main(int ac, char **av)
 				return (1);
 		}
 	}
-	if (!option[0] && write(1, "\n", 1) == -1)
+	if (ac && !option[0] && write(1, "\n", 1) == -1)
 		return (1);
-	(void)ac;
+	else if (option[0])
+		ft_putstr(NONEWLINE);
 	return (0);
 }

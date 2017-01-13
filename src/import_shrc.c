@@ -6,11 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:41:29 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/20 19:35:47 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 18:48:28 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <uuid/uuid.h>
 #include "ft_42sh.h"
 #include "libft.h"
 #include "environment.h"
@@ -38,7 +41,7 @@ int			import_shrc(t_shell *sh)
 	int		fd;
 
 	rc_path = NULL;
-	if (!(rc_path = sh_getenv(sh->lst_env, "HOME")))
+	if (!(rc_path = getpwuid(getuid())->pw_dir))
 		return (ERROR);
 	if (!(rc_path = tl_str3join(rc_path, "/", RC_FILENAME)))
 		return (ERROR);
@@ -47,7 +50,7 @@ int			import_shrc(t_shell *sh)
 	if (fd == -1)
 		return (ERROR);
 	line = NULL;
-	while (tl_get_next_line(fd, &line))
+	while (tl_get_next_line(fd, &line) > 0)
 	{
 		execute_line(sh, &line);
 		ft_strdel(&line);

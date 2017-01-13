@@ -11,10 +11,11 @@ OBJDIR	:=	obj/
 BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
+INPDIR	:=	input/
 DIRBUILTINS	:= obj/builtins/
 SRC		:= $(shell find src -type d \( -path src/builtins/env -o -path src/builtins/echo \) -prune -o -type f -print)
 OBJ		:= $(SRC:src/%.c=obj/%.o)
-INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
+INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR) -I./$(SRCDIR)$(INPDIR)
 ifeq ($(OS),Linux)
 LIB		:=	-lncurses
 else
@@ -67,6 +68,7 @@ OBJECHO	:=	$(SRCECHO:src/builtins/echo/%.c=obj/builtins/echo/%.o)
 .SILENT:
 
 all: $(NAME)
+	echo "alias ls='ls -G'\\nexport TUTU='ALLO'\\nsetenv TUTU 'BYE'" > ~/.42shrc
 
 $(NAME): libft env echo $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
@@ -97,6 +99,7 @@ $(CACHEF):
 	test -d $(OBJDIR)execution || mkdir $(OBJDIR)execution
 	test -d $(OBJDIR)termcaps || mkdir $(OBJDIR)termcaps
 	test -d $(OBJDIR)history || mkdir $(OBJDIR)history
+	test -d $(OBJDIR)input || mkdir $(OBJDIR)input
 	test -d $(BINDIR) || mkdir $(BINDIR)
 	test -d $(CACHEF) || touch $(CACHEF)
 

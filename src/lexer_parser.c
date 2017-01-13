@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 10:34:14 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/21 15:56:52 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 18:58:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,56 +46,6 @@ static int		add_elem(t_list **lst, char *command, size_t size)
 	return (GOOD);
 }
 
-static int		quote_prompt(char c)
-{
-	ft_putstr(c == '\'' ? "s" : "d");
-	ft_putstr(QUOTE_PROMPT);
-	return (GOOD);
-}
-
-static int		is_line_fulfilled(char **command, char *line, size_t *i, char *c)
-{
-	int		squote;
-	int		dquote;
-
-	if (!(*command = tl_str3join(*command, line, "\n")))
-		return (ERROR);
-	squote = *c == '\'' ? 1 : 0;
-	dquote = *c == '\"' ? 1 : 0;
-	while ((*command)[*i])
-	{
-		if ((*command)[*i] == *c && *i > 1 && (*command)[*i - 1] != '\\')
-			*c == '\'' ? squote++ : dquote++;
-		else if (((*command)[*i] == '\"' || (*command)[*i] == '\'') &&\
-			*i > 1 && (*command)[*i - 1] != '\\' && !(squote % 2) && !(dquote % 2))
-		{
-			*c = (*command)[*i];
-			squote = *c == '\'' ? 1 : 0;
-			dquote = *c == '\"' ? 1 : 0;
-		}
-		(*i)++;
-	}
-	return (squote % 2 || dquote % 2 ? ERROR : GOOD);
-}
-
-static int		wait_for_end_of_quote(char **command, size_t *i, char c)
-{
-	char		*line;
-	int			ret;
-
-	line = NULL;
-	while (quote_prompt(c) && (ret = tl_get_next_line(0, &line)) > 0)
-	{
-		if (is_line_fulfilled(command, line, i, &c))
-		{
-			break ;
-		}
-		ft_strdel(&line);
-	}
-	ft_strdel(&line);
-	return (ret == -1 ? ERROR : GOOD);
-}
-
 static int		check_inhibitors(t_list **lst, char **command, size_t *i)
 {
 	char		c;
@@ -116,10 +66,6 @@ static int		check_inhibitors(t_list **lst, char **command, size_t *i)
 	{
 		c = (*command)[*i];
 		*i += tl_jump_to_other_quote((*command) + *i);
-		if ((*command)[*i] == 0)
-		{
-			wait_for_end_of_quote(command, i, c);
-		}
 	}
 	return (GOOD);
 }

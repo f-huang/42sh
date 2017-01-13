@@ -30,6 +30,7 @@
 **	echo coucou >& -
 **	cat 1<&-
 */
+
 # define CLOSE_REDIRECT			(1 << 0)
 
 /*

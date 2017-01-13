@@ -6,24 +6,19 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 14:08:58 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/08 14:50:15 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 18:15:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <uuid/uuid.h>
+#include <limits.h>
 #include "ft_42sh.h"
 #include "environment.h"
 #include "libft.h"
-#include <stdlib.h>
-
-static	char	*get_name(t_shell *sh)
-{
-	char	*user;
-
-	user = sh_getenv(sh->lst_env, "USER");
-	if (user == 0)
-		return (0);
-	return (ft_strdup(user));
-}
+#include "input.h"
 
 static	char	*get_path_from_pwd(t_shell *sh)
 {
@@ -34,7 +29,7 @@ static	char	*get_path_from_pwd(t_shell *sh)
 	int		i;
 
 	pwd = sh_getenv(sh->lst_env, "PWD");
-	home = sh_getenv(sh->lst_env, "HOME");
+	home = getpwuid(getuid())->pw_dir;
 	if (!home || !pwd)
 		return (NULL);
 	if (!ft_strstr(pwd, home))
@@ -54,18 +49,16 @@ int				prompt(t_shell *sh)
 	char	*user;
 	int		length;
 
-	length = 0;
-	if ((user = get_name(sh)))
+	if ((user = getpwuid(getuid())->pw_name))
 	{
 		ft_putstr("\033[1;32m");
 		ft_putstr(user);
 		ft_putstr("\x1b[0m");
-		length += ft_strlen(user);
-		free(user);
 		ft_putchar(' ');
 	}
 	else
 		ft_putstr("$");
+	length = 2 + (user ? ft_strlen(user) : 1);
 	if ((pwd = get_path_from_pwd(sh)))
 	{
 		ft_putstr(pwd);
@@ -73,6 +66,6 @@ int				prompt(t_shell *sh)
 		free(pwd);
 	}
 	ft_putstr("> ");
-	length += ft_strlen("> ");
+	*prompt_len() = length;
 	return (length);
 }

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 15:47:41 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/06 15:08:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 19:08:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,12 @@ static int	search_for_alias(t_variable *lst_alias, char **line,\
 	return (ERROR);
 }
 
-static int	find_first_word(t_variable *lst_alias, char **line,\
+static void	find_first_word(t_variable *lst_alias, char **line,\
 													int *i, int first_word)
 {
 	int		end;
 	char	*word;
 
-	while ((*line)[*i] && tl_iswhitespace((*line)[*i]))
-		++(*i);
 	while ((*line)[*i] && (*line)[*i] != ';')
 	{
 		end = *i;
@@ -104,9 +102,8 @@ static int	find_first_word(t_variable *lst_alias, char **line,\
 				end += tl_jump_to_other_quote(*line + end);
 			end++;
 		}
-		if (first_word)
+		if (first_word && (word = tl_strndup(*line + *i, (end - *i))))
 		{
-			word = tl_strndup(*line + *i, (end - *i));
 			search_for_alias(lst_alias, line, word, i);
 			ft_strdel(&word);
 		}
@@ -116,7 +113,6 @@ static int	find_first_word(t_variable *lst_alias, char **line,\
 		first_word = 0;
 		(*i)++;
 	}
-	return (GOOD);
 }
 
 int			alias_substitution(t_variable *lst_alias, char **line)
@@ -130,6 +126,8 @@ int			alias_substitution(t_variable *lst_alias, char **line)
 	i = 0;
 	while (i < len)
 	{
+		while ((*line)[i] && tl_iswhitespace((*line)[i]))
+			++i;
 		find_first_word(lst_alias, line, &i, 1);
 		while ((*line)[i] == ';')
 			i++;

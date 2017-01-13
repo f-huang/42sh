@@ -29,10 +29,14 @@ void		free_heredocs(t_cmdwr *cmd)
 			list_tofree = list_cursor;
 			list_cursor = list_cursor->next;
 			free(list_tofree->content);
+			list_tofree->content = NULL;
 			free(list_tofree);
+			list_tofree = NULL;
 		}
 		tofree = cursor;
 		cursor = cursor->next;
 		free(tofree);
+		tofree = NULL;
 	}
+	cmd->heredocs = NULL;
 }

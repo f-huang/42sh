@@ -6,11 +6,12 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:01:52 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/15 14:15:20 by yfuks            ###   ########.fr       */
+/*   Updated: 2017/01/09 13:24:55 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <sys/wait.h>
 #include "execution.h"
 #include "ast.h"
 #include "libft.h"

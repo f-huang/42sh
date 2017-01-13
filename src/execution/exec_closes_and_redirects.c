@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 17:38:44 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/08 16:04:43 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 19:17:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,32 +44,32 @@ static void	left_redirect(t_redirections *cursor)
 	}
 }
 
-static void	right_redirect(t_redirections *cursor)
+static void	right_redirect(t_redirections *curs)
 {
 	int				fd;
 
-	if (cursor->type & CLOSE_REDIRECT)
+	if (curs->type & CLOSE_REDIRECT)
 	{
-		cursor->from_fd = (cursor->from_fd == -1) ? 1 : cursor->from_fd;
-		close(cursor->from_fd);
+		curs->from_fd = (curs->from_fd == -1) ? 1 : curs->from_fd;
+		close(curs->from_fd);
 	}
-	else if (cursor->type & FILE_REDIRECT)
+	else if (curs->type & FILE_REDIRECT)
 	{
-		if (exec_is_file(cursor->dest) && exec_is_directory(cursor->dest))
-			exit(exec_print_command_error(ISDIRECTORY, cursor->dest));
-		if (exec_is_file(cursor->dest) && !exec_is_writable(cursor->dest))
-			exit(exec_print_command_error(PERMISSIONDENIED, cursor->dest));
-		cursor->from_fd = (cursor->from_fd == -1) ? 1 : cursor->from_fd;
-		fd = open(cursor->dest, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-		dup2(fd, cursor->from_fd);
+		if (exec_is_file(curs->dest) && exec_is_directory(curs->dest))
+			exit(exec_print_command_error(ISDIRECTORY, curs->dest));
+		if (exec_is_file(curs->dest) && !exec_is_writable(curs->dest))
+			exit(exec_print_command_error(PERMISSIONDENIED, curs->dest));
+		curs->from_fd = (curs->from_fd == -1) ? 1 : curs->from_fd;
+		fd = open(curs->dest, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+		dup2(fd, curs->from_fd);
 	}
 	else
 	{
-		if (fcntl(cursor->to_fd, F_GETFD) == -1)
+		if (fcntl(curs->to_fd, F_GETFD) == -1)
 			exit(exec_print_command_error(BADFILEDESCRIPTOR,\
-			ft_itoa(cursor->to_fd)));
-		cursor->from_fd = (cursor->from_fd == -1) ? 1 : cursor->from_fd;
-		dup2(cursor->to_fd, cursor->from_fd);
+			ft_itoa(curs->to_fd)));
+		curs->from_fd = (curs->from_fd == -1) ? 1 : curs->from_fd;
+		dup2(curs->to_fd, curs->from_fd);
 	}
 }
 

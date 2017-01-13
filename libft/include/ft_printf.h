@@ -19,6 +19,9 @@
 # include <stdarg.h>
 # include <locale.h>
 # include <stdbool.h>
+#if linux
+# include <inttypes.h>
+#endif
 
 # include "libft.h"
 
