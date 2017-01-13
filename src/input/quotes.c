@@ -21,11 +21,19 @@ void	manage_quotes(void)
 	i = 0;
 	q = 0;
 	dq = 0;
-	while ((*command())[i])
+	while (!(*stock()) && (*command())[i])
 	{
 		if ((*command())[i] == '"' && !(q % 2))
 			dq++;
 		if ((*command())[i] == '\'' && !(dq % 2))
+			q++;
+		i++;
+	}
+	while ((*stock()) && (*stock())[i])
+	{
+		if ((*stock())[i] == '"' && !(q % 2))
+			dq++;
+		if ((*stock())[i] == '\'' && !(dq % 2))
 			q++;
 		i++;
 	}

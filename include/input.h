@@ -109,6 +109,7 @@ void			manage_command(char c);
 void			stremove(void);
 void			fill_space(int j);
 void			strinsert_input(char c);
+void			init_input(void);
 
 void			completion(void);
 void			code_up(int key);
@@ -141,6 +142,7 @@ char			**user(void);
 char			**get_home(void);
 t_coord			*cor(void);
 char			***env(void);
+int			*id(void);
 char			**stock(void);
 char			**copied(void);
 int				ft_isvalid(char c);

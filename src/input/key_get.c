@@ -16,7 +16,7 @@ int		get_basics(char c)
 {
 	if (c == '\x9')
 		return (CODE_TAB);
-	if (c == '\x4')
+	if (c == '\x4' && !(*quote() % 2) && !(*dquote() % 2))
 		return (CODE_CTRL_D);
 	if (c == '\x18')
 		return (CODE_CTRL_X);

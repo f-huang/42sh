@@ -39,3 +39,10 @@ char	**stock(void)
 
 	return (&stock);
 }
+
+int	*id(void)
+{
+	static int	id = 0;
+
+	return (&id);
+}
