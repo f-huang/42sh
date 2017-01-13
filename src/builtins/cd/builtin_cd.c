@@ -17,34 +17,16 @@
 #include "environment.h"
 #include "builtins.h"
 #include "libft.h"
+#include "tools.h"
 
 /*
- * **			This function change the working directory of the current shell
- * **			execution environment.
- * **			cd -P -> Do not follow symbolic links
- * **				(ex: PWD=/private/tmp)
- * **			cd -L -> Follow symbolic links  >>>>> DEFAULT
- * **				(ex: PWD=/tmp)
- * */
-
-static int	cd_error(int index, char *path)
-{
-	const char	*error_msg[] = {
-		"Too many arguments.\n",
-		"'HOME' variable not set.\n",
-		"'OLDPWD' variable not set.\n",
-		": No such file or directory.\n",
-		": Not a directory.\n",
-		": Permission denied.\n",
-		NULL
-	};
-
-	ft_putstr_fd("cd : ", 2);
-	if (index > 2 && index < 6 && path)
-		ft_putstr_fd(path, 2);
-	ft_putstr_fd(error_msg[index], 2);
-	return (1);
-}
+**			This function change the working directory of the current shell
+**			execution environment.
+**			cd -P -> Do not follow symbolic links
+**				(ex: PWD=/private/tmp)
+**			cd -L -> Follow symbolic links  >>>>> DEFAULT
+**				(ex: PWD=/tmp)
+*/
 
 static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 {
@@ -67,7 +49,8 @@ static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 		sh_setenv(lst_env, "PWD", path);
 }
 
-static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
+static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl, \
+		int alloc)
 {
 	struct stat	buf;
 
@@ -83,7 +66,72 @@ static int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 	if (chdir(path) == -1)
 		return (1);
 	set_pwd(lst_env, path, follow_sl);
+	if (alloc)
+		ft_strdel(&path);
 	return (0);
+}
+
+static void	append_one_dir(char **path, char *wanted)
+{
+	char	*tmp;
+
+	tmp = (*path)[1] ? ft_strjoin(*path, "/") : ft_strdup(*path);
+	*path ? free(*path) : 0;
+	*path = ft_strjoin(tmp, wanted);
+	tmp ? ft_strdel(&tmp) : 0;
+}
+
+static int	gear(char **path, char *tmp)
+{
+	char	*p;
+	char	*cpy;
+
+	cpy = *path;
+	if (ft_strequ(tmp, "."))
+		;
+	else if (ft_strequ(tmp, ".."))
+	{
+		if ((p = ft_strrchr(cpy, '/')))
+			while (*p)
+			{
+				if (p == *path)
+					++p;
+				*p = '\0';
+				++p;
+			}
+	}
+	else
+		append_one_dir(path, tmp);
+	return (GOOD);
+}
+
+static char	*build_path(t_variable *lst_env, char *wanted)
+{
+	char	*path;
+	char	**tmp;
+	int		i;
+
+	if (wanted[0] != '/')
+	{
+		if (!(path = sh_getenv(lst_env, "PWD")))
+			path = getcwd(NULL, _POSIX_PATH_MAX);
+		else if (!(path = ft_strdup(path)))
+			return (NULL);
+		if (!(tmp = ft_strsplit(wanted, '/')))
+			return (NULL);
+		if (tl_arrlen(tmp) == 0 && ft_strequ(wanted, "/"))
+			return (ft_strdup(wanted));
+		i = 0;
+		while (tmp[i])
+		{
+			gear(&path, tmp[i]);
+			++i;
+		}
+		tl_freedoubletab(tmp);
+	}
+	else
+		path = ft_strdup(wanted);
+	return (path);
 }
 
 int			builtin_cd(t_shell *sh, int ac, char **av)
@@ -91,10 +139,13 @@ int			builtin_cd(t_shell *sh, int ac, char **av)
 	char	*path;
 	_Bool	follow_sl;
 	int		i;
+	int		alloc;
 
 	i = 1;
 	follow_sl = get_options(av, &i);
 	path = NULL;
+	alloc = 0;
+	ft_putendl(av[i]);//
 	if (!av[i])
 	{
 		if (!(path = sh_getenv(sh->lst_env, "HOME")))
@@ -108,9 +159,12 @@ int			builtin_cd(t_shell *sh, int ac, char **av)
 				return (cd_error(2, NULL));
 		}
 		else
-			path = av[i];
+		{
+			path = build_path(sh->lst_env, av[i]);
+			alloc = 1;
+		}
 	}
 	else
 		return (cd_error(0, NULL));
-	return (change_directory(&sh->lst_env, path, follow_sl));
+	return (change_directory(&sh->lst_env, path, follow_sl, alloc));
 }
