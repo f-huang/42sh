@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 15:30:02 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/20 17:38:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 19:11:55 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ static int	set_read_arguments(t_shell *sh, char **av, char *line, char *ifs)
 	while (line[++i] && av[j + 1])
 		if (is_ifs_char(ifs, line[i]))
 		{
-			if (i != tmp)
+			if (i != tmp && (value = tl_strndup(line + tmp, i - tmp)))
 			{
-				if (!(value = tl_strndup(line + tmp, i - tmp)))
-					return (ERROR);
 				sh_setenv(&sh->lst_localvar, av[j++], value);
 				ft_strdel(&value);
 			}

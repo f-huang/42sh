@@ -6,11 +6,14 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 18:17:47 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/11/30 14:09:38 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 18:53:40 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <uuid/uuid.h>
 #include <unistd.h>
 #include "ft_42sh.h"
 #include "tools.h"
@@ -68,13 +71,13 @@ static char		*save_remain(char *s, char *p)
 	return (save);
 }
 
-int				tilde(t_shell *sh, char **acmd)
+int				tilde(char **acmd)
 {
 	char		*save;
 	int			ret;
 
 	ret = 0;
-	if (*acmd[0] == '~' && (save = sh_getenv(sh->lst_env, "HOME")))
+	if (*acmd[0] == '~' && (save = getpwuid(getuid())->pw_dir))
 	{
 		if (ft_strlen(*acmd) == 1)
 			save = save_home(save);

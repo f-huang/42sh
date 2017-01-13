@@ -6,14 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:35:18 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/21 16:19:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/12 17:52:29 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-#include "ft_42sh.h"
+# include "ft_42sh.h"
 
 # ifndef OLDPWD
 #  define OLDPWD 0
@@ -54,9 +54,9 @@ _Bool			get_options(char **av, int *i);
 **	EXPORT
 */
 
-char			**create_variables_tab(t_variable *lst_env, t_variable *lst_localvar);
+char			**create_variables_tab(\
+					t_variable *lst_env, t_variable *lst_localvar);
 void			print_export(t_variable *lst_env, t_variable *lst_localvar);
-
 
 /*
 **	ALIAS

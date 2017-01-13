@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:21 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/11 14:31:16 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/12 17:56:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,5 @@ int			init_shell(t_shell *sh, char *av_0)
 	set_default(&sh->lst_env);
 	init_history(&sh->lst_history, sh->lst_env);
 	import_shrc(sh);
-/*	if (!(init_termios(sh->term, sh->window)))
-		return (ERROR);
-*/	return (GOOD);
+	return (GOOD);
 }

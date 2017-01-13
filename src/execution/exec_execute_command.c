@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 17:46:09 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/12 14:13:19 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/12 19:09:47 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static	int		execute_bnb(t_shell *sh, char **command)
 	{
 		if (ft_strcmp(g_bnb[i].builtin, command[0]) == 0)
 		{
-			sh->last_return = g_bnb[i].function(sh, tl_arrlen(command), command);
+			sh->last_return = g_bnb[i].function(sh,\
+				tl_arrlen(command), command);
 			return (sh->last_return);
 		}
 		i++;

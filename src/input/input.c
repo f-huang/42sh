@@ -15,9 +15,6 @@
 void	ft_init_input(void)
 {
 	cor()->x = 0;
-	cor()->y = 0;
-	cor()->xmax = 0;
-	cor()->ymax = 0;
 	cor()->prompt_len = *prompt_len() + 1;
 	*command() = strdup_input("");
 }
@@ -46,7 +43,7 @@ int		input(void)
 			else
 				ft_putstr(*dquote() % 2 ? "dquote> " : "quote> ");
 		}
-		if (key == -1 && !(*command() && (*command())[0]))
+		if (key == -1 && !(*command() && (*command())[0]) && !cor()->len)
 			return (1);
 	}
 }

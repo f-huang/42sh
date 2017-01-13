@@ -19,4 +19,10 @@ void	code_ctrl_d(void)
 		default_mode();
 		ft_putchar('\n');
 	}
+	if (*command() && cor()->x < cor()->len)
+	{
+		move_right(1);
+		cor()->x++;
+		stremove();
+	}
 }
