@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:01:37 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/13 12:45:43 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/13 16:15:08 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ void	ft_init_input(void)
 {
 	cor()->x = 0;
 	cor()->prompt_len = *prompt_len() + 1;
+	ft_strdel(command());
 	*command() = strdup_input("");
 }
 
 int		input(void)
 {
-	int	key;
+	int		key;
 
 	key = 0;
 	ft_init_input();
@@ -37,11 +38,16 @@ int		input(void)
 			if (!(*dquote() % 2) && !(*quote() % 2))
 			{
 				reset_quotes();
+				*stock() ? ft_strdel(command()) : 0;
+				*stock() ? *command() = ft_strdup(*stock()) : 0;
+				ft_strdel(stock());
 				ft_putchar('\n');
 				return (0);
 			}
 			else
 			{
+				*stock() = tl_strmerge(*stock(), *command());
+				ft_init_input();
 				if (*dquote() % 2)
 					ft_putstr("dquote> ");
 				else if (*quote() % 2)
