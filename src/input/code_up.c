@@ -16,9 +16,9 @@ void	code_up(int key)
 {
 	char	*str;
 
-	str = get_elem(key);
 	if ((*dquote() % 2) || (*quote() % 2))
 		return ;
+	str = get_elem(key);
 	if (*pos() == 1)
 		ft_putchar('\a');
 	if (!str)
