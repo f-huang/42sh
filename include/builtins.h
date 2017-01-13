@@ -48,6 +48,7 @@ int				builtin_unalias(t_shell *sh, int ac, char **av);
 
 int				builtin_cd(t_shell *sh, int ac, char **av);
 _Bool			get_options(char **av, int *i);
+int				cd_error(int index, char *path);
 
 /*
 **	EXPORT

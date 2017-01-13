@@ -1,4 +1,4 @@
-static int	cd_error(int index, char *path)
+int		cd_error(int index, char *path)
 {
 	const char	*error_msg[] = {
 		"Too many arguments.\n",
