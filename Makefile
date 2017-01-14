@@ -97,7 +97,6 @@ $(CACHEF):
 	test -d $(OBJDIR)ast || mkdir $(OBJDIR)ast
 	test -d $(OBJDIR)tools || mkdir $(OBJDIR)tools
 	test -d $(OBJDIR)execution || mkdir $(OBJDIR)execution
-	test -d $(OBJDIR)termcaps || mkdir $(OBJDIR)termcaps
 	test -d $(OBJDIR)history || mkdir $(OBJDIR)history
 	test -d $(OBJDIR)input || mkdir $(OBJDIR)input
 	test -d $(BINDIR) || mkdir $(BINDIR)
