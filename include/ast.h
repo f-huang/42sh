@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:14:15 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/13 16:45:34 by yfuks            ###   ########.fr       */
+/*   Updated: 2017/01/14 15:57:03 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void			ast_free_cmdwr(t_cmdwr **cmd);
 void			ast_destroy_tree(t_ast *tree);
 
 int				ast_to_cmdwr(t_ast **list);
+t_list			*ast_to_lst(t_ast **ast);
 
 int				cmdwr_fill_struct(t_cmdwr **cmd, char *str);
 size_t			cmdwr_check_redirections(char *str, int *i, int redirection);

@@ -119,7 +119,7 @@ env: $(OBJENV)
 
 norme:
 	norminette $(SRCDIR) $(INCDIR) | grep -v Norme -B1 || true
-	norminette $(LIBFT)SRC/ $(LIBFT)include/ | grep -v Norme -B1 || true
+	norminette $(LIBFT)$(SRCDIR) $(LIBFT)$(INCDIR) | grep -v Norme -B1 || true
 
 clean:
 	make -C $(LIBDIR) clean

@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/12 17:53:07 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/14 15:52:39 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_list			*tl_lstlast(t_list *lst);
 t_list			*tl_lstnew(void *content, size_t size);
 void			tl_del(void *data, size_t len);
 void			tl_lstdelast(t_list **lst);
+void			tl_lstfree(t_list **begin);
 
 int				tl_get_next_line(int const fd, char **line);
 DIR				*tl_opendir(char *path);

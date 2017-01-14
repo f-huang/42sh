@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 16:01:52 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/09 13:24:55 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/14 16:09:19 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,46 +17,6 @@
 #include "libft.h"
 #include "tools.h"
 
-static t_list	*ast_to_list(t_ast **ast)
-{
-	t_ast	*cursor;
-	t_list	*begin;
-
-	cursor = *ast;
-	begin = 0;
-	while (cursor)
-	{
-		if (cursor->cmd2)
-		{
-			if (!begin)
-				begin = tl_lstnew(cursor->cmd2, sizeof(cursor->cmd2));
-			else
-				ft_lstadd(&begin, tl_lstnew(cursor->cmd2,
-											sizeof(cursor->cmd2)));
-		}
-		if (!begin)
-			begin = tl_lstnew(cursor->cmd1, sizeof(cursor->cmd1));
-		else
-			ft_lstadd(&begin, tl_lstnew(cursor->cmd1, sizeof(cursor->cmd1)));
-		cursor = cursor->left;
-	}
-	return (begin);
-}
-
-static void		free_list(t_list **begin)
-{
-	t_list	*cursor;
-	t_list	*tofree;
-
-	cursor = *begin;
-	while (cursor)
-	{
-		tofree = cursor;
-		cursor = cursor->next;
-		free(tofree);
-	}
-}
-
 void			exec_pipe(t_shell *sh, t_ast **ast)
 {
 	pid_t	id;
@@ -66,7 +26,7 @@ void			exec_pipe(t_shell *sh, t_ast **ast)
 	t_list	*begin;
 	int		tmp;
 
-	begin = ast_to_list(ast);
+	begin = ast_to_lst(ast);
 	cursor = begin;
 	fd_in = 0;
 	while (cursor)
@@ -81,7 +41,7 @@ void			exec_pipe(t_shell *sh, t_ast **ast)
 			{
 				waitpid(id, &tmp, WUNTRACED | WCONTINUED);
 				sh->last_return = get_command_status_code(tmp);
-				free_list(&begin);
+				tl_lstfree(&begin);
 				exit(sh->last_return);
 			}
 			else

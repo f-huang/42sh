@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 23:13:27 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/07 12:56:15 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/14 15:33:56 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <stdarg.h>
 # include <locale.h>
 # include <stdbool.h>
-#if linux
-# include <inttypes.h>
-#endif
+# if linux
+#  include <inttypes.h>
+# endif
 
 # include "libft.h"
 
