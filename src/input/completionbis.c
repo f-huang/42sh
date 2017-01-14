@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "input.h"
+#include "ft_42sh.h"
 
 int		applylink(struct dirent *lu, char *pattern)
 {
@@ -33,6 +34,33 @@ int		applylink(struct dirent *lu, char *pattern)
 	return (0);
 }
 
+int		check_builtins(char *pattern)
+{
+	char	**split;
+	int	i;
+	int	p;
+
+	i = 0;
+	p = 0;
+	split = ft_strsplit(BUILTIN, ' ');
+	while (split[i])
+	{
+		if (match(split[i], pattern) && (*command())[0])
+		{
+			while (cor()->x > 0
+			&& !ft_isspace(ft_getlast(*command())))
+				stremove();
+			while (split[i][p])
+				manage_command(split[i][p++]);
+			ft_tabdel(&split);
+			return (1);
+		}
+		i++;
+	}
+	ft_tabdel(&split);
+	return (0);
+}
+
 int		applycommand(struct dirent *lu, char *pattern)
 {
 	int		p;
@@ -51,7 +79,7 @@ int		applycommand(struct dirent *lu, char *pattern)
 		ft_strdel(&str);
 		return (1);
 	}
-	return (0);
+	return (check_builtins(pattern));
 }
 
 void	linkcase(char *pattern, char *to_open)
