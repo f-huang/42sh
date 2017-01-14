@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:21 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/12 17:56:46 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/14 13:34:51 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "tools.h"
 #include "environment.h"
 #include "history.h"
+#include "expansion.h"
 #include "input.h"
 #include <pwd.h>
 

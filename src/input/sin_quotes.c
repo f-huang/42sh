@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:43:40 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/09 13:45:00 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/14 13:52:05 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,18 @@ int		*quote(void)
 	static int	quote = 0;
 
 	return (&quote);
+}
+
+int		*bs(void)
+{
+	static int	bs = 0;
+
+	return (&bs);
+}
+
+char	**stock(void)
+{
+	static char	*stock = NULL;
+
+	return (&stock);
 }

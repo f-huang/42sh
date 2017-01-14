@@ -25,4 +25,9 @@ void	code_ctrl_d(void)
 		cor()->x++;
 		stremove();
 	}
+	if (*dquote() % 2 || *quote() % 2)
+	{
+		reset_quotes();
+		init_input();
+	}
 }

@@ -35,6 +35,8 @@ static void	reset_input(void)
 		prompt(&g_sh);
 	ft_strdel(command());
 	*command() = ft_strdup("");
+	ft_strdel(stock());
+	*stock() = ft_strdup("");
 	reset_quotes();
 	raw_mode();
 	cor()->x = 0;

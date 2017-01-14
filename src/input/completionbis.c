@@ -83,7 +83,10 @@ void	commandcase(char *pattern)
 	while (p.splitted_path && p.splitted_path[p.t])
 	{
 		if (!(p.dir = opendir(p.splitted_path[p.t])))
+		{
+			ft_tabdel(&p.splitted_path);
 			return ;
+		}
 		while ((p.lu = readdir(p.dir)))
 		{
 			p.check = applycommand(p.lu, pattern);
