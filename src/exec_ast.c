@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:20:49 by yfuks             #+#    #+#             */
-/*   Updated: 2016/12/20 16:43:00 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/14 18:05:30 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,58 +19,32 @@
 
 static	int	exec_and(t_shell *sh, t_ast *ast)
 {
-	pid_t	id;
-	int		tmp;
-
-	id = fork();
-	if (id > 0)
-	{
-		waitpid(0, &tmp, WUNTRACED | WCONTINUED);
-		sh->last_return = get_command_status_code(tmp);
-		if (sh->last_return == 0 && ast->right)
-			exec_ast(sh, ast->right);
-		else if (sh->last_return == 0 && ast->cmd2)
-			exec_redirection(sh, ast->cmd2);
-		else if (sh->last_return == 0 && ast->cmd1)
-			exec_redirection(sh, ast->cmd1);
-		return (sh->last_return);
-	}
-	else if (id == 0)
-	{
-		if (ast->left)
-			exit(exec_ast(sh, ast->left));
-		else
-			exit(exec_redirection(sh, ast->cmd1));
-	}
-	return (0);
+	if (ast->left)
+		exec_ast(sh, ast->left);
+	else
+		exec_redirection(sh, ast->cmd1);
+	if (sh->last_return == 0 && ast->right)
+		exec_ast(sh, ast->right);
+	else if (sh->last_return == 0 && ast->cmd2)
+		exec_redirection(sh, ast->cmd2);
+	else if (sh->last_return == 0 && ast->cmd1)
+		exec_redirection(sh, ast->cmd1);
+	return (sh->last_return);
 }
 
 static	int	exec_or(t_shell *sh, t_ast *ast)
 {
-	pid_t	id;
-	int		tmp;
-
-	id = fork();
-	if (id > 0)
-	{
-		waitpid(0, &tmp, WUNTRACED | WCONTINUED);
-		sh->last_return = get_command_status_code(tmp);
-		if (sh->last_return != 0 && ast->right)
-			exec_ast(sh, ast->right);
-		else if (sh->last_return != 0 && ast->cmd2)
-			exec_redirection(sh, ast->cmd2);
-		else if (sh->last_return != 0 && ast->cmd1)
-			exec_redirection(sh, ast->cmd1);
-		return (sh->last_return);
-	}
-	else if (id == 0)
-	{
-		if (ast->left)
-			exit(exec_ast(sh, ast->left));
-		else
-			exit(exec_redirection(sh, ast->cmd1));
-	}
-	return (0);
+	if (ast->left)
+		exec_ast(sh, ast->left);
+	else
+		exec_redirection(sh, ast->cmd1);
+	if (sh->last_return != 0 && ast->right)
+		exec_ast(sh, ast->right);
+	else if (sh->last_return != 0 && ast->cmd2)
+		exec_redirection(sh, ast->cmd2);
+	else if (sh->last_return != 0 && ast->cmd1)
+		exec_redirection(sh, ast->cmd1);
+	return (sh->last_return);
 }
 
 int			exec_pipes(t_shell *sh, t_ast *ast)
