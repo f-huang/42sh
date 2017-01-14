@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:09:11 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/14 15:56:30 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/14 16:47:56 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,19 @@ typedef struct	s_heredocs
 	struct s_heredocs		*next;
 }				t_heredocs;
 
-typedef	struct	s_cmdwr
+typedef struct	s_cmdwr
 {
 	char					**command;
 	t_redirections			*redirs;
 	t_heredocs				*heredocs;
 }				t_cmdwr;
+
+typedef struct	s_pipe
+{
+	t_list		*begin;
+	pid_t		id;
+	int			pipefd[2];
+}				t_pipe;
 
 int				exec_is_executable(char *filepath);
 char			**exec_get_envpath(t_shell *sh);
