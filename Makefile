@@ -57,11 +57,11 @@ OBJECHO	:=	$(SRCECHO:src/builtins/echo/%.c=obj/builtins/echo/%.o)
 # ================
 
 # ===== read =====
-#DIRREAD	:=	src/builtins/read/
-#OBJDIRREAD	:= obj/builtins/read/
-#BINREAD	:=	bin/read
-#SRCREAD	:=	$(shell find src/builtins/read -type f -print)
-#OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
+DIRREAD	:=	src/builtins/read/
+OBJDIRREAD	:= obj/builtins/read/
+BINREAD	:=	bin/read
+SRCREAD	:=	$(shell find src/builtins/read -type f -print)
+OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
 # ================
 
 .PHONY: all libft echo env norme clean fclean re

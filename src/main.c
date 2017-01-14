@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/13 17:38:55 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/14 14:54:09 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "input.h"
 
 t_shell		g_sh;
+
 static void		clear_main(char **line, t_list **lst)
 {
 	if (*line)
@@ -40,6 +41,18 @@ static void		call_signal(void)
 	signal(SIGCONT, SIG_IGN);
 }
 
+static void		gear(t_shell *sh, t_list *lst_commands)
+{
+	ft_strcmp(*command(), *old_command()) ? in_history(*command()) : 0;
+	ft_strdel(old_command());
+	*old_command() = *command() ? ft_strdup(*command()) : ft_strdup("");
+	save_command_line(&sh->lst_history, *command());
+	alias_substitution(sh->lst_alias, command());
+	lexer_parser(command(), &lst_commands);
+	loop_through_commands(sh, lst_commands);
+	clear_main(command(), &lst_commands);
+}
+
 int				main(int ac, char **av)
 {
 	t_shell		sh;
@@ -55,16 +68,7 @@ int				main(int ac, char **av)
 		call_signal();
 		g_sh = sh;
 		if (input() == 0)
-		{
-			ft_strcmp(*command(), *old_command()) ? in_history(*command()) : 0;
-			ft_strdel(old_command());
-			*old_command() = *command() ? ft_strdup(*command()) : ft_strdup("");
-			save_command_line(&sh.lst_history, *command());
-			alias_substitution(sh.lst_alias, command());
-			lexer_parser(command(), &lst_commands);
-			loop_through_commands(&sh, lst_commands);
-			clear_main(command(), &lst_commands);
-		}
+			gear(&sh, lst_commands);
 		else
 		{
 			clear_main(command(), &lst_commands);
