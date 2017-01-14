@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 17:56:25 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/14 14:47:38 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/14 17:10:32 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,25 @@ static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 int			change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 {
 	struct stat	buf;
+	int			ret;
 
 	if (!path)
 		return (1);
+	ret = 0;
 	if (access(path, F_OK) == -1)
-		return (cd_error(3, path));
+		ret = cd_error(3, path);
 	stat(path, &buf);
-	if (S_ISDIR(buf.st_mode) != 1)
-		return (cd_error(4, path));
-	if (access(path, X_OK) == -1)
-		return (cd_error(5, path));
-	if (chdir(path) == -1)
+	if (!ret && S_ISDIR(buf.st_mode) != 1)
+		ret = cd_error(4, path);
+	if (!ret && access(path, X_OK) == -1)
+		ret = cd_error(5, path);
+	if (!ret && chdir(path) == -1)
+	{
+		ft_strdel(&path);
 		return (1);
-	set_pwd(lst_env, path, follow_sl);
+	}
+	if (!ret)
+		set_pwd(lst_env, path, follow_sl);
 	ft_strdel(&path);
-	return (0);
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:40:17 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/10 12:14:14 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/14 17:20:37 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static	int	is_builtin_notbinary(t_exec *ex, char **command)
 
 int			exec_is_builtin(t_exec *ex, t_shell *sh, char **command)
 {
-	if (!ft_strchr(*command, '/') && is_binary_builtin(ex, sh, command))
+	if (!ft_strchr(command[0], '/') && is_binary_builtin(ex, sh, command))
 		return (1);
-	if (!ft_strchr(*command, '/') && is_builtin_notbinary(ex, command))
+	if (!ft_strchr(command[0], '/') && is_builtin_notbinary(ex, command))
 		return (1);
 	return (0);
 }
