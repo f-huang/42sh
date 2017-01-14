@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/13 15:43:53 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/14 13:52:50 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,6 @@ typedef struct	s_termsize
 typedef struct	s_coord
 {
 	size_t			x;
-	size_t			y;
-	size_t			xmax;
-	size_t			ymax;
 	size_t			prompt_len;
 	size_t			len;
 }				t_coord;
@@ -142,7 +139,6 @@ char			**user(void);
 char			**get_home(void);
 t_coord			*cor(void);
 char			***env(void);
-int			*id(void);
 char			**stock(void);
 char			**copied(void);
 int				ft_isvalid(char c);

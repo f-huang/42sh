@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:01:37 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/13 16:58:05 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/14 13:51:52 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@ void	init_input(void)
 	cor()->prompt_len = *prompt_len() + 1;
 	ft_strdel(command());
 	*command() = strdup_input("");
-}
-
-int		strlen_noreturn(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != '\n')
-			i++;
-	}
-	return (i);
 }
 
 int		input(void)
