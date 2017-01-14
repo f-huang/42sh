@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 17:56:25 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/13 17:57:32 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/14 14:47:38 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	set_pwd(t_variable **lst_env, char *path, _Bool follow_sl)
 		sh_setenv(lst_env, "PWD", path);
 }
 
-int	change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
+int			change_directory(t_variable **lst_env, char *path, _Bool follow_sl)
 {
 	struct stat	buf;
 

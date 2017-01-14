@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 14:08:58 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/13 16:24:59 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/14 15:09:15 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static	char	*get_path_from_pwd(t_shell *sh)
 		return (ft_strdup(pwd));
 	i = 0;
 	while (pwd[i] && home[i] && pwd[i] == home[i])
-		i++;
+		++i;
 	tmp = ft_strdup(&pwd[i]);
 	chain = ft_strjoin("~", tmp);
 	free(tmp);
