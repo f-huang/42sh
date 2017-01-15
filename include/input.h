@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/15 12:02:04 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 12:21:31 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ int				get_basics(char c);
 char			**user(void);
 char			**get_home(void);
 t_coord			*cor(void);
-char			***env(void);
 char			**stock(void);
 char			**copied(void);
 int				ft_isvalid(char c);

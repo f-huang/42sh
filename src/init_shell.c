@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:21 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/14 13:34:51 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 12:25:02 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ static int	copy_environment(t_variable **lst_env)
 	extern char	**environ;
 	int			i;
 
-	*env() = environ;
-	*get_home() = ft_strjoin("/Users/", getpwuid(getuid())->pw_name);
+	*get_home() = getpwuid(getuid())->pw_dir;
 	i = 0;
 	while (environ && environ[i])
 	{

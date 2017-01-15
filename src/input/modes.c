@@ -6,30 +6,11 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:47:58 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/14 15:50:52 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 12:17:34 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
-
-char	*ft_getenv(const char *need)
-{
-	size_t	i;
-	char	*tmp;
-
-	i = 0;
-	tmp = NULL;
-	while (*env() && (*env())[i])
-	{
-		if ((tmp = ft_strstr((*env())[i], need)) &&
-				!ft_strncmp((*env())[i], (char *)need, ft_strlen(need)))
-			break ;
-		i++;
-	}
-	if (!tmp)
-		return (NULL);
-	return (&tmp[ft_strlen(need) + 1] ? &tmp[ft_strlen(need) + 1] : NULL);
-}
 
 void	raw_mode(void)
 {
