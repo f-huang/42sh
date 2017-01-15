@@ -6,19 +6,19 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:21 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/15 12:25:02 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 16:57:13 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include <unistd.h>
+#include <pwd.h>
 #include "ft_42sh.h"
 #include "tools.h"
 #include "environment.h"
 #include "history.h"
 #include "expansion.h"
 #include "input.h"
-#include <pwd.h>
 
 /*
 **		This file is initalizing the shell. (Termios and environment).
