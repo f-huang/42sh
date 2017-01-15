@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 10:17:42 by fhuang            #+#    #+#             */
-/*   Updated: 2016/11/10 10:25:46 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/15 20:34:04 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	clear_env_list(t_variable **lst_env)
 		ft_strdel(&ptr->variable);
 		ft_memdel((void*)&ptr);
 	}
+	*lst_env = NULL;
 }
