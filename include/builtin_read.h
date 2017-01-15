@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:01:19 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/12 17:51:44 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/15 15:49:07 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,9 @@ typedef struct	s_read
 
 int				read_get_options(char **av, t_read *tools);
 int				read_option_error(char *str, char *msg);
-
 int				read_input(t_read tools, char **line);
-
 void			escape_line(char **line);
 int				split_line_into_fields(t_shell *sh, char **av, char *line);
-
 int				read_option_d(t_read *tools, char **av, int *i, int *j);
 int				read_option_n(t_read *tools, char **av, int *i, int *j);
 int				read_option_p(t_read *tools, char **av, int *i, int *j);
