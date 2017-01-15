@@ -3,7 +3,6 @@ NAME	:=	42sh
 # ====================
 
 # ===== Standard =====
-OS		:=	$(shell uname)
 CC		:=	clang -pipe
 CFLAGS	:=	-Wall -Wextra -Werror -g3
 SRCDIR	:=	src/
@@ -11,16 +10,161 @@ OBJDIR	:=	obj/
 BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
-INPDIR	:=	input/
 DIRBUILTINS	:= obj/builtins/
-SRC		:= $(shell find src -type d \( -path src/builtins/env -o -path src/builtins/echo \) -prune -o -type f -print)
-OBJ		:= $(SRC:src/%.c=obj/%.o)
-INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR) -I./$(SRCDIR)$(INPDIR)
-ifeq ($(OS),Linux)
-LIB		:=	-lncurses
-else
-LIB		:=	-ltermcap
-endif
+SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
+			$(SRCDIR)ast/ast_create_tree.c \
+			$(SRCDIR)ast/ast_destroy_tree.c \
+			$(SRCDIR)ast/ast_free_cmdwr.c \
+			$(SRCDIR)ast/ast_insert_elem_in_tree.c \
+			$(SRCDIR)ast/ast_parse_tree.c \
+			$(SRCDIR)ast/ast_to_cmdwr.c \
+			$(SRCDIR)ast/ast_to_lst.c \
+			$(SRCDIR)ast/cmdwr_check_redirections.c \
+			$(SRCDIR)ast/cmdwr_fill_struct.c \
+			$(SRCDIR)ast/line_to_ast.c \
+			$(SRCDIR)ast/redirection_create_elem.c \
+			$(SRCDIR)builtins/alias/builtin_alias.c \
+			$(SRCDIR)builtins/alias/print_alias.c \
+			$(SRCDIR)builtins/cd/builtin_cd.c \
+			$(SRCDIR)builtins/cd/cd_error.c \
+			$(SRCDIR)builtins/cd/change_directory.c \
+			$(SRCDIR)builtins/cd/get_options.c \
+			$(SRCDIR)builtins/exit/builtin_exit.c \
+			$(SRCDIR)builtins/export/builtin_export.c \
+			$(SRCDIR)builtins/export/create_variables_tab.c \
+			$(SRCDIR)builtins/export/print_export.c \
+			$(SRCDIR)builtins/read/escape_line.c \
+			$(SRCDIR)builtins/read/get_options.c \
+			$(SRCDIR)builtins/read/main.c \
+			$(SRCDIR)builtins/read/option_d.c \
+			$(SRCDIR)builtins/read/option_error.c \
+			$(SRCDIR)builtins/read/option_n.c \
+			$(SRCDIR)builtins/read/option_p.c \
+			$(SRCDIR)builtins/read/option_t.c \
+			$(SRCDIR)builtins/read/option_u.c \
+			$(SRCDIR)builtins/read/read_input.c \
+			$(SRCDIR)builtins/read/split_line_into_fields.c \
+			$(SRCDIR)builtins/setenv/builtin_setenv.c \
+			$(SRCDIR)builtins/unalias/builtin_unalias.c \
+			$(SRCDIR)builtins/unset/builtin_unset.c \
+			$(SRCDIR)builtins/unsetenv/builtin_unsetenv.c \
+			$(SRCDIR)clear_shell.c \
+			$(SRCDIR)environment/clear_env_list.c \
+			$(SRCDIR)environment/create_elem.c \
+			$(SRCDIR)environment/lstenv_to_tab.c \
+			$(SRCDIR)environment/lstvariable_len.c \
+			$(SRCDIR)environment/sh_getenv.c \
+			$(SRCDIR)environment/sh_print_env.c \
+			$(SRCDIR)environment/sh_setenv.c \
+			$(SRCDIR)environment/sh_unsetenv.c \
+			$(SRCDIR)environment/var_getkey.c \
+			$(SRCDIR)exec_ast.c \
+			$(SRCDIR)exec_command.c \
+			$(SRCDIR)execution/exec_closes_and_redirects.c \
+			$(SRCDIR)execution/exec_execute_command.c \
+			$(SRCDIR)execution/exec_get_command_status_code.c \
+			$(SRCDIR)execution/exec_get_envpath.c \
+			$(SRCDIR)execution/exec_is_builtin.c \
+			$(SRCDIR)execution/exec_is_command.c \
+			$(SRCDIR)execution/exec_is_directory.c \
+			$(SRCDIR)execution/exec_is_executable.c \
+			$(SRCDIR)execution/exec_is_file.c \
+			$(SRCDIR)execution/exec_is_readable.c \
+			$(SRCDIR)execution/exec_is_standalone.c \
+			$(SRCDIR)execution/exec_is_writable.c \
+			$(SRCDIR)execution/exec_pipe.c \
+			$(SRCDIR)execution/exec_print_command_error.c \
+			$(SRCDIR)execution/exec_redirection.c \
+			$(SRCDIR)execution/heredoc_free_heredocs.c \
+			$(SRCDIR)execution/heredoc_get_heredoc.c \
+			$(SRCDIR)execution/heredoc_get_new.c \
+			$(SRCDIR)execution/heredoc_prompt.c \
+			$(SRCDIR)expansion/alias_substitution.c \
+			$(SRCDIR)expansion/dollar.c \
+			$(SRCDIR)expansion/quotes.c \
+			$(SRCDIR)expansion/substitute.c \
+			$(SRCDIR)expansion/tilde.c \
+			$(SRCDIR)get_heredocs.c \
+			$(SRCDIR)get_line.c \
+			$(SRCDIR)history/clear_history_list.c \
+			$(SRCDIR)history/init_history.c \
+			$(SRCDIR)history/save_command_line.c \
+			$(SRCDIR)import_shrc.c \
+			$(SRCDIR)init_shell.c \
+			$(SRCDIR)input/builtin_completion.c \
+			$(SRCDIR)input/code_ctrl_d.c \
+			$(SRCDIR)input/code_ctrl_l.c \
+			$(SRCDIR)input/code_ctrl_u.c \
+			$(SRCDIR)input/code_ctrl_w.c \
+			$(SRCDIR)input/code_ctrl_x.c \
+			$(SRCDIR)input/code_down.c \
+			$(SRCDIR)input/code_end.c \
+			$(SRCDIR)input/code_home.c \
+			$(SRCDIR)input/code_left.c \
+			$(SRCDIR)input/code_return.c \
+			$(SRCDIR)input/code_right.c \
+			$(SRCDIR)input/code_shift_down.c \
+			$(SRCDIR)input/code_shift_left.c \
+			$(SRCDIR)input/code_shift_right.c \
+			$(SRCDIR)input/code_shift_up.c \
+			$(SRCDIR)input/code_up.c \
+			$(SRCDIR)input/command.c \
+			$(SRCDIR)input/completion.c \
+			$(SRCDIR)input/completionbis.c \
+			$(SRCDIR)input/ft_getlast.c \
+			$(SRCDIR)input/ft_lstpushback.c \
+			$(SRCDIR)input/ft_lstsize.c \
+			$(SRCDIR)input/ft_strsplit_whitespace.c \
+			$(SRCDIR)input/ft_tabdel.c \
+			$(SRCDIR)input/ft_tabdup.c \
+			$(SRCDIR)input/ft_tablen.c \
+			$(SRCDIR)input/ft_tabreplace.c \
+			$(SRCDIR)input/ft_tabstr.c \
+			$(SRCDIR)input/get_next_line_stdin.c \
+			$(SRCDIR)input/in_history.c \
+			$(SRCDIR)input/input.c \
+			$(SRCDIR)input/key.c \
+			$(SRCDIR)input/key_check.c \
+			$(SRCDIR)input/key_get.c \
+			$(SRCDIR)input/modes.c \
+			$(SRCDIR)input/move.c \
+			$(SRCDIR)input/quotes.c \
+			$(SRCDIR)input/remove_display.c \
+			$(SRCDIR)input/remove_shit.c \
+			$(SRCDIR)input/replace_with_shit.c \
+			$(SRCDIR)input/sin_env.c \
+			$(SRCDIR)input/sin_input.c \
+			$(SRCDIR)input/sin_list.c \
+			$(SRCDIR)input/sin_quotes.c \
+			$(SRCDIR)input/strdup_input.c \
+			$(SRCDIR)lexer_parser.c \
+			$(SRCDIR)loop_through_commands.c \
+			$(SRCDIR)main.c \
+			$(SRCDIR)prompt.c \
+			$(SRCDIR)sig_handler.c \
+			$(SRCDIR)tools/tl_arrlen.c \
+			$(SRCDIR)tools/tl_atoll.c \
+			$(SRCDIR)tools/tl_closedir.c \
+			$(SRCDIR)tools/tl_del.c \
+			$(SRCDIR)tools/tl_freedoubletab.c \
+			$(SRCDIR)tools/tl_get_next_line.c \
+			$(SRCDIR)tools/tl_isstrdigit.c \
+			$(SRCDIR)tools/tl_isstreempty.c \
+			$(SRCDIR)tools/tl_iswhitespace.c \
+			$(SRCDIR)tools/tl_jump_to_other_quote.c \
+			$(SRCDIR)tools/tl_lstaddend.c \
+			$(SRCDIR)tools/tl_lstdelast.c \
+			$(SRCDIR)tools/tl_lstfree.c \
+			$(SRCDIR)tools/tl_lstlast.c \
+			$(SRCDIR)tools/tl_lstnew.c \
+			$(SRCDIR)tools/tl_opendir.c \
+			$(SRCDIR)tools/tl_str3join.c \
+			$(SRCDIR)tools/tl_strisalnum.c \
+			$(SRCDIR)tools/tl_strmerge.c \
+			$(SRCDIR)tools/tl_strndup.c \
+			$(SRCDIR)tools/tl_strrealloc.c 
+OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
+INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR) -lft
 CACHEF	:=	.cache_exists
 HISTORY	:=	~/.42sh_history
@@ -41,27 +185,45 @@ WHITE		= "\033[0;37m"
 # ====================
 
 # ===== env =====
-DIRENV	:=	src/builtins/env/
-OBJDIRENV	:= obj/builtins/env/
-BINENV	:= bin/env
-SRCENV	:= $(shell find src/builtins/env -type f -print)
-OBJENV	:= $(SRCENV:src/builtins/env/%.c=obj/builtins/env/%.o)
+DIRENV	:=	$(SRCDIR)builtins/env/
+OBJDIRENV	:= $(DIRBUILTINS)env/
+BINENV	:=	$(BINDIR)env
+SRCENV	:=	$(DIRENV)add_key.c \
+			$(DIRENV)alloc_env.c \
+			$(DIRENV)copy_env.c \
+			$(DIRENV)exec_command.c \
+			$(DIRENV)free_env.c \
+			$(DIRENV)get_command_path.c \
+			$(DIRENV)get_env_key.c \
+			$(DIRENV)get_env_size.c \
+			$(DIRENV)get_env_value.c \
+			$(DIRENV)get_paths.c \
+			$(DIRENV)is_executable.c \
+			$(DIRENV)is_option.c \
+			$(DIRENV)is_option_i.c \
+			$(DIRENV)is_option_u.c \
+			$(DIRENV)key_exist.c \
+			$(DIRENV)main.c \
+			$(DIRENV)parse_argv.c \
+			$(DIRENV)print_env.c \
+			$(DIRENV)print_usage.c \
+			$(DIRENV)put_error.c \
+			$(DIRENV)remove_key.c \
+			$(DIRENV)set_env.c \
+			$(DIRENV)update_key.c
+OBJENV	:=	$(SRCENV:$(DIRENV)%.c=$(OBJDIRENV)%.o)
 # ===============
 
 # ===== echo =====
-DIRECHO	:=	src/builtins/echo/
-OBJDIRECHO	:= obj/builtins/echo/
-BINECHO	:=	bin/echo
-SRCECHO	:=	$(shell find src/builtins/echo -type f -print)
-OBJECHO	:=	$(SRCECHO:src/builtins/echo/%.c=obj/builtins/echo/%.o)
-# ================
-
-# ===== read =====
-DIRREAD	:=	src/builtins/read/
-OBJDIRREAD	:= obj/builtins/read/
-BINREAD	:=	bin/read
-SRCREAD	:=	$(shell find src/builtins/read -type f -print)
-OBJREAD	:=	$(SRCREAD:src/builtins/read/%.c=obj/builtins/read/%.o)
+DIRECHO	:=	$(SRCDIR)builtins/echo/
+OBJDIRECHO	:= $(DIRBUILTINS)echo/
+BINECHO	:=	$(BINDIR)echo
+SRCECHO	:=	$(DIRECHO)check_for_options.c \
+			$(DIRECHO)echo_atoi_base.c \
+			$(DIRECHO)echo_strings.c \
+			$(DIRECHO)is_ascii_char.c \
+			$(DIRECHO)main.c
+OBJECHO	:=	$(SRCECHO:$(DIRECHO)%.c=$(OBJDIRECHO)%.o)
 # ================
 
 .PHONY: all libft echo env norme clean fclean re
