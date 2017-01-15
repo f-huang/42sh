@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:41:46 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/13 17:41:58 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/15 20:37:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int			read_input(t_read tools, char **line)
 	if (!(tools.option & OPTION_D) &&\
 		!(tools.option & OPTION_S) && !(tools.option & OPTION_N))
 	{
-		if ((ret = tl_get_next_line(fd, line)) == -1)
+		if ((ret = get_line(fd, line)) == -1)
 			return (read_fd_error(tools.fd));
 		raw_mode();
 		return (ret == 0 ? ERROR : GOOD);
