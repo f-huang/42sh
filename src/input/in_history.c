@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 16:07:29 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/14 15:49:40 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 19:17:56 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void	in_history(char *buffer)
 	char	*path;
 
 	path = ft_strjoin(*get_home(), "/.42sh_history");
-	fd = open(path, O_WRONLY | O_APPEND | O_CREAT);
-	chmod(path, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	fd = open(path, O_WRONLY | O_APPEND | O_CREAT,\
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	ft_strdel(&path);
 	if (buffer && buffer[0])
 	{
