@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 15:45:47 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/14 15:45:48 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 16:47:11 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,6 @@ static int	manage_return(void)
 		}
 	}
 	return (1);
-}
-
-void		init_input(void)
-{
-	cor()->x = 0;
-	cor()->prompt_len = *prompt_len() + 1;
-	ft_strdel(command());
-	*command() = strdup_input("");
 }
 
 int			input(void)

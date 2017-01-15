@@ -6,7 +6,7 @@
 #    By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/15 15:36:45 by cjacquem         ###   ########.fr        #
+#    Updated: 2017/01/15 16:48:08 by cjacquem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,6 +134,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/ft_tabstr.c \
 			$(SRCDIR)input/get_next_line_stdin.c \
 			$(SRCDIR)input/in_history.c \
+			$(SRCDIR)input/init_input.c \
 			$(SRCDIR)input/input.c \
 			$(SRCDIR)input/key.c \
 			$(SRCDIR)input/key_check.c \
