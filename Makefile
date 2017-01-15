@@ -6,7 +6,7 @@
 #    By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/15 14:57:42 by cjacquem         ###   ########.fr        #
+#    Updated: 2017/01/15 15:14:33 by cjacquem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)builtins/export/print_export.c \
 			$(SRCDIR)builtins/read/escape_line.c \
 			$(SRCDIR)builtins/read/get_options.c \
-			$(SRCDIR)builtins/read/main.c \
+			$(SRCDIR)builtins/read/builtin_read.c \
 			$(SRCDIR)builtins/read/option_d.c \
 			$(SRCDIR)builtins/read/option_error.c \
 			$(SRCDIR)builtins/read/option_n.c \
