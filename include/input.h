@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/15 12:21:31 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 17:58:08 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
-# include <signal.h>
 # include <stdlib.h>
 # include <dirent.h>
 # include <termios.h>
 
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <sys/wait.h>
 # include <sys/ipc.h>
-# include <sys/ioctl.h>
 
 # define CODE_CTRL_D -1
 # define CODE_RETURN 0

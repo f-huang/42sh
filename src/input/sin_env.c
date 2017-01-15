@@ -6,18 +6,12 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:42:03 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/14 15:51:20 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 17:58:09 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/ioctl.h>
 #include "input.h"
-
-char		***env(void)
-{
-	static char	**env = NULL;
-
-	return (&env);
-}
 
 char		**get_home(void)
 {
