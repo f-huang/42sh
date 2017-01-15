@@ -181,6 +181,7 @@ INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR) -lft
 CACHEF	:=	.cache_exists
 HISTORY	:=	~/.42sh_history
+42SHRC	:=	~/.42shrc
 # ====================
 
 # ====== Colors ======
@@ -243,7 +244,7 @@ OBJECHO	:=	$(SRCECHO:$(DIRECHO)%.c=$(OBJDIRECHO)%.o)
 .SILENT:
 
 all: $(NAME)
-	echo "alias l='ls -lG'\\n" > ~/.42shrc
+	echo "alias l='ls -lG'\\n" > $(42SHRC)
 
 $(NAME): libft env echo $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
@@ -303,6 +304,7 @@ clean:
 fclean: clean
 	make -C $(LIBDIR) fclean
 	test -d $(HISTORY) | rm -f $(HISTORY)
+	test -d $(42SHRC) | rm -f $(42SHRC)
 	rm -f $(NAME)
 	rm -rf $(BINDIR)
 	printf $(RED)"$(NAME) removed\n"$(EOC)
