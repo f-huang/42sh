@@ -10,12 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <fcntl.h>
+#include <signal.h>
 #include "builtin_read.h"
 #include "libft.h"
 #include "ft_42sh.h"
 #include "tools.h"
-#include <unistd.h>
-#include <fcntl.h>
 #include "input.h"
 #include "tools.h"
 

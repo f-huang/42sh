@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
+#include <sys/wait.h>
 #include "ft_42sh.h"
 #include "input.h"
-#include <signal.h>
 
 #define PROMPT "$> "
 
