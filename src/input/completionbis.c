@@ -6,12 +6,14 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:35:41 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/14 15:48:55 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 12:04:50 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 #include "ft_42sh.h"
+
+extern	t_shell	g_sh;
 
 int		applylink(struct dirent *lu, char *pattern)
 {
@@ -31,33 +33,6 @@ int		applylink(struct dirent *lu, char *pattern)
 		ft_strdel(&str);
 		return (1);
 	}
-	return (0);
-}
-
-int		check_builtins(char *pattern)
-{
-	char	**split;
-	int	i;
-	int	p;
-
-	i = 0;
-	p = 0;
-	split = ft_strsplit(BUILTIN, ' ');
-	while (split[i])
-	{
-		if (match(split[i], pattern) && (*command())[0])
-		{
-			while (cor()->x > 0
-			&& !ft_isspace(ft_getlast(*command())))
-				stremove();
-			while (split[i][p])
-				manage_command(split[i][p++]);
-			ft_tabdel(&split);
-			return (1);
-		}
-		i++;
-	}
-	ft_tabdel(&split);
 	return (0);
 }
 
@@ -105,9 +80,10 @@ void	commandcase(char *pattern)
 {
 	t_comp	p;
 
-	p.path = ft_getenv("PATH") ? ft_getenv("PATH") : NULL;
+	p.path = sh_getenv(g_sh.lst_env, "PATH");
 	p.splitted_path = p.path ? ft_strsplit(p.path, ':') : NULL;
 	p.t = 0;
+	(!p.splitted_path || !p.splitted_path[0]) ? check_builtins(pattern) : 0;
 	while (p.splitted_path && p.splitted_path[p.t])
 	{
 		if (!(p.dir = opendir(p.splitted_path[p.t])))

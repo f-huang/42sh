@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/14 15:24:40 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 12:02:04 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void			stremove(void);
 void			fill_space(int j);
 void			strinsert_input(char c);
 
+int				check_builtins(char *pattern);
 void			completion(void);
 void			code_up(int key);
 void			code_right(void);
