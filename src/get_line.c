@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:48:17 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/13 16:44:22 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/15 20:44:28 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 **			This function receive the data wrote in the prompt (line).
 */
 
-static void	clear_buf(char **buf)
+static int	clear_buf(char **buf, int ret)
 {
 	if (!*buf)
-		return ;
+		return (ret);
 	ft_strclr(*buf);
 	ft_strdel(buf);
+	return (ret);
 }
 
 static int	save_line(char **line, char **buf, size_t size)
@@ -38,8 +39,7 @@ static int	save_line(char **line, char **buf, size_t size)
 	}
 	else if (!(*line = tl_strndup(*buf, size)))
 		return (ERROR);
-	clear_buf(buf);
-	return (GOOD);
+	return (clear_buf(buf, GOOD));
 }
 
 static int	push_line(char **tmp, char **line, char **buf, size_t size)
@@ -71,13 +71,15 @@ int			get_line(int fd, char **line)
 	}
 	if (!(buf = ft_strnew(BUFF_SIZE + 1)))
 		return (ERROR);
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
+		if (ret == -1)
+			return (clear_buf(&buf, -1));
 		if (push_line(&tmp, line, &buf, ret))
 			return (GOOD);
 		else
 			buf = ft_strnew(BUFF_SIZE + 1);
 	}
-	clear_buf(&buf);
+	clear_buf(&buf, 0);
 	return (*line && ft_strlen(*line) > 0 && ret != -1 ? GOOD : 0);
 }
