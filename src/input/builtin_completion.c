@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 11:37:13 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/15 17:51:25 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/15 18:07:06 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int		check_builtins(char *pattern)
 
 	i = 0;
 	p = 0;
-	split = ft_strsplit("cd exit read unalias setenv export unset alias\
-							unsetenv env echo", ' ');
+	split = ft_strsplit_whitespace("cd exit read unalias setenv echo unset\
+			alias export env unsetenv");
 	while (split[i])
 	{
 		if (match(split[i], pattern) && (*command())[0])
