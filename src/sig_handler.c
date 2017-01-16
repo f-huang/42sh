@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/13 17:08:58 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/16 12:32:04 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void		sig_handler(int signo)
 		reset_input();
 	else if (signo == SIGQUIT)
 		sigquit_handler();
-	else if (signo == SIGKILL)
+	else if (signo == SIGTERM || signo == SIGKILL)
+	{
 		default_mode();
+		exit(0);
+	}
 }
