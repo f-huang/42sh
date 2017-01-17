@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:41:46 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/15 20:49:26 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/17 12:27:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int	read_with_termcaps(t_read tools, char **line, int fd)
 	while (1)
 	{
 		ft_bzero(&c, 2);
-		signal(SIGINT, SIG_IGN);
 		if ((ret = read(fd, &c, 1)) == -1)
 			return (read_fd_error(tools.fd));
 		if (c[0] != '\n' && (*line = tl_strmerge(*line, c)))
@@ -72,8 +71,12 @@ int			read_input(t_read tools, char **line)
 
 	fd = tools.option & OPTION_U ? tools.fd : 0;
 	ret = 0;
+	signal(SIGINT, SIG_IGN);
 	if (tools.option & OPTION_P)
+	{
 		ft_putstr(tools.prompt);
+		ft_strdel(&tools.prompt);
+	}
 	if (!(tools.option & OPTION_D) &&\
 		!(tools.option & OPTION_S) && !(tools.option & OPTION_N))
 	{
