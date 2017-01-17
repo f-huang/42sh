@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_42sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 12:07:36 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/15 11:55:54 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/17 13:28:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct			s_bitfield
 **	BUILTIN CODE
 */
 # ifndef BUILTIN
-#  define BUILTIN "cd exit read unsetenv setenv export unset alias unalias"
+#  define BUILTIN "cd exit read unsetenv setenv export unset alias unalias history"
 # endif
 
 # ifndef NBBUILTIN

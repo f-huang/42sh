@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/15 16:48:08 by cjacquem         ###   ########.fr        #
+#    Updated: 2017/01/17 13:50:55 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)builtins/unalias/builtin_unalias.c \
 			$(SRCDIR)builtins/unset/builtin_unset.c \
 			$(SRCDIR)builtins/unsetenv/builtin_unsetenv.c \
+			$(SRCDIR)builtins/history/builtin_history.c \
 			$(SRCDIR)clear_shell.c \
 			$(SRCDIR)environment/clear_env_list.c \
 			$(SRCDIR)environment/create_elem.c \
@@ -175,7 +176,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_strisalnum.c \
 			$(SRCDIR)tools/tl_strmerge.c \
 			$(SRCDIR)tools/tl_strndup.c \
-			$(SRCDIR)tools/tl_strrealloc.c 
+			$(SRCDIR)tools/tl_strrealloc.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR) -lft
@@ -266,6 +267,7 @@ $(CACHEF):
 	test -d $(DIRBUILTINS)exit || mkdir $(DIRBUILTINS)exit
 	test -d $(DIRBUILTINS)export || mkdir $(DIRBUILTINS)export
 	test -d $(DIRBUILTINS)unset || mkdir $(DIRBUILTINS)unset
+	test -d $(DIRBUILTINS)history || mkdir $(DIRBUILTINS)history
 	test -d $(OBJDIRENV) || mkdir $(OBJDIRENV)
 	test -d $(OBJDIRECHO) || mkdir $(OBJDIRECHO)
 	test -d $(OBJDIR)environment || mkdir $(OBJDIR)environment

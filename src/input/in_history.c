@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_history.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 16:07:29 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/15 19:17:56 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/17 15:18:21 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	init_list(void)
 	ft_strdel(&path);
 	while (get_next_line_stdin(fd, &line) > 0)
 	{
-		ft_lstpushback(get_list(), line, ft_strlen(line) + 20);
+		ft_lstpushback(get_list(), line, ft_strlen(line) + 1);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
@@ -92,7 +92,7 @@ void	in_history(char *buffer)
 	ft_strdel(&path);
 	if (buffer && buffer[0])
 	{
-		ft_lstpushback(get_list(), buffer, ft_strlen(buffer) + 20);
+		ft_lstpushback(get_list(), buffer, ft_strlen(buffer) + 1);
 		write(fd, buffer, ft_strlen(buffer));
 		write(fd, "\n", 1);
 	}
