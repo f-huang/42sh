@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:44:58 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/15 12:48:01 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/18 13:00:19 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		key_get(void)
 	if (c == '\x05')
 		return (CODE_END);
 	if (c == '\x9' || c == '\x4' || c == '\x18' || c == '\x15' || c == '\x17' ||
-	c == '\x7f' || (c == '\xa' && !(*bs())) || c == '\x0c')
+	c == '\x7f' || c == '\xa' || c == '\x0c')
 		return (get_basics(c));
 	if (c == '\x1b')
 	{
@@ -55,9 +55,5 @@ int		key_get(void)
 		return (get_x1b(c));
 	}
 	manage_command(c);
-	if (ft_getlast(*command()) == '\\')
-		(*bs()) = 1;
-	else
-		(*bs()) = 0;
 	return (-2);
 }
