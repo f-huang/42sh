@@ -16,11 +16,9 @@ void	code_down(int key)
 {
 	char	*str;
 
-	if (!(str = get_elem(key)) || (*dquote() % 2) || (*quote() % 2))
-	{
-		ft_putstr("\a");
+	if ((*dquote() % 2) || (*quote() % 2))
 		return ;
-	}
+	str = get_elem(key);
 	move_left(cor()->x);
 	fill_space(cor()->len);
 	cor()->x = 0;
@@ -31,6 +29,8 @@ void	code_down(int key)
 		ft_putstr("\a");
 		return ;
 	}
+	if (!str)
+		return ;
 	ft_putstr(str);
 	cor()->len = ft_strlen(str);
 	cor()->x = cor()->len;
