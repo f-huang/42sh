@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/16 12:36:57 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/18 15:30:43 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	reset_input(void)
 	*stock() = ft_strdup("");
 	reset_quotes();
 	raw_mode();
+	cor()->len = 0;
 	cor()->x = 0;
 }
 
