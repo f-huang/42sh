@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 12:07:36 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/17 13:28:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/18 19:46:25 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ typedef struct			s_shell
 	char				*bin_path;
 	t_termios			term;
 	t_winsize			*window;
-	t_history			*lst_history;
 }						t_shell;
 
 typedef struct			s_bitfield
@@ -121,6 +120,13 @@ typedef struct			s_bitfield
 # ifndef NBBUILTIN
 #  define NBBUILTIN 6
 # endif
+
+/*
+**	SHELL ENVIRONMENT
+*/
+
+char					**user(void);
+char					**get_home(void);
 
 /*
 **	SHELL BASIC FUNCTIONS

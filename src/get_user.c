@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sin_list.c                                         :+:      :+:    :+:   */
+/*   get_user.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 13:37:53 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/18 19:29:51 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/18 19:47:47 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/18 19:51:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
-
-int		*get_size(void)
+char		**user(void)
 {
-	static int	size = 0;
+	static char	*user = (void*)0;
 
-	return (&size);
-}
-
-int		*pos(void)
-{
-	static int	i = -1000;
-
-	return (&i);
+	return (&user);
 }

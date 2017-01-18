@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:21 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/15 16:57:13 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/18 19:38:29 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int			init_shell(t_shell *sh, char *av_0)
 	if (!set_bin_path(&sh->bin_path, av_0))
 		return (ERROR);
 	set_default(&sh->lst_env);
-	init_history(&sh->lst_history, sh->lst_env);
+	init_history_list();
 	import_shrc(sh);
 	return (GOOD);
 }

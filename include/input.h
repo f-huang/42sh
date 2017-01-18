@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/15 17:58:08 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/18 19:52:38 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,7 @@ int				*prompt_len(void);
 int				get_x31(char c);
 int				get_x1b(char c);
 int				get_basics(char c);
-char			**user(void);
-char			**get_home(void);
+
 t_coord			*cor(void);
 char			**stock(void);
 char			**copied(void);
@@ -146,7 +145,6 @@ int				*quote(void);
 int				*bs(void);
 t_termsize		*termsize(void);
 void			remove_display(char *to_add);
-t_list			**get_list(void);
 int				*pos(void);
 int				*get_size(void);
 char			*get_elem(int command);

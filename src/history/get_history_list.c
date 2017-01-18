@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabprint.c                                      :+:      :+:    :+:   */
+/*   get_history_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/31 15:47:39 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/18 16:49:43 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/18 19:29:27 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/18 21:25:23 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_tabprint(char **tab)
+t_list	**get_full_list(void)
 {
-	int		i;
+	static t_list	*history = NULL;
 
-	i = 0;
-	while (tab && tab[i])
-		ft_putendl(tab[i++]);
+	if (!history)
+		history = ft_lstnew(NULL, 0);
+	return (&history);
+}
+
+t_list	**get_new_list(void)
+{
+	static t_list	*history = NULL;
+
+	if (!history)
+		history = *get_full_list();
+	return (&history);
 }

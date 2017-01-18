@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sin_list.c                                         :+:      :+:    :+:   */
+/*   get_home.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 13:37:53 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/18 19:29:51 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/18 19:47:13 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/18 19:51:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
-
-int		*get_size(void)
+char		**get_home(void)
 {
-	static int	size = 0;
+	static char	*get_home = (void*)0;
 
-	return (&size);
-}
-
-int		*pos(void)
-{
-	static int	i = -1000;
-
-	return (&i);
+	return (&get_home);
 }

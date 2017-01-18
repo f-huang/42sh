@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sin_list.c                                         :+:      :+:    :+:   */
+/*   delete_last_entry.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 13:37:53 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/18 19:29:51 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/18 20:13:38 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/18 20:13:58 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "libft.h"
+#include "builtin_history.h"
+#include "history.h"
 
-int		*get_size(void)
+void	delete_last_entry(t_hist_option tools)
 {
-	static int	size = 0;
+	t_list	*lst;
+	int		len;
 
-	return (&size);
-}
-
-int		*pos(void)
-{
-	static int	i = -1000;
-
-	return (&i);
+	lst = *get_full_list();
+	len = ft_lstlen(lst);
+	history_del_position_offset(&lst, tools, len);
 }
