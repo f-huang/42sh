@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/17 13:50:55 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/19 16:52:47 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)execution/heredoc_prompt.c \
 			$(SRCDIR)expansion/alias_substitution.c \
 			$(SRCDIR)expansion/dollar.c \
+			$(SRCDIR)expansion/exclamation_mark.c \
 			$(SRCDIR)expansion/quotes.c \
 			$(SRCDIR)expansion/substitute.c \
 			$(SRCDIR)expansion/tilde.c \
@@ -176,7 +177,8 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_strisalnum.c \
 			$(SRCDIR)tools/tl_strmerge.c \
 			$(SRCDIR)tools/tl_strndup.c \
-			$(SRCDIR)tools/tl_strrealloc.c
+			$(SRCDIR)tools/tl_strrealloc.c \
+			$(SRCDIR)tools/tl_switch_string.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR) -lft

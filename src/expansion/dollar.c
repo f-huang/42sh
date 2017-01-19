@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:34:49 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/13 15:09:00 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/19 16:18:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,28 @@ char		*dollar(t_shell *sh, char *acmd, char *ptr)
 {
 	char		*key;
 	char		*value;
-	char		*save;
+	// char		*save;
 	int			variable_number;
 
-	save = NULL;
+	// save = NULL;
 	variable_number = -1;
 	if (!(key = build_key(++ptr, &variable_number)))
 		return (NULL);
 	value = get_value(sh, key, variable_number);
-	if (!(save = ft_memalloc(ft_strlen(acmd) - ft_strlen(key) +\
-		(value ? ft_strlen(value) : 0) + 1)))
-		return (NULL);
-	save = ft_strncat(save, acmd, (size_t)(ptr - acmd - 1));
-	if (value)
-	{
-		save = ft_strcat(save, value);
-		ft_strdel(&value);
-	}
-	ptr += ft_strlen(key);
-	save = ft_strcat(save, ptr);
+	// if (!(save = ft_memalloc(ft_strlen(acmd) - ft_strlen(key) +\
+	// 	(value ? ft_strlen(value) : 0) + 1)))
+	// 	return (NULL);
+	// save = ft_strncat(save, acmd, (size_t)(ptr - acmd - 1));
+	// if (value)
+	// {
+	// 	save = ft_strcat(save, value);
+	// 	ft_strdel(&value);
+	// }
+	// ptr += ft_strlen(key);
+	// save = ft_strcat(save, ptr);
+	acmd = tl_switch_string(acmd, (size_t)(ptr - acmd -1), value, key);
 	ft_strdel(&key);
-	ft_strdel(&acmd);
-	return (save);
+	ft_strdel(&value);
+	// ft_strdel(&acmd);
+	return (acmd);
 }

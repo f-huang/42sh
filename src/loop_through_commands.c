@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:18:37 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/13 17:37:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/19 16:34:44 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,33 @@
 
 pid_t	g_heredoc_pid = -1;
 
-static void	handle_expansion(t_shell *sh, t_cmdwr *cmd)
+static int	handle_expansion(t_shell *sh, t_cmdwr *cmd)
 {
 	size_t		i;
 
 	i = 0;
 	while (cmd->command[i])
 	{
-		cmd->command[i] = substitute(sh, cmd->command[i]);
+		if (!(cmd->command[i] = substitute(sh, cmd->command[i])))
+			return (ERROR);
 		++i;
 	}
+	return (GOOD);
 }
 
-static void	loop_through_ast(t_shell *sh, t_ast *tree)
+static int	loop_through_ast(t_shell *sh, t_ast *tree)
 {
 	if (!tree)
-		return ;
+		return (GOOD);
 	if (tree->cmd1)
-		handle_expansion(sh, tree->cmd1);
+		if (!handle_expansion(sh, tree->cmd1))
+			return (ERROR);
 	if (tree->cmd2)
-		handle_expansion(sh, tree->cmd2);
-	loop_through_ast(sh, tree->left);
-	loop_through_ast(sh, tree->right);
+		if (!handle_expansion(sh, tree->cmd2))
+			return (ERROR);
+	if (!loop_through_ast(sh, tree->left)))
+		return (ERROR);
+	return (loop_through_ast(sh, tree->right));
 }
 
 void		loop_through_commands(t_shell *sh, t_list *lst_commands)
@@ -52,7 +57,8 @@ void		loop_through_commands(t_shell *sh, t_list *lst_commands)
 		return ;
 	while (ptr)
 	{
-		loop_through_ast(sh, ptr->content);
+		if (!loop_through_ast(sh, ptr->content))
+			return ;
 		exec_ast(sh, ptr->content);
 		ptr = ptr->next;
 	}
