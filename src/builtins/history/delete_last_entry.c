@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabdel.c                                        :+:      :+:    :+:   */
+/*   delete_last_entry.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 12:58:37 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:58:50 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/18 20:13:38 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/18 20:13:58 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "libft.h"
+#include "builtin_history.h"
+#include "history.h"
 
-void	ft_tabdel(char ***tab)
+void	delete_last_entry(t_hist_option tools)
 {
-	size_t	i;
+	t_list	*lst;
+	int		len;
 
-	i = 0;
-	if (!(*tab))
-		return ;
-	while ((*tab)[i])
-	{
-		free((*tab)[i]);
-		i++;
-	}
-	if (*tab)
-		free(*tab);
-	*tab = NULL;
+	lst = *get_full_list();
+	len = ft_lstlen(lst);
+	history_del_position_offset(&lst, tools, len);
 }

@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 18:34:49 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/19 16:18:43 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/19 17:44:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char		*dollar(t_shell *sh, char *acmd, char *ptr)
 	// }
 	// ptr += ft_strlen(key);
 	// save = ft_strcat(save, ptr);
-	acmd = tl_switch_string(acmd, (size_t)(ptr - acmd -1), value, key);
+	acmd = tl_switch_string(acmd, (size_t)(ptr - acmd - 1), value, key - 1);
 	ft_strdel(&key);
 	ft_strdel(&value);
 	// ft_strdel(&acmd);

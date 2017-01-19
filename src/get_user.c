@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tablen.c                                        :+:      :+:    :+:   */
+/*   get_user.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 12:59:19 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:59:26 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/18 19:47:47 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/18 19:51:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
-
-size_t	ft_tablen(char **tab)
+char		**user(void)
 {
-	size_t	size;
+	static char	*user = (void*)0;
 
-	size = 0;
-	while (tab[size])
-		size++;
-	return (size);
+	return (&user);
 }

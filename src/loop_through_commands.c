@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:18:37 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/19 16:34:44 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/19 16:54:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	loop_through_ast(t_shell *sh, t_ast *tree)
 	if (tree->cmd2)
 		if (!handle_expansion(sh, tree->cmd2))
 			return (ERROR);
-	if (!loop_through_ast(sh, tree->left)))
+	if (!loop_through_ast(sh, tree->left))
 		return (ERROR);
 	return (loop_through_ast(sh, tree->right));
 }

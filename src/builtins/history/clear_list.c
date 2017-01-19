@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tl_switch_string.c                                 :+:      :+:    :+:   */
+/*   clear_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/19 15:53:17 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/19 17:43:45 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/18 15:07:28 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/18 18:53:02 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
+#include "input.h"
 
-char	*tl_switch_string(char *line, int i, char *plus, char *minus)
+int		history_clear_list(t_list **lst)
 {
-	char	*tmp;
+	t_list	*tmp;
 
-	if (!minus || !line)
-		return (NULL);
-	if (!(tmp = ft_memalloc(ft_strlen(line) + (!plus ? 0 : ft_strlen(plus) -\
-		ft_strlen(minus) + 1))))
-		return (NULL);
-	tmp = ft_strncat(tmp, line, i);
-	if (plus)
-		tmp = ft_strcat(tmp, plus);
-	tmp = ft_strcat(tmp, line + i + ft_strlen(minus));
-	ft_strdel(&line);
-	return (tmp);
+	while (*lst)
+	{
+		tmp = *lst;
+		*lst = (*lst)->next;
+		if (tmp->content)
+			free(tmp->content);
+		tmp->content = NULL;
+		if (tmp)
+			free(tmp);
+		tmp = NULL;
+	}
+	*get_full_list() = NULL;
+	*get_new_list() = NULL;
+	return (0);
 }

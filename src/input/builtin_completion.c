@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_completion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 11:37:13 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/15 18:07:06 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/19 14:28:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 #include "ft_42sh.h"
+#include "tools.h"
 
 int		check_builtins(char *pattern)
 {
@@ -22,7 +23,7 @@ int		check_builtins(char *pattern)
 	i = 0;
 	p = 0;
 	split = ft_strsplit_whitespace("cd exit read unalias setenv echo unset\
-			alias export env unsetenv");
+			alias export env unsetenv history");
 	while (split[i])
 	{
 		if (match(split[i], pattern) && (*command())[0])
@@ -32,11 +33,13 @@ int		check_builtins(char *pattern)
 				stremove();
 			while (split[i][p])
 				manage_command(split[i][p++]);
-			ft_tabdel(&split);
+			tl_freedoubletab(split);
+			split = NULL;
 			return (1);
 		}
 		i++;
 	}
-	ft_tabdel(&split);
+	tl_freedoubletab(split);
+	split = NULL;
 	return (0);
 }

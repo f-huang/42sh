@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 15:22:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/19 16:45:53 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/19 17:42:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,12 @@
 */
 static int	is_strdigitneg(char *str)
 {
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]) && str[i] != '-')
-			return (0);
-		i++;
-	}
+	if (!str)
+		return (0);
+	if (!ft_isdigit(str[0]) && str[0] != '-')
+		return (0);
+	else if (str[0] == '-' && !ft_isdigit(str[1]))
+		return (0);
 	return (1);
 }
 
@@ -53,40 +50,55 @@ static int	print_from_offset(char **cmd, int *i)
 
 	lst = *get_full_list();
 	lst_index = 0;
-	if ((offset = *cmd[*i + 1] == '!' ? -1 : ft_atoi(*cmd + *i)) < 0)
-		offset = ft_lstlen(lst) - offset;
-	while (lst && lst_index < offset)
+	if ((offset = (*cmd)[*i + 1] == '!' ? -1 : ft_atoi(*cmd + *i + 1)) < 0)
+		offset = ft_lstlen(lst) - 1 - (-offset);
+	while (offset > 0 && lst && lst_index < offset)
 	{
 		lst_index++;
 		lst = lst->next;
 	}
-	if (offset == 0 || lst_index != offset || !lst || !lst->content)
+	if (offset <= 0 || lst_index != offset || !lst || !lst->content)
 	{
 		ft_putstr_fd("42sh: !", 2);
-		ft_putnbr_fd(offset, 2);
+		ft_putnbr_fd(ft_atoi(*cmd + *i + 1), 2);
 		ft_putstr_fd(": event not found\n", 2);
 		return (ERROR);
 	}
-	tmp = ft_strndup(*cmd + *i, ft_nbrlen(offset));
+	tmp = ft_strndup(*cmd + *i, ft_nbrlen(ft_atoi(*cmd + *i)) + 1);
 	*cmd = tl_switch_string(*cmd, *i, lst->content, tmp);
 	ft_strdel(&tmp);
-	(*i)++;
 	return (GOOD);
 }
 
-static int	command_typed_so_far(char **cmd, int *i)
+static int	look_for_string(char **cmd, int *i)
 {
+	t_list	*lst;
 	char	*tmp;
+	size_t	len;
 
-	if (*i == 0)
+	tmp = NULL;
+	lst = *get_full_list();
+	len = ft_strlen(*cmd + ++(*i));
+	while (lst)
+	{
+		if (lst->content)
+			if (ft_strnequ(*cmd + *i, lst->content, len))
+			{
+				if (!tmp)
+					tmp = ft_strdup(lst->content);
+				else
+					tmp = ft_strcpy(tmp, lst->content);
+			}
+		lst = lst->next;
+	}
+	if (!tmp)
 	{
 		ft_putstr_fd("42sh: No such word in event\n", 2);
 		return (ERROR);
 	}
-	tmp = ft_strndup(*cmd, *i);
-	*cmd = tl_switch_string(*cmd, *i, "!#", tmp);
+	*cmd = tl_switch_string(*cmd, *i - 1, tmp, *cmd + *i - 1);
 	ft_strdel(&tmp);
-	(*i)++;
+	(*i) += len;
 	return (GOOD);
 }
 
@@ -107,14 +119,15 @@ char		*exclamation_mark(char *cmd)
 				if (!print_from_offset(&cmd, &i))
 					return (NULL);
 			}
-			else if (cmd[i + 1] == '#')
+			else if (cmd[i + 1] != '#')
 			{
-				if (!command_typed_so_far(&cmd, &i))
+				if (!look_for_string(&cmd, &i))
 					return (NULL);
 			}
 		}
 		i++;
 	}
+	return (cmd);
 	// if (OK)
 	// delete_last_entry
 }
