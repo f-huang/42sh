@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tl_freedoubletab.c                                 :+:      :+:    :+:   */
+/*   option_p.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 17:21:05 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/19 14:16:22 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/18 20:16:31 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/18 20:19:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include "builtin_history.h"
+#include "history.h"
 #include "tools.h"
-#include <stdlib.h>
 
-void	tl_freedoubletab(char **tab)
+int		history_option_p(t_hist_option tools, char **av)
 {
 	int		i;
 
-	if (tab == 0)
-		return ;
+	if (!av || !av[0])
+		return (0);
+	delete_last_entry(tools);
 	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	if (tab)
-		free(tab);
-	tab = NULL;
+	while (av[i])
+		ft_putendl(av[i++]);
+	return (0);
 }

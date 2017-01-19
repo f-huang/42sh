@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   completionbis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:35:41 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/15 12:04:50 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/19 14:24:44 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 #include "ft_42sh.h"
+#include "tools.h"
 
 extern	t_shell	g_sh;
 
@@ -88,7 +89,8 @@ void	commandcase(char *pattern)
 	{
 		if (!(p.dir = opendir(p.splitted_path[p.t])))
 		{
-			ft_tabdel(&p.splitted_path);
+			tl_freedoubletab(p.splitted_path);
+			p.splitted_path = NULL;
 			return ;
 		}
 		while ((p.lu = readdir(p.dir)))
@@ -102,7 +104,8 @@ void	commandcase(char *pattern)
 			break ;
 		p.t++;
 	}
-	ft_tabdel(&p.splitted_path);
+	tl_freedoubletab(p.splitted_path);
+	p.splitted_path = NULL;
 }
 
 void	lastcase(char *pattern)

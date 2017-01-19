@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/16 12:29:21 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/18 19:59:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,9 @@ static void		call_signal(void)
 
 static void		gear(t_shell *sh, t_list *lst_commands)
 {
-	ft_strcmp(*command(), *old_command()) ? in_history(*command()) : 0;
 	ft_strdel(old_command());
 	*old_command() = *command() ? ft_strdup(*command()) : ft_strdup("");
-	save_command_line(&sh->lst_history, *command());
+	save_command_line(*command());
 	alias_substitution(sh->lst_alias, command());
 	lexer_parser(command(), &lst_commands);
 	loop_through_commands(sh, lst_commands);
@@ -66,7 +65,6 @@ int				main(int ac, char **av)
 	if (ac && !init_shell(&sh, av[0]))
 		return (ERROR);
 	*old_command() = ft_strdup("");
-	init_list();
 	while (prompt(&sh))
 	{
 		call_signal();

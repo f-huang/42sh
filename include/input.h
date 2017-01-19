@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/15 17:58:08 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/19 14:30:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,6 @@ char			ft_getlast(char *str);
 void			remove_shit(char ***new);
 void			replace_with_shit(char **s);
 int				get_next_line_stdin(int fd, char **line);
-void			ft_lstpushback(t_list **blst, void const *content,
-						size_t content_size);
-int				ft_lstsize(t_list *lst);
 char			**ft_strsplit_whitespace(char *s);
 char			ft_getlast(char *str);
 char			*strdup_input(char *src);
@@ -133,8 +130,7 @@ int				*prompt_len(void);
 int				get_x31(char c);
 int				get_x1b(char c);
 int				get_basics(char c);
-char			**user(void);
-char			**get_home(void);
+
 t_coord			*cor(void);
 char			**stock(void);
 char			**copied(void);
@@ -146,7 +142,6 @@ int				*quote(void);
 int				*bs(void);
 t_termsize		*termsize(void);
 void			remove_display(char *to_add);
-t_list			**get_list(void);
 int				*pos(void);
 int				*get_size(void);
 char			*get_elem(int command);
@@ -158,10 +153,8 @@ void			manage_quotes(void);
 void			reset_quotes(void);
 char			**old_command(void);
 
-size_t			ft_tablen(char **tabl);
 char			**ft_tabdup(char **tabl);
 char			**ft_tabstr(char **tabl, char *str);
-void			ft_tabdel(char ***tabl);
 int				ft_tabreplace(char ***tabl, char *str, char *by);
 
 int				input(void);
