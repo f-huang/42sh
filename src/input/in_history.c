@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 16:07:29 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/18 19:58:08 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:21:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char		*get_elem(int command)
 
 	j = 0;
 	list = *get_full_list();
-	*get_size() = ft_lstsize(list);
+	*get_size() = ft_lstlen(list);
 	(*pos() == -1000) ? *pos() = *get_size() : 0;
 	if (command == CODE_UP)
 		*pos() -= *pos() > 1 ? 1 : 0;

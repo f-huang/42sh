@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 13:28:18 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/18 21:33:06 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:28:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	call_function(t_hist_option tools, char **av)
 		return (overwrite_history_file(lst));
 	else if (tools.option & OPTION_A)
 		return (save_history_in_file(*get_new_list()));
-		// else if (tools.option & OPTION_N)
 	else
 		return (history_print_list(lst, av));
 }

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 14:09:24 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/18 20:32:51 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:29:19 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ static int	is_option(t_hist_option *tools, char **av, int *i, int *j)
 		tools->option |= OPTION_C;
 	else if (av[*i][*j] == 'd')
 		return (get_d_option(tools, av, i, j));
-	else if (av[*i][*j] == 'n')
-		tools->option |= OPTION_N;
 	else if (av[*i][*j] == 'r')
 		tools->option |= OPTION_R;
 	else if (av[*i][*j] == 'p')
@@ -95,11 +93,9 @@ static int	check_awrn(t_hist_option tools)
 		i++;
 	if (tools.option & OPTION_R)
 		i++;
-	if (tools.option & OPTION_N)
-		i++;
 	if (i > 1)
 	{
-		ft_putstr_fd("42sh: history: cannot use more than one of -anrw\n", 2);
+		ft_putstr_fd("42sh: history: cannot use more than one of -arw\n", 2);
 		return (ERROR);
 	}
 	return (GOOD);

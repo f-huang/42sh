@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/18 21:18:20 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/19 14:28:44 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,15 +138,10 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/completion.c \
 			$(SRCDIR)input/completionbis.c \
 			$(SRCDIR)input/ft_getlast.c \
-			$(SRCDIR)input/ft_lstpushback.c \
-			$(SRCDIR)input/ft_lstsize.c \
 			$(SRCDIR)input/ft_strsplit_whitespace.c \
-			$(SRCDIR)input/ft_tabdel.c \
 			$(SRCDIR)input/ft_tabdup.c \
-			$(SRCDIR)input/ft_tablen.c \
 			$(SRCDIR)input/ft_tabreplace.c \
 			$(SRCDIR)input/ft_tabstr.c \
-			$(SRCDIR)input/get_next_line_stdin.c \
 			$(SRCDIR)input/in_history.c \
 			$(SRCDIR)input/init_input.c \
 			$(SRCDIR)input/input.c \
