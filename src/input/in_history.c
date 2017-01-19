@@ -6,13 +6,13 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 16:07:29 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/17 15:18:21 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:21:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-char	*ft_purify(char *str, int size)
+static char	*ft_purify(char *str, int size)
 {
 	int		i;
 	int		j;
@@ -36,14 +36,14 @@ char	*ft_purify(char *str, int size)
 	return (new);
 }
 
-char	*get_elem(int command)
+char		*get_elem(int command)
 {
 	int				j;
 	t_list			*list;
 
 	j = 0;
-	list = *get_list();
-	*get_size() = ft_lstsize(list);
+	list = *get_full_list();
+	*get_size() = ft_lstlen(list);
 	(*pos() == -1000) ? *pos() = *get_size() : 0;
 	if (command == CODE_UP)
 		*pos() -= *pos() > 1 ? 1 : 0;
@@ -57,44 +57,4 @@ char	*get_elem(int command)
 		list = list->next;
 	}
 	return (NULL);
-}
-
-void	init_list(void)
-{
-	int		fd;
-	char	*line;
-	char	*path;
-
-	path = ft_strjoin(*get_home(), "/.42sh_history");
-	line = NULL;
-	if ((fd = open(path, O_RDONLY)) == -1)
-	{
-		ft_strdel(&path);
-		return ;
-	}
-	ft_strdel(&path);
-	while (get_next_line_stdin(fd, &line) > 0)
-	{
-		ft_lstpushback(get_list(), line, ft_strlen(line) + 1);
-		ft_strdel(&line);
-	}
-	ft_strdel(&line);
-}
-
-void	in_history(char *buffer)
-{
-	int		fd;
-	char	*path;
-
-	path = ft_strjoin(*get_home(), "/.42sh_history");
-	fd = open(path, O_WRONLY | O_APPEND | O_CREAT,\
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	ft_strdel(&path);
-	if (buffer && buffer[0])
-	{
-		ft_lstpushback(get_list(), buffer, ft_strlen(buffer) + 1);
-		write(fd, buffer, ft_strlen(buffer));
-		write(fd, "\n", 1);
-	}
-	close(fd);
 }

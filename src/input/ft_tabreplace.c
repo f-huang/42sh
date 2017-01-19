@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tabreplace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:59:40 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 13:05:51 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/19 14:28:21 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+#include "tools.h"
 
 int		ft_tabreplace(char ***tab, char *str, char *by)
 {
@@ -37,7 +38,8 @@ int		ft_tabreplace(char ***tab, char *str, char *by)
 	(by) ? (*tab)[i] = strdup_input(by) : 0;
 	cleaner = *tab;
 	*tab = ft_tabdup(*tab);
-	ft_tabdel(&cleaner);
+	tl_freedoubletab(cleaner);
+	cleaner = NULL;
 	return (i);
 }
 

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   completion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:35:30 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/14 15:48:50 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/19 14:23:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+#include "tools.h"
 
-int		match(char *s1, char *s2)
+int			match(char *s1, char *s2)
 {
 	if (*s1 == 0 && *s2 == 0)
 		return (1);
@@ -25,7 +26,7 @@ int		match(char *s1, char *s2)
 	return (0);
 }
 
-char	*two_step(char *s)
+static char	*two_step(char *s)
 {
 	if (ft_strchr(s, '/'))
 		return (ft_strjoin(ft_strrchr(s, '/') + 1, "*"));
@@ -33,7 +34,7 @@ char	*two_step(char *s)
 		return (ft_strjoin(s, "*"));
 }
 
-void	completion(void)
+void		completion(void)
 {
 	char	*pattern;
 	char	**splitted;
@@ -41,7 +42,7 @@ void	completion(void)
 	int		i;
 
 	splitted = ft_strsplit_whitespace(*command());
-	i = ft_tablen(splitted);
+	i = tl_arrlen(splitted);
 	needle = i ? strdup_input(splitted[i - 1]) : strdup_input("");
 	pattern = two_step(needle);
 	if (ft_strchr(needle, '/'))
@@ -50,7 +51,8 @@ void	completion(void)
 		commandcase(pattern);
 	else
 		lastcase(pattern);
-	ft_tabdel(&splitted);
+	tl_freedoubletab(splitted);
+	splitted = NULL;
 	ft_strdel(&needle);
 	ft_strdel(&pattern);
 }

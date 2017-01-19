@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 17:48:57 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/08 16:47:46 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/18 21:23:37 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,21 @@
 #include "libft.h"
 #include "tools.h"
 
-static int		save_history(t_history *lst_history, t_variable *lst_env)
+void			clear_history_list(void)
 {
-	int			fd;
-	char		*path;
+	t_list	*p;
+	t_list	*elem;
 
-	if ((path = sh_getenv(lst_env, "HOME")))
-	{
-		path = tl_str3join(path, "/", HISTORY);
-		fd = open(path,\
-			O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRUSR | S_IWUSR);
-		ft_strdel(&path);
-		if (fd == -1)
-			return (GOOD);
-		while (lst_history)
-		{
-			ft_putendl_fd(lst_history->command_line, fd);
-			lst_history = lst_history->next;
-		}
-		if (close(fd) == -1)
-			return (ERROR);
-	}
-	return (GOOD);
-}
-
-void			clear_history_list(t_history **lst_history, t_variable *lst_env)
-{
-	t_history	*p;
-	t_history	*elem;
-
-	if (!(save_history(*lst_history, lst_env)))
-		return ;
-	p = *lst_history;
+	save_history_in_file(*get_new_list());
+	p = *get_full_list();
 	while (p)
 	{
 		elem = p;
 		p = p->next;
-		ft_strdel(&elem->command_line);
+		if (elem->content)
+			ft_memdel((void*)&elem->content);
 		ft_memdel((void*)&elem);
 	}
+	*get_full_list() = NULL;
+	*get_new_list() = NULL;
 }
