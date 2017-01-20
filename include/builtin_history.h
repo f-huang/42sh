@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 14:28:23 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/19 11:52:17 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/20 13:19:52 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,10 @@ int				history_print_list(t_list *lst, char **av);
 int				history_get_options(t_hist_option *tools, char **av);
 
 int				history_clear_list(t_list **lst);
-void			delete_last_entry(t_hist_option tools);
 int				history_del_position_offset(t_list **lst, t_hist_option tools,\
 																	int offset);
-int				history_option_s(t_hist_option tools, char **av);
-int				history_option_p(t_hist_option tools, char **av);
+int				history_option_s(char **av);
+int				history_option_p(char **av);
 
 int				history_append_file_to_list(char **av);
 int				overwrite_history_file(t_list *lst_history);

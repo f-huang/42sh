@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 15:22:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/19 17:42:56 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/20 14:59:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static int	print_from_offset(char **cmd, int *i)
 		ft_putstr_fd("42sh: !", 2);
 		ft_putnbr_fd(ft_atoi(*cmd + *i + 1), 2);
 		ft_putstr_fd(": event not found\n", 2);
+		ft_strdel(&(*cmd));
 		return (ERROR);
 	}
 	tmp = ft_strndup(*cmd + *i, ft_nbrlen(ft_atoi(*cmd + *i)) + 1);
@@ -81,18 +82,13 @@ static int	look_for_string(char **cmd, int *i)
 	len = ft_strlen(*cmd + ++(*i));
 	while (lst)
 	{
-		if (lst->content)
-			if (ft_strnequ(*cmd + *i, lst->content, len))
-			{
-				if (!tmp)
-					tmp = ft_strdup(lst->content);
-				else
-					tmp = ft_strcpy(tmp, lst->content);
-			}
+		if (lst->content && ft_strnequ(*cmd + *i, lst->content, len))
+			tmp = tmp ? ft_strcpy(tmp, lst->content) : ft_strdup(lst->content);
 		lst = lst->next;
 	}
 	if (!tmp)
 	{
+		ft_strdel(&(*cmd));
 		ft_putstr_fd("42sh: No such word in event\n", 2);
 		return (ERROR);
 	}
@@ -104,30 +100,32 @@ static int	look_for_string(char **cmd, int *i)
 
 char		*exclamation_mark(char *cmd)
 {
+	int		first;
 	int		i;
 	int		backslash;
 
 	i = 0;
+	first = 0;
 	while (cmd[i])
 	{
 		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
 		if (cmd[i] == '!' && backslash == 0 && cmd[i + 1] && cmd[i + 1] != '='\
 			&& cmd[i + 1] != '\t' && cmd[i + 1] != ' ' && cmd[i + 1] != '(')
 		{
+			if (!first)
+				delete_last_entry();
+			first = 1;
 			if (is_strdigitneg(cmd + i + 1) || cmd[i + 1] == '!')
 			{
 				if (!print_from_offset(&cmd, &i))
 					return (NULL);
 			}
 			else if (cmd[i + 1] != '#')
-			{
 				if (!look_for_string(&cmd, &i))
 					return (NULL);
-			}
 		}
 		i++;
 	}
+	save_command_line(cmd);
 	return (cmd);
-	// if (OK)
-	// delete_last_entry
 }
