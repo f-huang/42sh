@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 13:28:18 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/19 14:28:52 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/20 13:20:06 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static int	call_function(t_hist_option tools, char **av)
 	else if (tools.option & OPTION_D)
 		return (history_del_position_offset(&lst, tools, tools.offset));
 	else if (tools.option & OPTION_S)
-		return (history_option_s(tools, av));
+		return (history_option_s(av));
 	else if (tools.option & OPTION_P)
-		return (history_option_p(tools, av));
+		return (history_option_p(av));
 	else if (tools.option & OPTION_R)
 		return (history_append_file_to_list(av));
 	else if (tools.option & OPTION_W)
