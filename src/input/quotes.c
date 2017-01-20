@@ -11,32 +11,27 @@
 /* ************************************************************************** */
 
 #include "input.h"
-/*
-static void	manage_bs(void)
-{
-	int		bs;
-	int		i;
 
-	bs = 0;
-	i = 0;
-	while (!(*stock()) && (*command())[i])
-	{
-		
-	}
-}*/
 void		manage_quotes(void)
 {
 	int		i;
 	int		dq;
 	int		q;
+	int		b;
 
 	i = 0;
 	q = 0;
 	dq = 0;
-//	manage_bs();
+	b = 0;
 	while (!(*stock()) && (*command())[i])
 	{
-		if ((*command())[i] == '"' && !(q % 2) && !(*bs()))
+		if ((*command())[i] == '\\')
+			b++;
+		else if ((*command())[i] != '"' || (*command())[i - 1] != '\\')
+			b = 0;
+		if (b == 2)
+			b = 0;
+		if ((*command())[i] == '"' && !(q % 2) && !b)
 			dq++;
 		if ((*command())[i] == '\'' && !(dq % 2))
 			q++;
@@ -44,7 +39,14 @@ void		manage_quotes(void)
 	}
 	while ((*stock()) && (*stock())[i])
 	{
-		if ((*stock())[i] == '"' && !(q % 2) && !(*bs()))
+		if ((*stock())[i] == '\\')
+			b++;
+		else if ((*stock())[i] != '"' || (*stock())[i - 1] != '\\')
+			b = 0;
+		if (b == 2)
+			b = 0;
+
+		if ((*stock())[i] == '"' && !(q % 2) && !b)
 			dq++;
 		if ((*stock())[i] == '\'' && !(dq % 2))
 			q++;
@@ -52,6 +54,7 @@ void		manage_quotes(void)
 	}
 	*(dquote()) = dq;
 	*(quote()) = q;
+	*(bs()) = b;
 }
 
 void	reset_quotes(void)
