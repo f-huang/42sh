@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/19 14:28:44 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/20 17:41:59 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,6 +118,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)import_shrc.c \
 			$(SRCDIR)init_shell.c \
 			$(SRCDIR)input/builtin_completion.c \
+			$(SRCDIR)input/code_completion.c \
 			$(SRCDIR)input/code_ctrl_d.c \
 			$(SRCDIR)input/code_ctrl_l.c \
 			$(SRCDIR)input/code_ctrl_u.c \

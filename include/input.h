@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/19 14:30:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/20 17:41:32 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char			*newclean(char *str);
 char			ft_getlast(char *str);
 void			remove_shit(char ***new);
 void			replace_with_shit(char **s);
-int				get_next_line_stdin(int fd, char **line);
+// int				get_next_line_stdin(int fd, char **line);
 char			**ft_strsplit_whitespace(char *s);
 char			ft_getlast(char *str);
 char			*strdup_input(char *src);
@@ -102,7 +102,8 @@ void			fill_space(int j);
 void			strinsert_input(char c);
 
 int				check_builtins(char *pattern);
-void			completion(void);
+void			code_completion(void);
+// void			completion(void);
 void			code_up(int key);
 void			code_right(void);
 void			code_left(void);

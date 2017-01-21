@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:44:58 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/18 13:00:19 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:41:40 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	key_dump(int key)
 {
-	(key == CODE_TAB) ? completion() : 0;
+	(key == CODE_TAB) ? code_completion() : 0;
 	(key == CODE_UP) ? code_up(key) : 0;
 	(key == CODE_BACK) ? stremove() : 0;
 	(key == CODE_RIGHT) ? code_right() : 0;
