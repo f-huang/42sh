@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 17:14:56 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/21 15:52:00 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/21 16:13:37 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,17 @@ static int	look_for_a_command(t_list **lst_completion, char *command, int semi_c
 		search_through_dir(lst_completion, tab[i], semi_colon ? "" : command);
 		i++;
 	}
+	tl_freedoubletab(tab);
 
-	t_list	*lst;
-
-	lst = *lst_completion;
-	while (lst)
-	{
-		if (lst->content)
-			ft_putendlcol(lst->content, RED);
-		lst = lst->next;
-	}
+	// t_list	*lst;
+	//
+	// lst = *lst_completion;
+	// while (lst)
+	// {
+	// 	if (lst->content)
+	// 		ft_putendlcol(lst->content, RED);
+	// 	lst = lst->next;
+	// }
 	return (0);
 }
 
@@ -111,7 +112,7 @@ void	code_completion(void)
 	int				i;
 	int				len;
 
-	if (ft_strequ(str, *command()))
+	if (str && ft_strequ(str, *command()))
 	{
 		cursor = cursor->next;
 		if (!cursor)
@@ -119,7 +120,9 @@ void	code_completion(void)
 	}
 	else
 	{
-		str = substitute(&g_sh, ft_strdup(*command()));
+		if (str)
+			ft_strdel(&str);
+		str = substitute(&g_sh, *command());
 		len = cor()->x - 1;
 		i = len;
 		while (i > 0 && !tl_iswhitespace(str[i]))
@@ -127,7 +130,14 @@ void	code_completion(void)
 		if (i == 0 || is_first_word(str + i) || str[len] == ';')
 			look_for_a_command(&lst_completion, str + i, str[len] == ';' ? 1 : 0);
 		cursor = lst_completion;
-		
+		len++;
+		*command() = tl_switch_string(str, len, cursor->content + len - i, "");
+		default_mode();
+		ft_putstr(cursor->content + len - i);
+		raw_mode();
+		str = *command();
+		cor()->x += ft_strlen(cursor->content + len - i);
+		cor()->len = ft_strlen(str);
 	}
 // 	else if (str[i - 1] == '$')
 // 		look_for_a_variable(str + i);

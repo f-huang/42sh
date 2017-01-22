@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion.h                                        :+:      :+:    :+:   */
+/*   delete_last_entry.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:23:46 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/19 16:02:06 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/18 20:13:38 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/20 13:20:32 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANSION_H
-# define EXPANSION_H
+#include "libft.h"
+#include "history.h"
 
-# include <dirent.h>
-# include "ft_42sh.h"
-# include "execution.h"
+void	delete_last_entry(void)
+{
+	t_list	*lst;
+	t_list	*prev;
 
-char					*substitute(t_shell *sh, char *cmd);
-char					*dollar(t_shell *sh, char *acmd, char *ptr);
-int						tilde(char **acmd);
-char					*remove_quotes_and_backslash(char *cmd);
-char					*exclamation_mark(char *cmd);
-
-int						alias_substitution(t_variable *lst_alias, char **line);
-#endif
+	if (!(lst = *get_full_list()))
+		return ;
+	prev = NULL;
+	while (lst->next)
+	{
+		prev = lst;
+		lst = lst->next;
+	}
+	if (prev)
+		prev->next = lst->next;
+	else
+		*get_full_list() = lst->next;
+	if (lst->content)
+		free(lst->content);
+	lst->content = NULL;
+	lst->content_size = 0;
+	free(lst);
+	lst = NULL;
+}
