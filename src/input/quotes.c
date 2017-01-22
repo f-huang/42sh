@@ -18,13 +18,14 @@ static void	single_line(int *q, int *dq, int *b, int i)
 	{
 		if ((*command())[i] == '\\')
 			(*b)++;
-		else if ((*command())[i] != '"' || (*command())[i - 1] != '\\')
+		else if (((*command())[i] != '"' && (*command())[i] != '\'')
+		|| (*command())[i - 1] != '\\')
 			*b = 0;
 		if (*b == 2)
 			*b = 0;
 		if ((*command())[i] == '"' && !(*q % 2) && !(*b))
 			(*dq)++;
-		if ((*command())[i] == '\'' && !(*dq % 2))
+		if ((*command())[i] == '\'' && !(*dq % 2) && (*q % 2 || !(*b)))
 			(*q)++;
 		i++;
 	}
@@ -36,13 +37,14 @@ static void	multi_line(int *q, int *dq, int *b, int i)
 	{
 		if ((*stock())[i] == '\\')
 			(*b)++;
-		else if ((*stock())[i] != '"' || (*stock())[i - 1] != '\\')
+		else if (((*stock())[i] != '"' && (*stock())[i] != '\'')
+		|| (*stock())[i - 1] != '\\')
 			*b = 0;
-		if (*b == 2)
+		if (*b == 2 || **command() == 0)
 			*b = 0;
 		if ((*stock())[i] == '"' && !(*q % 2) && !(*b))
 			(*dq)++;
-		if ((*stock())[i] == '\'' && !(*dq % 2))
+		if ((*stock())[i] == '\'' && !(*dq % 2) && (*q % 2 || !(*b)))
 			(*q)++;
 		i++;
 	}
@@ -63,6 +65,8 @@ void		manage_quotes(void)
 		multi_line(&q, &dq, &b, i);
 	else
 		single_line(&q, &dq, &b, i);
+	if (ft_getlast(*command()) == '\'' || ft_getlast(*command()) == '"')
+		b = 0;
 	*(dquote()) = dq;
 	*(quote()) = q;
 	*(bs()) = b;
