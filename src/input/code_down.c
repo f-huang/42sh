@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   code_down.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:30:16 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:30:41 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/18 15:54:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,21 @@ void	code_down(int key)
 {
 	char	*str;
 
-	str = get_elem(key);
 	if ((*dquote() % 2) || (*quote() % 2))
 		return ;
+	str = get_elem(key);
+	move_left(cor()->x);
+	fill_space(cor()->len);
+	cor()->x = 0;
 	if (*pos() == *get_size())
 	{
-		move_left(cor()->x);
-		fill_space(cor()->len);
-		cor()->x = 0;
 		ft_strdel(command());
 		*command() = strdup_input("");
+		ft_putstr("\a");
 		return ;
 	}
 	if (!str)
 		return ;
-	move_left(cor()->x);
-	fill_space(cor()->len);
-	cor()->x = 0;
 	ft_putstr(str);
 	cor()->len = ft_strlen(str);
 	cor()->x = cor()->len;

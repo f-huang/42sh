@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   get_home.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/04 17:38:42 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:47:48 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/18 19:47:13 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/18 19:51:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
-
-int		ft_lstsize(t_list *lst)
+char		**get_home(void)
 {
-	int		size;
+	static char	*get_home = (void*)0;
 
-	size = 0;
-	while (lst)
-	{
-		size++;
-		lst = lst->next;
-	}
-	return (size);
+	return (&get_home);
 }

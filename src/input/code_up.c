@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:34:23 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/17 13:58:42 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/18 15:53:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	code_up(int key)
 {
 	char	*str;
 
-	if ((*dquote() % 2) || (*quote() % 2))
+	if (!(str = get_elem(key)) || (*dquote() % 2) || (*quote() % 2))
+	{
+		ft_putstr("\a");
 		return ;
-	str = get_elem(key);
+	}
 	if (*pos() == 1)
 		ft_putchar('\a');
-	if (!str)
-		return ;
 	move_left(cor()->x);
 	fill_space(cor()->len);
 	cor()->x = 0;

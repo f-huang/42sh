@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabdel.c                                        :+:      :+:    :+:   */
+/*   option_p.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 12:58:37 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:58:50 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/18 20:16:31 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/20 13:19:45 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "libft.h"
+#include "history.h"
+#include "tools.h"
 
-void	ft_tabdel(char ***tab)
+int		history_option_p(char **av)
 {
-	size_t	i;
+	int		i;
 
+	if (!av || !av[0])
+		return (0);
+	delete_last_entry();
 	i = 0;
-	if (!(*tab))
-		return ;
-	while ((*tab)[i])
-	{
-		free((*tab)[i]);
-		i++;
-	}
-	if (*tab)
-		free(*tab);
-	*tab = NULL;
+	while (av[i])
+		ft_putendl(av[i++]);
+	return (0);
 }

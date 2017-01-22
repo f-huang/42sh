@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 17:43:41 by cjacquem          #+#    #+#             */
-/*   Updated: 2016/12/08 16:47:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/18 21:28:33 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,29 @@
 #include "history.h"
 #include "tools.h"
 
-static void	push_back(t_history **lst_history, t_history *new_elem)
+static void	add_command_in_list(char *command_line)
 {
-	t_history	*p;
+	t_list	*ptr;
+	char	*tmp;
 
-	if (*lst_history)
-	{
-		p = *lst_history;
-		while (p->next)
-			p = p->next;
-		p->next = new_elem;
-	}
-	else
-		*lst_history = new_elem;
+	ptr = *get_full_list();
+	while (ptr && ptr->next)
+		ptr = ptr->next;
+	tmp = ft_strtrim(command_line);
+	if (ptr && ptr->content)
+		if (ft_strequ(ptr->content, tmp))
+		{
+			ft_strdel(&tmp);
+			return ;
+		}
+	ptr->next = ft_lstnew(command_line, ft_strlen(command_line) + 1);
+	ft_strdel(&tmp);
 }
 
-int			save_command_line(t_history **lst_history, char *command_line)
+int			save_command_line(char *command_line)
 {
-	t_history	*new_elem;
-
 	if (!command_line || tl_isstrempty(command_line))
 		return (GOOD);
-	if (!(new_elem = (t_history*)ft_memalloc(sizeof(t_history))))
-		return (ERROR);
-	if (!(new_elem->command_line = ft_strdup(command_line)))
-		return (ERROR);
-	push_back(lst_history, new_elem);
+	add_command_in_list(command_line);
 	return (GOOD);
 }

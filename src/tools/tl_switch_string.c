@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
+/*   tl_switch_string.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/13 17:18:21 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/19 16:22:09 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/19 15:53:17 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/19 17:43:45 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_nbrlen(int n)
+char	*tl_switch_string(char *line, int i, char *plus, char *minus)
 {
-	size_t		size;
-	int			neg;
+	char	*tmp;
 
-	size = 1;
-	neg = n < 0 ? 1 : 0;
-	ABS(n);
-	while (n / 10)
-	{
-		n /= 10;
-		size++;
-	}
-	return (size + neg);
+	if (!minus || !line)
+		return (NULL);
+	if (!(tmp = ft_memalloc(ft_strlen(line) + (!plus ? 0 : ft_strlen(plus) -\
+		ft_strlen(minus) + 1))))
+		return (NULL);
+	tmp = ft_strncat(tmp, line, i);
+	if (plus)
+		tmp = ft_strcat(tmp, plus);
+	tmp = ft_strcat(tmp, line + i + ft_strlen(minus));
+	ft_strdel(&line);
+	return (tmp);
 }

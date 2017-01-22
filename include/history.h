@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:36:29 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/12 17:52:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/20 13:19:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@
 #  define HISTORY ".42sh_history"
 # endif
 
-typedef struct	s_history
-{
-	char				*command_line;
-	struct s_history	*next;
-}				t_history;
+t_list			**get_full_list(void);
+t_list			**get_new_list(void);
 
-int				init_history(t_history **lst_history, t_variable *lst_env);
-int				save_command_line(t_history **lst_history, char *command_line);
-void			clear_history_list(t_history **lst_history,\
-					t_variable *lst_env);
+
+void			init_history_list(void);
+int				save_command_line(char *command_line);
+void			clear_history_list(void);
+int				save_history_in_file(t_list *lst_history);
+void			delete_last_entry(void);
 
 #endif
