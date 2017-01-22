@@ -18,7 +18,7 @@ static void	display_second_prompt(void)
 	if (*bs())
 	{
 		cor()->prompt_len = 2;
-		ft_putstr("\n> ");
+		ft_putstr("> ");
 	}
 	else if (*dquote() % 2)
 	{

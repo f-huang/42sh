@@ -31,7 +31,8 @@ int		get_basics(char c)
 	if (c == '\xa')
 	{
 		manage_quotes();
-		if (((*dquote() % 2 && *dquote()) || (*quote() % 2 && *quote())))
+		if (((*dquote() % 2 && *dquote()) || (*quote() % 2 && *quote())
+		|| *bs))
 		{
 			code_end();
 			manage_command(c);

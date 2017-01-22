@@ -18,8 +18,8 @@ static void	single_line(int *q, int *dq, int *b, int i)
 	{
 		if ((*command())[i] == '\\')
 			(*b)++;
-		else if (((*command())[i] != '"' && (*command())[i] != '\'')
-		|| (*command())[i - 1] != '\\')
+		else if (((*command())[i] != '"' && (*command())[i] != '\''
+		&& (*command())[i] != '\n') || (*command())[i - 1] != '\\')
 			*b = 0;
 		if (*b == 2)
 			*b = 0;
@@ -37,8 +37,8 @@ static void	multi_line(int *q, int *dq, int *b, int i)
 	{
 		if ((*stock())[i] == '\\')
 			(*b)++;
-		else if (((*stock())[i] != '"' && (*stock())[i] != '\'')
-		|| (*stock())[i - 1] != '\\')
+		else if (((*stock())[i] != '"' && (*stock())[i] != '\''
+		&& (*stock())[i] != '\n') || (*stock())[i - 1] != '\\')
 			*b = 0;
 		if (*b == 2 || **command() == 0)
 			*b = 0;
