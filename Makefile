@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/23 18:44:13 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/23 21:15:39 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -151,7 +151,6 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/init_input.c \
 			$(SRCDIR)input/input.c \
 			$(SRCDIR)input/key.c \
-			$(SRCDIR)input/key_check.c \
 			$(SRCDIR)input/key_get.c \
 			$(SRCDIR)input/modes.c \
 			$(SRCDIR)input/move.c \

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 18:38:30 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/23 18:44:31 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/23 21:47:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,13 @@
 int		is_a_command(char *command)
 {
 	size_t	i;
-	// int		word;
 
-	// i = 0;
-	// word = 0;
-	// while (i < cor()->x)
-	// {
-	// 	if (word && tl_iswhitespace(command[i]))
-	// 		return (0);
-	// 	else if (!tl_iswhitespace(command[i]))
-	// 		word = 1;
-	// 	i++;
-	// }
 	if (tl_isstrempty(command))
 		return (1);
 	i = cor()->x - 1;
 	while (i > 0)
 	{
-		if (!tl_iswhitespace(command[i]) || command[i] != ';')
+		if (!tl_iswhitespace(command[i]) && command[i] != ';')
 			return (0);
 		return (1);
 	}

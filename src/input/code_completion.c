@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 17:14:56 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/23 19:00:26 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/23 21:53:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ static int	look_for_a_command(char *command)
 
 static void	display_command(char *cmd_before, char *to_add, int where)
 {
-	int		len;
+	char	*save_end;
 
+	save_end = ft_strdup(*command() + cor()->x);
 	if (*command() && (*command())[0])
 		*command() = tl_switch_string(cmd_before, where, to_add, "");
 	else
@@ -72,12 +73,14 @@ static void	display_command(char *cmd_before, char *to_add, int where)
 		ft_strdel(command());
 		*command() = ft_strdup(to_add + where);
 	}
+	cor()->len = ft_strlen(*command());
+	cor()->x = cor()->len - ft_strlen(save_end);
 	default_mode();
 	ft_putstr(to_add);
+	ft_putstr(save_end);
+	move_left(ft_strlen(save_end));
 	raw_mode();
-	len = ft_strlen(to_add);
-	cor()->x += len;
-	cor()->len += len;
+	ft_strdel(&save_end);
 }
 
 static char	*step_back(char *save, int *i)
@@ -86,6 +89,9 @@ static char	*step_back(char *save, int *i)
 
 	end = cor()->x - 1;
 	*i = end;
+	while ((*command())[end] && !tl_iswhitespace((*command())[end]) && (*command())[end] != ';'\
+		&& (*command())[end] != '&' && (*command())[end] != '|')
+		++end;
 	while (*i >= 0 && !tl_iswhitespace((*command())[*i]) && (*command())[*i] != ';'\
 		&& (*command())[*i] != '&' && (*command())[*i] != '|')
 	{
@@ -94,7 +100,10 @@ static char	*step_back(char *save, int *i)
 	}
 	cor()->len = ft_strlen(*command());
 	*i = *i < 0 ? 0 : *i;
-	return (tl_strndup(save, end - *i + 1));
+	if ((*command())[*i] == ';' || (*command())[*i] != '&' ||\
+		(*command())[*i] != '|')
+		++(*i);
+	return (tl_strndup(save + *i, end - *i + 1));
 }
 
 static void	command_back_to_what_it_was(char *save, int pos)
@@ -128,7 +137,6 @@ void	code_completion(void)
 		return ;
 	pos = cor()->x;
 	word = step_back(save, &i);
-	ft_putendlcol(word, RED);
 	if ((cursor = *get_cursor_completion()))
 	{
 		if (!(*get_cursor_completion() = cursor->next))

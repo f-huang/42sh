@@ -6,13 +6,24 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:44:58 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/20 17:41:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/23 21:11:57 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-void	key_dump(int key)
+static int	ft_isvalid(char c)
+{
+	if (ft_isprint(c) || (c == '\x9') || c == '\x4' || c == '\x7f' || c == '\xa'
+	|| c == '\x1b' || c == '\x5b' || c == '\x41' || c == '\x42' || c == '\x43'
+	|| c == '\x44' || c == '\x48' || c == '\x46' || c == '\x31' || c == '\x32'
+	|| c == '\x3b' || c == '\x42' || c == '\x41' || c == '\x18' || c == '\x15'
+	|| c == '\x17' || c == '\x0c' || c == '\x01' || c == '\x05')
+		return (1);
+	return (0);
+}
+
+void		key_dump(int key)
 {
 	(key == CODE_TAB) ? code_completion() : 0;
 	(key == CODE_UP) ? code_up(key) : 0;
@@ -34,7 +45,7 @@ void	key_dump(int key)
 	(key == CODE_CTRL_L) ? code_ctrl_l() : 0;
 }
 
-int		key_get(void)
+int			key_get(void)
 {
 	char	c;
 
