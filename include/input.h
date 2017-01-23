@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 16:53:53 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/23 18:55:34 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ t_termsize		*termsize(void);
 void			remove_display(char *to_add);
 int				*pos(void);
 int				*get_size(void);
-char			*get_elem(int command);
+char			*get_elem(int key);
 void			in_history(char *buffer);
 void			init_list(void);
 void			fill_space(int j);

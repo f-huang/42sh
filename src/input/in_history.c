@@ -6,13 +6,13 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 16:07:29 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/19 14:21:09 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/23 19:06:21 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-static char	*ft_purify(char *str, int size)
+static char		*ft_purify(char *str, int size)
 {
 	int		i;
 	int		j;
@@ -36,16 +36,20 @@ static char	*ft_purify(char *str, int size)
 	return (new);
 }
 
-char		*get_elem(int command)
+static t_list	*generated_list()
+
+char			*get_elem(int key)
 {
 	int				j;
+	char			*pattern;
 	t_list			*list;
 
 	j = 0;
+	pattern = ft_strjoin(*command(), "*");
 	list = *get_full_list();
 	*get_size() = ft_lstlen(list);
 	(*pos() == -1000) ? *pos() = *get_size() : 0;
-	if (command == CODE_UP)
+	if (key == CODE_UP)
 		*pos() -= *pos() > 1 ? 1 : 0;
 	else
 		*pos() += *pos() < *get_size() ? 1 : 0;
