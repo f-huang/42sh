@@ -35,7 +35,7 @@ static void	append_one_dir(char **path, char *wanted)
 	char	*tmp;
 
 	tmp = (*path)[1] ? ft_strjoin(*path, "/") : ft_strdup(*path);
-	*path ? free(*path) : 0;
+	*path ? ft_strdel(path) : 0;
 	*path = ft_strjoin(tmp, wanted);
 	tmp ? ft_strdel(&tmp) : 0;
 }
@@ -43,14 +43,12 @@ static void	append_one_dir(char **path, char *wanted)
 static int	gear(char **path, char *tmp)
 {
 	char	*p;
-	char	*cpy;
 
 	if (ft_strequ(tmp, "."))
 		;
 	else if (ft_strequ(tmp, ".."))
 	{
-		cpy = getcwd(NULL, _POSIX_PATH_MAX);
-		if ((p = ft_strrchr(cpy, '/')))
+		if ((p = ft_strrchr(*path, '/')))
 			while (*p)
 			{
 				if (p == *path)
@@ -58,8 +56,6 @@ static int	gear(char **path, char *tmp)
 				*p = '\0';
 				++p;
 			}
-		ft_strdel(path);
-		*path = cpy;
 	}
 	else
 		append_one_dir(path, tmp);
@@ -74,9 +70,12 @@ static char	*build_path(t_variable *lst_env, char *wanted)
 
 	if (wanted[0] != '/')
 	{
-		if (!(path = sh_getenv(lst_env, "PWD")))
-			path = getcwd(NULL, _POSIX_PATH_MAX);
-		else if (!(path = ft_strdup(path)))
+		if ((path = sh_getenv(lst_env, "PWD")))
+		{
+			if (!(path = ft_strdup(path)))
+				return (NULL);
+		}
+		else if (!(path = getcwd(NULL, _POSIX_PATH_MAX)))
 			return (NULL);
 		if (!(tmp = ft_strsplit(wanted, '/')))
 			return (NULL);
