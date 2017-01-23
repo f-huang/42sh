@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 15:45:47 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/18 17:25:21 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/23 16:08:11 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,18 @@ int			input(void)
 			continue ;
 		(key != -2 && key != -42) ? key_dump(key) : 0;
 		if (!key)
-		{
-			code_end();
+		{	
+			manage_quotes();
+			if (((*dquote() % 2 && *dquote()) || (*quote() % 2 && *quote())
+			|| *bs()))
+			{
+				code_end();
+				manage_command('\n');
+			}
 			*stock() = tl_strmerge(*stock(), *command());
 			manage_quotes();
 			ret = manage_return();
+			default_mode();
 			if (!ret)
 				return (0);
 		}
