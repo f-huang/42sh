@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/20 17:41:32 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/23 18:39:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,16 @@ typedef struct	s_comp
 	char			**splitted_path;
 }				t_comp;
 
+/*
+**	COMPLETION
+*/
+void			code_completion(void);
+int				is_a_command(char *command);
+int				search_through_dir(char *dir_name, char *command);
+t_list			**get_cursor_completion(void);
+t_list			**get_list_completion(void);
+
+
 char			*newclean(char *str);
 char			ft_getlast(char *str);
 void			remove_shit(char ***new);
@@ -102,7 +112,6 @@ void			fill_space(int j);
 void			strinsert_input(char c);
 
 int				check_builtins(char *pattern);
-void			code_completion(void);
 // void			completion(void);
 void			code_up(int key);
 void			code_right(void);

@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/21 15:52:32 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/23 18:44:13 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,6 +137,9 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/code_shift_up.c \
 			$(SRCDIR)input/code_up.c \
 			$(SRCDIR)input/command.c \
+			$(SRCDIR)input/completion/get_completion_list.c \
+			$(SRCDIR)input/completion/is_a_command.c \
+			$(SRCDIR)input/completion/search_through_dir.c \
 			$(SRCDIR)input/completion.c \
 			$(SRCDIR)input/completionbis.c \
 			$(SRCDIR)input/ft_getlast.c \
@@ -288,6 +291,7 @@ $(CACHEF):
 	test -d $(OBJDIR)execution || mkdir $(OBJDIR)execution
 	test -d $(OBJDIR)history || mkdir $(OBJDIR)history
 	test -d $(OBJDIR)input || mkdir $(OBJDIR)input
+	test -d $(OBJDIR)input/completion || mkdir $(OBJDIR)input/completion
 	test -d $(BINDIR) || mkdir $(BINDIR)
 	test -d $(CACHEF) || touch $(CACHEF)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   code_end.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/25 17:34:26 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/08 12:30:59 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/23 17:18:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	code_end(void)
 {
 	while (cor()->x < cor()->len)
 	{
-		if (!((cor()->x + cor()->prompt_len) % termsize()->col))
+		if (termsize()->col != 0 &&\
+			!((cor()->x + cor()->prompt_len) % termsize()->col))
 		{
 			move_down(1);
 			move_left(termsize()->col - 1);

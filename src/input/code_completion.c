@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 17:14:56 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/21 16:13:37 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/23 19:00:26 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 extern t_shell	g_sh;
 
 #define ALL_BUILTINS "alias cd echo env exit export history read setenv\
-						unalias unset unsetenv"
+unalias unset unsetenv"
 
-static int	search_through_tab(t_list **lst_completion, char **tab, char *command)
+static int	search_through_tab(char **tab, char *command)
 {
 	int		i;
 	int		len;
@@ -32,39 +32,20 @@ static int	search_through_tab(t_list **lst_completion, char **tab, char *command
 	while (tab && tab[i])
 	{
 		if (ft_strnequ(command, tab[i], len) && (found = 1))
-			ft_lstadd(lst_completion, ft_lstnew(tab[i], ft_strlen(tab[i]) + 1));
+			ft_lstadd(get_list_completion(), ft_lstnew(tab[i], ft_strlen(tab[i]) + 1));
 		i++;
 	}
 	return (found);
 }
 
-static int	search_through_dir(t_list **lst_completion, char *dir_name, char *command)
-{
-	DIR			*dir;
-	t_dirent	*sd;
-	int		len;
-
-	if ((dir = opendir(*dir_name == '\0' ? "." : dir_name)) == NULL)
-		return (1);
-	len = ft_strlen(command);
-	while ((sd = readdir(dir)))
-	{
-		if (ft_strequ(sd->d_name, ".") || ft_strequ(sd->d_name, ".."))
-			continue;
-		if (ft_strnequ(sd->d_name, command, len))
-			ft_lstadd(lst_completion, ft_lstnew(sd->d_name, ft_strlen(sd->d_name) + 1));
-	}
-	return (closedir(dir) == -1 ? 1 : 0);
-}
-
-static int	look_for_a_command(t_list **lst_completion, char *command, int semi_colon)
+static int	look_for_a_command(char *command)
 {
 	char	**tab;
 	char	*path;
 	int		i;
 
 	tab = ft_strsplit(ALL_BUILTINS, ' ');
-	search_through_tab(lst_completion, tab, semi_colon ? "" : command);
+	search_through_tab(tab, command);
 	tl_freedoubletab(tab);
 	tab = NULL;
 	if (!(path = sh_getenv(g_sh.lst_env ,"PATH")))
@@ -73,74 +54,102 @@ static int	look_for_a_command(t_list **lst_completion, char *command, int semi_c
 	i = 0;
 	while (tab && tab[i])
 	{
-		search_through_dir(lst_completion, tab[i], semi_colon ? "" : command);
+		search_through_dir(tab[i], command);
 		i++;
 	}
 	tl_freedoubletab(tab);
-
-	// t_list	*lst;
-	//
-	// lst = *lst_completion;
-	// while (lst)
-	// {
-	// 	if (lst->content)
-	// 		ft_putendlcol(lst->content, RED);
-	// 	lst = lst->next;
-	// }
 	return (0);
 }
 
-static int	is_first_word(char *command)
+static void	display_command(char *cmd_before, char *to_add, int where)
 {
-	int		i;
+	int		len;
 
-	i = 0;
-	while (command[i])
+	if (*command() && (*command())[0])
+		*command() = tl_switch_string(cmd_before, where, to_add, "");
+	else
 	{
-		if (tl_iswhitespace(command[i]))
-			return (0);
-		i++;
+		ft_strdel(command());
+		*command() = ft_strdup(to_add + where);
 	}
-	return (1);
+	default_mode();
+	ft_putstr(to_add);
+	raw_mode();
+	len = ft_strlen(to_add);
+	cor()->x += len;
+	cor()->len += len;
+}
+
+static char	*step_back(char *save, int *i)
+{
+	int		end;
+
+	end = cor()->x - 1;
+	*i = end;
+	while (*i >= 0 && !tl_iswhitespace((*command())[*i]) && (*command())[*i] != ';'\
+		&& (*command())[*i] != '&' && (*command())[*i] != '|')
+	{
+		stremove();
+		--(*i);
+	}
+	cor()->len = ft_strlen(*command());
+	*i = *i < 0 ? 0 : *i;
+	return (tl_strndup(save, end - *i + 1));
+}
+
+static void	command_back_to_what_it_was(char *save, int pos)
+{
+	if (!save)
+		return ;
+	code_end();
+	while (cor()->x)
+		stremove();
+	cor()->len = 0;
+	ft_strdel(command());
+	*command() = save;
+	default_mode();
+	ft_putstr(save);
+	raw_mode();
+	cor()->x = ft_strlen(save);
+	cor()->len = cor()->x;
+	move_left(cor()->x - pos);
+	cor()->x = pos;
 }
 
 void	code_completion(void)
 {
-	static t_list	*lst_completion = NULL;
-	static t_list	*cursor = NULL;
-	static char		*str = NULL;
-	int				i;
-	int				len;
+	t_list		*cursor = NULL;
+	char		*save;
+	char		*word;
+	int			pos;
+	int			i;
 
-	if (str && ft_strequ(str, *command()))
+	if (!(save = strdup_input(*command())) && !(i = 0))
+		return ;
+	pos = cor()->x;
+	word = step_back(save, &i);
+	ft_putendlcol(word, RED);
+	if ((cursor = *get_cursor_completion()))
 	{
-		cursor = cursor->next;
-		if (!cursor)
-			cursor = lst_completion;
+		if (!(*get_cursor_completion() = cursor->next))
+			*get_cursor_completion() = *get_list_completion();
 	}
 	else
 	{
-		if (str)
-			ft_strdel(&str);
-		str = substitute(&g_sh, *command());
-		len = cor()->x - 1;
-		i = len;
-		while (i > 0 && !tl_iswhitespace(str[i]))
-			i--;
-		if (i == 0 || is_first_word(str + i) || str[len] == ';')
-			look_for_a_command(&lst_completion, str + i, str[len] == ';' ? 1 : 0);
-		cursor = lst_completion;
-		len++;
-		*command() = tl_switch_string(str, len, cursor->content + len - i, "");
-		default_mode();
-		ft_putstr(cursor->content + len - i);
-		raw_mode();
-		str = *command();
-		cor()->x += ft_strlen(cursor->content + len - i);
-		cor()->len = ft_strlen(str);
+		if (i == 0 || is_a_command(save))
+			look_for_a_command(tl_isstrempty(save) ? "" : word);
+		else
+			search_through_dir("./", save + i);
+		*get_cursor_completion() = *get_list_completion();
 	}
+	if ((cursor = *get_cursor_completion()) && cursor->content)
+	{
+		display_command(*command(), cursor->content, cor()->x);
+		ft_strdel(&save);
+	}
+	else
+		command_back_to_what_it_was(save, pos);
+	ft_strdel(&word);
 // 	else if (str[i - 1] == '$')
 // 		look_for_a_variable(str + i);
-// 	else
-// 		look_for_a_file(str + i);
 }
