@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/19 14:28:44 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/20 13:14:23 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,6 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)builtins/history/builtin_history.c \
 			$(SRCDIR)builtins/history/clear_list.c \
 			$(SRCDIR)builtins/history/del_position_offset.c \
-			$(SRCDIR)builtins/history/delete_last_entry.c \
 			$(SRCDIR)builtins/history/get_options.c \
 			$(SRCDIR)builtins/history/print_list.c \
 			$(SRCDIR)builtins/history/option_s.c \
@@ -103,6 +102,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)execution/heredoc_prompt.c \
 			$(SRCDIR)expansion/alias_substitution.c \
 			$(SRCDIR)expansion/dollar.c \
+			$(SRCDIR)expansion/exclamation_mark.c \
 			$(SRCDIR)expansion/quotes.c \
 			$(SRCDIR)expansion/substitute.c \
 			$(SRCDIR)expansion/tilde.c \
@@ -110,9 +110,10 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)get_home.c \
 			$(SRCDIR)get_line.c \
 			$(SRCDIR)get_user.c \
-			$(SRCDIR)history/init_history_list.c \
-			$(SRCDIR)history/get_history_list.c \
 			$(SRCDIR)history/clear_history_list.c \
+			$(SRCDIR)history/delete_last_entry.c \
+			$(SRCDIR)history/get_history_list.c \
+			$(SRCDIR)history/init_history_list.c \
 			$(SRCDIR)history/save_history_in_file.c \
 			$(SRCDIR)history/save_command_line.c \
 			$(SRCDIR)import_shrc.c \
@@ -184,7 +185,8 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_strisalnum.c \
 			$(SRCDIR)tools/tl_strmerge.c \
 			$(SRCDIR)tools/tl_strndup.c \
-			$(SRCDIR)tools/tl_strrealloc.c
+			$(SRCDIR)tools/tl_strrealloc.c \
+			$(SRCDIR)tools/tl_switch_string.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR) -lft

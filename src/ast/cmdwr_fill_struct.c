@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:27:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/08 16:39:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/19 14:54:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static size_t	get_tablen(char *str)
 			(str[index.i] == '\'' || str[index.i] == '\"'))
 			index.i += tl_jump_to_other_quote(str + index.i) + 1;
 		else if (is_operator(NULL, str, NULL, &index) &&\
-			index.j > 0 && tl_iswhitespace(str[index.j - 1]))
+			(index.j > 0 && tl_iswhitespace(str[index.j - 1])))
 			len--;
 		else if (tl_iswhitespace(str[index.i]))
 		{

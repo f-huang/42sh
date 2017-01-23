@@ -12,9 +12,29 @@
 
 #include "input.h"
 
+static void	display_second_prompt(void)
+{
+	init_input();
+	if (*bs())
+	{
+		cor()->prompt_len = 2;
+		ft_putstr("> ");
+	}
+	else if (*dquote() % 2)
+	{
+		cor()->prompt_len = 8;
+		ft_putstr("dquote> ");
+	}
+	else if (*quote() % 2)
+	{
+		cor()->prompt_len = 7;
+		ft_putstr("quote> ");
+	}
+}
+
 static int	manage_return(void)
 {
-	if (!(*dquote() % 2) && !(*quote() % 2))
+	if (!(*dquote() % 2) && !(*quote() % 2) && !(*bs()))
 	{
 		reset_quotes();
 		!ft_strcmp(*stock(), *command()) || !(**stock()) ? ft_putchar('\n') : 0;
@@ -24,19 +44,7 @@ static int	manage_return(void)
 		return (0);
 	}
 	else
-	{
-		init_input();
-		if (*dquote() % 2)
-		{
-			cor()->prompt_len = 8;
-			ft_putstr("dquote> ");
-		}
-		else if (*quote() % 2)
-		{
-			cor()->prompt_len = 7;
-			ft_putstr("quote> ");
-		}
-	}
+		display_second_prompt();
 	return (1);
 }
 
