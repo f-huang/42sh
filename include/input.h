@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 16:24:36 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/23 16:53:53 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ int				get_x1b(char c);
 int				get_basics(char c);
 
 int				*lbracket(void);
-int				*rbracket(void);
 t_coord			*cor(void);
 char			**stock(void);
 char			**copied(void);
