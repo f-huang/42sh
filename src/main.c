@@ -65,7 +65,7 @@ int				main(int ac, char **av)
 	if (ac && !init_shell(&sh, av[0]))
 		return (ERROR);
 	*old_command() = ft_strdup("");
-	while (prompt(&sh))
+	while (prompt())
 	{
 		call_signal();
 		g_sh = sh;
