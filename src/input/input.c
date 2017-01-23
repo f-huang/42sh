@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 15:45:47 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 16:08:11 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/23 16:15:51 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ static int	manage_return(void)
 	return (1);
 }
 
+static void	return_issue(void)
+{
+	manage_quotes();
+	if (((*dquote() % 2 && *dquote()) || (*quote() % 2 && *quote())
+				|| *bs()))
+	{
+		code_end();
+		manage_command('\n');
+	}
+	*stock() = tl_strmerge(*stock(), *command());
+	manage_quotes();
+}
+
 int			input(void)
 {
 	int		key;
@@ -63,16 +76,8 @@ int			input(void)
 			continue ;
 		(key != -2 && key != -42) ? key_dump(key) : 0;
 		if (!key)
-		{	
-			manage_quotes();
-			if (((*dquote() % 2 && *dquote()) || (*quote() % 2 && *quote())
-			|| *bs()))
-			{
-				code_end();
-				manage_command('\n');
-			}
-			*stock() = tl_strmerge(*stock(), *command());
-			manage_quotes();
+		{
+			return_issue();
 			ret = manage_return();
 			default_mode();
 			if (!ret)
