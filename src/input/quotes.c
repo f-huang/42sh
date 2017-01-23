@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:49:07 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/18 18:47:10 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/23 14:44:07 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	single_line(int *q, int *dq, int *b, int i)
 			(*dq)++;
 		if ((*command())[i] == '\'' && !(*dq % 2) && (*q % 2 || !(*b)))
 			(*q)++;
+		if ((*command())[i] == '\'' || (*command())[i] == '"')
+			*b = 0;
 		i++;
 	}
 }
@@ -40,12 +42,14 @@ static void	multi_line(int *q, int *dq, int *b, int i)
 		else if (((*stock())[i] != '"' && (*stock())[i] != '\''
 		&& (*stock())[i] != '\n') || (*stock())[i - 1] != '\\')
 			*b = 0;
-		if (*b == 2 || **command() == 0)
+		if (**command() == 0 || (*b == 2))
 			*b = 0;
 		if ((*stock())[i] == '"' && !(*q % 2) && !(*b))
 			(*dq)++;
 		if ((*stock())[i] == '\'' && !(*dq % 2) && (*q % 2 || !(*b)))
 			(*q)++;
+		if ((*stock())[i] == '\'' || (*stock())[i] == '"')
+			*b = 0;
 		i++;
 	}
 }
