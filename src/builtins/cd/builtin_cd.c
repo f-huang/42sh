@@ -45,11 +45,11 @@ static int	gear(char **path, char *tmp)
 	char	*p;
 	char	*cpy;
 
-	cpy = *path;
 	if (ft_strequ(tmp, "."))
 		;
 	else if (ft_strequ(tmp, ".."))
 	{
+		cpy = getcwd(NULL, _POSIX_PATH_MAX);
 		if ((p = ft_strrchr(cpy, '/')))
 			while (*p)
 			{
@@ -58,6 +58,8 @@ static int	gear(char **path, char *tmp)
 				*p = '\0';
 				++p;
 			}
+		ft_strdel(path);
+		*path = cpy;
 	}
 	else
 		append_one_dir(path, tmp);

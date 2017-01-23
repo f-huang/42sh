@@ -17,7 +17,6 @@
 
 #define PROMPT "$> "
 
-extern	t_shell	g_sh;
 extern	pid_t	g_id;
 
 static void	reset_input(void)
@@ -33,7 +32,7 @@ static void	reset_input(void)
 			kill(g_id, SIGKILL);
 	}
 	else
-		prompt(&g_sh);
+		prompt();
 	ft_strdel(command());
 	*command() = ft_strdup("");
 	ft_strdel(stock());
