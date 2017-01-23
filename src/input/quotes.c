@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:49:07 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 14:44:07 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/23 16:48:07 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ static void	single_line(int *q, int *dq, int *b, int i)
 			(*q)++;
 		if ((*command())[i] == '\'' || (*command())[i] == '"')
 			*b = 0;
+		if (!(*q % 2) && !(*dq % 2) && (*command())[i] == '(')
+			(*lbracket())++;
+		if (!(*q % 2) && !(*dq % 2) && (*command())[i] == ')')
+			(*lbracket())--;
 		i++;
 	}
 }
@@ -50,6 +54,10 @@ static void	multi_line(int *q, int *dq, int *b, int i)
 			(*q)++;
 		if ((*stock())[i] == '\'' || (*stock())[i] == '"')
 			*b = 0;
+		if (!(*q % 2) && !(*dq % 2) && (*stock())[i] == '(')
+			(*lbracket())++;
+		if (!(*q % 2) && !(*dq % 2) && (*stock())[i] == ')')
+			(*lbracket())--;
 		i++;
 	}
 }
@@ -65,6 +73,7 @@ void		manage_quotes(void)
 	q = 0;
 	dq = 0;
 	b = 0;
+	*lbracket() = 0;
 	if (*stock())
 		multi_line(&q, &dq, &b, i);
 	else
@@ -81,4 +90,5 @@ void	reset_quotes(void)
 	*dquote() = 0;
 	*quote() = 0;
 	*bs() = 0;
+	*lbracket() = 0;
 }

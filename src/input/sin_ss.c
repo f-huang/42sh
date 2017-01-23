@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sin_quotes.c                                       :+:      :+:    :+:   */
+/*   sin_ss.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 13:43:40 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 16:26:20 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/23 16:18:39 by ataguiro          #+#    #+#             */
+/*   Updated: 2017/01/23 16:37:50 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+/*
+**	"(command)" --> OK
+**	"(command)othercommand" --> ERROR
+**	"command(othercommand)" --> ERROR
+**	"()" --> ERROR
+**	"(command); (othercommand)" --> OK (same with && and ||)
+**	"(command; command)" --> OK (same with && and ||)
+*/
 
-int		*dquote(void)
+int		*lbracket(void)
 {
-	static int	dquote = 0;
+	static int	lbracket = 0;
 
-	return (&dquote);
+	return (&lbracket);
 }
 
-int		*quote(void)
+int		*rbracket(void)
 {
-	static int	quote = 0;
+	static int 	rbracket = 0;
 
-	return (&quote);
-}
-
-int		*bs(void)
-{
-	static int	bs = 0;
-
-	return (&bs);
-}
-
-char	**stock(void)
-{
-	static char	*stock = NULL;
-
-	return (&stock);
+	return (&rbracket);
 }

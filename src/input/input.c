@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 15:45:47 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 16:15:51 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/23 16:44:17 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,16 @@ static void	display_second_prompt(void)
 		cor()->prompt_len = 7;
 		ft_putstr("quote> ");
 	}
+	else if (*lbracket())
+	{
+		cor()->prompt_len = 2;
+		ft_putstr("> ");
+	}
 }
 
 static int	manage_return(void)
 {
-	if (!(*dquote() % 2) && !(*quote() % 2) && !(*bs()))
+	if (!(*dquote() % 2) && !(*quote() % 2) && !(*bs()) && !(*lbracket()))
 	{
 		reset_quotes();
 		!ft_strcmp(*stock(), *command()) || !(**stock()) ? ft_putchar('\n') : 0;
@@ -51,8 +56,8 @@ static int	manage_return(void)
 static void	return_issue(void)
 {
 	manage_quotes();
-	if (((*dquote() % 2 && *dquote()) || (*quote() % 2 && *quote())
-				|| *bs()))
+	if ((*dquote() % 2 && *dquote()) || (*quote() % 2 && *quote())
+				|| *bs() || *lbracket())
 	{
 		code_end();
 		manage_command('\n');
