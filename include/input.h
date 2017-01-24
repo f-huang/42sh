@@ -147,6 +147,7 @@ int				get_x31(char c);
 int				get_x1b(char c);
 int				get_basics(char c);
 
+char			**found(void);
 int				*search_mode(void);
 int				*lbracket(void);
 t_coord			*cor(void);

@@ -25,6 +25,7 @@ static void	reset_input(void)
 
 	default_mode();
 	code_end();
+	*found() ? fill_space(ft_strlen(*found())) : 0;
 	ft_putchar('\n');
 	if (waitpid(g_id, &status, 0) != -1)
 	{
@@ -37,8 +38,10 @@ static void	reset_input(void)
 	*command() = ft_strdup("");
 	ft_strdel(stock());
 	*stock() = ft_strdup("");
+	ft_strdel(found());
 	reset_quotes();
 	raw_mode();
+	*search_mode() = 0;
 	cor()->len = 0;
 	cor()->x = 0;
 }

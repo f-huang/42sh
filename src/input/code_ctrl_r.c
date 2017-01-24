@@ -12,35 +12,43 @@
 
 #include "input.h"
 
-static void	display_missing(char *tmp)
+static void	display_missing(char *tmp, int *old_len)
 {
 	default_mode();
 	tmp = &tmp[cor()->x];
+	ft_putstr("\033[4;92m");
 	ft_putstr(tmp);
-	move_left(ft_strlen(tmp));
+	ft_putstr("\033[0m");
+	*old_len = ft_strlen(tmp);
+	move_left(*old_len);
 }
 
 void		code_ctrl_r(void)
 {
-	static char	*tmp = NULL;
+	static int	old_len = 0;
 	char		*pattern;
 	t_list		*full_list;
 
+	ft_strdel(found());
+	fill_space(old_len);
 	if (!(*search_mode()))
 	{
 		*search_mode() = 1;
+		move_left(*prompt_len() + 1);
+		prompt();
 		return ;
 	}
-	pattern = ft_strjoin(*command(), "*");
+	pattern = **command() ? ft_strjoin(*command(), "*") : NULL;
 	full_list = *get_full_list();
-	while (full_list)
+	while (pattern && full_list)
 	{
 		if (match((char *)full_list->content, pattern))
 		{
-			tmp = ft_strdup((char *)full_list->content);
+			*found() = ft_strdup((char *)full_list->content);
 			break ;
 		}
 		full_list = full_list->next;
 	}
-	display_missing(tmp);
+	*found() ? display_missing(*found(), &old_len) : 0;
+	ft_strdel(&pattern);
 }

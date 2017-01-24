@@ -30,3 +30,10 @@ int			*search_mode(void)
 
 	return (&search_mode);
 }
+
+char		**found(void)
+{
+	static char	*found = NULL;
+
+	return (&found);
+}
