@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/15 12:20:54 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/24 11:34:09 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,34 +35,36 @@ static void	append_one_dir(char **path, char *wanted)
 	char	*tmp;
 
 	tmp = (*path)[1] ? ft_strjoin(*path, "/") : ft_strdup(*path);
-	*path ? free(*path) : 0;
+	*path ? ft_strdel(path) : 0;
 	*path = ft_strjoin(tmp, wanted);
 	tmp ? ft_strdel(&tmp) : 0;
 }
 
-static int	gear(char **path, char *tmp)
+static int	gear(char **path, char **tmp)
 {
 	char	*p;
-	char	*cpy;
+	int		i;
 
-	if (ft_strequ(tmp, "."))
-		;
-	else if (ft_strequ(tmp, ".."))
+	i = 0;
+	while (tmp[i])
 	{
-		cpy = getcwd(NULL, _POSIX_PATH_MAX);
-		if ((p = ft_strrchr(cpy, '/')))
-			while (*p)
-			{
-				if (p == *path)
+		if (ft_strequ(tmp[i], "."))
+			;
+		else if (ft_strequ(tmp[i], ".."))
+		{
+			if ((p = ft_strrchr(*path, '/')))
+				while (*p)
+				{
+					if (p == *path)
+						++p;
+					*p = '\0';
 					++p;
-				*p = '\0';
-				++p;
-			}
-		ft_strdel(path);
-		*path = cpy;
+				}
+		}
+		else
+			append_one_dir(path, tmp[i]);
+		++i;
 	}
-	else
-		append_one_dir(path, tmp);
 	return (GOOD);
 }
 
@@ -70,24 +72,21 @@ static char	*build_path(t_variable *lst_env, char *wanted)
 {
 	char	*path;
 	char	**tmp;
-	int		i;
 
 	if (wanted[0] != '/')
 	{
-		if (!(path = sh_getenv(lst_env, "PWD")))
-			path = getcwd(NULL, _POSIX_PATH_MAX);
-		else if (!(path = ft_strdup(path)))
+		if ((path = sh_getenv(lst_env, "PWD")))
+		{
+			if (!(path = ft_strdup(path)))
+				return (NULL);
+		}
+		else if (!(path = getcwd(NULL, _POSIX_PATH_MAX)))
 			return (NULL);
 		if (!(tmp = ft_strsplit(wanted, '/')))
 			return (NULL);
 		if (tl_arrlen(tmp) == 0 && ft_strequ(wanted, "/"))
 			return (ft_strdup(wanted));
-		i = 0;
-		while (tmp[i])
-		{
-			gear(&path, tmp[i]);
-			++i;
-		}
+		gear(&path, tmp);
 		tl_freedoubletab(tmp);
 	}
 	else
