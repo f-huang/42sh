@@ -31,7 +31,7 @@ void		code_ctrl_r(void)
 
 	ft_strdel(found());
 	fill_space(old_len);
-	if (!(*search_mode()))
+	if (!(*search_mode()) && (*search_mode() = 1))
 	{
 		*search_mode() = 1;
 		move_left(*prompt_len() + 1);
