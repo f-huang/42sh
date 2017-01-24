@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/24 16:33:58 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/24 21:16:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void			tl_freedoubletab(char **tab);
 size_t			tl_arrlen(char **arr);
 
 void			tl_lstaddend(t_list **alst, t_list *new_elem);
+void			tl_lstadd_sortalpha(t_list **lst, t_list *new);
 t_list			*tl_lstlast(t_list *lst);
 t_list			*tl_lstnew(void *content, size_t size);
 void			tl_del(void *data, size_t len);

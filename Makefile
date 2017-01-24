@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/24 16:34:15 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/24 22:26:43 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,8 +137,12 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/code_shift_up.c \
 			$(SRCDIR)input/code_up.c \
 			$(SRCDIR)input/command.c \
+			$(SRCDIR)input/completion/clear_completion.c \
+			$(SRCDIR)input/completion/display_command.c \
 			$(SRCDIR)input/completion/get_completion_list.c \
 			$(SRCDIR)input/completion/is_a_command.c \
+			$(SRCDIR)input/completion/is_delim_char.c \
+			$(SRCDIR)input/completion/look_for_a_command.c \
 			$(SRCDIR)input/completion/look_for_a_file.c \
 			$(SRCDIR)input/completion/search_through_dir.c \
 			$(SRCDIR)input/completion.c \
@@ -180,6 +184,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_isstreempty.c \
 			$(SRCDIR)tools/tl_iswhitespace.c \
 			$(SRCDIR)tools/tl_jump_to_other_quote.c \
+			$(SRCDIR)tools/tl_lstadd_sortalpha.c \
 			$(SRCDIR)tools/tl_lstaddend.c \
 			$(SRCDIR)tools/tl_lstdelast.c \
 			$(SRCDIR)tools/tl_lstfree.c \

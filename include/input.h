@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/24 12:29:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/25 00:33:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,14 @@ typedef struct	s_comp
 */
 t_list			**get_cursor_completion(void);
 t_list			**get_list_completion(void);
+void			clear_completion(void);
+void			display_command(char **save, int pos);
 
 void			code_completion(void);
+int				is_delim_char(char *str, int i);
 int				is_a_command(char *command);
 int				look_for_a_file(char *command);
+int				look_for_a_command(char *command);
 int				search_through_dir(char *dir_name, char *command);
 
 /*

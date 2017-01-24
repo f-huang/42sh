@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 18:33:33 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/24 17:04:22 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/24 23:53:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ static void	add_in_list(char *dir_name, char *file_name)
 	{
 		path = ft_strdup(file_name);
 	}
-	if (tl_is_a_directory(path))
-		path = tl_strmerge(path, "/");
-	ft_lstadd(get_list_completion(), ft_lstnew(path, ft_strlen(path) + 1));
+	tl_lstadd_sortalpha(get_list_completion(),\
+		ft_lstnew(path, ft_strlen(path) + 1));
 	ft_strdel(&path);
 }
 
@@ -50,7 +49,9 @@ int			search_through_dir(char *dir_name, char *command)
 	while ((sd = readdir(dir)))
 	{
 		if (ft_strequ(sd->d_name, ".") || ft_strequ(sd->d_name, ".."))
-			continue;
+			continue ;
+		if (trim[0] != '.' && sd->d_name[0] == '.')
+			continue ;
 		tmp = tl_str3join(dir_name, "/", sd->d_name);
 		if (ft_strnequ(sd->d_name, trim, len))
 			add_in_list(dir_name, sd->d_name);

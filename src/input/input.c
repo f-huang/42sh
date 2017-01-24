@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 15:45:47 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 17:46:14 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/24 22:13:31 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int			input(void)
 		key = key_get();
 		if (key == -3)
 			continue ;
-		if (key != 1 && !(*get_cursor_completion() = NULL))
-			tl_lstfree(get_list_completion());
+		if (key != 1)
+			clear_completion();
 		(key != -2 && key != -42) ? key_dump(key) : 0;
 		if (!key)
 		{
