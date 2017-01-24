@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:49:16 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/15 12:20:54 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/24 11:34:09 by cjacquem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,31 @@ static void	append_one_dir(char **path, char *wanted)
 	tmp ? ft_strdel(&tmp) : 0;
 }
 
-static int	gear(char **path, char *tmp)
+static int	gear(char **path, char **tmp)
 {
 	char	*p;
+	int		i;
 
-	if (ft_strequ(tmp, "."))
-		;
-	else if (ft_strequ(tmp, ".."))
+	i = 0;
+	while (tmp[i])
 	{
-		if ((p = ft_strrchr(*path, '/')))
-			while (*p)
-			{
-				if (p == *path)
+		if (ft_strequ(tmp[i], "."))
+			;
+		else if (ft_strequ(tmp[i], ".."))
+		{
+			if ((p = ft_strrchr(*path, '/')))
+				while (*p)
+				{
+					if (p == *path)
+						++p;
+					*p = '\0';
 					++p;
-				*p = '\0';
-				++p;
-			}
+				}
+		}
+		else
+			append_one_dir(path, tmp[i]);
+		++i;
 	}
-	else
-		append_one_dir(path, tmp);
 	return (GOOD);
 }
 
@@ -66,7 +72,6 @@ static char	*build_path(t_variable *lst_env, char *wanted)
 {
 	char	*path;
 	char	**tmp;
-	int		i;
 
 	if (wanted[0] != '/')
 	{
@@ -81,12 +86,7 @@ static char	*build_path(t_variable *lst_env, char *wanted)
 			return (NULL);
 		if (tl_arrlen(tmp) == 0 && ft_strequ(wanted, "/"))
 			return (ft_strdup(wanted));
-		i = 0;
-		while (tmp[i])
-		{
-			gear(&path, tmp[i]);
-			++i;
-		}
+		gear(&path, tmp);
 		tl_freedoubletab(tmp);
 	}
 	else
