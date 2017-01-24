@@ -36,16 +36,12 @@ static char		*ft_purify(char *str, int size)
 	return (new);
 }
 
-static t_list	*generated_list()
-
 char			*get_elem(int key)
 {
 	int				j;
-	char			*pattern;
 	t_list			*list;
 
 	j = 0;
-	pattern = ft_strjoin(*command(), "*");
 	list = *get_full_list();
 	*get_size() = ft_lstlen(list);
 	(*pos() == -1000) ? *pos() = *get_size() : 0;

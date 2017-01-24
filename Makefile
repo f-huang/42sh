@@ -118,6 +118,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)history/save_command_line.c \
 			$(SRCDIR)import_shrc.c \
 			$(SRCDIR)init_shell.c \
+			$(SRCDIR)input/ft_lstpushback.c \
 			$(SRCDIR)input/builtin_completion.c \
 			$(SRCDIR)input/code_ctrl_d.c \
 			$(SRCDIR)input/code_ctrl_l.c \
