@@ -88,8 +88,6 @@ typedef struct	s_comp
 	char			**splitted_path;
 }				t_comp;
 
-void			ft_lstpushback(t_list **lst, void const *content, \
-														size_t content_size);
 char			*newclean(char *str);
 char			ft_getlast(char *str);
 void			remove_shit(char ***new);
