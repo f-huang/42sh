@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 18:55:34 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/24 18:00:06 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define CODE_CTRL_U 200
 # define CODE_CTRL_W 300
 # define CODE_CTRL_L 400
+# define CODE_CTRL_R 500
 
 typedef	struct	s_infos2
 {
@@ -87,7 +88,8 @@ typedef struct	s_comp
 	char			**splitted_path;
 }				t_comp;
 
-void    ft_lstpushback(t_list **lst, void const *content, size_t content_size);
+void			ft_lstpushback(t_list **lst, void const *content, \
+														size_t content_size);
 char			*newclean(char *str);
 char			ft_getlast(char *str);
 void			remove_shit(char ***new);
@@ -124,6 +126,7 @@ void			code_ctrl_x(void);
 void			code_ctrl_u(void);
 void			code_ctrl_w(void);
 void			code_ctrl_l(void);
+void			code_ctrl_r(void);
 
 /*
 **	COMPLETION
@@ -144,6 +147,7 @@ int				get_x31(char c);
 int				get_x1b(char c);
 int				get_basics(char c);
 
+int				*search_mode(void);
 int				*lbracket(void);
 t_coord			*cor(void);
 char			**stock(void);

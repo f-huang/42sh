@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 15:45:47 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 16:44:17 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/24 18:08:20 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			input(void)
 		key = key_get();
 		if (key == -3)
 			continue ;
-		(key != -2 && key != -42) ? key_dump(key) : 0;
+		(key != -42) ? key_dump(key) : 0;
 		if (!key)
 		{
 			return_issue();

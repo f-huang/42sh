@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 13:06:57 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 15:07:13 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/24 17:12:13 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		get_basics(char c)
 		return (CODE_BACK);
 	if (c == '\x0C')
 		return (CODE_CTRL_L);
+	if (c == '\x12')
+		return (CODE_CTRL_R);
 	if (c == '\xa')
 		return (CODE_RETURN);
 	return (-42);

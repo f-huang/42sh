@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:32:26 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/13 12:30:42 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/24 18:09:49 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	code_return(int *key)
 {
 	*pos() = -1000;
+	*search_mode() = 0;
 	*key = CODE_END;
 	default_mode();
 }

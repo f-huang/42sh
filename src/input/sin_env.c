@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 13:42:03 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/18 19:47:52 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/24 17:24:17 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,11 @@ t_termsize	*termsize(void)
 	new.col = w.ws_col;
 	new.row = w.ws_row;
 	return (&new);
+}
+
+int			*search_mode(void)
+{
+	static int	search_mode = 0;
+
+	return (&search_mode);
 }
