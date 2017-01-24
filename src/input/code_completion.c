@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 17:14:56 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/23 21:53:24 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/24 15:27:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static int	search_through_tab(char **tab, char *command)
 	while (tab && tab[i])
 	{
 		if (ft_strnequ(command, tab[i], len) && (found = 1))
+		{
 			ft_lstadd(get_list_completion(), ft_lstnew(tab[i], ft_strlen(tab[i]) + 1));
+			// *get_cursor_completion() = *get_list_completion();
+		}
 		i++;
 	}
 	return (found);
@@ -41,46 +44,52 @@ static int	search_through_tab(char **tab, char *command)
 static int	look_for_a_command(char *command)
 {
 	char	**tab;
-	char	*path;
-	int		i;
+	// char	*path;
+	// int		i;
 
 	tab = ft_strsplit(ALL_BUILTINS, ' ');
 	search_through_tab(tab, command);
 	tl_freedoubletab(tab);
 	tab = NULL;
-	if (!(path = sh_getenv(g_sh.lst_env ,"PATH")))
-		return (1);
-	tab = ft_strsplit(path, ':');
-	i = 0;
-	while (tab && tab[i])
-	{
-		search_through_dir(tab[i], command);
-		i++;
-	}
-	tl_freedoubletab(tab);
+	// if (!(path = sh_getenv(g_sh.lst_env ,"PATH")))
+		// return (1);
+	// tab = ft_strsplit(path, ':');
+	// i = 0;
+	// while (tab && tab[i])
+	// {
+	// 	search_through_dir(tab[i], command);
+	// 	i++;
+	// }
+	// tl_freedoubletab(tab);
 	return (0);
 }
 
-static void	display_command(char *cmd_before, char *to_add, int where)
+static void	display_command(char *cmd_before, char *to_add)
 {
 	char	*save_end;
 
-	save_end = ft_strdup(*command() + cor()->x);
+	save_end = NULL;
 	if (*command() && (*command())[0])
-		*command() = tl_switch_string(cmd_before, where, to_add, "");
+	{
+		save_end = ft_strdup(*command() + cor()->x);
+		*command() = tl_switch_string(cmd_before, cor()->x, to_add, "");
+	}
 	else
 	{
 		ft_strdel(command());
-		*command() = ft_strdup(to_add + where);
+		*command() = ft_strdup(to_add);
 	}
 	cor()->len = ft_strlen(*command());
-	cor()->x = cor()->len - ft_strlen(save_end);
+	cor()->x = cor()->len - (save_end ? ft_strlen(save_end) : 0);
 	default_mode();
 	ft_putstr(to_add);
-	ft_putstr(save_end);
-	move_left(ft_strlen(save_end));
+	if (save_end)
+	{
+		ft_putstr(save_end);
+		move_left(ft_strlen(save_end));
+		ft_strdel(&save_end);
+	}
 	raw_mode();
-	ft_strdel(&save_end);
 }
 
 static char	*step_back(char *save, int *i)
@@ -89,7 +98,7 @@ static char	*step_back(char *save, int *i)
 
 	end = cor()->x - 1;
 	*i = end;
-	while ((*command())[end] && !tl_iswhitespace((*command())[end]) && (*command())[end] != ';'\
+	while (end >= 0 && (*command())[end] && !tl_iswhitespace((*command())[end]) && (*command())[end] != ';'\
 		&& (*command())[end] != '&' && (*command())[end] != '|')
 		++end;
 	while (*i >= 0 && !tl_iswhitespace((*command())[*i]) && (*command())[*i] != ';'\
@@ -100,12 +109,13 @@ static char	*step_back(char *save, int *i)
 	}
 	cor()->len = ft_strlen(*command());
 	*i = *i < 0 ? 0 : *i;
-	if ((*command())[*i] == ';' || (*command())[*i] != '&' ||\
-		(*command())[*i] != '|')
+	end = end < *i ? *i : end;
+	if ((*command())[*i] == ';' || (*command())[*i] == '&' ||\
+		(*command())[*i] == '|')
 		++(*i);
-	return (tl_strndup(save + *i, end - *i + 1));
+	return (tl_isstrempty(save) ? ft_strnew(0) : tl_strndup(save + *i, end - *i + 1));
 }
-
+/*
 static void	command_back_to_what_it_was(char *save, int pos)
 {
 	if (!save)
@@ -124,7 +134,7 @@ static void	command_back_to_what_it_was(char *save, int pos)
 	move_left(cor()->x - pos);
 	cor()->x = pos;
 }
-
+*/
 void	code_completion(void)
 {
 	t_list		*cursor = NULL;
@@ -133,7 +143,7 @@ void	code_completion(void)
 	int			pos;
 	int			i;
 
-	if (!(save = strdup_input(*command())) && !(i = 0))
+	if (!(save = ft_strdup(*command())) && !(i = 0))
 		return ;
 	pos = cor()->x;
 	word = step_back(save, &i);
@@ -144,19 +154,21 @@ void	code_completion(void)
 	}
 	else
 	{
-		if (i == 0 || is_a_command(save))
+		if (i == 0 || ((i = is_a_command(save)) && i == 1))
+			// ft_putendlcol("toto", RED);
 			look_for_a_command(tl_isstrempty(save) ? "" : word);
-		else
-			search_through_dir("./", save + i);
+		// else
+			// look_for_a_file(word);
 		*get_cursor_completion() = *get_list_completion();
 	}
 	if ((cursor = *get_cursor_completion()) && cursor->content)
 	{
-		display_command(*command(), cursor->content, cor()->x);
+		display_command(*command(), cursor->content);
 		ft_strdel(&save);
+		ft_putendlcol(cursor->content, RED);
 	}
-	else
-		command_back_to_what_it_was(save, pos);
+	// else
+	// 	command_back_to_what_it_was(save, pos);
 	ft_strdel(&word);
 // 	else if (str[i - 1] == '$')
 // 		look_for_a_variable(str + i);

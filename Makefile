@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/23 21:15:39 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/24 12:29:38 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,6 +139,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/command.c \
 			$(SRCDIR)input/completion/get_completion_list.c \
 			$(SRCDIR)input/completion/is_a_command.c \
+			$(SRCDIR)input/completion/look_for_a_file.c \
 			$(SRCDIR)input/completion/search_through_dir.c \
 			$(SRCDIR)input/completion.c \
 			$(SRCDIR)input/completionbis.c \
