@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/24 12:29:38 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/24 16:34:15 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -175,6 +175,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_del.c \
 			$(SRCDIR)tools/tl_freedoubletab.c \
 			$(SRCDIR)tools/tl_get_next_line.c \
+			$(SRCDIR)tools/tl_is_a_directory.c \
 			$(SRCDIR)tools/tl_isstrdigit.c \
 			$(SRCDIR)tools/tl_isstreempty.c \
 			$(SRCDIR)tools/tl_iswhitespace.c \

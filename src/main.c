@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/23 18:36:21 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/24 16:13:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int				main(int ac, char **av)
 	*old_command() = ft_strdup("");
 	while (prompt(&sh))
 	{
+	
 		call_signal();
 		g_sh = sh;
 		if (input() == 0)

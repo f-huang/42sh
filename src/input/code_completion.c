@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 17:14:56 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/24 15:27:03 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/24 17:05:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	search_through_tab(char **tab, char *command)
 		if (ft_strnequ(command, tab[i], len) && (found = 1))
 		{
 			ft_lstadd(get_list_completion(), ft_lstnew(tab[i], ft_strlen(tab[i]) + 1));
-			// *get_cursor_completion() = *get_list_completion();
 		}
 		i++;
 	}
@@ -44,23 +43,25 @@ static int	search_through_tab(char **tab, char *command)
 static int	look_for_a_command(char *command)
 {
 	char	**tab;
-	// char	*path;
-	// int		i;
+	char	*path;
+	int		i;
 
+	if (ft_strchr(command, '/'))
+		return (look_for_a_file(command));
 	tab = ft_strsplit(ALL_BUILTINS, ' ');
 	search_through_tab(tab, command);
 	tl_freedoubletab(tab);
 	tab = NULL;
-	// if (!(path = sh_getenv(g_sh.lst_env ,"PATH")))
-		// return (1);
-	// tab = ft_strsplit(path, ':');
-	// i = 0;
-	// while (tab && tab[i])
-	// {
-	// 	search_through_dir(tab[i], command);
-	// 	i++;
-	// }
-	// tl_freedoubletab(tab);
+	if (!(path = sh_getenv(g_sh.lst_env ,"PATH")))
+		return (1);
+	tab = ft_strsplit(path, ':');
+	i = 0;
+	while (tab && tab[i])
+	{
+		search_through_dir(tab[i], command);
+		i++;
+	}
+	tl_freedoubletab(tab);
 	return (0);
 }
 
@@ -115,7 +116,7 @@ static char	*step_back(char *save, int *i)
 		++(*i);
 	return (tl_isstrempty(save) ? ft_strnew(0) : tl_strndup(save + *i, end - *i + 1));
 }
-/*
+
 static void	command_back_to_what_it_was(char *save, int pos)
 {
 	if (!save)
@@ -134,7 +135,7 @@ static void	command_back_to_what_it_was(char *save, int pos)
 	move_left(cor()->x - pos);
 	cor()->x = pos;
 }
-*/
+
 void	code_completion(void)
 {
 	t_list		*cursor = NULL;
@@ -155,21 +156,20 @@ void	code_completion(void)
 	else
 	{
 		if (i == 0 || ((i = is_a_command(save)) && i == 1))
-			// ft_putendlcol("toto", RED);
 			look_for_a_command(tl_isstrempty(save) ? "" : word);
-		// else
-			// look_for_a_file(word);
+		else
+			look_for_a_file(word);
 		*get_cursor_completion() = *get_list_completion();
 	}
 	if ((cursor = *get_cursor_completion()) && cursor->content)
 	{
 		display_command(*command(), cursor->content);
 		ft_strdel(&save);
-		ft_putendlcol(cursor->content, RED);
 	}
-	// else
-	// 	command_back_to_what_it_was(save, pos);
+	else
+		command_back_to_what_it_was(save, pos);
 	ft_strdel(&word);
 // 	else if (str[i - 1] == '$')
 // 		look_for_a_variable(str + i);
+
 }
