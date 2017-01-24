@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 13:06:57 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/18 13:33:08 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/23 15:07:13 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,7 @@ int		get_basics(char c)
 	if (c == '\x0C')
 		return (CODE_CTRL_L);
 	if (c == '\xa')
-	{
-		manage_quotes();
-		(((*dquote() % 2 && *dquote()) || (*quote() % 2 && *quote()))) ?
-			manage_command(c) : 0;
 		return (CODE_RETURN);
-	}
 	return (-42);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/25 00:33:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/25 00:54:58 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,10 @@ void			stremove(void);
 void			fill_space(int j);
 void			strinsert_input(char c);
 
+/*
+**	KEY DUMP FUNCTIONS
+*/
+
 int				check_builtins(char *pattern);
 // void			completion(void);
 void			code_up(int key);
@@ -138,17 +142,26 @@ void			code_ctrl_u(void);
 void			code_ctrl_w(void);
 void			code_ctrl_l(void);
 
+/*
+**	COMPLETION
+*/
+
 int				match(char *s1, char *s2);
 void			linkcase(char *pattern, char *to_open);
 void			commandcase(char *pattern);
 void			lastcase(char *pattern);
 void			init_input(void);
 
+/*
+**	GET_KEY
+*/
+
 int				*prompt_len(void);
 int				get_x31(char c);
 int				get_x1b(char c);
 int				get_basics(char c);
 
+int				*lbracket(void);
 t_coord			*cor(void);
 char			**stock(void);
 char			**copied(void);

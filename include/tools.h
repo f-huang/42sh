@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/24 21:16:46 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/25 00:55:58 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ size_t			tl_jump_to_other_quote(char *ptr);
 char			*tl_strrealloc(char *s, size_t size);
 char			*tl_strndup(const char *s1, size_t n);
 char			*tl_switch_string(char *line, int i, char *plus, char *minus);
+
 char			*tl_strmerge(char *origin, char *adding);
 char			*tl_str3join(char *s1, char *s2, char *s3);
 

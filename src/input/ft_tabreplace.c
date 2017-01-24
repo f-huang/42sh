@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:59:40 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/19 14:28:21 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/23 16:58:55 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int		ft_tabreplace(char ***tab, char *str, char *by)
 		i++;
 	}
 	ft_strdel(&cleaner_str);
-	if (by)
-		(*tab)[i] ? free((*tab)[i]) : 0;
+	by && (*tab)[i] ? free((*tab)[i]) : 0;
 	(by) ? (*tab)[i] = strdup_input(by) : 0;
 	cleaner = *tab;
 	*tab = ft_tabdup(*tab);

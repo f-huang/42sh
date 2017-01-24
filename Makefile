@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/24 22:26:43 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/25 00:54:43 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -167,6 +167,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/sin_input.c \
 			$(SRCDIR)input/sin_list.c \
 			$(SRCDIR)input/sin_quotes.c \
+			$(SRCDIR)input/sin_ss.c \
 			$(SRCDIR)input/strdup_input.c \
 			$(SRCDIR)lexer_parser.c \
 			$(SRCDIR)loop_through_commands.c \

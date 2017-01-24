@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:36:29 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/20 13:19:07 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/24 14:19:29 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 t_list			**get_full_list(void);
 t_list			**get_new_list(void);
-
 
 void			init_history_list(void);
 int				save_command_line(char *command_line);

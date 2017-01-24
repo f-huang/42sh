@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   code_ctrl_l.c                                      :+:      :+:    :+:   */
+/*   sin_ss.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 11:55:23 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/13 11:55:24 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/23 16:18:39 by ataguiro          #+#    #+#             */
+/*   Updated: 2017/01/23 16:53:43 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+/*
+**	"(command)" --> OK
+**	"(command)othercommand" --> ERROR
+**	"command(othercommand)" --> ERROR
+**	"()" --> ERROR
+**	"(command); (othercommand)" --> OK (same with && and ||)
+**	"(command; command)" --> OK (same with && and ||)
+*/
 
-void	code_ctrl_l(void)
+int		*lbracket(void)
 {
-	ft_putstr("\033[H\033[J");
-	prompt();
-	*command() && (*command())[0] ? ft_putstr(*command()) : 0;
-	move_left(cor()->len - cor()->x);
+	static int	lbracket = 0;
+
+	return (&lbracket);
 }

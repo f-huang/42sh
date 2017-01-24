@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 14:28:23 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/20 13:19:52 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/24 14:39:19 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,34 @@
 
 /*
 **	-c
-**		Clear the history list. This can be combined with the other
-**		options to replace the history list completely.
+**	Clear the history list. This can be combined with the other
+**	options to replace the history list completely.
 **
 **	-d	offset
-**		Delete the history entry at position offset.
-**		offset should be specified as it appears when the history is displayed.
+**	Delete the history entry at position offset.
+**	offset should be specified as it appears when the history is displayed.
 **
 **	-r
-**		Read the current history file and append its contents to the history list.
+**	Read the current history file and append its contents to the history list.
+**
 **	-p
-**		Perform history substitution on the args and display the result
-**		on the standard output, without storing the results in the history list.
+**	Perform history substitution on the args and display the result
+**	on the standard output, without storing the results in the history list.
 **
 **	-s
-**		The args are added to the end of the history list as a single entry.
+**	The args are added to the end of the history list as a single entry.
 **
 **	-a
-**		Append the new history lines (history lines entered since
-**		the beginning of the current Bash session) to the history file.
+**	Append the new history lines (history lines entered since
+**	the beginning of the current Bash session) to the history file.
 **
 **	-w
-**		Append the current history to the history file.
+**	Append the current history to the history file.
 **
 **	-n
-**		Append the history lines not already read from the history file
-**		to the current history list. These are lines appended to the
-**		history file since the beginning of the current Bash session.
-**
+**	Append the history lines not already read from the history file
+**	to the current history list. These are lines appended to the
+**	history file since the beginning of the current Bash session.
 */
 
 typedef struct	s_hist_option
