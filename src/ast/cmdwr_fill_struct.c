@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:27:36 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/19 14:54:05 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/25 18:52:17 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		is_operator(t_cmdwr **cmd, char *str, char *tmp, t_index *index)
 			len = cmdwr_check_redirections(str, &index->i, j);
 			if (tmp != NULL)
 			{
-				while (tl_iswhitespace(*tmp))
+				while (ast_special_is_space(*tmp))
 					tmp++;
 				if (str + index->i != tmp)
 					(*cmd)->command[index->j] =\
@@ -57,12 +57,12 @@ static size_t	get_tablen(char *str)
 			(str[index.i] == '\'' || str[index.i] == '\"'))
 			index.i += tl_jump_to_other_quote(str + index.i) + 1;
 		else if (is_operator(NULL, str, NULL, &index) &&\
-			(index.j > 0 && tl_iswhitespace(str[index.j - 1])))
+			(index.j > 0 && ast_special_is_space(str[index.j - 1])))
 			len--;
-		else if (tl_iswhitespace(str[index.i]))
+		else if (ast_special_is_space(str[index.i]))
 		{
 			len++;
-			while (tl_iswhitespace(str[index.i]))
+			while (ast_special_is_space(str[index.i]))
 				index.i++;
 		}
 		else
@@ -75,7 +75,7 @@ static int		is_word(char *str, int *i, char **tmp, char **tab)
 {
 	char				*ptr;
 
-	if (!tl_iswhitespace(str[*i]))
+	if (!ast_special_is_space(str[*i]))
 		return (0);
 	if (!(ptr = tl_strndup(*tmp, (size_t)(str + *i - *tmp))))
 		return (-1);
@@ -85,7 +85,7 @@ static int		is_word(char *str, int *i, char **tmp, char **tab)
 		return (0);
 	}
 	*tab = ptr;
-	while (str[*i] && tl_iswhitespace(str[*i]))
+	while (str[*i] && ast_special_is_space(str[*i]))
 		(*i)++;
 	*tmp = str + *i;
 	return (1);
@@ -106,7 +106,7 @@ static char		*cmdwr_fill_command_tab(t_cmdwr **cmd, t_index *index,\
 		else if ((ret = is_operator(cmd, str, tmp, index)))
 		{
 			index->j += ret - 1;
-			while (tl_iswhitespace(str[index->i]))
+			while (ast_special_is_space(str[index->i]))
 				index->i++;
 			tmp = str + index->i;
 		}
@@ -129,6 +129,6 @@ int				cmdwr_fill_struct(t_cmdwr **cmd, char *str)
 		return (ERROR);
 	tmp = cmdwr_fill_command_tab(cmd, &index, str);
 	if (!tl_isstrempty(tmp))
-		(*cmd)->command[index.j++] = ft_strtrim(tmp);
+		(*cmd)->command[index.j++] = ast_special_trim(tmp);
 	return (GOOD);
 }
