@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 15:22:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/25 12:24:31 by yfuks            ###   ########.fr       */
+/*   Updated: 2017/01/25 14:17:30 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,27 +110,24 @@ char		*exclamation_mark(char *cmd)
 	int		i;
 	int		backslash;
 
-	i = 0;
+	i = -1;
 	first = 0;
-	while (cmd[i])
+	while (cmd[++i])
 	{
 		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
 		if (cmd[i] == '!' && backslash == 0 && cmd[i + 1] && cmd[i + 1] != '='\
 			&& cmd[i + 1] != '\t' && cmd[i + 1] != ' ' && cmd[i + 1] != '(')
 		{
-			if (!first)
+			if (!first && (first = 1))
 				delete_last_entry();
-			first = 1;
 			if (is_strdigitneg(cmd + i + 1) || cmd[i + 1] == '!')
 			{
 				if (!print_from_offset(&cmd, &i))
 					return (NULL);
 			}
-			else if (cmd[i + 1] != '#')
-				if (!look_for_string(&cmd, &i))
-					return (NULL);
+			else if (cmd[i + 1] != '#'  && !look_for_string(&cmd, &i))
+				return (NULL);
 		}
-		i++;
 	}
 	save_command_line(cmd);
 	return (cmd);
