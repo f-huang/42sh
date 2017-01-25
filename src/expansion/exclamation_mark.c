@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 15:22:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/25 14:17:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/25 14:33:59 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ char		*exclamation_mark(char *cmd)
 				if (!print_from_offset(&cmd, &i))
 					return (NULL);
 			}
-			else if (cmd[i + 1] != '#'  && !look_for_string(&cmd, &i))
+			else if (cmd[i + 1] != '#' && !look_for_string(&cmd, &i))
 				return (NULL);
 		}
 	}

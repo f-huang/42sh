@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:35:41 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/25 14:19:55 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/25 14:35:38 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void	commandcase(char *pattern)
 	t_comp	p;
 
 	p.path = sh_getenv(g_sh.lst_env, "PATH");
-	p.splitted_path = !(p.t = 0) && p.path ? ft_strsplit(p.path, ':') : NULL;
+	p.t = 0;
+	p.splitted_path = p.path ? ft_strsplit(p.path, ':') : NULL;
 	(!p.splitted_path || !p.splitted_path[0]) ? check_builtins(pattern) : 0;
 	while (p.splitted_path && p.splitted_path[p.t])
 	{
