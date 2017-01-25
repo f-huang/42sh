@@ -18,7 +18,7 @@ int		get_basics(char c)
 		return (CODE_TAB);
 	if (c == '\x4' && !(*quote() % 2) && !(*dquote() % 2))
 		return (CODE_CTRL_D);
-	if (c == '\x18')
+	if (c == '\x0b')
 		return (CODE_CTRL_X);
 	if (c == '\x15')
 		return (CODE_CTRL_U);

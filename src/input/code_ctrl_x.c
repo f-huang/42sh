@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   code_ctrl_x.c                                      :+:      :+:    :+:   */
+/*   code_ctrl_k.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "input.h"
 
-void	code_ctrl_x(void)
+void	code_ctrl_k(void)
 {
 	ft_strdel(copied());
 	*copied() = strdup_input(&(*command())[cor()->x]);

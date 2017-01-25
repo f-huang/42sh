@@ -120,7 +120,7 @@ void			code_shift_up(void);
 void			code_shift_down(void);
 void			code_shift_right(void);
 void			code_shift_left(void);
-void			code_ctrl_x(void);
+void			code_ctrl_k(void);
 void			code_ctrl_u(void);
 void			code_ctrl_w(void);
 void			code_ctrl_l(void);

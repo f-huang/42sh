@@ -28,7 +28,7 @@ void	key_dump(int key)
 	(key == CODE_SHIFT_DOWN) ? code_shift_down() : 0;
 	(key == CODE_SHIFT_RIGHT) ? code_shift_right() : 0;
 	(key == CODE_SHIFT_LEFT) ? code_shift_left() : 0;
-	(key == CODE_CTRL_X) ? code_ctrl_x() : 0;
+	(key == CODE_CTRL_X) ? code_ctrl_k() : 0;
 	(key == CODE_CTRL_U) ? code_ctrl_u() : 0;
 	(key == CODE_CTRL_W) ? code_ctrl_w() : 0;
 	(key == CODE_CTRL_L) ? code_ctrl_l() : 0;
@@ -47,7 +47,7 @@ int		key_get(void)
 		return (CODE_HOME);
 	if (c == '\x05')
 		return (CODE_END);
-	if (c == '\x9' || c == '\x4' || c == '\x18' || c == '\x15' || c == '\x17' ||
+	if (c == '\x9' || c == '\x4' || c == '\x0b' || c == '\x15' || c == '\x17' ||
 	c == '\x7f' || c == '\xa' || c == '\x0c' || c == '\x12')
 		return (get_basics(c));
 	if (c == '\x1b')
