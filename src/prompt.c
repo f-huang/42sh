@@ -54,18 +54,19 @@ int				prompt(void)
 	{
 		ft_putstr("\033[1;32m");
 		ft_putstr(user);
-		ft_putstr("\x1b[0m");
-		ft_putchar(' ');
+		ft_putstr("\x1b[0m ");
 	}
 	else
-		ft_putstr("$");
+		ft_putchar('$');
 	length = 2 + (user ? ft_strlen(user) : 1);
 	if ((pwd = get_path_from_pwd()))
 	{
 		ft_putstr(pwd);
 		length += ft_strlen(pwd);
 		ft_strdel(&pwd);
-	}
+	}	
+	*search_mode() ? ft_putstr("\033[1;34m (i-search)\033[0m") : 0;
+	*search_mode() ? length += 11 : 0;
 	ft_putstr("> ");
 	*prompt_len() = length;
 	return (length);
