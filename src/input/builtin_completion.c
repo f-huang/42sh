@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 11:37:13 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/19 14:28:09 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/25 12:21:17 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ int		check_builtins(char *pattern)
 		i++;
 	}
 	tl_freedoubletab(split);
-	split = NULL;
 	return (0);
 }

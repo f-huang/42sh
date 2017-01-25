@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:52:07 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/20 14:36:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/25 12:18:30 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*tab_to_str(char **tab)
 	return (ret);
 }
 
-int		history_option_s(char **av)
+int			history_option_s(char **av)
 {
 	char	*str;
 

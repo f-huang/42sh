@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 19:33:41 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/18 21:26:41 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/25 12:19:45 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		save_history_in_file(t_list *lst_history)
 	{
 		path = tl_str3join(path, "/", HISTORY);
 		fd = open(path, O_WRONLY | O_APPEND | O_CREAT,\
-						S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);;
+						S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		ft_strdel(&path);
 		if (fd == -1)
 			return (1);
