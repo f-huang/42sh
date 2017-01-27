@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:18:37 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/13 17:37:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/26 18:32:21 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,21 @@
 #include "tools.h"
 #include "ft_42sh.h"
 
-pid_t	g_heredoc_pid = -1;
+pid_t			g_heredoc_pid = -1;
 
-static void	handle_expansion(t_shell *sh, t_cmdwr *cmd)
+
+static void		handle_expansion(t_shell *sh, t_cmdwr *cmd)
 {
 	size_t		i;
+	t_list		*lst_tab;
+	t_list		*result;
 
 	i = 0;
+	lst_tab = tl_tabtolst(cmd->command);
+	tl_freedoubletab(cmd->command);
+	result = glob_substitution(&lst_tab);
+	cmd->command = tl_lsttotab(result);
+	tl_lstfree(&result);
 	while (cmd->command[i])
 	{
 		cmd->command[i] = substitute(sh, cmd->command[i]);
@@ -31,7 +39,7 @@ static void	handle_expansion(t_shell *sh, t_cmdwr *cmd)
 	}
 }
 
-static void	loop_through_ast(t_shell *sh, t_ast *tree)
+static void		loop_through_ast(t_shell *sh, t_ast *tree)
 {
 	if (!tree)
 		return ;
@@ -43,7 +51,7 @@ static void	loop_through_ast(t_shell *sh, t_ast *tree)
 	loop_through_ast(sh, tree->right);
 }
 
-void		loop_through_commands(t_shell *sh, t_list *lst_commands)
+void			loop_through_commands(t_shell *sh, t_list *lst_commands)
 {
 	t_list		*ptr;
 

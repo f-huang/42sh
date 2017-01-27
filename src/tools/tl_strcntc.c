@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tl_freedoubletab.c                                 :+:      :+:    :+:   */
+/*   tl_strcntc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 17:21:05 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/25 17:37:34 by tpoac            ###   ########.fr       */
+/*   Created: 2017/01/24 17:30:12 by tpoac             #+#    #+#             */
+/*   Updated: 2017/01/24 17:31:58 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
-#include <stdlib.h>
 
-void	tl_freedoubletab(char **tab)
+size_t		tl_strcntc(const char *str, const char *charset)
 {
-	int		i;
+	size_t	i;
+	size_t	j;
 
-	if (tab == 0)
-		return ;
 	i = 0;
-	while (tab[i])
+	j = 0;
+	if (!str || !charset)
+		return (0);
+	while (str[i])
 	{
-		free(tab[i]);
-		tab[i] = NULL;
+		if (tl_cis(str[i], charset))
+			j++;
 		i++;
 	}
-	if (tab)
-		free(tab);
-	tab = NULL;
+	return (j);
 }

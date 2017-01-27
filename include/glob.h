@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tl_freedoubletab.c                                 :+:      :+:    :+:   */
+/*   glob.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 17:21:05 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/25 17:37:34 by tpoac            ###   ########.fr       */
+/*   Created: 2017/01/22 15:58:56 by tpoac             #+#    #+#             */
+/*   Updated: 2017/01/25 20:43:56 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
-#include <stdlib.h>
+#ifndef GLOB_H
+# define GLOB_H
+# include "tools.h"
+# include "libft.h"
 
-void	tl_freedoubletab(char **tab)
-{
-	int		i;
+int					matchpp(const char *s1, const char *s2);
+t_list				*ft_glob(char *s);
 
-	if (tab == 0)
-		return ;
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	if (tab)
-		free(tab);
-	tab = NULL;
-}
+#endif

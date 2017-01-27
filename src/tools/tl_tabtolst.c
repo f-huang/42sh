@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tl_freedoubletab.c                                 :+:      :+:    :+:   */
+/*   tl_tabtolst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 17:21:05 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/25 17:37:34 by tpoac            ###   ########.fr       */
+/*   Created: 2017/01/22 15:53:48 by tpoac             #+#    #+#             */
+/*   Updated: 2017/01/25 18:41:53 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
-#include <stdlib.h>
 
-void	tl_freedoubletab(char **tab)
+t_list			*tl_tabtolst(char **tab)
 {
-	int		i;
+	int			i;
+	t_list		*top;
+	t_list		*new;
 
-	if (tab == 0)
-		return ;
+	if (!tab || !*tab)
+		return (NULL);
 	i = 0;
+	top = NULL;
+	new = NULL;
 	while (tab[i])
 	{
-		free(tab[i]);
-		tab[i] = NULL;
+		new = ft_lstnew(tab[i], ft_strlen(tab[i]) + 1);
+		if (top)
+			tl_lstaddend(&top, new);
+		else
+			top = new;
 		i++;
 	}
-	if (tab)
-		free(tab);
-	tab = NULL;
+	return (top);
 }

@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/19 14:28:44 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/25 20:44:28 by tpoac            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,6 +102,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)execution/heredoc_get_new.c \
 			$(SRCDIR)execution/heredoc_prompt.c \
 			$(SRCDIR)expansion/alias_substitution.c \
+			$(SRCDIR)expansion/glob_substitution.c \
 			$(SRCDIR)expansion/dollar.c \
 			$(SRCDIR)expansion/quotes.c \
 			$(SRCDIR)expansion/substitute.c \
@@ -164,6 +165,8 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)main.c \
 			$(SRCDIR)prompt.c \
 			$(SRCDIR)sig_handler.c \
+			$(SRCDIR)tools/tl_strupto.c \
+			$(SRCDIR)tools/tl_cis.c \
 			$(SRCDIR)tools/tl_arrlen.c \
 			$(SRCDIR)tools/tl_atoll.c \
 			$(SRCDIR)tools/tl_closedir.c \
@@ -174,6 +177,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_isstreempty.c \
 			$(SRCDIR)tools/tl_iswhitespace.c \
 			$(SRCDIR)tools/tl_jump_to_other_quote.c \
+			$(SRCDIR)tools/tl_tabtolst.c \
 			$(SRCDIR)tools/tl_lstaddend.c \
 			$(SRCDIR)tools/tl_lstdelast.c \
 			$(SRCDIR)tools/tl_lstfree.c \
@@ -184,7 +188,14 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_strisalnum.c \
 			$(SRCDIR)tools/tl_strmerge.c \
 			$(SRCDIR)tools/tl_strndup.c \
-			$(SRCDIR)tools/tl_strrealloc.c
+			$(SRCDIR)tools/tl_strrealloc.c \
+			$(SRCDIR)tools/tl_lsttotab.c \
+			$(SRCDIR)tools/tl_lstnewstr.c \
+			$(SRCDIR)tools/tl_memdup.c \
+			$(SRCDIR)tools/tl_strnupto.c \
+			$(SRCDIR)tools/tl_strcntc.c \
+			$(SRCDIR)glob/matchpp.c \
+			$(SRCDIR)glob/glob.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR) -lft
@@ -261,7 +272,7 @@ $(NAME): libft env echo $(OBJ)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
-	printf $(BLUE)"|"$(EOC)
+	printf $(BLUE)""$(EOC)
 
 $(CACHEF):
 	test -d $(OBJDIR) || mkdir $(OBJDIR)
@@ -282,6 +293,7 @@ $(CACHEF):
 	test -d $(OBJDIR)expansion || mkdir $(OBJDIR)expansion
 	test -d $(OBJDIR)ast || mkdir $(OBJDIR)ast
 	test -d $(OBJDIR)tools || mkdir $(OBJDIR)tools
+	test -d $(OBJDIR)glob || mkdir $(OBJDIR)glob
 	test -d $(OBJDIR)execution || mkdir $(OBJDIR)execution
 	test -d $(OBJDIR)history || mkdir $(OBJDIR)history
 	test -d $(OBJDIR)input || mkdir $(OBJDIR)input
