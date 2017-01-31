@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 13:27:22 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/26 18:28:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/31 12:22:45 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,12 @@ char			*remove_quotes_and_backslash(char *cmd)
 			cmd[i] = 127;
 		}
 		else if (cmd[i] == '\\' && !(SQUOTE_OPEN) && cmd[i + 1] == '\\')
-				i++;
+		{
+			cmd[i + 1] = 127;
+			i++;
+		}
 		else if (cmd[i] == '\\' && !(SQUOTE_OPEN) && cmd[i + 1] != '\'' && cmd[i + 1] != '\"')
-				cmd[i] = 127;
+			cmd[i] = 127;
 		else if (backslash == 1 && !(SQUOTE_OPEN) && (cmd[i] == '\'' || cmd[i] == '\"'))
 			cmd[i - 1] = 127;
 		i++;
