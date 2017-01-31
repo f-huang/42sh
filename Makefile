@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/25 00:54:43 by fhuang           ###   ########.fr        #
+#    Updated: 2017/01/31 12:49:58 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,6 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)history/save_command_line.c \
 			$(SRCDIR)import_shrc.c \
 			$(SRCDIR)init_shell.c \
-			$(SRCDIR)input/builtin_completion.c \
 			$(SRCDIR)input/code_completion.c \
 			$(SRCDIR)input/code_ctrl_d.c \
 			$(SRCDIR)input/code_ctrl_l.c \
@@ -145,18 +144,17 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/completion/look_for_a_command.c \
 			$(SRCDIR)input/completion/look_for_a_file.c \
 			$(SRCDIR)input/completion/search_through_dir.c \
-			$(SRCDIR)input/completion.c \
-			$(SRCDIR)input/completionbis.c \
 			$(SRCDIR)input/ft_getlast.c \
 			$(SRCDIR)input/ft_strsplit_whitespace.c \
 			$(SRCDIR)input/ft_tabdup.c \
 			$(SRCDIR)input/ft_tabreplace.c \
 			$(SRCDIR)input/ft_tabstr.c \
-			$(SRCDIR)input/in_history.c \
+			$(SRCDIR)input/history_get_elem.c \
 			$(SRCDIR)input/init_input.c \
 			$(SRCDIR)input/input.c \
 			$(SRCDIR)input/key.c \
 			$(SRCDIR)input/key_get.c \
+			$(SRCDIR)input/match.c \
 			$(SRCDIR)input/modes.c \
 			$(SRCDIR)input/move.c \
 			$(SRCDIR)input/quotes.c \

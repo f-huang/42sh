@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 12:18:44 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/25 00:14:33 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/31 12:40:37 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		look_for_a_file(char *command)
 	else
 	{
 		command[len] == '/' ? ++len : 0;
-		tmp = tl_strndup(command, len + 1);
+		tmp = tl_strndup(command, len);
 		dir_name = ft_strtrim(tmp);
 		ft_strdel(&tmp);
 	}

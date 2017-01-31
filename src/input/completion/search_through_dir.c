@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 18:33:33 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/24 23:53:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/31 12:45:01 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int			search_through_dir(char *dir_name, char *command)
 	t_dirent	*sd;
 	int			len;
 	char		*trim;
-	char		*tmp;
 
 	if ((dir = opendir(*dir_name == '\0' ? "." : dir_name)) == NULL)
 		return (1);
@@ -52,10 +51,8 @@ int			search_through_dir(char *dir_name, char *command)
 			continue ;
 		if (trim[0] != '.' && sd->d_name[0] == '.')
 			continue ;
-		tmp = tl_str3join(dir_name, "/", sd->d_name);
-		if (ft_strnequ(sd->d_name, trim, len))
+		if (ft_strnequ(trim, sd->d_name, len))
 			add_in_list(dir_name, sd->d_name);
-		ft_strdel(&tmp);
 	}
 	ft_strdel(&trim);
 	return (closedir(dir) == -1 ? 1 : 0);

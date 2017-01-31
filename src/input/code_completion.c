@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 17:14:56 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/25 00:38:22 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/31 12:38:40 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,17 @@ static char	*step_back(char *save)
 {
 	int		end;
 	int		i;
-
 	if (!save)
 		return (NULL);
 	end = cor()->x - ((*command())[cor()->x] == 0 ? 1 : 0);
+	i = end;
 	while (end >= 0 && (*command())[end] && !is_delim_char(*command(), end))
 		++end;
+	while (cor()->x < cor()->len)
+	{
+		move_right(1);
+		++cor()->x;
+	}
 	i = step_back_2();
 	cor()->len = ft_strlen(*command());
 	i = i < 0 ? 0 : i;
