@@ -6,7 +6,7 @@
 /*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 15:58:56 by tpoac             #+#    #+#             */
-/*   Updated: 2017/01/26 18:27:19 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/01/31 13:33:21 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void			ft_glob_files(
 		new = ft_lstnew(d_name, ft_strlen(d_name) + 1);
 		if (!ft_strequ(change_dir, "."))
 		{
-			tmp = change_dir;
+			tmp = new->content;
 			new->content = ft_strjoin(change_dir, new->content);
 			free(tmp);
 		}

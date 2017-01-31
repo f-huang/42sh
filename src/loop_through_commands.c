@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:18:37 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/26 18:32:21 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/01/31 13:30:16 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 pid_t			g_heredoc_pid = -1;
 
-
 static void		handle_expansion(t_shell *sh, t_cmdwr *cmd)
 {
 	size_t		i;
@@ -31,6 +30,7 @@ static void		handle_expansion(t_shell *sh, t_cmdwr *cmd)
 	tl_freedoubletab(cmd->command);
 	result = glob_substitution(&lst_tab);
 	cmd->command = tl_lsttotab(result);
+	tl_lstfree(&lst_tab);
 	tl_lstfree(&result);
 	while (cmd->command[i])
 	{

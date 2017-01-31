@@ -6,7 +6,7 @@
 /*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 15:55:25 by tpoac             #+#    #+#             */
-/*   Updated: 2017/01/26 18:30:53 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/01/31 13:30:30 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_list			*glob_substitution(t_list **lst_tab)
 		else
 			result = glob;
 		free(tmp->content);
-		free(tmp);
 		tmp = tmp->next;
 	}
 	return (result);
