@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 15:45:47 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/25 00:55:35 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/01 16:19:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int			input(void)
 			continue ;
 		if (key != 1)
 			clear_completion();
-		(key != -2 && key != -42) ? key_dump(key) : 0;
+		(key != -42) ? key_dump(key) : 0;
 		if (!key)
 		{
 			return_issue();

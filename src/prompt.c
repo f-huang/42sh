@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 14:08:58 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/14 15:09:15 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/25 14:33:31 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,10 @@ int				prompt(void)
 	{
 		ft_putstr("\033[1;32m");
 		ft_putstr(user);
-		ft_putstr("\x1b[0m");
-		ft_putchar(' ');
+		ft_putstr("\x1b[0m ");
 	}
 	else
-		ft_putstr("$");
+		ft_putchar('$');
 	length = 2 + (user ? ft_strlen(user) : 1);
 	if ((pwd = get_path_from_pwd()))
 	{
@@ -66,6 +65,8 @@ int				prompt(void)
 		length += ft_strlen(pwd);
 		ft_strdel(&pwd);
 	}
+	*search_mode() ? ft_putstr("\033[1;34m (i-search)\033[0m") : 0;
+	*search_mode() ? length += 11 : 0;
 	ft_putstr("> ");
 	*prompt_len() = length;
 	return (length);

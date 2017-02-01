@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/31 12:49:58 by fhuang           ###   ########.fr        #
+#    Updated: 2017/02/01 16:16:05 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,6 +124,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/code_ctrl_u.c \
 			$(SRCDIR)input/code_ctrl_w.c \
 			$(SRCDIR)input/code_ctrl_x.c \
+			$(SRCDIR)input/code_ctrl_r.c \
 			$(SRCDIR)input/code_down.c \
 			$(SRCDIR)input/code_end.c \
 			$(SRCDIR)input/code_home.c \

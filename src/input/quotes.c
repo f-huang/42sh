@@ -6,7 +6,7 @@
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:49:07 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 16:48:07 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/25 12:25:56 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void		manage_quotes(void)
 	*(bs()) = b;
 }
 
-void	reset_quotes(void)
+void		reset_quotes(void)
 {
 	*dquote() = 0;
 	*quote() = 0;

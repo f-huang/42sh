@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 12:07:36 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/24 14:37:05 by yfuks            ###   ########.fr       */
+/*   Updated: 2017/01/25 14:55:48 by yfuks            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct			s_bitfield
 
 # ifndef BUILTIN
 #  define _BUILTIN1 "cd exit read unsetenv setenv export unset"
-#  define _BUILTIN2 "alias unalias history"
+#  define _BUILTIN2 " alias unalias history"
 #  define BUILTIN _BUILTIN1 _BUILTIN2
 # endif
 

@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:44:58 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 21:11:57 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/01 16:19:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		key_dump(int key)
 	(key == CODE_CTRL_U) ? code_ctrl_u() : 0;
 	(key == CODE_CTRL_W) ? code_ctrl_w() : 0;
 	(key == CODE_CTRL_L) ? code_ctrl_l() : 0;
+	(key == CODE_CTRL_R) || *search_mode() ? code_ctrl_r() : 0;
 }
 
 int			key_get(void)
@@ -58,7 +59,7 @@ int			key_get(void)
 	if (c == '\x05')
 		return (CODE_END);
 	if (c == '\x9' || c == '\x4' || c == '\x18' || c == '\x15' || c == '\x17' ||
-	c == '\x7f' || c == '\xa' || c == '\x0c')
+	c == '\x7f' || c == '\xa' || c == '\x0c' || c == '\x12')
 		return (get_basics(c));
 	if (c == '\x1b')
 	{

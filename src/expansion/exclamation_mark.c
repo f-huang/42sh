@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 15:22:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/20 14:59:17 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/01/25 14:33:59 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,30 @@
 #include "tools.h"
 #include "ft_42sh.h"
 #include "history.h"
+
 /*
 **	!
-**		Start a history substitution, except when followed by a space,
-**		tab, the end of the line, `=' or `('.
+**	Start a history substitution, except when followed by a space,
+**	tab, the end of the line, `=' or `('.
 **	!n
-**		Refer to command line n.
+**	Refer to command line n.
 **	!-n
-**		Refer to the command n lines back.
+**	Refer to the command n lines back.
 **	!!
-**		Refer to the previous command. This is a synonym for `!-1'.
+**	Refer to the previous command. This is a synonym for `!-1'.
 **	!string
-**		Refer to the most recent command starting with string.
+**	Refer to the most recent command starting with string.
 **	!#
-**		The entire command line typed so far.
-**
+**	The entire command line typed so far.
 */
+
+static void	put_error_event(int event)
+{
+	ft_putstr_fd("42sh: !", 2);
+	ft_putnbr_fd(event, 2);
+	ft_putstr_fd(": event not found\n", 2);
+}
+
 static int	is_strdigitneg(char *str)
 {
 	if (!str)
@@ -59,9 +67,7 @@ static int	print_from_offset(char **cmd, int *i)
 	}
 	if (offset <= 0 || lst_index != offset || !lst || !lst->content)
 	{
-		ft_putstr_fd("42sh: !", 2);
-		ft_putnbr_fd(ft_atoi(*cmd + *i + 1), 2);
-		ft_putstr_fd(": event not found\n", 2);
+		put_error_event(ft_atoi(*cmd + *i + 1));
 		ft_strdel(&(*cmd));
 		return (ERROR);
 	}
@@ -104,27 +110,24 @@ char		*exclamation_mark(char *cmd)
 	int		i;
 	int		backslash;
 
-	i = 0;
+	i = -1;
 	first = 0;
-	while (cmd[i])
+	while (cmd[++i])
 	{
 		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
 		if (cmd[i] == '!' && backslash == 0 && cmd[i + 1] && cmd[i + 1] != '='\
 			&& cmd[i + 1] != '\t' && cmd[i + 1] != ' ' && cmd[i + 1] != '(')
 		{
-			if (!first)
+			if (!first && (first = 1))
 				delete_last_entry();
-			first = 1;
 			if (is_strdigitneg(cmd + i + 1) || cmd[i + 1] == '!')
 			{
 				if (!print_from_offset(&cmd, &i))
 					return (NULL);
 			}
-			else if (cmd[i + 1] != '#')
-				if (!look_for_string(&cmd, &i))
-					return (NULL);
+			else if (cmd[i + 1] != '#' && !look_for_string(&cmd, &i))
+				return (NULL);
 		}
-		i++;
 	}
 	save_command_line(cmd);
 	return (cmd);
