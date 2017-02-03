@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 13:27:22 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/03 17:30:07 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/03 17:41:18 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,16 @@ char			*remove_quotes_and_backslash(char *cmd)
 		else if (!(SQUOTE_OPEN) && cmd[i] == '\\' &&\
 			cmd[i + 1] != '\'' && cmd[i + 1] != '\"' && cmd[i + 1] != '\n')
 			cmd[i] = 127;
-		else if (cmd[i] == '\'' && !(DQUOTE_OPEN) && bf.bslash == 0 &&\
-			(++bf.squote))
+		else if (cmd[i] == '\'' && !(DQUOTE_OPEN) && bf.bslash == 0)
+		{
+			++bf.squote;
 			cmd[i] = 127;
-		else if (cmd[i] == '\"' && bf.bslash == 0 && !(SQUOTE_OPEN) &&\
-			(++bf.dquote))
+		}
+		else if (cmd[i] == '\"' && bf.bslash == 0 && !(SQUOTE_OPEN))
+		{
+			++bf.dquote;
 			cmd[i] = 127;
+		}
 		else if (bf.bslash == 1 && ((cmd[i] == '\'' && !(DQUOTE_OPEN)) ||\
 			(cmd[i] == '\"' && !(SQUOTE_OPEN))))
 			cmd[i - 1] = 127;
