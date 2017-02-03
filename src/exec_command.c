@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:00:09 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/11 22:01:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/03 13:42:40 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "execution.h"
 #include "tools.h"
 #include "libft.h"
+#include "expansion.h"
 
 static	int	print_error(char **paths, int error, char *command)
 {
@@ -36,6 +37,11 @@ int			exec_command(t_shell *sh, char **command)
 	char	**paths;
 	t_exec	ex;
 
+	if (command[0][0] == '(')
+	{
+		subshell_substitution(command);
+		exec_command(sh, command);
+	}
 	paths = exec_get_envpath(sh);
 	ft_bzero(&ex, sizeof(ex));
 	if (ft_strlen(command[0]) > _POSIX_ARG_MAX && (sh->last_return = 1))

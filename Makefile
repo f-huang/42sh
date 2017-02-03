@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/01/31 14:09:13 by tpoac            ###   ########.fr        #
+#    Updated: 2017/02/01 15:27:43 by tpoac            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,8 +102,9 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)execution/heredoc_get_new.c \
 			$(SRCDIR)execution/heredoc_prompt.c \
 			$(SRCDIR)expansion/alias_substitution.c \
-			$(SRCDIR)expansion/glob_substitution.c \
 			$(SRCDIR)expansion/dollar.c \
+			$(SRCDIR)expansion/glob_substitution.c \
+			$(SRCDIR)expansion/subshell_substitution.c \
 			$(SRCDIR)expansion/quotes.c \
 			$(SRCDIR)expansion/substitute.c \
 			$(SRCDIR)expansion/tilde.c \
