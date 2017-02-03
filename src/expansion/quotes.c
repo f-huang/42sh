@@ -6,73 +6,58 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 13:27:22 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/19 16:08:03 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:39:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_42sh.h"
 
-static char		*shift_quotes(char *cmd, int *i)
+#define SQUOTE_OPEN (bf.squote % 2) == 1
+#define DQUOTE_OPEN (bf.dquote % 2) == 1
+
+static char		*strcpy_without_blank(char *src)
 {
-	int		save;
-	char	c;
-
-	c = cmd[*i];
-	save = cmd[*i + 1] ? 0 : *i;
-	while (cmd[++(*i)])
-	{
-		if (save == 0 && cmd[*i] == c)
-			save = *i - 1;
-		cmd[*i - 1] = cmd[*i];
-	}
-	ft_strclr(cmd + *i - 1);
-	*i = save;
-	return (cmd);
-}
-
-static char		*shift_backslash(char *cmd, int i)
-{
-	while (cmd[++i])
-	{
-		cmd[i - 1] = cmd[i];
-	}
-	ft_strclr(cmd + i - 1);
-	return (cmd);
-}
-
-static char		*remove_backslash(char *cmd)
-{
-	int			i;
-	_Bool		backslash;
+	int		i;
+	int		j;
 
 	i = 0;
-	while (cmd[i])
+	j = 0;
+	while (src[i])
 	{
-		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
-		if (cmd[i] == '\\' && backslash == 0 &&\
-			(cmd[i + 1] == '\'' || cmd[i + 1] == '\"' || cmd[i + 1] == '\\'))
-			cmd = shift_backslash(cmd, i);
+		if (src[i] != 127)
+			src[j++] = src[i];
 		i++;
 	}
-	return (cmd);
+	ft_strclr(src + j);
+	return (src);
 }
 
 char			*remove_quotes_and_backslash(char *cmd)
 {
 	int			i;
-	_Bool		backslash;
+	t_bitfield	bf;
 
-	i = 0;
-	while (cmd[i])
+	i = -1;
+	ft_bzero(&bf, sizeof(t_bitfield));
+	while (cmd[++i])
 	{
-		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
-		if ((cmd[i] == '\"' || cmd[i] == '\'') && backslash == 0)
-			cmd = shift_quotes(cmd, &i);
-		else if (cmd[i] == '\\' && backslash == 0 &&\
-			cmd[i + 1] != '\'' && cmd[i + 1] != '\"' && cmd[i + 1] != '\\')
-			cmd = shift_backslash(cmd, i);
-		else
-			i++;
+		bf.bslash = (i > 0 && cmd[i - 1] == '\\' && !(SQUOTE_OPEN)) ? 1 : 0;
+		if (cmd[i] == '\\' && !(SQUOTE_OPEN) && cmd[i + 1] == '\\' && (i++))
+			cmd[i + 1] = 127;
+		else if (!(SQUOTE_OPEN) && ((cmd[i] == '\\' &&\
+			cmd[i + 1] != '\'' && cmd[i + 1] != '\"' && cmd[i + 1] != '\n') ||\
+			(cmd[i] == '\n' && bf.bslash == 1)))
+			cmd[i] = 127;
+		else if (cmd[i] == '\'' && !(DQUOTE_OPEN) && bf.bslash == 0 &&\
+			(++bf.squote))
+			cmd[i] = 127;
+		else if (cmd[i] == '\"' && bf.bslash == 0 && !(SQUOTE_OPEN) &&\
+			(++bf.dquote))
+			cmd[i] = 127;
+		else if (bf.bslash == 1 && ((cmd[i] == '\'' && !(DQUOTE_OPEN)) ||\
+			(cmd[i] == '\"' && !(SQUOTE_OPEN))))
+			cmd[i - 1] = 127;
 	}
-	return (remove_backslash(cmd));
+	return (strcpy_without_blank(cmd));
 }

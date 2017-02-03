@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/02/01 16:16:05 by fhuang           ###   ########.fr        #
+#    Updated: 2017/02/03 14:24:04 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)ast/cmdwr_fill_struct.c \
 			$(SRCDIR)ast/line_to_ast.c \
 			$(SRCDIR)ast/redirection_create_elem.c \
+			$(SRCDIR)ast/ast_special_is_space.c \
+			$(SRCDIR)ast/ast_special_trim.c \
 			$(SRCDIR)builtins/alias/builtin_alias.c \
 			$(SRCDIR)builtins/alias/print_alias.c \
 			$(SRCDIR)builtins/cd/builtin_cd.c \
