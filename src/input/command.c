@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:42:00 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 16:53:34 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/25 00:55:25 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,26 @@ void	stremove(void)
 {
 	char	*cleaner;
 	char	*to_add;
+	char	*tmp;
 
 	if (!(*command() && (*command())[0]))
 		return ;
 	if (cor()->x > 0)
 	{
-		to_add = strdup_input(&(*command())[cor()->x]);
+		to_add = ((*command()) + cor()->x);
 		(cor()->x)--;
 		move_left(1);
 		remove_display(to_add);
 		(*command())[cor()->x] = 127;
-		cleaner = *command();
-		(*command()) = strdup_input(*command());
-		ft_strdel(&cleaner);
-		ft_strdel(&to_add);
+		if (*command())
+		{
+			tmp = strdup_input(*command());
+			free(*command());
+			*command() = tmp;
+		}
+		cleaner = NULL;
+		ft_strclr(to_add);
+		to_add = NULL;
 	}
 }
 

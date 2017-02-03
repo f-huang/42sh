@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/18 15:30:43 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/24 22:13:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	reset_input(void)
 	*search_mode() = 0;
 	cor()->len = 0;
 	cor()->x = 0;
+	clear_completion();
 }
 
 static void	sigquit_handler(void)
