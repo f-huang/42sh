@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_special_trim.c                                 :+:      :+:    :+:   */
+/*   tl_is_whitespace_in_str.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/25 18:48:27 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/03 14:25:48 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/20 17:22:34 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/20 17:23:08 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "ast.h"
+#include "tools.h"
 
-char	*ast_special_trim(char *s)
+int		tl_is_whitespace_in_str(char *str)
 {
 	int		i;
-	int		end;
 
 	i = 0;
-	end = ft_strlen(s) - 1;
-	while (s[i] != '\0' && ast_special_is_space((int)s[i]) == 1)
+	while (str[i])
+	{
+		if (tl_iswhitespace(str[i]))
+			return (1);
 		i++;
-	if (s[i] == '\0')
-		return (ft_strdup((char*)s + i));
-	while (ast_special_is_space((int)s[end]) == 1)
-		end--;
-	return (ft_strndup((char*)s + i, ++end - i));
+	}
+	return (0);
 }

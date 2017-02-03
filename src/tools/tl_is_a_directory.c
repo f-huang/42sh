@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_special_trim.c                                 :+:      :+:    :+:   */
+/*   tl_is_a_directory.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/25 18:48:27 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/03 14:25:48 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/24 16:31:42 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/24 16:35:18 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "ast.h"
+#include <sys/stat.h>
 
-char	*ast_special_trim(char *s)
+int		tl_is_a_directory(char *path)
 {
-	int		i;
-	int		end;
+	struct stat	buf;
 
-	i = 0;
-	end = ft_strlen(s) - 1;
-	while (s[i] != '\0' && ast_special_is_space((int)s[i]) == 1)
-		i++;
-	if (s[i] == '\0')
-		return (ft_strdup((char*)s + i));
-	while (ast_special_is_space((int)s[end]) == 1)
-		end--;
-	return (ft_strndup((char*)s + i, ++end - i));
+	if (stat(path, &buf) == -1)
+		return (0);
+	return (S_ISDIR(buf.st_mode) == 1 ? 1 : 0);
 }

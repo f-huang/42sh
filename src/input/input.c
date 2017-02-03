@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 15:45:47 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/24 18:08:20 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/02/01 16:19:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int			input(void)
 		key = key_get();
 		if (key == -3)
 			continue ;
+		if (key != 1)
+			clear_completion();
 		(key != -42) ? key_dump(key) : 0;
 		if (!key)
 		{

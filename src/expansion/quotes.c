@@ -6,15 +6,15 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 13:27:22 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/02 16:38:11 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:39:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_42sh.h"
 
-#define SQUOTE_OPEN (squote % 2) == 1
-#define DQUOTE_OPEN (dquote % 2) == 1
+#define SQUOTE_OPEN (bf.squote % 2) == 1
+#define DQUOTE_OPEN (bf.dquote % 2) == 1
 
 static char		*strcpy_without_blank(char *src)
 {
@@ -35,42 +35,29 @@ static char		*strcpy_without_blank(char *src)
 
 char			*remove_quotes_and_backslash(char *cmd)
 {
-	int		i;
-	int		squote;
-	int		dquote;
-	_Bool	backslash;
+	int			i;
+	t_bitfield	bf;
 
-	i = 0;
-	squote = 0;
-	dquote = 0;
-	while (cmd[i])
+	i = -1;
+	ft_bzero(&bf, sizeof(t_bitfield));
+	while (cmd[++i])
 	{
-		backslash = (i > 0 && cmd[i - 1] == '\\' && !(SQUOTE_OPEN)) ? 1 : 0;
-		if (cmd[i] == '\n' && backslash == 1 && !(SQUOTE_OPEN) && !(DQUOTE_OPEN))
-			cmd[i] = 127;
-		else if (cmd[i] == '\'' && !(DQUOTE_OPEN) &&\
-			(backslash == 0))
-		{
-			cmd[i] = 127;
-			++squote;
-		}
-		else if (cmd[i] == '\"' && backslash == 0 && !(SQUOTE_OPEN))
-		{
-			++dquote;
-			cmd[i] = 127;
-		}
-		else if (cmd[i] == '\\' && !(SQUOTE_OPEN) && cmd[i + 1] == '\\')
-		{
+		bf.bslash = (i > 0 && cmd[i - 1] == '\\' && !(SQUOTE_OPEN)) ? 1 : 0;
+		if (cmd[i] == '\\' && !(SQUOTE_OPEN) && cmd[i + 1] == '\\' && (i++))
 			cmd[i + 1] = 127;
-			i++;
-		}
-		else if (cmd[i] == '\\' && !(SQUOTE_OPEN) && cmd[i + 1] != '\'' && cmd[i + 1] != '\"' && cmd[i + 1] != '\n')
+		else if (!(SQUOTE_OPEN) && ((cmd[i] == '\\' &&\
+			cmd[i + 1] != '\'' && cmd[i + 1] != '\"' && cmd[i + 1] != '\n') ||\
+			(cmd[i] == '\n' && bf.bslash == 1)))
 			cmd[i] = 127;
-		else if (cmd[i] == '\'' && backslash == 1 && !(DQUOTE_OPEN))
+		else if (cmd[i] == '\'' && !(DQUOTE_OPEN) && bf.bslash == 0 &&\
+			(++bf.squote))
+			cmd[i] = 127;
+		else if (cmd[i] == '\"' && bf.bslash == 0 && !(SQUOTE_OPEN) &&\
+			(++bf.dquote))
+			cmd[i] = 127;
+		else if (bf.bslash == 1 && ((cmd[i] == '\'' && !(DQUOTE_OPEN)) ||\
+			(cmd[i] == '\"' && !(SQUOTE_OPEN))))
 			cmd[i - 1] = 127;
-		else if (cmd[i] == '\"' && backslash == 1 && !(SQUOTE_OPEN))
-			cmd[i - 1] = 127;
-		i++;
 	}
 	return (strcpy_without_blank(cmd));
 }
