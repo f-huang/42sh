@@ -6,7 +6,7 @@
 /*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 20:42:50 by tpoac             #+#    #+#             */
-/*   Updated: 2017/01/25 21:07:17 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/03 14:57:21 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int			match_crochet(const char *s1, const char *s2)
 	char			*letters;
 	size_t			count_letters;
 
+	if (ft_strlen(s2) > tl_strupto(s2, "]"))
+		return (0);
 	letters = ft_strsub(s2, 1, tl_strupto(s2, "]") - 2);
 	if (match_inside(s1, letters))
 	{
@@ -43,6 +45,8 @@ static int			match_accolade(const char *s1, const char *s2)
 	int				inc_i;
 
 	inc_i = 0;
+	if (ft_strlen(s2) > tl_strupto(s2, "}"))
+		return (0);
 	sub_split = ft_strsub(s2, 1, tl_strupto(s2, "}") - 2);
 	split_accolade = ft_strsplit(sub_split, ',');
 	free(sub_split);
