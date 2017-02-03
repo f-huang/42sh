@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:18:37 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/03 14:51:23 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/03 16:31:30 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		handle_expansion(t_shell *sh, t_cmdwr *cmd)
 	cmd->command = tl_lsttotab(result);
 	tl_lstfree(&lst_tab);
 	tl_lstfree(&result);
-	while (cmd->command[i])
+	while (cmd->command && cmd->command[i])
 	{
 		cmd->command[i] = substitute(sh, cmd->command[i]);
 		++i;

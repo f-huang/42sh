@@ -6,7 +6,7 @@
 /*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 15:58:56 by tpoac             #+#    #+#             */
-/*   Updated: 2017/02/03 14:54:41 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/03 16:30:10 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ t_list				*ft_glob(char *s)
 	dir = NULL;
 	files = NULL;
 	current_dir = NULL;
-	change_dir = handle_dir(s, &current_dir);
-	while ((dir = readdir(current_dir)) != NULL)
+	if (!(change_dir = handle_dir(s, &current_dir)))
+		return (NULL);
+	while (current_dir && (dir = readdir(current_dir)) != NULL)
 		ft_glob_files(s, dir->d_name, &files, change_dir);
 	if (!ft_strequ(change_dir, "."))
 		free(change_dir);
