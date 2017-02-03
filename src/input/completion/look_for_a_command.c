@@ -6,16 +6,16 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 21:39:38 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/24 22:00:23 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:15:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "tools.h"
 #include "input.h"
+#include "ft_42sh.h"
 
-#define ALL_BUILTINS "alias cd echo env exit export history read setenv\
-unalias unset unsetenv"
+#define ALL_BUILTINS _BUILTIN1 _BUILTIN2 _BINARY_BUILTIN
 
 extern t_shell	g_sh;
 
@@ -32,7 +32,7 @@ static int	search_through_tab(char **tab, char *command)
 	{
 		if (ft_strnequ(command, tab[i], len) && (found = 1))
 		{
-			tl_lstadd_sortalpha(get_list_completion(),\
+			tl_lstadd_sortalpha(get_list_completion(), \
 				ft_lstnew(tab[i], ft_strlen(tab[i]) + 1));
 		}
 		i++;
@@ -52,7 +52,7 @@ int			look_for_a_command(char *command)
 	search_through_tab(tab, command);
 	tl_freedoubletab(tab);
 	tab = NULL;
-	if (!(path = sh_getenv(g_sh.lst_env ,"PATH")))
+	if (!(path = sh_getenv(g_sh.lst_env, "PATH")))
 		return (1);
 	tab = ft_strsplit(path, ':');
 	i = 0;

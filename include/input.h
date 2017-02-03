@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/02/01 16:16:22 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:15:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,26 +91,30 @@ typedef struct	s_comp
 /*
 **	COMPLETION
 */
+
 t_list			**get_cursor_completion(void);
 t_list			**get_list_completion(void);
 void			clear_completion(void);
 void			display_command(char **save, int pos);
 
-void			code_completion(void);
 int				is_delim_char(char *str, int i);
 int				is_a_command(char *command);
 int				look_for_a_file(char *command);
 int				look_for_a_command(char *command);
 int				search_through_dir(char *dir_name, char *command);
 
+int				match(char *s1, char *s2);
+
 /*
+**	TOOLS
 */
+
+void			init_input(void);
 
 char			*newclean(char *str);
 char			ft_getlast(char *str);
 void			remove_shit(char ***new);
 void			replace_with_shit(char **s);
-// int				get_next_line_stdin(int fd, char **line);
 char			**ft_strsplit_whitespace(char *s);
 char			ft_getlast(char *str);
 char			*strdup_input(char *src);
@@ -124,8 +128,7 @@ void			strinsert_input(char c);
 **	KEY DUMP FUNCTIONS
 */
 
-int				check_builtins(char *pattern);
-// void			completion(void);
+void			code_completion(void);
 void			code_up(int key);
 void			code_right(void);
 void			code_left(void);
@@ -143,16 +146,6 @@ void			code_ctrl_u(void);
 void			code_ctrl_w(void);
 void			code_ctrl_l(void);
 void			code_ctrl_r(void);
-
-/*
-**	COMPLETION
-*/
-
-int				match(char *s1, char *s2);
-void			linkcase(char *pattern, char *to_open);
-void			commandcase(char *pattern);
-void			lastcase(char *pattern);
-void			init_input(void);
 
 /*
 **	GET_KEY

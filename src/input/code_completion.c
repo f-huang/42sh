@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 17:14:56 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/31 12:38:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:17:53 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	*step_back(char *save)
 {
 	int		end;
 	int		i;
+
 	if (!save)
 		return (NULL);
 	end = cor()->x - ((*command())[cor()->x] == 0 ? 1 : 0);
