@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/02/04 14:29:33 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/02/04 15:08:00 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int				main(int ac, char **av)
 	t_shell		sh;
 	t_list		*lst_commands;
 
-//	if (isatty(STDIN_FILENO) != 1)
-//		exit(0);
+	if (isatty(STDIN_FILENO) != 1)
+		exit(0);
 	lst_commands = NULL;
 	if (ac && !init_shell(&sh, av[0]))
 		return (ERROR);
