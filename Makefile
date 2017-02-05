@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/02/03 16:35:26 by tpoac            ###   ########.fr        #
+#    Updated: 2017/02/05 14:01:02 by ataguiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -182,6 +182,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_lstaddend.c \
 			$(SRCDIR)tools/tl_lstdelast.c \
 			$(SRCDIR)tools/tl_lstfree.c \
+			$(SRCDIR)tools/tl_nodefree.c \
 			$(SRCDIR)tools/tl_lstlast.c \
 			$(SRCDIR)tools/tl_lstnew.c \
 			$(SRCDIR)tools/tl_opendir.c \
