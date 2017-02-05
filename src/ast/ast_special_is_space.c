@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   code_ctrl_l.c                                      :+:      :+:    :+:   */
+/*   ast_special_is_space.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 11:55:23 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/13 11:55:24 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/25 18:50:32 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/25 18:50:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
-
-void	code_ctrl_l(void)
+int	ast_special_is_space(int c)
 {
-	ft_putstr("\033[H\033[J");
-	prompt();
-	*command() && (*command())[0] ? ft_putstr(*command()) : 0;
-	move_left(cor()->len - cor()->x);
+	return (c == ' ' || c == '\t');
 }

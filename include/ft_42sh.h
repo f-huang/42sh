@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 12:07:36 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/31 14:01:27 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/05 13:25:32 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,12 @@ typedef struct			s_bitfield
 /*
 **	BUILTIN CODE
 */
+
 # ifndef BUILTIN
-#  define BUILTIN "cd exit read unsetenv setenv export unset alias unalias history"
+#  define _BUILTIN1 "cd exit read unsetenv setenv export unset"
+#  define _BUILTIN2 " alias unalias history"
+#  define _BINARY_BUILTIN " echo env"
+#  define BUILTIN _BUILTIN1 _BUILTIN2
 # endif
 
 # ifndef NBBUILTIN
@@ -136,7 +140,7 @@ int						import_shrc(t_shell *sh);
 int						init_shell(t_shell *sh, char *av_0);
 void					clear_shell(t_shell *sh);
 
-int						prompt(t_shell *sh);
+int						prompt(void);
 int						get_line(int fd, char **line);
 void					sig_handler(int signo);
 void					loop_through_commands(t_shell *sh,\

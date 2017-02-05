@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   option_p.c                                         :+:      :+:    :+:   */
+/*   ast_special_trim.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/18 20:16:31 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/20 13:19:45 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/25 18:48:27 by fhuang            #+#    #+#             */
+/*   Updated: 2017/02/03 14:25:48 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "history.h"
-#include "tools.h"
+#include "ast.h"
 
-int		history_option_p(char **av)
+char	*ast_special_trim(char *s)
 {
 	int		i;
+	int		end;
 
-	if (!av || !av[0])
-		return (0);
-	delete_last_entry();
 	i = 0;
-	while (av[i])
-		ft_putendl(av[i++]);
-	return (0);
+	end = ft_strlen(s) - 1;
+	while (s[i] != '\0' && ast_special_is_space((int)s[i]) == 1)
+		i++;
+	if (s[i] == '\0')
+		return (ft_strdup((char*)s + i));
+	while (ast_special_is_space((int)s[end]) == 1)
+		end--;
+	return (ft_strndup((char*)s + i, ++end - i));
 }

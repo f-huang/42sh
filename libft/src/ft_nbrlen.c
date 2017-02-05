@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   code_ctrl_l.c                                      :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 11:55:23 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/13 11:55:24 by ataguiro         ###   ########.fr       */
+/*   Created: 2016/05/13 17:18:21 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/19 16:22:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "libft.h"
 
-void	code_ctrl_l(void)
+size_t		ft_nbrlen(int n)
 {
-	ft_putstr("\033[H\033[J");
-	prompt();
-	*command() && (*command())[0] ? ft_putstr(*command()) : 0;
-	move_left(cor()->len - cor()->x);
+	size_t		size;
+	int			neg;
+
+	size = 1;
+	neg = n < 0 ? 1 : 0;
+	ABS(n);
+	while (n / 10)
+	{
+		n /= 10;
+		size++;
+	}
+	return (size + neg);
 }

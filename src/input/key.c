@@ -3,18 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:44:58 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/18 13:00:19 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/02/04 15:06:25 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-void	key_dump(int key)
+static int	ft_isvalid(char c)
 {
-	(key == CODE_TAB) ? completion() : 0;
+	if (ft_isprint(c) || (c == '\x9') || c == '\x4' || c == '\x7f' || c == '\xa'
+	|| c == '\x1b' || c == '\x5b' || c == '\x41' || c == '\x42' || c == '\x43'
+	|| c == '\x44' || c == '\x48' || c == '\x46' || c == '\x31' || c == '\x32'
+	|| c == '\x3b' || c == '\x42' || c == '\x41' || c == '\x18' || c == '\x15'
+	|| c == '\x17' || c == '\x0c' || c == '\x01' || c == '\x05' || c == '\x12')
+		return (1);
+	return (0);
+}
+
+void		key_dump(int key)
+{
+	(key == CODE_TAB) ? code_completion() : 0;
 	(key == CODE_UP) ? code_up(key) : 0;
 	(key == CODE_BACK) ? stremove() : 0;
 	(key == CODE_RIGHT) ? code_right() : 0;
@@ -32,9 +43,10 @@ void	key_dump(int key)
 	(key == CODE_CTRL_U) ? code_ctrl_u() : 0;
 	(key == CODE_CTRL_W) ? code_ctrl_w() : 0;
 	(key == CODE_CTRL_L) ? code_ctrl_l() : 0;
+	(key == CODE_CTRL_R) || *search_mode() ? code_ctrl_r() : 0;
 }
 
-int		key_get(void)
+int			key_get(void)
 {
 	char	c;
 
@@ -47,7 +59,7 @@ int		key_get(void)
 	if (c == '\x05')
 		return (CODE_END);
 	if (c == '\x9' || c == '\x4' || c == '\x18' || c == '\x15' || c == '\x17' ||
-	c == '\x7f' || c == '\xa' || c == '\x0c')
+	c == '\x7f' || c == '\xa' || c == '\x0c' || c == '\x12')
 		return (get_basics(c));
 	if (c == '\x1b')
 	{

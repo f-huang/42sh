@@ -1,48 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sin_input.c                                        :+:      :+:    :+:   */
+/*   sin_ss.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 13:40:08 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/24 17:18:26 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/23 16:18:39 by ataguiro          #+#    #+#             */
+/*   Updated: 2017/01/23 16:53:43 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+/*
+**	"(command)" --> OK
+**	"(command)othercommand" --> ERROR
+**	"command(othercommand)" --> ERROR
+**	"()" --> ERROR
+**	"(command); (othercommand)" --> OK (same with && and ||)
+**	"(command; command)" --> OK (same with && and ||)
+*/
 
-char	**command(void)
+int		*lbracket(void)
 {
-	static char	*command = NULL;
+	static int	lbracket = 0;
 
-	return (&command);
-}
-
-char	**old_command(void)
-{
-	static char	*old_command = NULL;
-
-	return (&old_command);
-}
-
-char	**copied(void)
-{
-	static char	*copied = NULL;
-
-	return (&copied);
-}
-
-int		*prompt_len(void)
-{
-	static int	len = 0;
-
-	return (&len);
-}
-
-t_coord	*cor(void)
-{
-	static t_coord	cor;
-
-	return (&cor);
+	return (&lbracket);
 }
