@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tl_freedoubletab.c                                 :+:      :+:    :+:   */
+/*   tl_memdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 17:21:05 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/25 17:37:34 by tpoac            ###   ########.fr       */
+/*   Created: 2017/01/23 16:19:26 by tpoac             #+#    #+#             */
+/*   Updated: 2017/01/23 16:20:12 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
-#include <stdlib.h>
 
-void	tl_freedoubletab(char **tab)
+void		*tl_memdup(void const *dest, size_t n)
 {
-	int		i;
+	void	*dup;
 
-	if (tab == 0)
-		return ;
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
-	}
-	if (tab)
-		free(tab);
-	tab = NULL;
+	if (!(dup = malloc(sizeof(unsigned char) * n)))
+		return (NULL);
+	ft_memcpy(dup, dest, n);
+	return (dup);
 }

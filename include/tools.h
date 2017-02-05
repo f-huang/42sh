@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/25 00:55:58 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/05 13:24:33 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ typedef struct	s_gnl
 #  define BUFF_SIZE 1096
 # endif
 
+t_list			*tl_lstnewstr(void const *content, size_t content_size);
+char			**tl_lsttotab(t_list *lst_tab);
+int				tl_strnupto(const char *str, const char *charset, int n);
+size_t			tl_strcntc(const char *str, const char *charset);
+
+size_t			tl_strupto(const char *str, const char *charset);
+int				tl_cis(char c, const char *charset);
+
 int				tl_isspace(int c);
 int				tl_iswhitespace(int c);
 int				tl_is_whitespace_in_str(char *str);
@@ -57,6 +65,7 @@ char			*tl_str3join(char *s1, char *s2, char *s3);
 void			tl_freedoubletab(char **tab);
 size_t			tl_arrlen(char **arr);
 
+t_list			*tl_tabtolst(char **tab);
 void			tl_lstaddend(t_list **alst, t_list *new_elem);
 void			tl_lstadd_sortalpha(t_list **lst, t_list *new);
 t_list			*tl_lstlast(t_list *lst);
@@ -70,5 +79,7 @@ int				tl_get_next_line(int const fd, char **line);
 int				tl_is_a_directory(char *path);
 DIR				*tl_opendir(char *path);
 int				*tl_closedir(DIR *dir);
+
+void			*tl_memdup(void const *dest, size_t n);
 
 #endif

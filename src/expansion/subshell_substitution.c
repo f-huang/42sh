@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tl_freedoubletab.c                                 :+:      :+:    :+:   */
+/*   subshell_substitution.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 17:21:05 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/25 17:37:34 by tpoac            ###   ########.fr       */
+/*   Created: 2017/02/01 15:26:19 by tpoac             #+#    #+#             */
+/*   Updated: 2017/02/03 13:42:50 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
-#include <stdlib.h>
+#include "expansion.h"
 
-void	tl_freedoubletab(char **tab)
+void		subshell_substitution(char **command)
 {
-	int		i;
+	size_t	i;
+	size_t	j;
 
-	if (tab == 0)
-		return ;
 	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		tab[i] = NULL;
+	j = 0;
+	if (!command && !*command)
+		return ;
+	command[0] = &command[0][1];
+	while (command[i + 1])
 		i++;
-	}
-	if (tab)
-		free(tab);
-	tab = NULL;
+	while (command[i][j + 1])
+		j++;
+	command[i][j] = '\0';
 }

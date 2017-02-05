@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tl_freedoubletab.c                                 :+:      :+:    :+:   */
+/*   tl_strupto.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tpoac <tpoac@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 17:21:05 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/25 17:37:34 by tpoac            ###   ########.fr       */
+/*   Created: 2016/03/28 23:52:38 by tpoac             #+#    #+#             */
+/*   Updated: 2017/01/22 16:37:15 by tpoac            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
-#include <stdlib.h>
 
-void	tl_freedoubletab(char **tab)
+size_t		tl_strupto(const char *str, const char *charset)
 {
-	int		i;
+	size_t	i;
+	size_t	j;
 
-	if (tab == 0)
-		return ;
 	i = 0;
-	while (tab[i])
+	j = 0;
+	if (!str && !charset)
+		return (0);
+	while (str[i])
 	{
-		free(tab[i]);
-		tab[i] = NULL;
-		i++;
+		if (!charset[j])
+		{
+			j = 0;
+			i++;
+		}
+		if (str[i] == charset[j])
+			return (i + 1);
+		j++;
 	}
-	if (tab)
-		free(tab);
-	tab = NULL;
+	return (0);
 }
