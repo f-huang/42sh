@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/02/05 14:06:23 by ataguiro         ###   ########.fr        #
+#    Updated: 2017/02/05 14:08:02 by ataguiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -210,7 +210,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_strnupto.c \
 			$(SRCDIR)tools/tl_strcntc.c \
 			$(SRCDIR)glob/matchpp.c \
-			$(SRCDIR)glob/glob.c
+			$(SRCDIR)glob/glob.c \
 			$(SRCDIR)tools/tl_switch_string.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)

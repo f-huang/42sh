@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:18:37 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/05 14:04:03 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/02/05 14:30:27 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int	handle_expansion(t_shell *sh, t_cmdwr *cmd)
 	tl_freedoubletab(cmd->command);
 	result = glob_substitution(&lst_tab);
 	cmd->command = tl_lsttotab(result);
-	tl_lstfree(&lst_tab);
-	tl_lstfree(&result);
+	tl_nodefree(&lst_tab);
+	tl_nodefree(&result);
 	while (cmd->command && cmd->command[i])
 	{
 		if (!(cmd->command[i] = substitute(sh, cmd->command[i])))
