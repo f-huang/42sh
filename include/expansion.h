@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:23:46 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/05 14:05:44 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/02/05 17:17:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ char					*exclamation_mark(char *cmd);
 int						alias_substitution(t_variable *lst_alias, char **line);
 t_list					*glob_substitution(t_list **lst_tab);
 
-void					subshell_substitution(char **comand);
+int						subshell_substitution(char **comand);
 
 #endif

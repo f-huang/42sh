@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:18:37 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/05 14:30:27 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/02/05 16:43:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	loop_through_ast(t_shell *sh, t_ast *tree)
 	return (loop_through_ast(sh, tree->right));
 }
 
-void			loop_through_commands(t_shell *sh, t_list *lst_commands)
+void		loop_through_commands(t_shell *sh, t_list *lst_commands)
 {
 	t_list		*ptr;
 

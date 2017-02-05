@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/02/05 14:08:02 by ataguiro         ###   ########.fr        #
+#    Updated: 2017/02/05 17:24:27 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,6 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)expansion/alias_substitution.c \
 			$(SRCDIR)expansion/dollar.c \
 			$(SRCDIR)expansion/glob_substitution.c \
-			$(SRCDIR)expansion/subshell_substitution.c \
 			$(SRCDIR)expansion/exclamation_mark.c \
 			$(SRCDIR)expansion/quotes.c \
 			$(SRCDIR)expansion/substitute.c \
@@ -209,6 +208,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_memdup.c \
 			$(SRCDIR)tools/tl_strnupto.c \
 			$(SRCDIR)tools/tl_strcntc.c \
+			$(SRCDIR)tools/tl_strcpy_w_blank.c \
 			$(SRCDIR)glob/matchpp.c \
 			$(SRCDIR)glob/glob.c \
 			$(SRCDIR)tools/tl_switch_string.c

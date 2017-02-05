@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   subshell_substitution.c                            :+:      :+:    :+:   */
+/*   tl_strcpy_w_blank.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/01 15:26:19 by tpoac             #+#    #+#             */
-/*   Updated: 2017/02/03 13:42:50 by tpoac            ###   ########.fr       */
+/*   Created: 2017/02/05 17:07:06 by fhuang            #+#    #+#             */
+/*   Updated: 2017/02/05 17:08:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expansion.h"
+#include "libft.h"
 
-void		subshell_substitution(char **command)
+char		*tl_strcpy_w_blank(char *src)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	if (!command && !*command)
-		return ;
-	command[0] = &command[0][1];
-	while (command[i + 1])
+	while (src[i])
+	{
+		if (src[i] != 127)
+			src[j++] = src[i];
 		i++;
-	while (command[i][j + 1])
-		j++;
-	command[i][j] = '\0';
+	}
+	ft_strclr(src + j);
+	return (src);
 }

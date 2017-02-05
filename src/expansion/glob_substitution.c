@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   glob_substitution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: tpoac <tpoac@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 15:55:25 by tpoac             #+#    #+#             */
-/*   Updated: 2017/01/31 13:30:30 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/05 16:42:38 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_list			*glob_substitution(t_list **lst_tab)
 	result = NULL;
 	while (tmp)
 	{
-		glob = ft_glob(tmp->content);
+		if (!(glob = ft_glob(tmp->content)))
+			glob = ft_lstnew(tmp->content, ft_strlen(tmp->content) + 1);
 		if (result)
 			tl_lstaddend(&result, glob);
 		else

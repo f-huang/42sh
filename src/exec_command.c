@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 16:00:09 by yfuks             #+#    #+#             */
-/*   Updated: 2017/02/03 16:34:48 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/05 17:24:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,10 @@ int			exec_command(t_shell *sh, char **command)
 	char	**paths;
 	t_exec	ex;
 
-	if (command && command[0][0] == '(')
-	{
-		subshell_substitution(command);
-		exec_command(sh, command);
-	}
 	paths = exec_get_envpath(sh);
 	ft_bzero(&ex, sizeof(ex));
-	if (command && ft_strlen(command[0]) > _POSIX_ARG_MAX && (sh->last_return = 1))
+	if (command && ft_strlen(command[0]) > _POSIX_ARG_MAX &&\
+		(sh->last_return = 1))
 		return (print_error(paths, TOOLONG, command[0]));
 	if (!exec_is_command(&ex, sh, command, paths))
 		return (command && print_error(paths, NOTFOUND, command[0]));

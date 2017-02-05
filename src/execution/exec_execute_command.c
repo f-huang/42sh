@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 17:46:09 by yfuks             #+#    #+#             */
-/*   Updated: 2017/02/01 14:56:36 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/05 17:25:22 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int				exec_execute_command(t_exec *ex, t_shell *sh, char **command)
 	env = lstenv_to_tab(sh->lst_env);
 	if ((g_id = fork()) > 0)
 	{
-				waitpid(0, &tmp, WUNTRACED | WCONTINUED);
+		waitpid(0, &tmp, WUNTRACED | WCONTINUED);
 		sh->last_return = get_command_status_code(tmp);
 		free(env);
 		return (sh->last_return);

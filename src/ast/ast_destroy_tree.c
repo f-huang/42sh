@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:05:13 by fhuang            #+#    #+#             */
-/*   Updated: 2016/12/01 12:25:10 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/05 16:49:35 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	ast_destroy_tree(t_ast *tree)
 	ast_destroy_tree(tree->left);
 	ast_destroy_tree(tree->right);
 	tree->operator = 0;
-	ft_strdel(&tree->str);
+	if (tree->str)
+		ft_strdel(&tree->str);
 	if (tree->cmd1)
 	{
 		free_heredocs(tree->cmd1);

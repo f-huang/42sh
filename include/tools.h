@@ -6,7 +6,7 @@
 /*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:12:33 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/02/05 14:05:20 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/02/05 17:09:33 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char			*tl_switch_string(char *line, int i, char *plus, char *minus);
 
 char			*tl_strmerge(char *origin, char *adding);
 char			*tl_str3join(char *s1, char *s2, char *s3);
+char			*tl_strcpy_w_blank(char *src);
 
 void			tl_freedoubletab(char **tab);
 size_t			tl_arrlen(char **arr);
