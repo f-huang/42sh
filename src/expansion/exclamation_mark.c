@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 15:22:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/05 14:45:04 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/05 18:03:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ static char	*look_for_string(char **cmd, int *i)
 	tmp = NULL;
 	lst = *get_full_list();
 	len = ++(*i);
-	while ((*cmd)[len] && ((len == 0 || (len > 1 && (*cmd)[len - 1] != '\\'))\
-		&& (*cmd)[len] != ' ' && (*cmd)[len] != '\t' && (*cmd)[len] != ';'))
+	while ((*cmd)[len + 1] && (*cmd)[len + 1] != ' ' && (*cmd)[len + 1] != '\t'
+		&& (*cmd)[len + 1] != ';')
 		++len;
 	while (lst)
 	{
