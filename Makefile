@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/02/05 17:24:27 by fhuang           ###   ########.fr        #
+#    Updated: 2017/02/05 17:32:33 by cjacquem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -284,11 +284,11 @@ all: $(NAME)
 
 $(NAME): libft env echo $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBPATH) $(LIB) $(INC)
-	printf $(BLUE)" $@ compiled!\n"$(EOC)
+	printf $(GREEN)" $@ compiled!\n"$(EOC)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
-	printf $(BLUE)""$(EOC)
+	printf $(GREEN)"|"$(EOC)
 
 $(CACHEF):
 	test -d $(OBJDIR) || mkdir $(OBJDIR)
@@ -325,11 +325,11 @@ libft:
 
 echo: $(OBJECHO)
 	$(CC) $(CFLAGS) -o $(BINECHO) $(OBJECHO) $(LIBPATH) $(LIB) $(INC)
-	printf $(BLUE)" $@ compiled!\n"$(EOC)
+	printf $(GREEN)" $@ compiled!\n"$(EOC)
 
 env: $(OBJENV)
 	$(CC) $(CFLAGS) -o $(BINENV) $(OBJENV) $(LIBPATH) $(LIB) $(INC)
-	printf $(BLUE)" $@ compiled!\n"$(EOC)
+	printf $(GREEN)" $@ compiled!\n"$(EOC)
 
 norme:
 	norminette $(SRCDIR) $(INCDIR) | grep -v Norme -B1 || true
