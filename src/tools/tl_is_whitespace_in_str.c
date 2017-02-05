@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   code_ctrl_l.c                                      :+:      :+:    :+:   */
+/*   tl_is_whitespace_in_str.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 11:55:23 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/13 11:55:24 by ataguiro         ###   ########.fr       */
+/*   Created: 2017/01/20 17:22:34 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/20 17:23:08 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "tools.h"
 
-void	code_ctrl_l(void)
+int		tl_is_whitespace_in_str(char *str)
 {
-	ft_putstr("\033[H\033[J");
-	prompt();
-	*command() && (*command())[0] ? ft_putstr(*command()) : 0;
-	move_left(cor()->len - cor()->x);
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (tl_iswhitespace(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
 }

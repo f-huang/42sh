@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
+/*   tl_is_a_directory.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/13 17:18:21 by fhuang            #+#    #+#             */
-/*   Updated: 2016/06/12 20:25:05 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/24 16:31:42 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/24 16:35:18 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <sys/stat.h>
 
-size_t		ft_nbrlen(int n)
+int		tl_is_a_directory(char *path)
 {
-	size_t		size;
+	struct stat	buf;
 
-	size = 1;
-	ABS(n);
-	while (n / 10)
-	{
-		n /= 10;
-		size++;
-	}
-	return (size);
+	if (stat(path, &buf) == -1)
+		return (0);
+	return (S_ISDIR(buf.st_mode) == 1 ? 1 : 0);
 }

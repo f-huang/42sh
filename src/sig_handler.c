@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/18 15:30:43 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/01/24 22:13:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 #define PROMPT "$> "
 
-extern	t_shell	g_sh;
 extern	pid_t	g_id;
 
 static void	reset_input(void)
@@ -26,6 +25,7 @@ static void	reset_input(void)
 
 	default_mode();
 	code_end();
+	*found() ? fill_space(ft_strlen(*found())) : 0;
 	ft_putchar('\n');
 	if (waitpid(g_id, &status, 0) != -1)
 	{
@@ -33,15 +33,18 @@ static void	reset_input(void)
 			kill(g_id, SIGKILL);
 	}
 	else
-		prompt(&g_sh);
+		prompt();
 	ft_strdel(command());
 	*command() = ft_strdup("");
 	ft_strdel(stock());
 	*stock() = ft_strdup("");
+	ft_strdel(found());
 	reset_quotes();
 	raw_mode();
+	*search_mode() = 0;
 	cor()->len = 0;
 	cor()->x = 0;
+	clear_completion();
 }
 
 static void	sigquit_handler(void)

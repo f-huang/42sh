@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 14:08:58 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/14 15:09:15 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/25 14:33:31 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "libft.h"
 #include "input.h"
 
-static	char	*get_path_from_pwd(t_shell *sh)
+static	char	*get_path_from_pwd(void)
 {
 	char	*pwd;
 	char	*home;
@@ -28,22 +28,23 @@ static	char	*get_path_from_pwd(t_shell *sh)
 	char	*tmp;
 	int		i;
 
-	pwd = sh_getenv(sh->lst_env, "PWD");
+	pwd = getcwd(NULL, _POSIX_PATH_MAX);
 	home = getpwuid(getuid())->pw_dir;
 	if (!home || !pwd)
 		return (NULL);
 	if (!ft_strstr(pwd, home))
-		return (ft_strdup(pwd));
+		return (pwd);
 	i = 0;
 	while (pwd[i] && home[i] && pwd[i] == home[i])
 		++i;
 	tmp = ft_strdup(&pwd[i]);
 	chain = ft_strjoin("~", tmp);
-	free(tmp);
+	ft_strdel(&tmp);
+	ft_strdel(&pwd);
 	return (chain);
 }
 
-int				prompt(t_shell *sh)
+int				prompt(void)
 {
 	char	*pwd;
 	char	*user;
@@ -53,18 +54,19 @@ int				prompt(t_shell *sh)
 	{
 		ft_putstr("\033[1;32m");
 		ft_putstr(user);
-		ft_putstr("\x1b[0m");
-		ft_putchar(' ');
+		ft_putstr("\x1b[0m ");
 	}
 	else
-		ft_putstr("$");
+		ft_putchar('$');
 	length = 2 + (user ? ft_strlen(user) : 1);
-	if ((pwd = get_path_from_pwd(sh)))
+	if ((pwd = get_path_from_pwd()))
 	{
 		ft_putstr(pwd);
 		length += ft_strlen(pwd);
-		free(pwd);
+		ft_strdel(&pwd);
 	}
+	*search_mode() ? ft_putstr("\033[1;34m (i-search)\033[0m") : 0;
+	*search_mode() ? length += 11 : 0;
 	ft_putstr("> ");
 	*prompt_len() = length;
 	return (length);

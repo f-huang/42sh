@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 15:47:41 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/03 14:48:36 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/05 14:05:08 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,6 @@ static char	*is_alias(t_variable *lst_alias, char *word)
 	return (NULL);
 }
 
-static int	switch_string(char **line, int i, char *plus, char *minus)
-{
-	char	*tmp;
-
-	if (!plus || !minus)
-		return (ERROR);
-	if (!(tmp = ft_memalloc(ft_strlen(*line) + ft_strlen(plus) -\
-		ft_strlen(minus) + 1)))
-		return (ERROR);
-	tmp = ft_strncat(tmp, *line, i);
-	tmp = ft_strcat(tmp, plus);
-	tmp = ft_strcat(tmp, *line + i + ft_strlen(minus));
-	ft_strdel(&(*line));
-	*line = tmp;
-	return (GOOD);
-}
-
 static int	search_for_alias(t_variable *lst_alias, char **line,\
 												char *initial_word, int *i)
 {
@@ -70,7 +53,7 @@ static int	search_for_alias(t_variable *lst_alias, char **line,\
 			return (ERROR);
 		else if (ft_strequ(tmp_key, value))
 		{
-			switch_string(line, *i, value, initial_word);
+			*line = tl_switch_string(*line, *i, value, initial_word);
 			*i = *i + ft_strlen(value);
 			return (GOOD);
 		}
@@ -78,7 +61,7 @@ static int	search_for_alias(t_variable *lst_alias, char **line,\
 	}
 	if (!ft_strequ(initial_word, tmp_key))
 	{
-		switch_string(line, *i, tmp_key, initial_word);
+		*line = tl_switch_string(*line, *i, tmp_key, initial_word);
 		*i = ft_strlen(tmp_key) - ft_strlen(initial_word);
 		return (GOOD);
 	}

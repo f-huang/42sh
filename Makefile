@@ -6,7 +6,7 @@
 #    By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/15 14:57:28 by cjacquem          #+#    #+#              #
-#    Updated: 2017/02/05 14:01:02 by ataguiro         ###   ########.fr        #
+#    Updated: 2017/02/05 14:06:23 by ataguiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)ast/cmdwr_fill_struct.c \
 			$(SRCDIR)ast/line_to_ast.c \
 			$(SRCDIR)ast/redirection_create_elem.c \
+			$(SRCDIR)ast/ast_special_is_space.c \
+			$(SRCDIR)ast/ast_special_trim.c \
 			$(SRCDIR)builtins/alias/builtin_alias.c \
 			$(SRCDIR)builtins/alias/print_alias.c \
 			$(SRCDIR)builtins/cd/builtin_cd.c \
@@ -64,7 +66,6 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)builtins/history/builtin_history.c \
 			$(SRCDIR)builtins/history/clear_list.c \
 			$(SRCDIR)builtins/history/del_position_offset.c \
-			$(SRCDIR)builtins/history/delete_last_entry.c \
 			$(SRCDIR)builtins/history/get_options.c \
 			$(SRCDIR)builtins/history/print_list.c \
 			$(SRCDIR)builtins/history/option_s.c \
@@ -105,6 +106,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)expansion/dollar.c \
 			$(SRCDIR)expansion/glob_substitution.c \
 			$(SRCDIR)expansion/subshell_substitution.c \
+			$(SRCDIR)expansion/exclamation_mark.c \
 			$(SRCDIR)expansion/quotes.c \
 			$(SRCDIR)expansion/substitute.c \
 			$(SRCDIR)expansion/tilde.c \
@@ -112,19 +114,21 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)get_home.c \
 			$(SRCDIR)get_line.c \
 			$(SRCDIR)get_user.c \
-			$(SRCDIR)history/init_history_list.c \
-			$(SRCDIR)history/get_history_list.c \
 			$(SRCDIR)history/clear_history_list.c \
+			$(SRCDIR)history/delete_last_entry.c \
+			$(SRCDIR)history/get_history_list.c \
+			$(SRCDIR)history/init_history_list.c \
 			$(SRCDIR)history/save_history_in_file.c \
 			$(SRCDIR)history/save_command_line.c \
 			$(SRCDIR)import_shrc.c \
 			$(SRCDIR)init_shell.c \
-			$(SRCDIR)input/builtin_completion.c \
+			$(SRCDIR)input/code_completion.c \
 			$(SRCDIR)input/code_ctrl_d.c \
 			$(SRCDIR)input/code_ctrl_l.c \
 			$(SRCDIR)input/code_ctrl_u.c \
 			$(SRCDIR)input/code_ctrl_w.c \
 			$(SRCDIR)input/code_ctrl_x.c \
+			$(SRCDIR)input/code_ctrl_r.c \
 			$(SRCDIR)input/code_down.c \
 			$(SRCDIR)input/code_end.c \
 			$(SRCDIR)input/code_home.c \
@@ -137,19 +141,25 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/code_shift_up.c \
 			$(SRCDIR)input/code_up.c \
 			$(SRCDIR)input/command.c \
-			$(SRCDIR)input/completion.c \
-			$(SRCDIR)input/completionbis.c \
+			$(SRCDIR)input/completion/clear_completion.c \
+			$(SRCDIR)input/completion/display_command.c \
+			$(SRCDIR)input/completion/get_completion_list.c \
+			$(SRCDIR)input/completion/is_a_command.c \
+			$(SRCDIR)input/completion/is_delim_char.c \
+			$(SRCDIR)input/completion/look_for_a_command.c \
+			$(SRCDIR)input/completion/look_for_a_file.c \
+			$(SRCDIR)input/completion/search_through_dir.c \
 			$(SRCDIR)input/ft_getlast.c \
 			$(SRCDIR)input/ft_strsplit_whitespace.c \
 			$(SRCDIR)input/ft_tabdup.c \
 			$(SRCDIR)input/ft_tabreplace.c \
 			$(SRCDIR)input/ft_tabstr.c \
-			$(SRCDIR)input/in_history.c \
+			$(SRCDIR)input/history_get_elem.c \
 			$(SRCDIR)input/init_input.c \
 			$(SRCDIR)input/input.c \
 			$(SRCDIR)input/key.c \
-			$(SRCDIR)input/key_check.c \
 			$(SRCDIR)input/key_get.c \
+			$(SRCDIR)input/match.c \
 			$(SRCDIR)input/modes.c \
 			$(SRCDIR)input/move.c \
 			$(SRCDIR)input/quotes.c \
@@ -160,6 +170,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)input/sin_input.c \
 			$(SRCDIR)input/sin_list.c \
 			$(SRCDIR)input/sin_quotes.c \
+			$(SRCDIR)input/sin_ss.c \
 			$(SRCDIR)input/strdup_input.c \
 			$(SRCDIR)lexer_parser.c \
 			$(SRCDIR)loop_through_commands.c \
@@ -174,11 +185,13 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_del.c \
 			$(SRCDIR)tools/tl_freedoubletab.c \
 			$(SRCDIR)tools/tl_get_next_line.c \
+			$(SRCDIR)tools/tl_is_a_directory.c \
 			$(SRCDIR)tools/tl_isstrdigit.c \
 			$(SRCDIR)tools/tl_isstreempty.c \
 			$(SRCDIR)tools/tl_iswhitespace.c \
 			$(SRCDIR)tools/tl_jump_to_other_quote.c \
 			$(SRCDIR)tools/tl_tabtolst.c \
+			$(SRCDIR)tools/tl_lstadd_sortalpha.c \
 			$(SRCDIR)tools/tl_lstaddend.c \
 			$(SRCDIR)tools/tl_lstdelast.c \
 			$(SRCDIR)tools/tl_lstfree.c \
@@ -198,6 +211,7 @@ SRC		:=	$(SRCDIR)ast/ast_create_elem.c \
 			$(SRCDIR)tools/tl_strcntc.c \
 			$(SRCDIR)glob/matchpp.c \
 			$(SRCDIR)glob/glob.c
+			$(SRCDIR)tools/tl_switch_string.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR) -lft
@@ -299,6 +313,7 @@ $(CACHEF):
 	test -d $(OBJDIR)execution || mkdir $(OBJDIR)execution
 	test -d $(OBJDIR)history || mkdir $(OBJDIR)history
 	test -d $(OBJDIR)input || mkdir $(OBJDIR)input
+	test -d $(OBJDIR)input/completion || mkdir $(OBJDIR)input/completion
 	test -d $(BINDIR) || mkdir $(BINDIR)
 	test -d $(CACHEF) || touch $(CACHEF)
 

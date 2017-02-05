@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tl_lstfree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/14 15:54:52 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/25 17:35:56 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/05 14:03:29 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ void		tl_lstfree(t_list **begin)
 	{
 		tofree = cursor;
 		cursor = cursor->next;
+		if (tofree->content)
+			free(tofree->content);
+		tofree->content = NULL;
+		tofree->content_size = 0;
 		free(tofree);
+		tofree = NULL;
 	}
+	*begin = NULL;
 }

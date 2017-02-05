@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/02/03 14:50:23 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/05 14:03:42 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,12 @@ static void		call_signal(void)
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, sig_handler);
 	signal(SIGTERM, sig_handler);
-	signal(SIGKILL, sig_handler);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGCONT, SIG_IGN);
 }
 
 static void		gear(t_shell *sh, t_list *lst_commands)
 {
-	ft_strdel(old_command());
-	*old_command() = *command() ? ft_strdup(*command()) : ft_strdup("");
 	save_command_line(*command());
 	alias_substitution(sh->lst_alias, command());
 	lexer_parser(command(), &lst_commands);
@@ -64,8 +61,7 @@ int				main(int ac, char **av)
 	lst_commands = NULL;
 	if (ac && !init_shell(&sh, av[0]))
 		return (ERROR);
-	*old_command() = ft_strdup("");
-	while (prompt(&sh))
+	while (prompt())
 	{
 		call_signal();
 		g_sh = sh;

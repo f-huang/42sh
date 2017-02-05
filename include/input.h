@@ -6,7 +6,7 @@
 /*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 13:18:09 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/19 14:30:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/03 14:15:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define CODE_CTRL_U 200
 # define CODE_CTRL_W 300
 # define CODE_CTRL_L 400
+# define CODE_CTRL_R 500
 
 typedef	struct	s_infos2
 {
@@ -87,11 +88,33 @@ typedef struct	s_comp
 	char			**splitted_path;
 }				t_comp;
 
+/*
+**	COMPLETION
+*/
+
+t_list			**get_cursor_completion(void);
+t_list			**get_list_completion(void);
+void			clear_completion(void);
+void			display_command(char **save, int pos);
+
+int				is_delim_char(char *str, int i);
+int				is_a_command(char *command);
+int				look_for_a_file(char *command);
+int				look_for_a_command(char *command);
+int				search_through_dir(char *dir_name, char *command);
+
+int				match(char *s1, char *s2);
+
+/*
+**	TOOLS
+*/
+
+void			init_input(void);
+
 char			*newclean(char *str);
 char			ft_getlast(char *str);
 void			remove_shit(char ***new);
 void			replace_with_shit(char **s);
-int				get_next_line_stdin(int fd, char **line);
 char			**ft_strsplit_whitespace(char *s);
 char			ft_getlast(char *str);
 char			*strdup_input(char *src);
@@ -101,8 +124,11 @@ void			stremove(void);
 void			fill_space(int j);
 void			strinsert_input(char c);
 
-int				check_builtins(char *pattern);
-void			completion(void);
+/*
+**	KEY DUMP FUNCTIONS
+*/
+
+void			code_completion(void);
 void			code_up(int key);
 void			code_right(void);
 void			code_left(void);
@@ -119,22 +145,23 @@ void			code_ctrl_x(void);
 void			code_ctrl_u(void);
 void			code_ctrl_w(void);
 void			code_ctrl_l(void);
+void			code_ctrl_r(void);
 
-int				match(char *s1, char *s2);
-void			linkcase(char *pattern, char *to_open);
-void			commandcase(char *pattern);
-void			lastcase(char *pattern);
-void			init_input(void);
+/*
+**	GET_KEY
+*/
 
 int				*prompt_len(void);
 int				get_x31(char c);
 int				get_x1b(char c);
 int				get_basics(char c);
 
+char			**found(void);
+int				*search_mode(void);
+int				*lbracket(void);
 t_coord			*cor(void);
 char			**stock(void);
 char			**copied(void);
-int				ft_isvalid(char c);
 char			*newclean(char *str);
 char			**command(void);
 int				*dquote(void);
@@ -144,7 +171,7 @@ t_termsize		*termsize(void);
 void			remove_display(char *to_add);
 int				*pos(void);
 int				*get_size(void);
-char			*get_elem(int command);
+char			*get_elem(int key);
 void			in_history(char *buffer);
 void			init_list(void);
 void			fill_space(int j);

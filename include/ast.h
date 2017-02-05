@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 17:14:15 by yfuks             #+#    #+#             */
-/*   Updated: 2017/01/14 15:57:03 by cjacquem         ###   ########.fr       */
+/*   Updated: 2017/01/25 18:53:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ typedef struct	s_ast
 	t_cmdwr			*cmd1;
 	t_cmdwr			*cmd2;
 }				t_ast;
+
+char			*ast_special_trim(char *str);
+int				ast_special_is_space(int c);
 
 t_ast			*line_to_ast(char *line);
 

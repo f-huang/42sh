@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   option_p.c                                         :+:      :+:    :+:   */
+/*   tl_switch_string.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/18 20:16:31 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/20 13:19:45 by fhuang           ###   ########.fr       */
+/*   Created: 2017/01/19 15:53:17 by fhuang            #+#    #+#             */
+/*   Updated: 2017/01/19 17:43:45 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "history.h"
-#include "tools.h"
 
-int		history_option_p(char **av)
+char	*tl_switch_string(char *line, int i, char *plus, char *minus)
 {
-	int		i;
+	char	*tmp;
 
-	if (!av || !av[0])
-		return (0);
-	delete_last_entry();
-	i = 0;
-	while (av[i])
-		ft_putendl(av[i++]);
-	return (0);
+	if (!minus || !line)
+		return (NULL);
+	if (!(tmp = ft_memalloc(ft_strlen(line) + (!plus ? 0 : ft_strlen(plus) -\
+		ft_strlen(minus) + 1))))
+		return (NULL);
+	tmp = ft_strncat(tmp, line, i);
+	if (plus)
+		tmp = ft_strcat(tmp, plus);
+	tmp = ft_strcat(tmp, line + i + ft_strlen(minus));
+	ft_strdel(&line);
+	return (tmp);
 }
