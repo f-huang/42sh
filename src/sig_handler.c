@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 14:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/24 22:13:09 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/05 17:45:15 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <sys/wait.h>
 #include "ft_42sh.h"
 #include "input.h"
-
-#define PROMPT "$> "
 
 extern	pid_t	g_id;
 

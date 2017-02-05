@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   code_right.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataguiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ataguiro <ataguiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 12:32:38 by ataguiro          #+#    #+#             */
-/*   Updated: 2017/01/23 15:40:23 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/05 17:48:28 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	code_right(void)
 {
 	int	check;
 
-	if (cor()->x && cor()->prompt_len && termsize()->col)
+	if (cor()->prompt_len && termsize()->col)
 	{
 		check = cor()->x < cor()->len;
 		if (check)
