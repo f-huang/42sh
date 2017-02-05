@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjacquem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjacquem <cjacquem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/15 16:45:18 by cjacquem          #+#    #+#             */
-/*   Updated: 2017/01/23 13:58:04 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/02/05 14:00:25 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void		init_input(void)
 {
 	cor()->x = 0;
 	cor()->prompt_len = *prompt_len() + 1;
-	ft_strdel(command());
+	if (*command())
+		ft_strdel(command());
 	*command() = strdup_input("");
 }

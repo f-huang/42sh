@@ -6,7 +6,7 @@
 /*   By: yfuks <yfuks@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:19:48 by yfuks             #+#    #+#             */
-/*   Updated: 2017/02/05 14:03:42 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/02/05 15:26:18 by ataguiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ static void		call_signal(void)
 
 static void		gear(t_shell *sh, t_list *lst_commands)
 {
+	if (ft_strchr(*command(), '!'))
+		if (!(*command() = exclamation_mark(*command())))
+			return ;
 	save_command_line(*command());
 	alias_substitution(sh->lst_alias, command());
 	lexer_parser(command(), &lst_commands);

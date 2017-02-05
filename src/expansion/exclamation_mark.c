@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 15:22:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/01/25 14:33:59 by ataguiro         ###   ########.fr       */
+/*   Updated: 2017/02/05 14:45:04 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 **	Refer to the previous command. This is a synonym for `!-1'.
 **	!string
 **	Refer to the most recent command starting with string.
-**	!#
-**	The entire command line typed so far.
 */
 
 static void	put_error_event(int event)
@@ -49,7 +47,7 @@ static int	is_strdigitneg(char *str)
 	return (1);
 }
 
-static int	print_from_offset(char **cmd, int *i)
+static char	*print_from_offset(char **cmd, int *i)
 {
 	t_list	*lst;
 	char	*tmp;
@@ -59,7 +57,7 @@ static int	print_from_offset(char **cmd, int *i)
 	lst = *get_full_list();
 	lst_index = 0;
 	if ((offset = (*cmd)[*i + 1] == '!' ? -1 : ft_atoi(*cmd + *i + 1)) < 0)
-		offset = ft_lstlen(lst) - 1 - (-offset);
+		offset = ft_lstlen(lst) - (-offset);
 	while (offset > 0 && lst && lst_index < offset)
 	{
 		lst_index++;
@@ -69,15 +67,15 @@ static int	print_from_offset(char **cmd, int *i)
 	{
 		put_error_event(ft_atoi(*cmd + *i + 1));
 		ft_strdel(&(*cmd));
-		return (ERROR);
+		return (NULL);
 	}
-	tmp = ft_strndup(*cmd + *i, ft_nbrlen(ft_atoi(*cmd + *i)) + 1);
+	ft_putendl(lst->content);
+	tmp = tl_strndup(*cmd + *i, ft_nbrlen(ft_atoi(*cmd + *i + 1)) + 1);
 	*cmd = tl_switch_string(*cmd, *i, lst->content, tmp);
-	ft_strdel(&tmp);
-	return (GOOD);
+	return (tmp);
 }
 
-static int	look_for_string(char **cmd, int *i)
+static char	*look_for_string(char **cmd, int *i)
 {
 	t_list	*lst;
 	char	*tmp;
@@ -85,10 +83,13 @@ static int	look_for_string(char **cmd, int *i)
 
 	tmp = NULL;
 	lst = *get_full_list();
-	len = ft_strlen(*cmd + ++(*i));
+	len = ++(*i);
+	while ((*cmd)[len] && ((len == 0 || (len > 1 && (*cmd)[len - 1] != '\\'))\
+		&& (*cmd)[len] != ' ' && (*cmd)[len] != '\t' && (*cmd)[len] != ';'))
+		++len;
 	while (lst)
 	{
-		if (lst->content && ft_strnequ(*cmd + *i, lst->content, len))
+		if (lst->content && !ft_strncmp(lst->content, *cmd + *i, len))
 			tmp = tmp ? ft_strcpy(tmp, lst->content) : ft_strdup(lst->content);
 		lst = lst->next;
 	}
@@ -96,39 +97,37 @@ static int	look_for_string(char **cmd, int *i)
 	{
 		ft_strdel(&(*cmd));
 		ft_putstr_fd("42sh: No such word in event\n", 2);
-		return (ERROR);
+		return (NULL);
 	}
 	*cmd = tl_switch_string(*cmd, *i - 1, tmp, *cmd + *i - 1);
-	ft_strdel(&tmp);
-	(*i) += len;
-	return (GOOD);
+	ft_putendl(tmp);
+	return (((*i) += len) ? tmp : tmp);
 }
 
 char		*exclamation_mark(char *cmd)
 {
-	int		first;
 	int		i;
 	int		backslash;
+	char	*ret;
 
 	i = -1;
-	first = 0;
+	ret = NULL;
 	while (cmd[++i])
 	{
 		backslash = (i > 0 && cmd[i - 1] == '\\') ? 1 : 0;
 		if (cmd[i] == '!' && backslash == 0 && cmd[i + 1] && cmd[i + 1] != '='\
 			&& cmd[i + 1] != '\t' && cmd[i + 1] != ' ' && cmd[i + 1] != '(')
 		{
-			if (!first && (first = 1))
-				delete_last_entry();
 			if (is_strdigitneg(cmd + i + 1) || cmd[i + 1] == '!')
 			{
-				if (!print_from_offset(&cmd, &i))
+				if (!(ret = print_from_offset(&cmd, &i)))
 					return (NULL);
 			}
-			else if (cmd[i + 1] != '#' && !look_for_string(&cmd, &i))
+			else if (cmd[i + 1] != '#' && !(ret = look_for_string(&cmd, &i)))
 				return (NULL);
+			if (ret)
+				ft_strdel(&ret);
 		}
 	}
-	save_command_line(cmd);
 	return (cmd);
 }
