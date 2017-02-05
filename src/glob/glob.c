@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   glob.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpoac <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: tpoac <tpoac@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 15:58:56 by tpoac             #+#    #+#             */
-/*   Updated: 2017/02/03 16:30:10 by tpoac            ###   ########.fr       */
+/*   Updated: 2017/02/05 16:11:51 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,14 @@ static char			*handle_dir(char *s, DIR **current_dir)
 {
 	char			*dir;
 	size_t			end;
-	int				stat;
 
 	dir = ".";
-	stat = 0;
 	if (ft_strchr(s, '/'))
 	{
 		end = (size_t)tl_strnupto(s, "/", tl_strcntc(s, "/") - 1);
 		dir = ft_strsub(s, 0, end);
-		if (!(*current_dir = opendir(dir)))
-			stat = 1;
 	}
-	else
-	{
-		if (!(*current_dir = opendir(".")))
-			stat = 2;
-	}
-	if (stat > 0)
+	if (!(*current_dir = opendir(dir)))
 	{
 		if (!ft_strequ(dir, "."))
 			free(dir);
